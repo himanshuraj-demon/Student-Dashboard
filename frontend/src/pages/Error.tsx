@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Ai = () => {
+const Error = () => {
   return (
     <div>
-      
+      error
     </div>
   )
 }
 
-export default Ai
+export default Error

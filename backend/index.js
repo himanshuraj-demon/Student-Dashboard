@@ -5,16 +5,26 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import methodOverride from "method-override";
 import helmet from "helmet";
+import cors from "cors";
+import morgan from "morgan";
+
 
 import connectDB from "./connection.js";
 const PORT=3020;
 
-import userRoute from "./routes/user"
+import userRoute from "./routes/user.js"
 
 const app = express();
 
+app.use(morgan("dev"));
 app.use(helmet());  
-app.use(cookieParcher());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Vite
+    credentials: true,
+  })
+);
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(express.static(path.resolve('public'))); 

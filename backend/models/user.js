@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 
-userSchema.pre("save", function (next) {
+userSchema.pre("save", function () {
     const user = this;
 
   if (!user.isModified("password")) return;
@@ -43,7 +43,6 @@ userSchema.pre("save", function (next) {
 
   this.salt = salt;
   this.password = hashedPassword;
-  next();
 
 });
 
