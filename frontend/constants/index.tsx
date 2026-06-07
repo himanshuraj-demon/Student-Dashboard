@@ -3,7 +3,6 @@ import {
   FiBookOpen,
   FiCalendar,
   FiPieChart,
-  FiUser,
 } from "react-icons/fi";
 import { FaCode } from "react-icons/fa";
 import { CgNotes } from "react-icons/cg";
@@ -16,55 +15,55 @@ const links = [
     name: "Home",
     key:0,
     path: "/",
-    icon: <FiHome size={22} />,
+    icon: <FiHome size={22} className="text-[var(--text-secondary)]"/>,
   },
   {
     name: "Dashboard",
     key:1,
     path: "/dashboard",
-    icon: <LuLayoutDashboard size={22} />,
+    icon: <LuLayoutDashboard size={22} className="text-[var(--text-secondary)]"/>,
   },
   {
     name: "Timetable",
     key:2,
     path: "/timetable",
-    icon: <FiCalendar  size={22} />,
+    icon: <FiCalendar  size={22} className="text-[var(--text-secondary)]"/>,
   },
   {
     name: "Courses",
     key:3,
     path: "/courses",
-    icon: <FiBookOpen size={22} />,
+    icon: <FiBookOpen size={22} className="text-[var(--text-secondary)]"/>,
   },
   {
     name: "Calendar",
     key:4,
     path: "/calendar",
-    icon: <GrSchedule size={22} />,
+    icon: <GrSchedule size={22} className="text-[var(--text-secondary)]"/>,
   },
   {
     name: "Analytics",
     key:5,
     path: "/analytics",
-    icon: <FiPieChart size={22} />,
+    icon: <FiPieChart size={22} className="text-[var(--text-secondary)]"/>,
   },
   {
     name: "Notes",
     key:6,
     path: "/notes",
-    icon: <CgNotes size={22} />,
+    icon: <CgNotes size={22} className="text-[var(--text-secondary)]"/>,
   },
   {
     name: "To-do",
     key:7,
     path: "/todo",
-    icon: <FiCheckSquare size={22} />,
+    icon: <FiCheckSquare size={22} className="text-[var(--text-secondary)]"/>,
   },
   {
     name: "Competitive",
     key:8,
     path: "/competitive",
-    icon: <FaCode size={22} />,
+    icon: <FaCode size={22} className="text-[var(--text-secondary)]"/>,
   },
 ];
 

@@ -1,12 +1,12 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
 import { useTitle } from '../hooks/useTitle'
+import Nav from '../services/Nav';
 
 const Todo = () => {
   useTitle("Todo");
   return (
     <div className='main'>
-      <Navbar/>
+      <Nav/>
       Todo
     </div>
   )

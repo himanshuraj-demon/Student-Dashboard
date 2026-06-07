@@ -3,7 +3,6 @@ import User from "../models/user.js"
 async function handleSignUp(req, res) {
     const { name, email, password } = req.body;
     try {
-
         await User.create({
             name,
             email,
@@ -31,6 +30,8 @@ async function handleLogIn(req, res) {
         return res
             .cookie("token", token, {
                 httpOnly: true,
+                secure: true,
+                sameSite: "none",
             })
             .json({
                 ok: true,
@@ -44,14 +45,13 @@ async function handleLogIn(req, res) {
     }
 }
 
-async function clearUser(req,res) {
+async function clearUser(req, res) {
     res.clearCookie("token");
-
-  return res.json({
-    ok: true,
-  });
+    return res.json({
+        ok: true,
+    });
 }
 
 export {
-    handleLogIn, handleSignUp,clearUser
+    handleLogIn, handleSignUp, clearUser
 }

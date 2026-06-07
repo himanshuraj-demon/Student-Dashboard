@@ -1,12 +1,15 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
+import React, { useState } from 'react'
+import Nav from '../services/Nav'
 
 const Home = () => {
+  const [count ,setCount]=useState(0);
   return (
     <div className='main'>
-    <Navbar/>
-    <div className='flex-1 w-auto'>Home
-    <div className='bg-white h-dvh text-black'>hi</div>
+    <Nav/>
+    <div className='flex-1 w-auto'>{count}
+      <button onClick={()=>setCount(count=>count+1)}>click</button>
+    <div className='bg-white h-dvh text-black'>
+    </div>
     <div className='bg-red-500 h-dvh text-white'>hello</div>
     </div>
     </div>

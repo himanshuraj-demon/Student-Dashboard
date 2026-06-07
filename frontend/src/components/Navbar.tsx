@@ -1,14 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { links } from "../../constants";
-
+import { FaUser } from "react-icons/fa";
 const Navbar = () => {
   return (
     <>
       <nav className="navbar">
         <div className="logo">
-          <img src="./images/default.jpg" alt="nono" />
-          <span>SmartTrack</span>
+          <img src="./images/logo.svg" alt="nono"/>
+          <img src="./images/namelogo.png" alt="nono" className="spanlogo"/>
         </div>
 
         <div className="navlinks">
@@ -28,7 +28,7 @@ const Navbar = () => {
 
         <div className="profile">
           <NavLink to={"/profile"} className={({ isActive }) => (isActive ? "active-link" : "")}>
-            <img src="./images/default.jpg" alt="nono" />
+            <FaUser size={22} className="img text-[var(--text-secondary)]"/>
             <span>SmartTrack</span>
           </NavLink>
         </div>

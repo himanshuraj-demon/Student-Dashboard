@@ -1,5 +1,8 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
 import axios from "axios";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 interface FormData {
   name: string;
@@ -8,142 +11,239 @@ interface FormData {
   confirmPassword: string;
 }
 
+type SignupRes = {
+  ok: boolean;
+};
+
 export default function Signup() {
-  const [form, setForm] = useState<FormData>({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showCPassword, setShowCPassword] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setError,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>({ mode: "onChange" });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+  const delay = (s: number) =>
+    new Promise((resolve) => setTimeout(resolve, s * 1000));
+
+  const getPasswordStrength = (password: string) => {
+    let score = 0;
+    if (password.length >= 8) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[a-z]/.test(password)) score++;
+    if (/\d/.test(password)) score++;
+    if (/[^A-Za-z0-9]/.test(password)) score++;
+
+    if (score <= 2) return "Weak Password";
+    if (score <= 4) return "Medium Password";
+    return "Strong Password";
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (form.password !== form.confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-
+  const onSubmit = async (data: FormData) => {
     try {
-      const res = await axios.post("http://192.168.1.6:3000/user/signup", {
-        name: form.name,
-        email: form.email,
-        password: form.password,
+      const res: SignupRes = await axios.post(
+        "http://192.168.1.6:3000/user/signup",
+        {
+          name: data.name,
+          email: data.email,
+          password: data.password,
+        },
+      );
+      await delay(4);
+      if (res.ok) {
+        reset();
+        navigate("/login", { replace: true });
+      }
+      setError("root", {
+        message: "Something went wrong",
       });
-
-      console.log(res.data);
-      alert(res.data);
     } catch (error) {
-      console.log(error);
-      alert(error);
+      if (axios.isAxiosError(error)) {
+        setError("root", {
+          message: error.response?.data?.message || error.message,
+        });
+        console.log("error");
+      } else {
+        setError("root", {
+          message: "Something went wrong",
+        });
+      }
     }
-
-    setForm({
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
   };
+
+  const password = watch("password", "");
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
-        <div className="rounded-3xl border border-zinc-800 bg-zinc-900/70 backdrop-blur-xl p-8 shadow-2xl">
-          <div className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-white">Create Account</h1>
+    <div className="signup-root">
+      <div className="signup-left">
+        <div className="signup-brand">
+          <span className="signup-brand-dot" />
+          StudyTracker
+        </div>
 
-            <p className="mt-2 text-zinc-400">
-              Start tracking your academic journey
-            </p>
+        <div className="signup-form-wrap">
+          <div className="signup-heading">
+            <h1>
+              Hi,{" "}
+              <span className="signup-heading-accent">{"{{user.name}}"}</span>
+            </h1>
+            <p className="signup-subheading">Create your account</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label className="mb-2 block text-sm text-zinc-300">
-                Full Name
-              </label>
-
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="signup-form"
+            noValidate>
+            <div className="signup-field">
+              <label className="signup-label">What's your username?</label>
               <input
+                placeholder="e.g. grace_hopper"
+                {...register("name", {
+                  required: { value: true, message: "Username Required" },
+                })}
                 type="text"
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                placeholder="John Doe"
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white outline-none transition focus:border-blue-500"
-                required
+                className="signup-input"
               />
+              {errors.name && (
+                <span className="signup-error">
+                  {String(errors.name.message)}
+                </span>
+              )}
             </div>
 
-            <div>
-              <label className="mb-2 block text-sm text-zinc-300">Email</label>
-
+            <div className="signup-field">
+              <label className="signup-label">What's your email?</label>
               <input
+                placeholder="you@iitgn.ac.in"
+                {...register("email", {
+                  required: { value: true, message: "Email Required" },
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@iitgn\.ac\.in$/,
+                    message: "Only @iitgn.ac.in email allowed",
+                  },
+                })}
                 type="email"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                placeholder="john@example.com"
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white outline-none transition focus:border-blue-500"
-                required
+                className="signup-input"
               />
+              {errors.email && (
+                <span className="signup-error">
+                  {String(errors.email.message)}
+                </span>
+              )}
             </div>
 
-            <div>
-              <label className="mb-2 block text-sm text-zinc-300">
-                Password
-              </label>
+            <div className="signup-field">
+              <label className="signup-label">Create a password</label>
+              <div className="relative">
+                <input
+                  {...register("password", {
+                    required: { value: true, message: "Password Required" },
+                    minLength: { value: 8, message: "Min length is 8" },
+                  })}
+                  placeholder="Min. 8 characters"
+                  type={showPassword ? "text" : "password"}
+                  className="signup-input pr-10"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white transition-colors">
+                  {showPassword ? (
+                    <IoEyeOffOutline size={18} />
+                  ) : (
+                    <IoEyeOutline size={18} />
+                  )}
+                </button>
+              </div>
+              {errors.password && (
+                <span className="signup-error">
+                  {String(errors.password.message)}
+                </span>
+              )}
+              {password && (
+                <div className="signup-strength-wrap">
+                  <span
+                    className={`signup-strength-badge ${
+                      getPasswordStrength(password) === "Weak Password"
+                        ? "signup-strength-weak"
+                        : getPasswordStrength(password) === "Medium Password"
+                          ? "signup-strength-medium"
+                          : "signup-strength-strong"
+                    }`}>
+                    {getPasswordStrength(password)}
+                  </span>
+                </div>
+              )}
+            </div>
 
+            <div className="signup-field">
+              <label className="signup-label">Confirm your password</label>
+              <div className="relative">
               <input
-                type="password"
-                name="password"
-                value={form.password}
-                onChange={handleChange}
-                placeholder="••••••••"
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white outline-none transition focus:border-blue-500"
-                required
-                min={8}
+                {...register("confirmPassword", {
+                  required: { value: true, message: "This field is required" },
+                  validate: (value: string) =>
+                    value === password || "Passwords do not match",
+                })}
+                placeholder="Re-enter password"
+                type={showCPassword ? "text" : "password"}
+                className="signup-input"
               />
+              <button
+                type="button"
+                onClick={() => setShowCPassword(!showCPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white transition-colors">
+                {showCPassword ? (
+                  <IoEyeOffOutline size={18} />
+                ) : (
+                  <IoEyeOutline size={18} />
+                )}
+              </button></div>
+              {errors.confirmPassword && (
+                <span className="signup-error">
+                  {errors.confirmPassword.message}
+                </span>
+              )}
             </div>
 
-            <div>
-              <label className="mb-2 block text-sm text-zinc-300">
-                Confirm Password
-              </label>
-
-              <input
-                type="password"
-                name="confirmPassword"
-                value={form.confirmPassword}
-                onChange={handleChange}
-                placeholder="••••••••"
-                className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white outline-none transition focus:border-blue-500"
-                required
-                min={8}
-              />
-            </div>
+            {errors.root && (
+              <span className="signup-error signup-root-error">
+                {errors.root.message}
+              </span>
+            )}
 
             <button
+              disabled={isSubmitting}
               type="submit"
-              className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-500">
-              Create Account
+              className="signup-submit">
+              {isSubmitting ? "Creating account…" : "Continue"}
             </button>
-          </form>
 
-          <div className="mt-6 text-center">
-            <p className="text-sm text-zinc-400">
+            <p className="signup-login-link">
               Already have an account?{" "}
-              <span className="cursor-pointer text-blue-400 hover:text-blue-300">
-                Login In
-              </span>
+              <Link to="/login" className="signup-link">
+                Log in
+              </Link>
             </p>
+          </form>
+        </div>
+      </div>
+      <div className="signup-right">
+        <img
+          src="./images/signupbg.avif"
+          alt="Abstract study visual"
+          className="signup-hero-img"
+        />
+        <div className="signup-right-overlay">
+          <p className="signup-trusted-label">Made by</p>
+          <div className="signup-trusted-logos">
+            <span>Himanshu Raj</span>
+            <span>IIT Gandhinagar</span>
           </div>
         </div>
       </div>

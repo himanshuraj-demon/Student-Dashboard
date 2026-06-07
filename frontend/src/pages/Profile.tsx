@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
-import Navbar from '../components/Navbar'
 import { useTitle } from '../hooks/useTitle'
+import Nav from '../services/Nav'
 
 const Profile = () => {
   useTitle("Profile")
   return (
     <div className='main'>
-      <Navbar/>
+      <Nav/>
       Profile
     </div>
   )
