@@ -183,7 +183,7 @@ h6 {
 
 .main {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr;
     transition: grid-template-columns 0.4s ease;
     @apply pb-20 md:pb-0;
 }

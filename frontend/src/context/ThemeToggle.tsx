@@ -5,7 +5,7 @@ export function ThemeToggle() {
   const isDark = theme === "dark";
 
   return (
-    <div className="w-auto text-center  bottom-7 h-10 absolute md:bottom-25 md:left-10 z-50  p-2 flex flex-row items-center justify-center">
+    <div className="w-auto text-center  bottom-7 h-10 absolute md:bottom-25 md:left-10 z-5  p-2 flex flex-row items-center justify-center">
       <div className="flex text-center mr-2 font-semibold text-2xl">Theme : {isDark?"Light":"Dark"}</div>
       
     <button
