@@ -9,6 +9,7 @@ export function AuthProvider({
 }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [auth,setAuth]=useState(false);
   const logout = ():void => {
     setUser(null);
   };
@@ -24,6 +25,7 @@ export function AuthProvider({
         );
 
         setUser(res.data.user);
+        setAuth(true)
       } catch {
         setUser(null);
       } finally {
@@ -38,7 +40,7 @@ export function AuthProvider({
     <AuthContext.Provider
       value={{
         user,
-        auth: !!user,
+        auth,
         loading,
         setUser,
         logout,

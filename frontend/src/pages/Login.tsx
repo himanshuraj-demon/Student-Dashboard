@@ -120,7 +120,7 @@ export default function Login() {
                     minLength: { value: 8, message: "Min length is 8" },
                   })}
                   placeholder="Min. 8 characters"
-                  type="password"
+                  type={showPassword?"text":"password"}
                   className="signup-input"
                 />
                 <button
@@ -151,7 +151,7 @@ export default function Login() {
               disabled={isSubmitting}
               type="submit"
               className="signup-submit">
-              {isSubmitting ? "Creating account…" : "Continue"}
+              {isSubmitting ? "Login..." : "Continue"}
             </button>
 
             <p className="signup-login-link">

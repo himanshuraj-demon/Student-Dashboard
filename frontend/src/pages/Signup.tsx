@@ -47,7 +47,7 @@ export default function Signup() {
   const onSubmit = async (data: FormData) => {
     try {
       const res: SignupRes = await axios.post(
-        "http://192.168.1.6:3000/user/signup",
+        "http://localhost:3000/user/signup",
         {
           name: data.name,
           email: data.email,
@@ -55,10 +55,8 @@ export default function Signup() {
         },
       );
       await delay(4);
-      if (res.ok) {
         reset();
         navigate("/login", { replace: true });
-      }
       setError("root", {
         message: "Something went wrong",
       });

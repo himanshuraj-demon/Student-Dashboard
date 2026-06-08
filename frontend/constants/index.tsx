@@ -1,5 +1,4 @@
 import {
-  FiHome,
   FiBookOpen,
   FiCalendar,
   FiPieChart,
@@ -12,15 +11,9 @@ import { FiCheckSquare } from "react-icons/fi";
 
 const links = [
   {
-    name: "Home",
-    key:0,
-    path: "/",
-    icon: <FiHome size={22} className="text-[var(--text-secondary)]"/>,
-  },
-  {
     name: "Dashboard",
     key:1,
-    path: "/dashboard",
+    path: "/",
     icon: <LuLayoutDashboard size={22} className="text-[var(--text-secondary)]"/>,
   },
   {
