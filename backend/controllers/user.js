@@ -48,7 +48,19 @@ async function handleLogIn(req, res) {
         });
     }
 }
-
+async function handelMe(req, res) {
+    
+    const user = await User.findById(req.user._id);
+    const details = await Details.findOne({
+        user: req.user._id,
+    });
+    return res.json({
+        user: {
+            ...user.toObject(),
+            details,
+        },
+    });
+}
 async function clearUser(req, res) {
     res.clearCookie("token");
     return res.json({
@@ -56,6 +68,64 @@ async function clearUser(req, res) {
     });
 }
 
+const updateProfile = async (req, res) => {
+  try {
+    const {
+      name,
+      branch,
+      currentSemester,
+      cpi,
+      creditsCompleted,
+      bio,
+      linkedin,
+      github,
+      codeforcesHandle,
+      codechefHandle,
+    } = req.body;
+
+    const userId = req.user._id;
+
+    await User.findByIdAndUpdate(userId, {
+      name,
+    });
+
+    const details =
+      await Details.findOneAndUpdate(
+        { user: userId },
+        {
+          branch,
+          currentSemester,
+          cpi,
+          creditsCompleted,
+          bio,
+          linkedin,
+          github,
+          codeforcesHandle,
+          codechefHandle,
+        },
+        {
+          new: true,
+          upsert: true,
+        }
+      );
+
+    const user = await User.findById(userId);
+
+    return res.status(200).json({
+      success: true,
+      user: {
+        ...user.toObject(),
+        details,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to update profile",
+    });
+  }
+};
+
+
 export {
-    handleLogIn, handleSignUp, clearUser
+    handleLogIn, handleSignUp, clearUser,handelMe,updateProfile
 }

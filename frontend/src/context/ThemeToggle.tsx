@@ -5,6 +5,9 @@ export function ThemeToggle() {
   const isDark = theme === "dark";
 
   return (
+    <div className="w-auto text-center  bottom-7 h-10 absolute md:bottom-25 md:left-10 z-50  p-2 flex flex-row items-center justify-center">
+      <div className="flex text-center mr-2 font-semibold text-2xl">Theme : {isDark?"Light":"Dark"}</div>
+      
     <button
       onClick={toggleTheme}
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
@@ -17,9 +20,10 @@ export function ThemeToggle() {
         fontSize: "0.875rem",
         transition: "background 0.2s",
       }}
-      className="w-10  h-10 fixed top-2 right-2 z-50 text-center p-2"
+      className="z-50 text-center p-3 flex justify-center items-center"
     >
-      {isDark ? <FiSun size={18} />: <FiMoon size={18} />}
+     {isDark ? <FiSun size={18} />: <FiMoon size={18} />}
     </button>
+    </div>
   );
 }

@@ -1,5 +1,7 @@
 import JWT from "jsonwebtoken"
 import dotenv from "dotenv";
+import Details from "../models/userdetails.js";
+import User from "../models/user.js";
 dotenv.config();
 
 const key = process.env.JWT_SECRET;
@@ -10,8 +12,8 @@ function createToken(user) {
         name: user.name,
         email: user.email,
         role: user.role,
-        userImg: user.profileImageUrl,
     };
+    
     const TOKEN = JWT.sign(payload, key, {
         expiresIn: "7d",
     });

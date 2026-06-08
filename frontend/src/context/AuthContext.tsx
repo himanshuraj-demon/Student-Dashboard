@@ -1,10 +1,27 @@
 import { createContext } from "react";
 
 export interface User {
-  id: string;
+  _id: string;
   name: string;
   email: string;
+  profileImageUrl?: string;
+  details?: UserDetails;
 }
+export interface UserDetails {
+  cpi: number;
+  totalCredits: number;
+  creditsCompleted: number;
+  currentSemester: number;
+  bio: string;
+  branch: string;
+  linkedin: string;
+  github: string;
+  codeforcesHandle: string;
+  codechefHandle: string;
+  streak: number;
+  totalStudyHours: number;
+}
+
 
 interface AuthContextType {
   user: User | null;

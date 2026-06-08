@@ -1,7 +1,6 @@
 import React ,{memo} from "react";
 import Navbar from "../components/Navbar";
 import MobileNav from "../components/MobileNav";
-import { ThemeToggle } from "../context/ThemeToggle";
 
 const Nav = () => {
   console.log("i am rendering");
@@ -9,7 +8,6 @@ const Nav = () => {
     <>
       <Navbar />
       <MobileNav />
-      <ThemeToggle/>
     </>
   );
 };

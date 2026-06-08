@@ -12,6 +12,7 @@ const Dashbord = () => {
     setAiOpen: React.Dispatch<React.SetStateAction<boolean>>;
   }>;
   useTitle("Dashboard");
+  console.log(user)
   return (
     <div className={`main ${isAiOpen ? "ai-open" : ""}`}>
       <Nav />

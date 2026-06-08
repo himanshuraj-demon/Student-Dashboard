@@ -10,6 +10,7 @@
     --bg-primary: #f8f8f8;
     --bg-secondary: #ffffff;
     --invert: 0%;
+    --image: url("./images/background.webp");
 
     /* Navbar Gradient */
     --nav-from: #ececef;
@@ -21,7 +22,7 @@
     --text-secondary: #4b5563;
 
     /* Accent */
-    --accent: oklch(0.97 0 0);
+    --accent: oklch(87.235% 0.11951 85.107);
     --accent-hover: #cdbf72;
     --glass-bg: rgba(255, 255, 255, 0.5);
 
@@ -77,6 +78,7 @@
     --bg-primary: #0f0a1f;
     --bg-secondary: #18122b;
     --invert: 100%;
+    --image: url("./images/background2.webp");
 
     /* Navbar Gradient */
     --nav-from: #000000;
@@ -140,6 +142,10 @@
 
 body {
     font-family: 'Inter', sans-serif;
+    background: linear-gradient(150deg,
+            var(--nav-from) 0%,
+            var(--nav-via) 80%,
+            var(--nav-to)) 100%;
 }
 
 h1,
@@ -154,10 +160,12 @@ h6 {
 ::-webkit-scrollbar {
     width: 6px;
 }
+
 ::-webkit-scrollbar-track {
     background: var(--scrollbar-track);
     border-radius: 999px;
 }
+
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(180deg,
             var(--scrollbar-thumb-from),
@@ -165,12 +173,14 @@ h6 {
             var(--scrollbar-thumb-to));
     border-radius: 999px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg,
             var(--scrollbar-thumb-from),
             var(--scrollbar-thumb-via),
             var(--scrollbar-thumb-to));
 }
+
 .main {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -187,6 +197,7 @@ h6 {
 
     border-right: 1px solid var(--border-primary);
 }
+
 .navbar {
     .logo {
         @apply flex items-center my-5 px-2;
@@ -246,10 +257,11 @@ h6 {
         }
 
         .active-link>span:first-child {
-            background-color: var(--accent)
+            background-color: var(--accent);
         }
     }
 }
+
 .mobile-nav {
     @apply fixed bottom-0 left-0 right-0 h-16 flex items-center justify-around backdrop-blur-md border-t md:hidden z-50;
     background: linear-gradient(to bottom,
@@ -280,10 +292,6 @@ h6 {
     }
 
 }
-
-
-
-
 
 
 @theme inline {
@@ -346,4 +354,63 @@ h6 {
 .main.ai-open {
     grid-template-columns: auto 1fr 25rem;
     transition: grid-template-columns 0.3s ease;
+}
+
+.mainprofilebox {
+    @apply relative overflow-y-auto pb-24;
+
+    .profile {
+        @apply h-56 md:h-72 bg-cover bg-center;
+        background-image: var(--image);
+    }
+
+    .profile-errors {
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: #f87171;
+        text-align: center;
+        margin-top: -0.25rem;
+    }
+
+    form {
+        @apply px-4 md:px-8 mt-10 grid gap-5 w-dvw md:w-auto;
+    }
+
+    .div1 {
+        @apply grid grid-cols-1 md:grid-cols-2 gap-5;
+    }
+
+    .profile-field {
+        @apply flex flex-col gap-2;
+    }
+
+    .profile-label {
+        color: var(--text-primary);
+        @apply text-sm font-semibold;
+    }
+
+    .profile-input {
+        background: var(--card-bg);
+        color: var(--text-primary);
+
+        @apply border border-white/10 rounded-xl px-4 py-3 outline-none transition-all duration-200;
+    }
+
+    .profile-input:focus {
+        border-color: var(--accent);
+    }
+
+    .profile-input:disabled {
+        @apply opacity-80 cursor-default;
+    }
+
+    .bio-field {
+        @apply col-span-full;
+    }
+
+    .section-title {
+        color: var(--text-primary);
+
+        @apply text-xl font-bold mt-4 mb-2;
+    }
 }
