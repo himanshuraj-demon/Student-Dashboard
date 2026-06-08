@@ -11,7 +11,8 @@ import Notes from "../pages/Notes";
 import Courses from "../pages/Courses";
 import Analytics from "../pages/Analytics";
 import Competitive from "../pages/Competitive";
+import Details from "../pages/Details";
 
 export{
-    Home,Login,Signup,Error,Timetable,Dashbord,Profile,Todo ,Calender,Notes,Courses,Analytics,Competitive
+    Details,Home,Login,Signup,Error,Timetable,Dashbord,Profile,Todo ,Calender,Notes,Courses,Analytics,Competitive
 }

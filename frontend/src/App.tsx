@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home,Login,Signup,Error,Timetable,Dashbord, Todo, Calender, Notes, Courses, Analytics, Profile, Competitive} from "./services"
+import { Home,Login,Signup,Error,Timetable,Dashbord, Todo, Calender, Notes, Courses, Analytics, Profile, Competitive,Details} from "./services"
 import ThemeProvider from "./context/ThemeContext";
 import { useAuth } from "./hooks/useAuth";
 import axios from "axios";
 import ProtectedRoute from "./context/ProtectedRoute";
+
 axios.defaults.withCredentials = true;
 
 const App = () => {
@@ -13,7 +14,6 @@ const App = () => {
     <ThemeProvider>
       <Routes >
         <Route path="/" element={auth ? <Dashbord /> : <Home />} errorElement={<Error/>}/>
-        <Route element={<ProtectedRoute />}>
         <Route path="/timetable" element={<Timetable />} errorElement={<Error/>} />
         <Route path="/dashboard" element={<Dashbord />} errorElement={<Error/>} />
         <Route path="/todo" element={<Todo />} errorElement={<Error/>} />
@@ -23,7 +23,8 @@ const App = () => {
         <Route path="/analytics" element={<Analytics />} errorElement={<Error/>}/>
         <Route path="/profile" element={<Profile />} errorElement={<Error/>}/>
         <Route path="/competitive" element={<Competitive />} errorElement={<Error/>}/>
-        </Route>
+        <Route path="/details" element={<Details />} errorElement={<Error/>}/>
+        
         <Route path="/login" element={<Login />} errorElement={<Error/>}/>
         <Route path="/signup" element={<Signup />} errorElement={<Error/>}/>
         <Route path="*" element={<Error />}/>

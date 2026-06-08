@@ -8,6 +8,7 @@ import { CgNotes } from "react-icons/cg";
 import { GrSchedule } from "react-icons/gr";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { FiCheckSquare } from "react-icons/fi";
+import { TbListDetails } from "react-icons/tb";
 
 const links = [
   {
@@ -39,6 +40,12 @@ const links = [
     key:5,
     path: "/analytics",
     icon: <FiPieChart size={22} className="text-[var(--text-secondary)]"/>,
+  },
+  {
+    name: "Details",
+    key:56,
+    path: "/details",
+    icon: <TbListDetails size={22} className="text-[var(--text-secondary)]"/>,
   },
   {
     name: "Notes",

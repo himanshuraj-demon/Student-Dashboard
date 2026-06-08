@@ -13,6 +13,7 @@ import connectDB from "./connection.js";
 const PORT = 3020;
 
 import userRoute from "./routes/user.js"
+import aiRoutes from "./routes/ai-chat.js";
 
 const app = express();
 
@@ -24,7 +25,6 @@ const globalLimiter = rateLimit({
   legacyHeaders: false,
   message: { message: 'Too many requests, please try again later.' },
 });
-
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 20,
@@ -48,6 +48,7 @@ app.use(express.static(path.resolve('public')));
 
 connectDB(process.env.MONGO_URL);
 
+app.use("/api", aiRoutes);
 app.use("/user",authLimiter, userRoute);
 app.get("/", (req, res) => {
   return res.json({ working: "good" });

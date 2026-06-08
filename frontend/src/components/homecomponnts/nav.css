@@ -1,20 +1,17 @@
 @import "tailwindcss";
 :root{
-    --nav-from: #000000;
-    --nav-via: #160129;
-    --nav-to: #260c43;
+    --nav1-from: #000000;
+    --nav1-via: #160129;
+    --nav1-to: #260c43;
 }
 
-*{
-    color:white;
-}
 body{
     width: 100dvw;
     overflow-x:hidden 
 }
 .mainnav{
     @apply flex p-5 justify-between items-center h-20 text-white bg-black fixed top-4;
-    background: linear-gradient(var(--nav-from),var(--nav-via),var(--nav-to));
+    background: linear-gradient(var(--nav1-from),var(--nav1-via),var(--nav1-to));
     .logo{
         @apply flex gap-5;
     }

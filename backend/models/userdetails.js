@@ -38,6 +38,11 @@ const detailsSchema = new mongoose.Schema(
       default: "",
     },
 
+    branch: {
+      type: String,
+      default: "",
+    },
+    
     linkedin: {
       type: String,
       default: "",
