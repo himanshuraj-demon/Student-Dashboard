@@ -32,7 +32,7 @@ const authLimiter = rateLimit({
   legacyHeaders: false,
   message: { message: 'Too many authentication attempts, please try again later.' },
 });
-app.use(globalLimiter)
+// app.use(globalLimiter)
 app.use(cookieParser());
 app.use(helmet());
 app.use(
@@ -49,7 +49,7 @@ app.use(express.static(path.resolve('public')));
 connectDB(process.env.MONGO_URL);
 
 app.use("/api", aiRoutes);
-app.use("/user",authLimiter, userRoute);
+app.use("/user",userRoute);
 app.get("/", (req, res) => {
   return res.json({ working: "good" });
 })

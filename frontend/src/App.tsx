@@ -71,12 +71,12 @@ const App = () => {
               element={<Competitive />}
               errorElement={<Error />}
             />
-            <Route
+          </Route>
+          <Route
               path="/details"
               element={<Details />}
               errorElement={<Error />}
             />
-          </Route>
           <Route path="/login" element={<Login />} errorElement={<Error />} />
           <Route path="/signup" element={<Signup />} errorElement={<Error />} />
           <Route path="*" element={<Error />} />
