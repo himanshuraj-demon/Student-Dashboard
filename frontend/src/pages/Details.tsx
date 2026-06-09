@@ -1,14 +1,13 @@
 import React from "react";
 import { useTitle } from "../hooks/useTitle";
 import Nav from "../services/Nav";
-import { useAuth } from "../hooks/useAuth";
 import CreditBreakdownChart from "../components/CreditBreakdown";
 import SemesterTrendChart from "../components/Semester";
 import Mandatory from "../components/Mandatory";
 
+
 const Details = () => {
   useTitle("Details");
-  const { user } = useAuth();
   return (
     <div className="main">
       <Nav />
@@ -23,7 +22,6 @@ const Details = () => {
         </div>
         <div>
             <Mandatory/>
-            
         </div>
         </div>
         

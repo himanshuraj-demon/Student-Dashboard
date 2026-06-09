@@ -4,8 +4,7 @@ import Nav from "../services/Nav";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../hooks/useAuth";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import api from "../hooks/api";
+import api from "../services/api";
 import { ThemeToggle } from "../context/ThemeToggle";
 
 interface FormData {
@@ -35,9 +34,8 @@ const Branch: string[] = [
 ];
 
 const Profile = () => {
-  const navigate = useNavigate();
   const [isEditing, setEditing] = useState(false);
-  const { user, setUser,logout } = useAuth();
+  const { user, setUser, logout } = useAuth();
   const {
     register,
     handleSubmit,
@@ -64,8 +62,8 @@ const Profile = () => {
       profileImg: user.profileImageUrl,
     });
   }, [user, reset]);
-    const onSubmit = async (data: FormData) => {
-      console.log(data);
+  const onSubmit = async (data: FormData) => {
+    console.log(data);
     try {
       const res = await api.post(
         "/user/update-profile",
@@ -154,7 +152,7 @@ const Profile = () => {
               <label className="profile-label">Current Semester</label>
 
               <select
-                {...(register("currentSemester", { valueAsNumber: true }))}
+                {...register("currentSemester", { valueAsNumber: true })}
                 disabled={!isEditing}
                 className="profile-input">
                 {[...Array(12)].map((_, i) => (
@@ -171,7 +169,11 @@ const Profile = () => {
               <input
                 type="number"
                 step="0.01"
-                {...(register("cpi", { valueAsNumber: true ,minLength:{value:0,message:"Invalid Input !!"},maxLength:{value:0,message:"Invalid input"}}))}
+                {...register("cpi", {
+                  valueAsNumber: true,
+                  minLength: { value: 0, message: "Invalid Input !!" },
+                  maxLength: { value: 0, message: "Invalid input" },
+                })}
                 disabled={!isEditing}
                 className="profile-input"
                 min={0}
@@ -188,7 +190,10 @@ const Profile = () => {
 
               <input
                 type="number"
-                {...(register("creditsCompleted", { valueAsNumber: true,minLength:{value:0,message:"Invalid Input !!"} }))}
+                {...register("creditsCompleted", {
+                  valueAsNumber: true,
+                  minLength: { value: 0, message: "Invalid Input !!" },
+                })}
                 disabled={!isEditing}
                 className="profile-input"
                 min={0}
@@ -268,12 +273,12 @@ const Profile = () => {
             )}
             {!isEditing && (
               <div
-                onClick={() => logout}
+                onClick={() => logout()}
                 className="w-full md:w-36 h-10 rounded-xl cursor-pointer bg-red-500 font-semibold flex justify-center items-center">
                 Log Out
               </div>
             )}
-            <ThemeToggle/>
+            <ThemeToggle />
 
             {isEditing ? (
               <button

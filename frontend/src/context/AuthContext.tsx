@@ -25,9 +25,10 @@ export interface UserDetails {
 
 interface AuthContextType {
   user: User | null;
-  auth: boolean;
+  auth: boolean | null;
   loading: boolean;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  setAuth: React.Dispatch<React.SetStateAction<boolean | null>>;
   logout: () => void;
 }
 

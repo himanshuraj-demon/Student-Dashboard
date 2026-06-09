@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import api from "../services/api";
 
 interface FormData {
   email: string;
@@ -11,10 +13,12 @@ interface FormData {
 interface LoginResponse {
   ok: boolean;
   message: string;
+  user: string;
 }
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const { setAuth, setUser } = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -28,8 +32,8 @@ export default function Login() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      await axios.post<LoginResponse>(
-        "http://localhost:3000/user/login",
+      await api.post<LoginResponse>(
+        "/user/login",
         {
           email: data.email,
           password: data.password,
@@ -38,9 +42,12 @@ export default function Login() {
           withCredentials: true,
         },
       );
+      const me = await api.get("/user/me");
       await delay(4);
+      setUser(me.data.user);
       reset();
-      navigate("/", { replace: true });
+      setAuth(true);
+      navigate("/dashboard", { replace: true });
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setError("root", {
@@ -120,7 +127,7 @@ export default function Login() {
                     minLength: { value: 8, message: "Min length is 8" },
                   })}
                   placeholder="Min. 8 characters"
-                  type={showPassword?"text":"password"}
+                  type={showPassword ? "text" : "password"}
                   className="signup-input"
                 />
                 <button

@@ -3,18 +3,13 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-
+import api from "../services/api";
 interface FormData {
   name: string;
   email: string;
   password: string;
   confirmPassword: string;
 }
-
-type SignupRes = {
-  ok: boolean;
-};
-
 export default function Signup() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showCPassword, setShowCPassword] = useState<boolean>(false);
@@ -46,17 +41,14 @@ export default function Signup() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const res: SignupRes = await axios.post(
-        "http://localhost:3000/user/signup",
-        {
-          name: data.name,
-          email: data.email,
-          password: data.password,
-        },
-      );
+      await api.post("/user/signup", {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      });
       await delay(4);
-        reset();
-        navigate("/login", { replace: true });
+      reset();
+      navigate("/login", { replace: true });
       setError("root", {
         message: "Something went wrong",
       });
@@ -75,7 +67,6 @@ export default function Signup() {
   };
 
   const password = watch("password", "");
-
   return (
     <div className="signup-root">
       <div className="signup-left">
@@ -182,26 +173,30 @@ export default function Signup() {
             <div className="signup-field">
               <label className="signup-label">Confirm your password</label>
               <div className="relative">
-              <input
-                {...register("confirmPassword", {
-                  required: { value: true, message: "This field is required" },
-                  validate: (value: string) =>
-                    value === password || "Passwords do not match",
-                })}
-                placeholder="Re-enter password"
-                type={showCPassword ? "text" : "password"}
-                className="signup-input"
-              />
-              <button
-                type="button"
-                onClick={() => setShowCPassword(!showCPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white transition-colors">
-                {showCPassword ? (
-                  <IoEyeOffOutline size={18} />
-                ) : (
-                  <IoEyeOutline size={18} />
-                )}
-              </button></div>
+                <input
+                  {...register("confirmPassword", {
+                    required: {
+                      value: true,
+                      message: "This field is required",
+                    },
+                    validate: (value: string) =>
+                      value === password || "Passwords do not match",
+                  })}
+                  placeholder="Re-enter password"
+                  type={showCPassword ? "text" : "password"}
+                  className="signup-input"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowCPassword(!showCPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white transition-colors">
+                  {showCPassword ? (
+                    <IoEyeOffOutline size={18} />
+                  ) : (
+                    <IoEyeOutline size={18} />
+                  )}
+                </button>
+              </div>
               {errors.confirmPassword && (
                 <span className="signup-error">
                   {errors.confirmPassword.message}

@@ -1,19 +1,29 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { AuthContext, type User } from "./AuthContext";
-import api from "../hooks/api";
+import api from "../services/api";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [auth, setAuth] = useState(false);
-  const logout = (): void => {
-    setUser(null);
-    setAuth(false);
+  const [auth, setAuth] = useState<boolean | null>(null);
+  const logout = async () => {
+    try {
+      await api.post(
+        "/user/logout",
+        {},
+        {
+          withCredentials: true,
+        },
+      );
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setUser(null);
+      setAuth(false);
+    }
   };
 
   useEffect(() => {
-    
     const checkAuth = async () => {
       try {
         const res = await api.get("/user/me");
@@ -36,6 +46,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         user,
         auth,
         loading,
+        setAuth,
         setUser,
         logout,
       }}>
