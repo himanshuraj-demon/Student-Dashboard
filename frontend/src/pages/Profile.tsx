@@ -63,7 +63,6 @@ const Profile = () => {
     });
   }, [user, reset]);
   const onSubmit = async (data: FormData) => {
-    console.log(data);
     try {
       const res = await api.post(
         "/user/update-profile",
@@ -263,37 +262,40 @@ const Profile = () => {
               placeholder="Write something ..."
             />
           </div>
-          <div className="flex flex-col md:flex-row gap-3 justify-end mt-6">
-            {isEditing && (
-              <div
-                onClick={() => setEditing(false)}
-                className="w-full md:w-36 h-10 rounded-xl cursor-pointer bg-red-500 font-semibold flex justify-center items-center">
-                Cancel
-              </div>
-            )}
-            {!isEditing && (
-              <div
-                onClick={() => logout()}
-                className="w-full md:w-36 h-10 rounded-xl cursor-pointer bg-red-500 font-semibold flex justify-center items-center">
-                Log Out
-              </div>
-            )}
+          <div className="mt-6 flex flex-col md:flex-row justify-between items-center gap-4">
             <ThemeToggle />
 
-            {isEditing ? (
-              <button
-                type="submit"
-                className="w-full md:w-36 h-10 rounded-xl bg-green-500 font-semibold"
-                disabled={isSubmitting}>
-                Save Changes
-              </button>
-            ) : (
-              <div
-                onClick={() => setEditing(true)}
-                className="w-full md:w-36 h-10 rounded-xl cursor-pointer bg-blue-500 font-semibold justify-center items-center flex">
-                Edit Profile
-              </div>
-            )}
+            <div className="flex flex-col md:flex-row gap-3">
+              {isEditing && (
+                <div
+                  onClick={() => setEditing(false)}
+                  className="w-full md:w-36 h-10 rounded-xl cursor-pointer bg-red-500 font-semibold flex justify-center items-center">
+                  Cancel
+                </div>
+              )}
+
+              {!isEditing && (
+                <div
+                  onClick={() => logout()}
+                  className="w-full md:w-36 h-10 rounded-xl cursor-pointer bg-red-500 font-semibold flex justify-center items-center">
+                  Log Out
+                </div>
+              )}
+
+              {isEditing ? (
+                <button
+                  type="submit"
+                  className="w-full md:w-36 h-10 rounded-xl bg-green-500 font-semibold" disabled={isSubmitting}> 
+                  Save Changes
+                </button>
+              ) : (
+                <div
+                  onClick={() => setEditing(true)}
+                  className="w-full md:w-36 h-10 rounded-xl cursor-pointer bg-blue-500 font-semibold flex justify-center items-center">
+                  Edit Profile
+                </div>
+              )}
+            </div>
           </div>
         </form>
         {errors.root && (

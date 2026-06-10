@@ -18,7 +18,7 @@ type RowProps = {
 
 function Row({ label, value, colorDot }: RowProps) {
   return (
-    <li className="flex items-center justify-between px-3 py-2 rounded-lg bg-gray-50">
+    <li className="flex items-center justify-between px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-300">
       <div className="flex items-center gap-2">
         {colorDot !== undefined && (
           <span
@@ -84,7 +84,7 @@ export default function InstituteRequirements() {
           label="Basic Science Elective Credits"
           value={`${r.scienceBasket.basicScienceElectiveCredits} credits`}
         />
-        <li className="flex items-start justify-between px-3 py-2 rounded-lg bg-gray-50">
+        <li className="flex items-start justify-between px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-300">
           <span className="text-sm font-medium text-gray-700">
             Allowed Areas
           </span>

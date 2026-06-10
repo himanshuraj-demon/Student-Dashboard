@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 import MobileNav from "../components/MobileNav";
 
 const Nav = () => {
-  console.log("i am rendering");
   return (
     <>
       <Navbar />

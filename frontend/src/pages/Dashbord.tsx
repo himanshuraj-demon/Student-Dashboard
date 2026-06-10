@@ -12,7 +12,6 @@ const Dashbord = () => {
     setAiOpen: React.Dispatch<React.SetStateAction<boolean>>;
   }>;
   useTitle("Dashboard");
-  console.log(user)
   return (
     <div className={`main ${isAiOpen ? "ai-open" : ""}`}>
       <Nav />
@@ -20,6 +19,8 @@ const Dashbord = () => {
         <h1>{user?.name}</h1>
         {auth ? <h1>Hi</h1> : <h1>no hi</h1>}
       </div>
+
+      
       {isAiOpen && <AiSidebarWithProps setAiOpen={setAiOpen} />}
       {!isAiOpen && (
         <button

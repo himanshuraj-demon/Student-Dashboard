@@ -13,6 +13,7 @@ import Analytics from "../pages/Analytics";
 import Competitive from "../pages/Competitive";
 import Details from "../pages/Details";
 
+
 export{
     Details,Home,Login,Signup,Error,Timetable,Dashbord,Profile,Todo ,Calender,Notes,Courses,Analytics,Competitive
 }

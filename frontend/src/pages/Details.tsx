@@ -44,10 +44,16 @@ const Details = () => {
     <div className="main">
       <Nav />
       <div className="detailsmainbox overflow-x-hidden relative md:w-full w-dvw  flex flex-col h-dvh ">
-        <h1 className="font-semibold text-4xl self-center m-5 md:absolute md:right-3 text-center w-dvw md:w-auto">
-          Academic Details
-        </h1>
-        <div className="relative md:top-20 mt-5 md:mt-0">
+        <div className="flex items-center justify-between mx-5 border-b-2 py-1">
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold">Academic Details </h1>
+
+            <p className="text-sm text-muted-foreground mt-1">
+              Degree requirements and semester credit analysis
+            </p>
+          </div>
+        </div>
+        <div className="relative md:top-10 mt-5 md:mt-0">
           <div>
             <CreditBreakdownChart />
           </div>
@@ -89,8 +95,18 @@ const Details = () => {
             />
           </div>
           <div className="text-center  flex justify-between">
-            <a href="./pdfs/Adv13_Norms for BTech Programme_28 Jan 2026.pdf" target="_blank" className="bg-blue-600 m-5 w-40 p-2 text-white rounded-2xl font-semibold">Know More</a>
-            <a href="./pdfs/Adv13_Norms for BTech Programme_28 Jan 2026.pdf" download={true} className="bg-blue-600 m-5 w-40 p-2 text-white rounded-2xl font-semibold">Download</a>
+            <a
+              href="./pdfs/Adv13_Norms for BTech Programme_28 Jan 2026.pdf"
+              target="_blank"
+              className="bg-blue-600 m-5 w-40 p-2 text-white rounded-2xl font-semibold">
+              Know More
+            </a>
+            <a
+              href="./pdfs/Adv13_Norms for BTech Programme_28 Jan 2026.pdf"
+              download={true}
+              className="bg-blue-600 m-5 w-40 p-2 text-white rounded-2xl font-semibold">
+              Download
+            </a>
           </div>
         </div>
       </div>

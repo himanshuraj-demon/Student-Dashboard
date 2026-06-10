@@ -7,6 +7,7 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
+import { TrendingUp } from "lucide-react";
 
 const semesterData = [
   { sem: "S1", credits: 24 },
@@ -22,8 +23,8 @@ const semesterData = [
 export default function SemesterTrendChart() {
   return (
     <>
-    <h2 className="text-2xl font-semibold m-4">Usual Sems Pattern : </h2>
-    <ResponsiveContainer width="100%" height={300}>
+    <h2 className="text-xl font-semibold m-4 flex gap-3 items-center "><TrendingUp size={32}/>  Semester Credit Trend  </h2>
+    <ResponsiveContainer width="100%" height={300} className="relative left-0">
       <LineChart data={semesterData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="sem" />
