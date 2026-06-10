@@ -4,9 +4,12 @@ import Nav from "../services/Nav";
 import AiSidebar from "../components/AiSidebar";
 import { LuBotMessageSquare } from "react-icons/lu";
 import Notesblock from "../components/Notesblock";
+import { FiPlus } from "react-icons/fi";
+import NotesEdit from "../components/NotesEdit";
 
 const Notes = () => {
   const [isAiOpen, setAiOpen] = useState(false);
+  const [isEdit,setEdit]=useState(false)
   const AiSidebarWithProps = AiSidebar as React.ComponentType<{
     setAiOpen: React.Dispatch<React.SetStateAction<boolean>>;
   }>;
@@ -32,8 +35,12 @@ const Notes = () => {
           />
         </div>
 
-        <div className="flex flex-wrap justify-center">
-          <Notesblock/>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
+          {!isEdit && <NotesEdit isEdit={isEdit} setEdit={setEdit}/>}
+          <div className="h-40 md:h-80 hover:scale-105 bg-[#ffffaf55] transition-all duration-300 ease-in-out rounded-2xl border-2 border-blue-200 flex justify-center items-center text-2xl " onClick={()=>setEdit(!isEdit)}>
+           Add <FiPlus size={30} />
+          </div>
+
         </div>
       </div>
 
