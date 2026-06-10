@@ -25,3 +25,13 @@ export interface Branch {
 }
 
 export type CourseType = "core" | "elective" | "basket" | "your";
+
+export interface Note{
+  _id:string,
+  title:string,
+  description:string,
+  theme:{
+    bg:string,
+    text:string,
+  }
+}

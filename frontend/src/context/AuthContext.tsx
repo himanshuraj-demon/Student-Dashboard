@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import {type Note } from "../../constants/types";
 
 export interface User {
   _id: string;
@@ -30,6 +31,8 @@ interface AuthContextType {
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   setAuth: React.Dispatch<React.SetStateAction<boolean | null>>;
   logout: () => void;
+  notes:Note[];
+  setNotes:React.Dispatch<React.SetStateAction<Note[] | []>>
 }
 
 export const AuthContext =

@@ -14,6 +14,7 @@ const PORT = 3020;
 
 import userRoute from "./routes/user.js"
 import aiRoutes from "./routes/ai-chat.js";
+import notesRoute from "./routes/notes.js"
 
 const app = express();
 
@@ -49,6 +50,7 @@ app.use(express.static(path.resolve('public')));
 connectDB(process.env.MONGO_URL);
 
 app.use("/api", aiRoutes);
+app.use("/notes",notesRoute);
 app.use("/user",userRoute);
 app.get("/", (req, res) => {
   return res.json({ working: "good" });
