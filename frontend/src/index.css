@@ -86,7 +86,7 @@
     /* Navbar Gradient */
     --nav-from: #000000;
     --nav-via: #07011b;
-    --border-colorP:rgb(129, 132, 137);
+    --border-colorP: rgb(129, 132, 137);
     --cardc: #111827;
     --border: #1f2937;
     --nav-to: #0f0c31;
@@ -152,7 +152,7 @@ body {
             var(--nav-from) 0%,
             var(--nav-via) 80%,
             var(--nav-to)) 100%;
-     color: var(--text-primary);       
+    color: var(--text-primary);
 }
 
 h1,
@@ -202,7 +202,7 @@ h6 {
 }
 
 .cardsectioncredit {
-    background: rgba(59,130,246,0.06);
+    background: rgba(59, 130, 246, 0.06);
     border: 1px solid var(--border);
 }
 
@@ -225,6 +225,7 @@ h6 {
 
 .navbar {
     @apply sticky;
+
     .logo {
         @apply flex items-center my-5 px-2;
 
@@ -389,21 +390,28 @@ h6 {
         @apply text-xl font-bold mt-4 mb-2;
     }
 }
-.branchpanel{
-    .branchpanelsearch{
+
+.branchpanel {
+    .branchpanelsearch {
         color: var(--text-primary);
         border-color: var(--border-colorP);
     }
 }
 
+.universal {
+    color: var(--text-primary);
+    border-color: var(--border-colorP);
+}
 
-.notesmenu{
+
+.notesmenu,
+.todosmenu {
     background-color: var(--cardc);
     @apply w-dvw md:w-full h-dvh overflow-x-hidden;
-    .notesinput{
+
+    .notesinput {
         color: var(--text-primary);
         background-color: var(--bg-secondary);
         border: 1px solid var(--text-secondary);
     }
 }
-

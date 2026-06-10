@@ -35,3 +35,15 @@ export interface Note{
     text:string,
   }
 }
+
+export interface Todo {
+  _id?: string;          
+  title: string;         
+  description?: string;  
+  time?: string;         
+  tag: "coding" | "game" | "study" | "music" | "fitness" | "personal"; 
+  pinned: boolean;     
+  completed: boolean;    
+  createdAt?: string;    
+  updatedAt?: string;    
+}

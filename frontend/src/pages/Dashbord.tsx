@@ -24,7 +24,7 @@ const Dashbord = () => {
       {isAiOpen && <AiSidebarWithProps setAiOpen={setAiOpen} />}
       {!isAiOpen && (
         <button
-          className="fixed bottom-2 right-2"
+          className="fixed  md:bottom-6 md:right-5 bottom-25 right-5"
           onClick={() => setAiOpen(true)}>
           <LuBotMessageSquare size={35} />
         </button>

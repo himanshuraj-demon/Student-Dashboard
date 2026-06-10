@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { AuthContext, type User } from "./AuthContext";
 import api from "../services/api";
-import { type Note } from "../../constants/types";
+import { type Note,type Todo } from "../../constants/types";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [auth, setAuth] = useState<boolean | null>(null);
   const [notes, setNotes] = useState<Note[]>([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
   const logout = async () => {
     try {
       await api.post(
@@ -28,12 +29,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const [userRes, notesRes] = await Promise.all([
+        const [userRes, notesRes,todoRes] = await Promise.all([
           api.get("/user/me"),
           api.get("/notes"),
+          api.get("/todos")
         ]);
         setUser(userRes.data.user);
         setNotes(notesRes.data);
+        setTodos(todoRes.data);
         setAuth(true);
       } catch {
         setUser(null);
@@ -56,7 +59,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser,
         logout,
         notes,
-        setNotes
+        setNotes,
+        todos,
+        setTodos,
       }}>
       {children}
     </AuthContext.Provider>
