@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import api from "../services/api";
+import toast from "react-hot-toast";
 interface FormData {
   name: string;
   email: string;
@@ -41,23 +42,18 @@ export default function Signup() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      await api.post("/user/signup", {
+      const res = await api.post("/user/signup", {
         name: data.name,
         email: data.email,
         password: data.password,
       });
       await delay(4);
       reset();
+      toast.success(res.data.message);
       navigate("/login", { replace: true });
-      setError("root", {
-        message: "Something went wrong",
-      });
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        setError("root", {
-          message: error.response?.data?.message || error.message,
-        });
-        console.log("error");
+        toast.error(error.response?.data?.message || "Something went wrong");
       } else {
         setError("root", {
           message: "Something went wrong",

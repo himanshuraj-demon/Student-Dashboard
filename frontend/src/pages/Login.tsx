@@ -5,6 +5,7 @@ import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import api from "../services/api";
+import toast from "react-hot-toast";
 
 interface FormData {
   email: string;
@@ -32,7 +33,7 @@ export default function Login() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      await api.post<LoginResponse>(
+      const res=await api.post<LoginResponse>(
         "/user/login",
         {
           email: data.email,
@@ -47,6 +48,7 @@ export default function Login() {
       setUser(me.data.user);
       reset();
       setAuth(true);
+      toast.success(res.data.message);
       navigate("/dashboard", { replace: true });
     } catch (error) {
       if (axios.isAxiosError(error)) {

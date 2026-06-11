@@ -19,6 +19,7 @@ import ThemeProvider from "./context/ThemeContext";
 import { useAuth } from "./hooks/useAuth";
 import axios from "axios";
 import ProtectedRoute from "./context/ProtectedRoute";
+import { Toaster } from "react-hot-toast";
 
 axios.defaults.withCredentials = true;
 
@@ -27,6 +28,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <ThemeProvider>
+        <Toaster position="top-center" />
         <Routes>
           <Route
             path="/"

@@ -11,7 +11,7 @@
     --bg-secondary: #ffffff;
     --cardc: #ffffff44;
     --border: #e5e7eb;
-    --border-colorP: rgb(243 244 246);
+    --border-colorP: rgb(237, 217, 153);
     --invert: 0%;
     --image: url("./images/background.webp");
 
@@ -332,64 +332,260 @@ h6 {
     transition: grid-template-columns 0.3s ease;
 }
 
+
+
 .mainprofilebox {
-    @apply relative pb-24 overflow-y-scroll h-dvh;
+  @apply relative pb-24 overflow-y-scroll h-dvh w-dvw md:w-auto;
 
-    .profile {
-        @apply h-56 md:h-72 bg-cover bg-center;
-        background-image: var(--image);
+  .profile-cover {
+    height: 180px;
+    background-image: var(--image);
+    background-size:auto;
+    position: relative;
+    overflow: hidden;
+    z-index: 50;
+
+    .cover-grid {
+      position: relative;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(108,99,255,0.09) 39px, rgba(108,99,255,0.09) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(108,99,255,0.09) 39px, rgba(108,99,255,0.09) 40px);
     }
 
-    .profile-errors {
-        font-size: 0.78rem;
-        font-weight: 500;
-        color: #f87171;
-        text-align: center;
-        margin-top: -0.25rem;
+    .cover-glow {
+      position: relative;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 200px;
+      background: radial-gradient(ellipse, rgba(108,99,255,0.22) 0%, transparent 70%);
+    }
+  }
+
+  .avatar-row {
+    @apply flex items-end gap-4 px-6 mb-5 md:-mt-10;
+
+    .avatar-wrap {
+      width: 88px;
+      height: 88px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #6C63FF, #22D3A5);
+      background-size: cover;
+      background-position: center;
+      border: 3px solid var(--bg, #0F1117);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 50px;
     }
 
-    form {
-        @apply px-4 md:px-8 mt-10 grid gap-5 w-dvw md:w-auto;
+    .avatar-initials {
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -1px;
+      user-select: none;
     }
 
-    .div1 {
-        @apply grid grid-cols-1 md:grid-cols-2 gap-5;
-    }
-
-    .profile-field {
-        @apply flex flex-col gap-2;
-    }
-
-    .profile-label {
+    .avatar-info {
+      @apply pb-1;
+      .avatar-name {
         color: var(--text-primary);
-        @apply text-sm font-semibold;
+        @apply text-xl font-bold leading-tight;
+      }
+      .avatar-email {
+        color: var(--text-secondary);
+        @apply text-sm mt-0.5 font-mono;
+      }
     }
 
-    .profile-input {
-        background: var(--card-bg);
+    .avatar-actions {
+      @apply ml-auto pb-1 hidden md:flex gap-2;
+    }
+  }
+
+  .stats-row {
+    @apply grid grid-cols-3 gap-3 px-6 mb-6;
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.08);
+      @apply rounded-2xl p-4 flex flex-col gap-1;
+
+      .stat-label {
+        @apply text-xs font-semibold uppercase tracking-widest;
+        color: var(--text-secondary);
+      }
+      .stat-val {
+        @apply text-3xl font-bold leading-none font-mono;
         color: var(--text-primary);
+        .stat-ord { @apply text-base; }
+      }
+      .stat-sub {
+        @apply text-xs;
+        color: var(--text-secondary);
+      }
 
-        @apply border-2 border-white/10 rounded-xl px-4 py-3 outline-none transition-all duration-200;
+      &.stat-accent .stat-val { color: #6C63FF; }
+      &.stat-amber  .stat-val { color: #FBBF24; }
+      &.stat-green  .stat-val { color: #22D3A5; }
     }
+  }
 
-    .profile-input:focus {
-        border-color: var(--accent);
-    }
+  .profile-section {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.08);
+    @apply rounded-2xl px-6 py-5 mx-6 mb-4;
+  }
 
-    .profile-input:disabled {
-        @apply opacity-80 cursor-default;
-    }
 
-    .bio-field {
-        @apply col-span-full;
-    }
+  form {
+    @apply grid gap-0;
+  }
 
-    .section-title {
+  .div1 {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+  }
+
+  .profile-field {
+    @apply flex flex-col gap-1.5;
+  }
+
+  .profile-label {
+    color: var(--text-secondary);
+    @apply text-xs font-semibold uppercase tracking-wide flex gap-1.5 items-center;
+  }
+
+  .profile-input {
+    background: var(--input-bg, rgba(255,255,255,0.04));
+    color: var(--text-primary);
+    @apply border border-white/10 rounded-xl px-4 py-2.5 outline-none transition-all duration-200 text-sm;
+    border-color: var(--border-colorP);
+
+    &:focus { border-color: #6C63FF; }
+    &:disabled { @apply  cursor-default; }
+  }
+
+  select.profile-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238B8FA8' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
+
+  .bio-field {
+    @apply col-span-full;
+  }
+
+  .profile-error {
+    @apply text-xs font-medium text-red-400 mt-0.5;
+  }
+
+  .profile-errors {
+    @apply text-xs font-medium text-red-400 text-center mt-2 px-6;
+  }
+
+  /* ── Section heading ───────────────────────────────────────────────────── */
+  .section-title {
+    color: var(--text-secondary);
+    @apply text-xs font-bold uppercase tracking-widest mb-4 pb-3 flex gap-2 items-center;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  /* ── Handle tiles (read-only) ──────────────────────────────────────────── */
+  .handles-grid {
+    @apply grid grid-cols-2 gap-3;
+
+    .handle-tile {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      @apply rounded-xl p-3 flex items-center gap-3;
+
+      > div {
+        @apply flex flex-col gap-0.5 overflow-hidden;
+      }
+
+      .handle-platform {
+        @apply text-xs font-semibold uppercase tracking-wide;
+        color: var(--text-secondary);
+      }
+      .handle-val {
+        @apply text-sm font-mono truncate;
         color: var(--text-primary);
-
-        @apply text-xl font-bold mt-4 mb-2;
+      }
     }
+
+    .h-linkedin { color: #60A5FA; }
+    .h-github   { color: #8B8FA8; }
+    .h-cf       { color: #F87171; }
+    .h-lc       { color: #FBBF24; }
+  }
+
+  /* ── Footer bar ────────────────────────────────────────────────────────── */
+  .profile-footer {
+    @apply flex flex-col md:flex-row justify-between items-center gap-4 px-6 mt-2;
+
+    .footer-actions {
+      @apply flex gap-3;
+    }
+  }
+
+  /* ── Buttons ───────────────────────────────────────────────────────────── */
+  .btn {
+    @apply flex items-center gap-2 px-5 h-10 rounded-xl text-sm font-semibold cursor-pointer transition-all duration-150 border-0 outline-none;
+    &:hover { @apply opacity-85; }
+    &:disabled { @apply opacity-50 cursor-not-allowed; }
+  }
+  .btn-primary {
+    background: #6C63FF;
+    color: #fff;
+  }
+  .btn-ghost {
+    background: rgba(255,255,255,0.07);
+    color: var(--text-primary);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .btn-danger {
+    background: rgba(248,113,113,0.12);
+    color: #F87171;
+    border: 1px solid rgba(248,113,113,0.2);
+  }
+
+  /* ── Responsive ────────────────────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .profile-cover { height: 130px; }
+
+    .avatar-row {
+      @apply flex-wrap px-4;
+      margin-top: -36px;
+
+      .avatar-wrap { width: 72px; height: 72px; border-radius: 16px; }
+      .avatar-initials { font-size: 22px; }
+      .avatar-info .avatar-name { @apply text-lg; }
+      .avatar-actions { @apply hidden; }
+    }
+
+    .stats-row {
+      @apply grid-cols-2 px-4 gap-2;
+      .stat-card:last-child { grid-column: 1 / -1; }
+      .stat-val { @apply text-2xl; }
+    }
+
+    .profile-section { @apply mx-3 px-4 py-4; }
+    .handles-grid { @apply grid-cols-1; }
+
+    .profile-footer {
+      @apply px-4;
+      .footer-actions { @apply w-full justify-end; }
+    }
+  }
 }
+
+
+
 
 .branchpanel {
     .branchpanelsearch {
@@ -414,4 +610,10 @@ h6 {
         background-color: var(--bg-secondary);
         border: 1px solid var(--text-secondary);
     }
+}
+
+.competative{
+    color: var(--text-primary);
+    border-color: var(--border-colorP);
+    background-color: var(--bg-secondary);
 }

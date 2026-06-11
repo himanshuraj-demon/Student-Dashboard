@@ -5,6 +5,7 @@ import { type Note } from "../../constants/types";
 import api from "../services/api";
 import { useAuth } from "../hooks/useAuth";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const noteThemes = [
   { bg: "#FEF3C7", text: "#92400E" }, // Warm Yellow
@@ -43,10 +44,12 @@ const NotesEdit = ({ note, setEdit }: Props) => {
         await api.put(`/notes/${note._id}`, payload);
         const notesRes = await api.get("/notes");
         setNotes(notesRes.data);
+        toast.success("Note updated");
       } else {
         await api.post("/notes", payload);
         const notesRes = await api.get("/notes");
         setNotes(notesRes.data);
+        toast.success("Note created");
       }
       setEdit(false);
     } catch (error) {
@@ -70,6 +73,7 @@ const NotesEdit = ({ note, setEdit }: Props) => {
       const notesRes = await api.get("/notes");
       setNotes(notesRes.data);
       setEdit(false);
+      toast.success("Note Deleted");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setError("root", {

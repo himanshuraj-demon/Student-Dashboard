@@ -8,6 +8,7 @@ import helmet from "helmet";
 import cors from "cors";
 import morgan from "morgan";
 import rateLimit from "express-rate-limit"
+import axios from "axios"
 
 import connectDB from "./connection.js";
 const PORT = 3020;
@@ -39,7 +40,7 @@ app.use(cookieParser());
 app.use(helmet());
 app.use(
   cors({
-    origin: "http://localhost:5173", // Vite
+    origin: process.env.CLIENT_URL || 'http://localhost:5173', // Vite
     credentials: true,
   })
 );
@@ -51,9 +52,9 @@ app.use(express.static(path.resolve('public')));
 connectDB(process.env.MONGO_URL);
 
 app.use("/api", aiRoutes);
-app.use("/notes",notesRoute);
-app.use("/todos",todosRoute);
-app.use("/user",userRoute);
+app.use("/notes", notesRoute);
+app.use("/todos", todosRoute);
+app.use("/user", userRoute);
 app.get("/", (req, res) => {
   return res.json({ working: "good" });
 })
