@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import api from "../services/api";
 import toast from "react-hot-toast";
+import { FcGoogle } from "react-icons/fc";
+import { useGoogleLogin, type CodeResponse } from "@react-oauth/google";
 
 interface FormData {
   email: string;
@@ -19,7 +21,7 @@ interface LoginResponse {
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { setAuth, setUser } = useAuth();
+  const { checkAuth} = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -28,12 +30,37 @@ export default function Login() {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({ mode: "onChange" });
-  const delay = (s: number) =>
-    new Promise((resolve) => setTimeout(resolve, s * 1000));
+
+  const googleAuth = async (auth: CodeResponse) => {
+    try {
+      if (auth.code) {
+        const result = await api.get(
+          `/user/auth/google?code=${encodeURIComponent(auth.code)}`,
+          { withCredentials: true },
+        );
+
+        console.log(result.data);
+
+        if (result.data.ok) {
+          await checkAuth()
+          toast.success("Login Succesfull");
+          navigate("/dashboard", { replace: true });
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: googleAuth,
+    onError: (err) => console.log(err),
+    flow: "auth-code",
+  });
 
   const onSubmit = async (data: FormData) => {
     try {
-      const res=await api.post<LoginResponse>(
+      const res = await api.post<LoginResponse>(
         "/user/login",
         {
           email: data.email,
@@ -43,11 +70,8 @@ export default function Login() {
           withCredentials: true,
         },
       );
-      const me = await api.get("/user/me");
-      await delay(4);
-      setUser(me.data.user);
+      await checkAuth();
       reset();
-      setAuth(true);
       toast.success(res.data.message);
       navigate("/dashboard", { replace: true });
     } catch (error) {
@@ -170,6 +194,19 @@ export default function Login() {
               </Link>
             </p>
           </form>
+          <div className="signup-divider">
+            <span className="signup-divider-line" />
+            <span className="signup-divider-text">or</span>
+            <span className="signup-divider-line" />
+          </div>
+
+          <button
+            type="button"
+            className="google-login-btn"
+            onClick={handleGoogleLogin}>
+            <FcGoogle size={20} />
+            <span>Continue with Google</span>
+          </button>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { AuthContext, type User } from "./AuthContext";
 import api from "../services/api";
-import { type Note,type Todo } from "../../constants/types";
+import { type Note, type Todo } from "../../constants/types";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -26,28 +26,33 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const [userRes, notesRes,todoRes] = await Promise.all([
-          api.get("/user/me"),
-          api.get("/notes"),
-          api.get("/todos")
-        ]);
-        setUser(userRes.data.user);
-        setNotes(notesRes.data);
-        setTodos(todoRes.data);
-        setAuth(true);
-      } catch {
-        setUser(null);
-        setAuth(false);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const checkAuth = useCallback(async () => {
+  try {
+    const [userRes, notesRes, todoRes] = await Promise.all([
+      api.get("/user/me"),
+      api.get("/notes"),
+      api.get("/todos"),
+    ]);
 
-    checkAuth();
-  }, []);
+    setUser(userRes.data.user);
+    setNotes(notesRes.data);
+    setTodos(todoRes.data);
+    setAuth(true);
+  } catch {
+    setUser(null);
+    setAuth(false);
+  } finally {
+    setLoading(false);
+  }
+}, []);
+
+useEffect(() => {
+  const id = setTimeout(() => {
+    void checkAuth();
+  }, 0);
+
+  return () => clearTimeout(id);
+}, [checkAuth]);
 
   return (
     <AuthContext.Provider
@@ -62,6 +67,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setNotes,
         todos,
         setTodos,
+        checkAuth,
       }}>
       {children}
     </AuthContext.Provider>

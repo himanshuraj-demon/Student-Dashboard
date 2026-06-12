@@ -23,7 +23,7 @@ type Props = {
 };
 
 const NotesEdit = ({ note, setEdit }: Props) => {
-  const { register, handleSubmit, reset, setError, formState: { errors } } = useForm<Note>();
+  const { register, handleSubmit, reset, setError, formState: { errors,isSubmitting } } = useForm<Note>();
   const { setNotes } = useAuth();
   const [isEditing, setEditing] = useState(note === null);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -136,6 +136,7 @@ const NotesEdit = ({ note, setEdit }: Props) => {
             <input
               {...register("title")}
               disabled={!isEditing}
+              maxLength={200}
               placeholder="Title"
               className="
         bg-transparent
@@ -150,6 +151,7 @@ const NotesEdit = ({ note, setEdit }: Props) => {
             <textarea
               {...register("description")}
               disabled={!isEditing}
+              maxLength={100000}
               placeholder="Start writing..."
               className="
         flex-1
@@ -193,7 +195,8 @@ const NotesEdit = ({ note, setEdit }: Props) => {
 
                   <button
                     type="submit"
-                    className="px-3 py-1 rounded-2xl bg-green-600 text-white cursor-pointer">
+                    className="px-3 py-1 rounded-2xl bg-green-600 text-white cursor-pointer"
+                    disabled={isSubmitting}>
                     Save Changes
                   </button>
                 </div>

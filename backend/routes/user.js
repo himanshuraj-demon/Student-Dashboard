@@ -1,6 +1,6 @@
 import express from "express"
 const router = express.Router()
-import { handleSignUp, handleLogIn, clearUser, handelMe ,updateProfile, handleCources, handleUpdateCources} from "../controllers/user.js"
+import { handleSignUp, handleLogIn, clearUser, handelMe ,updateProfile, handleCources, handleUpdateCources,handleGoogleAuth} from "../controllers/user.js"
 import { checkAuth } from "../middleware/auth.js"
 import User from "../models/user.js";
 import Details from "../models/userdetails.js";
@@ -13,6 +13,7 @@ router.post("/update-profile",checkAuth,updateProfile);
 router.post("/logout", clearUser);
 router.get("/your-courses", checkAuth, handleCources);
 router.post("/your-courses", checkAuth, handleUpdateCources);
+router.get("/auth/google",handleGoogleAuth);
 
 
 export default router;

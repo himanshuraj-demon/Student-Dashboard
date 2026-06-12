@@ -75,10 +75,10 @@ const App = () => {
             />
           </Route>
           <Route
-              path="/details"
-              element={<Details />}
-              errorElement={<Error />}
-            />
+            path="/details"
+            element={<Details />}
+            errorElement={<Error />}
+          />
           <Route path="/login" element={<Login />} errorElement={<Error />} />
           <Route path="/signup" element={<Signup />} errorElement={<Error />} />
           <Route path="*" element={<Error />} />

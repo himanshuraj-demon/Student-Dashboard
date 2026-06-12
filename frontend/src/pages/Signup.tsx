@@ -5,6 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import api from "../services/api";
 import toast from "react-hot-toast";
+import { FcGoogle } from "react-icons/fc";
+import { useGoogleLogin, type CodeResponse } from "@react-oauth/google";
+import { useAuth } from "../hooks/useAuth";
 interface FormData {
   name: string;
   email: string;
@@ -14,6 +17,7 @@ interface FormData {
 export default function Signup() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showCPassword, setShowCPassword] = useState<boolean>(false);
+  const { checkAuth } = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -61,6 +65,33 @@ export default function Signup() {
       }
     }
   };
+  const googleAuth = async (auth: CodeResponse) => {
+    try {
+      if (auth.code) {
+        const result = await api.get(
+          `/user/auth/google?code=${encodeURIComponent(auth.code)}`,
+          { withCredentials: true },
+        );
+
+        console.log(result.data);
+
+        if (result.data.ok) {
+          await checkAuth();
+          reset();
+          toast.success("Sign Up Succesfull");
+          navigate("/dashboard");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleGoogleSignup = useGoogleLogin({
+    onSuccess: googleAuth,
+    onError: (err) => console.log(err),
+    flow: "auth-code",
+  });
 
   const password = watch("password", "");
   return (
@@ -220,6 +251,19 @@ export default function Signup() {
               </Link>
             </p>
           </form>
+          <div className="signup-divider">
+            <span className="signup-divider-line" />
+            <span className="signup-divider-text">or</span>
+            <span className="signup-divider-line" />
+          </div>
+
+          <button
+            type="button"
+            className="google-login-btn"
+            onClick={handleGoogleSignup}>
+            <FcGoogle size={20} />
+            <span>Sign up with Google</span>
+          </button>
         </div>
       </div>
       <div className="signup-right">

@@ -34,7 +34,8 @@ interface AuthContextType {
   notes:Note[];
   setNotes:React.Dispatch<React.SetStateAction<Note[] | []>>;
   todos:Todo[];
-  setTodos:React.Dispatch<React.SetStateAction<Todo[] | []>>
+  setTodos:React.Dispatch<React.SetStateAction<Todo[] | []>>;
+  checkAuth: () => Promise<void>;
 }
 
 export const AuthContext =

@@ -14,10 +14,11 @@ const userSchema = new mongoose.Schema({
     },
     salt: {
         type: String,
+        select: false
     },
     password: {
         type: String,
-        required: true,
+        select: false
     },
     profileImageUrl: {
         type: String,

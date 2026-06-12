@@ -2,6 +2,9 @@ import User from "../models/user.js"
 import Details from "../models/userdetails.js";
 import Cources from "../models/userCources.js";
 import { courseMasterList } from "../constants/data.js";
+import { createToken } from "../services/auth.js";
+import { oauth2client } from "../config/googleConfig.js"
+import axios from "axios";
 
 async function handleSignUp(req, res) {
     const { name, email, password } = req.body;
@@ -55,8 +58,8 @@ async function handleLogIn(req, res) {
         return res
             .cookie("token", token, {
                 httpOnly: true,
-                sameSite: "lax",
-                secure: false,
+                sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+                secure: process.env.NODE_ENV === "production",
             })
             .json({
                 ok: true,
@@ -69,9 +72,11 @@ async function handleLogIn(req, res) {
         });
     }
 }
+
+
 async function handelMe(req, res) {
 
-    const user = await User.findById(req.user._id);
+    const user = await User.findById(req.user._id).select("-password -salt");
     const details = await Details.findOne({
         user: req.user._id,
     });
@@ -88,6 +93,43 @@ async function clearUser(req, res) {
         success: true,
         message: "Logged out",
     });
+}
+
+async function handleGoogleAuth(req, res) {
+    const code = req.query.code;
+    try {
+        const googleRes = await oauth2client.getToken(code);
+        oauth2client.setCredentials(googleRes.tokens);
+        const userRes = await axios.get(
+            `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${googleRes.tokens.access_token}`
+        );
+        const { email, name, picture } = userRes.data;
+        let user = await User.findOne({ email });
+        if (!user) {
+            user = await User.create({
+                name, email, profileImageUrl: picture
+            });
+            await Details.create({
+                user: user._id,
+            });
+        }
+        const token = createToken(user);
+        return res.status(200).cookie("token", token, {
+            httpOnly: true,
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+            secure: process.env.NODE_ENV === "production",
+        }).json({
+            ok: true,
+            message: "Login successful",
+        })
+
+    } catch (error) {
+        console.error(error)
+        return res.status(500).json({
+            message: "error occured",
+            error: error.message
+        })
+    }
 }
 
 const updateProfile = async (req, res) => {
@@ -215,5 +257,5 @@ async function handleUpdateCources(req, res) {
     }
 }
 export {
-    handleLogIn, handleSignUp, clearUser, handelMe, updateProfile, handleCources, handleUpdateCources
+    handleLogIn, handleSignUp, clearUser, handelMe, updateProfile, handleCources, handleUpdateCources, handleGoogleAuth
 }

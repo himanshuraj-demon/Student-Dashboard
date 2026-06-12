@@ -310,14 +310,12 @@ export default function AllCoursesPanel({
   // Normal All Courses view
   return (
     <main className="flex-1 min-w-0 overflow-hidden flex flex-col gap-4">
-      {/* Header */}
-      <div className="bg-[#ffffff11] branchpanelsearch rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-5">
+      {/* Header — sticky on both desktop and mobile */}
+      <div className="sticky top-0 z-20 bg-[#ffffff11] branchpanelsearch rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-5 backdrop-blur-sm">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
-            <h1 className="text-xl font-bold ">All Courses</h1>
-            <p className="text-sm  mt-0.5 truncate">
-              Complete course catalogue
-            </p>
+            <h1 className="text-xl font-bold">All Courses</h1>
+            <p className="text-sm mt-0.5 truncate">Complete course catalogue</p>
           </div>
           <button
             onClick={handleStartAdding}
@@ -340,8 +338,8 @@ export default function AllCoursesPanel({
         </div>
       </div>
 
-      {/* Search */}
-      <div className="relative w-full">
+      {/* Search — sticky just below the header */}
+      <div className="sticky top-[72px] z-10 relative w-full">
         <svg
           className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
           fill="none"
@@ -369,10 +367,10 @@ export default function AllCoursesPanel({
         )}
       </div>
 
-      {/* Your Courses section */}
-      <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border border-gray-100 shadow-sm overflow-x-hidden min-w-0">
-        <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-50">
-          <h2 className="font-semibold  flex items-center gap-2 min-w-0">
+      {/* Your Courses — scrolls independently */}
+      <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border border-gray-100 shadow-sm overflow-hidden min-w-0 flex flex-col">
+        <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-50 shrink-0">
+          <h2 className="font-semibold flex items-center gap-2 min-w-0">
             <span className="w-2.5 h-2.5 rounded-full bg-violet-500 inline-block shrink-0" />
             <span className="truncate">Your Courses</span>
           </h2>
@@ -381,15 +379,17 @@ export default function AllCoursesPanel({
               <span className="text-xs bg-violet-100 text-violet-700 font-bold px-2 py-0.5 rounded-full">
                 {yourCoursesFiltered.length} courses
               </span>
-              <span className="text-xs bg-gray-100  font-bold px-2 py-0.5 rounded-full">
+              <span className="text-xs bg-gray-100 font-bold px-2 py-0.5 rounded-full text-black">
                 {yourCoursesFiltered.reduce((sum, c) => sum + c.credits, 0)} cr
               </span>
             </div>
           )}
         </div>
-        <div className="p-3">
+
+        {/* This inner div scrolls independently — capped height on mobile + desktop */}
+        <div className="overflow-y-auto p-3 max-h-48 sm:max-h-64 md:max-h-72">
           {isFetchingYourCourses ? (
-            <div className="flex items-center justify-center gap-2 py-6 text-sm text-gray-400 ">
+            <div className="flex items-center justify-center gap-2 py-6 text-sm text-gray-400">
               <svg
                 className="w-4 h-4 animate-spin"
                 fill="none"
@@ -411,7 +411,7 @@ export default function AllCoursesPanel({
               Loading your courses…
             </div>
           ) : yourCoursesFiltered.length > 0 ? (
-            <ul className="flex flex-col gap-1.5 overflow-x-hidden">
+            <ul className="flex flex-col gap-1.5">
               {yourCoursesFiltered.map((c) => (
                 <CourseRow
                   key={c.code}
@@ -433,18 +433,20 @@ export default function AllCoursesPanel({
         </div>
       </section>
 
-      {/* All Courses master list */}
-      <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border border-gray-100 shadow-sm overflow-hidden min-w-0">
-        <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-50">
-          <h2 className="font-semibold  flex items-center gap-2 min-w-0">
+      {/* Course Catalogue — scrolls independently, takes remaining space on desktop */}
+      <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border border-gray-100 shadow-sm overflow-hidden min-w-0 flex flex-col flex-1 min-h-0">
+        <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-50 shrink-0">
+          <h2 className="font-semibold flex items-center gap-2 min-w-0">
             <span className="w-2.5 h-2.5 rounded-full bg-gray-400 inline-block shrink-0" />
             <span className="truncate">Course Catalogue</span>
           </h2>
-          <span className="text-xs bg-gray-100 font-bold px-2 py-0.5 rounded-full shrink-0 ml-2">
+          <span className="text-xs bg-gray-100 text-black font-bold px-2 py-0.5 rounded-full shrink-0 ml-2">
             {allCoursesFiltered.length} courses
           </span>
         </div>
-        <ul className="flex flex-col gap-1.5 p-3 max-h-[60vh] overflow-y-auto overflow-x-hidden">
+
+        {/* This inner list scrolls independently — fills all remaining vertical space on desktop */}
+        <ul className="flex flex-col gap-1.5 p-3 overflow-y-auto max-h-64 sm:max-h-80 md:flex-1 md:min-h-0">
           {allCoursesFiltered.length > 0 ? (
             allCoursesFiltered.map(([code, course]) => (
               <CourseRow
