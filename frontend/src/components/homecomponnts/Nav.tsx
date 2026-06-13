@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
+import {Link} from "react-router-dom"
 
 const Nav = () => {
   useGSAP(() => {
@@ -48,8 +49,8 @@ const Nav = () => {
             <h1>Smart Track</h1>
           </div>
           <div className="options">
-            <button>Log In</button>
-            <button>Sign Up</button>
+          <Link to={"/login"}><button>Log In</button></Link> 
+           <Link to={"/signup"}><button>Sign Up</button></Link> 
           </div>
         </div>
       </div>

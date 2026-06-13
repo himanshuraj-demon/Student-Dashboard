@@ -1,6 +1,7 @@
 import User from "../models/user.js"
 import Details from "../models/userdetails.js";
 import Cources from "../models/userCources.js";
+import SemesterDetail from "../models/semsterdetails.js";
 import { courseMasterList } from "../constants/data.js";
 import { createToken } from "../services/auth.js";
 import { oauth2client } from "../config/googleConfig.js"
@@ -256,6 +257,76 @@ async function handleUpdateCources(req, res) {
         });
     }
 }
+
+
+async function handleSaveSemester(req, res) {
+  try {
+    const userId = req.user._id;
+
+    const { semester, courses } = req.body;
+
+    if (!semester || !Array.isArray(courses)) {
+      return res.status(400).json({
+        ok: false,
+        message: "Invalid payload",
+      });
+    }
+
+    const data =
+      await SemesterDetail.findOneAndUpdate(
+        {
+          userId,
+          semester,
+        },
+        {
+          userId,
+          semester,
+          courses,
+        },
+        {
+          upsert: true,
+          returnDocument: 'after',
+        }
+      );
+
+    return res.status(200).json({
+      ok: true,
+      semester: data,
+    });
+  } catch (err) {
+    console.error(err);
+
+    return res.status(500).json({
+      ok: false,
+      message: "Internal Server Error",
+    });
+  }
+}
+
+async function handleGetSemester(req, res) {
+  try {
+    const userId = req.user._id;
+    const semester = Number(req.params.semester);
+
+    const data = await SemesterDetail.findOne({
+      userId,
+      semester,
+    });
+
+    return res.json({
+      ok: true,
+      semester: data,
+    });
+  } catch (err) {
+    console.error(err);
+
+    return res.status(500).json({
+      ok: false,
+    });
+  }
+}
+
+
 export {
-    handleLogIn, handleSignUp, clearUser, handelMe, updateProfile, handleCources, handleUpdateCources, handleGoogleAuth
+    handleLogIn, handleSignUp, clearUser, handelMe, updateProfile, handleCources, handleUpdateCources, handleGoogleAuth,handleSaveSemester,handleGetSemester
 }

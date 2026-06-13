@@ -7,7 +7,7 @@ import {
   Timetable,
   Dashbord,
   Todo,
-  Calender,
+  Planner,
   Notes,
   Courses,
   Analytics,
@@ -48,8 +48,8 @@ const App = () => {
             />
             <Route path="/todo" element={<Todo />} errorElement={<Error />} />
             <Route
-              path="/calendar"
-              element={<Calender />}
+              path="/planner"
+              element={<Planner />}
               errorElement={<Error />}
             />
             <Route path="/notes" element={<Notes />} errorElement={<Error />} />

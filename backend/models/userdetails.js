@@ -40,7 +40,7 @@ const detailsSchema = new mongoose.Schema(
 
     branch: {
       type: String,
-      default: "",
+      default: "Artificial Intelligence",
     },
     
     linkedin: {

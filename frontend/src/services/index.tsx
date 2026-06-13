@@ -6,7 +6,7 @@ import Timetable from "../pages/Timetable";
 import Dashbord from "../pages/Dashbord";
 import Profile from "../pages/Profile";
 import Todo from "../pages/Todo";
-import Calender from "../pages/Calender";
+import Planner from "../pages/Planner";
 import Notes from "../pages/Notes";
 import Courses from "../pages/Courses";
 import Analytics from "../pages/Analytics";
@@ -15,5 +15,5 @@ import Details from "../pages/Details";
 
 
 export{
-    Details,Home,Login,Signup,Error,Timetable,Dashbord,Profile,Todo ,Calender,Notes,Courses,Analytics,Competitive
+    Details,Home,Login,Signup,Error,Timetable,Dashbord,Profile,Todo ,Planner,Notes,Courses,Analytics,Competitive
 }

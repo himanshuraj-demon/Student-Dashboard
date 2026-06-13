@@ -863,6 +863,8 @@ const Mechanical = [
     ]
   }
 ];
+
+const Semsterdetails=["Remaining Courses","Semester-1","Semester-2","Semester-3","Semester-4","Semester-5","Semester-6","Semester-7","Semester-8","Semester-9","Semester-10","Semester-11","Semester-12"]
 export {
-    curriculumPathway1,Chemical,Civil,ComputerScience,Electrical,Mechanical,Materials
+    curriculumPathway1,Chemical,Civil,ComputerScience,Electrical,Mechanical,Materials,Semsterdetails
 }
