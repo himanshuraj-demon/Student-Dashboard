@@ -44,7 +44,7 @@ export default function Login() {
         if (result.data.ok) {
           await checkAuth()
           toast.success("Login Succesfull");
-          navigate("/dashboard", { replace: true });
+          navigate("/profile", { replace: true });
         }
       }
     } catch (error) {
@@ -73,7 +73,8 @@ export default function Login() {
       await checkAuth();
       reset();
       toast.success(res.data.message);
-      navigate("/dashboard", { replace: true });
+      toast.error("Please Update Profile first (new User)");
+      navigate("/profile", { replace: true });
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setError("root", {

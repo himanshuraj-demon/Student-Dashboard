@@ -1,7 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { branches, courseMasterList } from "../../constants/courses";
 import { useAuth } from "../hooks/useAuth";
-import api from "../services/api";
 
 
 import type { Course, CourseBasket } from "../../constants/types";
@@ -20,7 +19,7 @@ interface ExpandedBasketsState {
 
 // ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
 export default function BranchCourses() {
-  const { user } = useAuth();
+  const { user,yourCourses } = useAuth();
   const branchNames = Object.keys(branches) as string[];
 
   // Sidebar state
@@ -39,31 +38,6 @@ export default function BranchCourses() {
   const [expandedBaskets, setExpandedBaskets] = useState<ExpandedBasketsState>(
     {},
   );
-
-  // Your courses state (fetched from backend GET)
-  const [yourCourses, setYourCourses] = useState<string[] | null>(null);
-  const [isFetchingYourCourses, setIsFetchingYourCourses] = useState(false);
-
-  // Add Courses mode state
-  const [isAddingCourses, setIsAddingCourses] = useState(false);
-
-
-  useEffect(() => {
-    const fetchCourses = async () => {
-      if (yourCourses !== null || isFetchingYourCourses) return;
-      try {
-        setIsFetchingYourCourses(true);
-        const res = await api.get("/user/your-courses");
-        setYourCourses(res.data.codes ?? []);
-      } catch (err) {
-        console.error(err);
-        setYourCourses([]);
-      } finally {
-        setIsFetchingYourCourses(false);
-      }
-    };
-    fetchCourses();
-  }, [yourCourses, isFetchingYourCourses]);
 
   const filteredBranches = useMemo(
     (): string[] =>
@@ -154,7 +128,6 @@ export default function BranchCourses() {
           <button
             onClick={() => {
               setSidebarView("all-courses");
-              setIsAddingCourses(false);
             }}
             className={`flex-1 py-2 text-xs font-semibold transition-colors
               ${sidebarView === "all-courses" ? "bg-violet-600 text-white" : "text-gray-500 hover:bg-gray-50"}`}>
@@ -234,7 +207,7 @@ export default function BranchCourses() {
             <div className="h-px bg-gray-100" />
             <div className="text-center">
               <div className="text-2xl font-bold text-violet-600">
-                {isFetchingYourCourses ? "—" : (yourCourses?.length ?? 0)}
+                {(yourCourses?.length ?? 0)}
               </div>
               <div className="text-xs text-gray-500">Your Completed</div>
             </div>
@@ -267,7 +240,6 @@ export default function BranchCourses() {
           allCoursesFiltered={allCoursesFiltered}
           yourCoursesFiltered={yourCoursesFiltered}
           yourCourses={yourCourses}
-          isFetchingYourCourses={isFetchingYourCourses}
         />}
     </div>
   );

@@ -1,7 +1,6 @@
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { branches ,instituteRequirements} from "../../constants/courses";
 import { useAuth } from "../hooks/useAuth";
-import api from "../services/api";
 import { Semsterdetails } from "../../constants/semesterplan";
 
 import RemainingCourses from "./RemainingCourses";
@@ -16,34 +15,13 @@ function semNameToNum(name: string): number {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function SemesterWise() {
-  const { user } = useAuth();
+  const { user,yourCourses,setYourCourses } = useAuth();
   const semesterItems: string[] = Semsterdetails;
   const selectedBranch = user?.details?.branch ||"Artificial Intelligence";
 
   const [selected, setSelected] = useState<string>(semesterItems[0]);
   const [search, setSearch] = useState<string>("");
   const [allCoursesQuery, setAllCoursesQuery] = useState<string>("");
-
-  // ── Course-codes state (fetched once from GET /user/your-courses) ──────────
-  const [yourCourses, setYourCourses] = useState<string[] | null>(null);
-  const [isFetchingYourCourses, setIsFetchingYourCourses] = useState(false);
-
-  useEffect(() => {
-    const fetchCourses = async () => {
-      if (yourCourses !== null || isFetchingYourCourses) return;
-      try {
-        setIsFetchingYourCourses(true);
-        const res = await api.get("/user/your-courses");
-        setYourCourses(res.data.codes ?? []);
-      } catch (err) {
-        console.error(err);
-        setYourCourses([]);
-      } finally {
-        setIsFetchingYourCourses(false);
-      }
-    };
-    fetchCourses();
-  }, [yourCourses, isFetchingYourCourses]);
 
   const [semesterRecords, setSemesterRecords] = useState<
     Record<number, SemesterData>
@@ -65,7 +43,7 @@ export default function SemesterWise() {
       const merged = Array.from(new Set([...prev, ...newCodes]));
       return merged;
     });
-  }, []);
+  }, [setYourCourses]);
 
   // ── Derived lists ──────────────────────────────────────────────────────────
 
@@ -169,7 +147,6 @@ export default function SemesterWise() {
           allCoursesQuery={allCoursesQuery}
           remainingMandatoryCourses={remainingMandatoryCourses}
           yourCourses={remainingCoreCourses}
-          isFetchingYourCourses={isFetchingYourCourses}
         />
       ) : (
         activeSemNum !== null && (

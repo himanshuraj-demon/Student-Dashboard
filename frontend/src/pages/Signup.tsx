@@ -79,7 +79,8 @@ export default function Signup() {
           await checkAuth();
           reset();
           toast.success("Sign Up Succesfull");
-          navigate("/dashboard");
+          toast.error("Please Update Profile first");
+          navigate("/profile");
         }
       }
     } catch (error) {

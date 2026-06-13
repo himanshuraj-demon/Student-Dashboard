@@ -9,6 +9,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [auth, setAuth] = useState<boolean | null>(null);
   const [notes, setNotes] = useState<Note[]>([]);
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [yourCourses, setYourCourses] = useState<string[]>([]);
   const logout = async () => {
     try {
       await api.post(
@@ -23,36 +24,43 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setUser(null);
       setAuth(false);
+      setNotes([]);
+      setTodos([]);
+      setYourCourses([]);
+      setLoading(false);
     }
   };
 
   const checkAuth = useCallback(async () => {
-  try {
-    const [userRes, notesRes, todoRes] = await Promise.all([
-      api.get("/user/me"),
-      api.get("/notes"),
-      api.get("/todos"),
-    ]);
+    try {
+      const [userRes, notesRes, todoRes, coursesRes] = await Promise.all([
+        api.get("/user/me"),
+        api.get("/notes"),
+        api.get("/todos"),
+        api.get("/user/your-courses"),
+      ]);
 
-    setUser(userRes.data.user);
-    setNotes(notesRes.data);
-    setTodos(todoRes.data);
-    setAuth(true);
-  } catch {
-    setUser(null);
-    setAuth(false);
-  } finally {
-    setLoading(false);
-  }
-}, []);
+      setUser(userRes.data.user);
+      setNotes(notesRes.data);
+      setTodos(todoRes.data);
+      setYourCourses(coursesRes.data.codes ?? []);
 
-useEffect(() => {
-  const id = setTimeout(() => {
-    void checkAuth();
-  }, 0);
+      setAuth(true);
+    } catch {
+      setUser(null);
+      setAuth(false);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-  return () => clearTimeout(id);
-}, [checkAuth]);
+  useEffect(() => {
+    const id = setTimeout(() => {
+      void checkAuth();
+    }, 0);
+
+    return () => clearTimeout(id);
+  }, [checkAuth]);
 
   return (
     <AuthContext.Provider
@@ -68,6 +76,8 @@ useEffect(() => {
         todos,
         setTodos,
         checkAuth,
+        yourCourses,
+        setYourCourses,
       }}>
       {children}
     </AuthContext.Provider>

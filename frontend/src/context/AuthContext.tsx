@@ -36,6 +36,8 @@ interface AuthContextType {
   todos:Todo[];
   setTodos:React.Dispatch<React.SetStateAction<Todo[] | []>>;
   checkAuth: () => Promise<void>;
+  yourCourses: string[];
+  setYourCourses: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export const AuthContext =

@@ -1,6 +1,7 @@
 import { useState, useEffect, type JSX } from "react";
 import { courseMasterList } from "../../constants/courses";
 import api from "../services/api";
+import { useAuth } from "../hooks/useAuth";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -26,15 +27,32 @@ export interface SemesterData {
 // ─── Portal paste parser ──────────────────────────────────────────────────────
 
 const VALID_GRADES = new Set([
-  "A+", "A", "A-",
-  "B+", "B", "B-",
-  "C+", "C", "C-",
-  "D+", "D", "D-",
-  "F", "AB", "FF", "W", "PP", "NP", "I",
+  "A+",
+  "A",
+  "A-",
+  "B+",
+  "B",
+  "B-",
+  "C+",
+  "C",
+  "C-",
+  "D+",
+  "D",
+  "D-",
+  "F",
+  "AB",
+  "FF",
+  "W",
+  "PP",
+  "NP",
+  "I",
 ]);
 
 export function parsePortalPaste(raw: string): CourseRecord[] {
-  const lines = raw.split("\n").map((l) => l.trim()).filter(Boolean);
+  const lines = raw
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean);
   const results: CourseRecord[] = [];
 
   for (const line of lines) {
@@ -58,23 +76,41 @@ export function parsePortalPaste(raw: string): CourseRecord[] {
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function Spinner({ className = "w-3 h-3" }: { className?: string }): JSX.Element {
+function Spinner({
+  className = "w-3 h-3",
+}: {
+  className?: string;
+}): JSX.Element {
   return (
-    <svg className={`animate-spin ${className}`} fill="none" viewBox="0 0 24 24">
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+    <svg
+      className={`animate-spin ${className}`}
+      fill="none"
+      viewBox="0 0 24 24">
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      />
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8v8z"
+      />
     </svg>
   );
 }
 
 function GradeBadge({ grade }: { grade: string }): JSX.Element {
   const good = ["A+", "A", "A-", "B+", "B"].includes(grade);
-  const ok   = ["B-", "C+", "C", "C-"].includes(grade);
-  const cls  = good
+  const ok = ["B-", "C+", "C", "C-"].includes(grade);
+  const cls = good
     ? "bg-emerald-50 text-emerald-700"
     : ok
-    ? "bg-amber-50 text-amber-700"
-    : "bg-red-50 text-red-600";
+      ? "bg-amber-50 text-amber-700"
+      : "bg-red-50 text-red-600";
   return (
     <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${cls}`}>
       {grade}
@@ -108,7 +144,9 @@ function CourseTableRow({
         <input
           className="w-14 text-xs text-center border border-gray-300 rounded-lg px-1.5 py-1 font-bold focus:outline-none focus:ring-2 focus:ring-violet-300 bg-white"
           value={record.grade}
-          onChange={(e) => onGradeChange(record.code, e.target.value.toUpperCase())}
+          onChange={(e) =>
+            onGradeChange(record.code, e.target.value.toUpperCase())
+          }
         />
       ) : (
         <div className="w-14 flex justify-end shrink-0">
@@ -135,7 +173,7 @@ function LoadingSkeleton(): JSX.Element {
 interface SemesterPanelProps {
   semesterName: string;
   semesterNum: number;
-  existingCodes: string[];                              // from parent — all completed codes
+  existingCodes: string[]; // from parent — all completed codes
   onSaved: (semNum: number, data: SemesterData) => void;
   onCoursesAdded: (codes: string[]) => void;
 }
@@ -147,10 +185,10 @@ export default function SemesterPanel({
   onSaved,
   onCoursesAdded,
 }: SemesterPanelProps): JSX.Element {
-
   // ── Fetch state ────────────────────────────────────────────────────────────
-  const [isFetching, setIsFetching]     = useState<boolean>(true);
-  const [fetchError, setFetchError]     = useState<boolean>(false);
+  const [isFetching, setIsFetching] = useState<boolean>(true);
+  const [fetchError, setFetchError] = useState<boolean>(false);
+  const { setYourCourses } = useAuth();
 
   // ── Data state ─────────────────────────────────────────────────────────────
   // null  = fetch in progress or no data on backend
@@ -158,12 +196,12 @@ export default function SemesterPanel({
   const [savedCourses, setSavedCourses] = useState<CourseRecord[] | null>(null);
 
   // ── UI state ───────────────────────────────────────────────────────────────
-  const [editing, setEditing]           = useState<boolean>(false);
-  const [pasteText, setPasteText]       = useState<string>("");
+  const [editing, setEditing] = useState<boolean>(false);
+  const [pasteText, setPasteText] = useState<string>("");
   const [parsedCourses, setParsedCourses] = useState<CourseRecord[]>([]);
-  const [parseError, setParseError]     = useState<string>("");
-  const [isSaving, setIsSaving]         = useState<boolean>(false);
-  const [saveError, setSaveError]       = useState<string>("");
+  const [parseError, setParseError] = useState<string>("");
+  const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [saveError, setSaveError] = useState<string>("");
 
   // ── GET /user/semester-details/:semester on mount ─────────────────────────
   useEffect(() => {
@@ -181,12 +219,16 @@ export default function SemesterPanel({
         // Backend shape: { ok: true, semester: { courses: [{code, grade}] } | null }
         const record = res.data?.semester;
 
-        if (record && Array.isArray(record.courses) && record.courses.length > 0) {
+        if (
+          record &&
+          Array.isArray(record.courses) &&
+          record.courses.length > 0
+        ) {
           // Map backend shape → CourseRecord[] (handles both {code,grade} directly
           // and any variant where backend stores {courseCode, grade})
           const courses: CourseRecord[] = record.courses.map(
             (c: { code?: string; courseCode?: string; grade: string }) => ({
-              code:  c.code ?? c.courseCode ?? "",
+              code: c.code ?? c.courseCode ?? "",
               grade: c.grade,
             }),
           );
@@ -211,11 +253,13 @@ export default function SemesterPanel({
     };
 
     fetchSemester();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [semesterNum]); // re-runs only when user switches semester
 
   // ── Derived ────────────────────────────────────────────────────────────────
-  const hasSavedData  = savedCourses !== null && savedCourses.length > 0;
+  const hasSavedData = savedCourses !== null && savedCourses.length > 0;
   const displayCourses = parsedCourses; // what's shown in table (parsed or saved)
 
   const totalCredits = displayCourses.reduce(
@@ -229,14 +273,18 @@ export default function SemesterPanel({
     setParseError("");
     const results = parsePortalPaste(pasteText);
     if (results.length === 0) {
-      setParseError("Could not find any courses. Make sure you pasted the full semester result table.");
+      setParseError(
+        "Could not find any courses. Make sure you pasted the full semester result table.",
+      );
       return;
     }
     setParsedCourses(results);
   };
 
   const handleGradeChange = (code: string, grade: string) => {
-    setParsedCourses((prev) => prev.map((r) => (r.code === code ? { ...r, grade } : r)));
+    setParsedCourses((prev) =>
+      prev.map((r) => (r.code === code ? { ...r, grade } : r)),
+    );
   };
 
   const handleSave = async () => {
@@ -246,23 +294,24 @@ export default function SemesterPanel({
 
     const semPayload: SemesterPayload = {
       semester: semesterNum,
-      courses:  parsedCourses,
+      courses: parsedCourses,
     };
 
     // Only send codes not already on the backend
-    const existingSet  = new Set(existingCodes);
+    const existingSet = new Set(existingCodes);
     const newOnlyCodes = parsedCourses
       .map((c) => c.code)
       .filter((code) => !existingSet.has(code));
 
     try {
-      // 1. Save semester-wise grades
       await api.post("/user/semester-details", semPayload);
-
-      // 2. Only post new codes — avoids duplicates on backend
       if (newOnlyCodes.length > 0) {
-        await api.post("/user/your-courses", { codes: newOnlyCodes } satisfies CourseCodesPayload);
+        await api.post("/user/your-courses", {
+          codes: newOnlyCodes,
+        } satisfies CourseCodesPayload);
+        const coursesRes = await api.get("/user/your-courses");
         onCoursesAdded(newOnlyCodes);
+        setYourCourses(coursesRes.data.codes ?? []);
       }
 
       const saved: SemesterData = { courses: parsedCourses, saved: true };
@@ -299,7 +348,6 @@ export default function SemesterPanel({
 
   return (
     <main className="flex-1 min-w-0 overflow-hidden flex flex-col gap-4">
-
       {/* ── Header ── */}
       <div className="sticky top-0 z-20 bg-[#ffffff11] branchpanelsearch rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-5 backdrop-blur-sm">
         <div className="flex items-center justify-between gap-3">
@@ -351,20 +399,30 @@ export default function SemesterPanel({
       {editing && (
         <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-5 flex flex-col gap-3">
           <div>
-            <h2 className="font-semibold text-sm">Import Grades From IITGN Portal</h2>
+            <h2 className="font-semibold text-sm">
+              Import Grades From IITGN Portal
+            </h2>
             <p className="text-xs text-gray-400 mt-0.5">
-              Go to your student portal → Results → copy the full semester table and paste below.
+              Go to your student portal → Results → copy the full semester table
+              and paste below.
             </p>
           </div>
 
           <textarea
             className="w-full h-36 text-xs font-mono rounded-xl border border-gray-200 bg-white p-3 resize-none focus:outline-none focus:ring-2 focus:ring-violet-300 text-gray-700 placeholder:text-gray-300 shadow-sm"
-            placeholder={"2025-2026 Semester I  ES 101  Engineering Graphics  3  B-\n2025-2026 Semester I  MA 103  Calculus of Single Variable  4  A\n2025-2026 Semester I  HS 191  Introduction to Writing I  2  A-"}
+            placeholder={
+              "2025-2026 Semester I  ES 101  Engineering Graphics  3  B-\n2025-2026 Semester I  MA 103  Calculus of Single Variable  4  A\n2025-2026 Semester I  HS 191  Introduction to Writing I  2  A-"
+            }
             value={pasteText}
-            onChange={(e) => { setPasteText(e.target.value); setParseError(""); }}
+            onChange={(e) => {
+              setPasteText(e.target.value);
+              setParseError("");
+            }}
           />
 
-          {parseError && <p className="text-xs text-red-500 font-medium">{parseError}</p>}
+          {parseError && (
+            <p className="text-xs text-red-500 font-medium">{parseError}</p>
+          )}
 
           <div className="flex gap-2">
             <button
@@ -385,7 +443,9 @@ export default function SemesterPanel({
             )}
           </div>
 
-          {saveError && <p className="text-xs text-red-500 font-medium">{saveError}</p>}
+          {saveError && (
+            <p className="text-xs text-red-500 font-medium">{saveError}</p>
+          )}
         </section>
       )}
 
@@ -393,8 +453,12 @@ export default function SemesterPanel({
       {!editing && !hasSavedData && (
         <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center justify-center py-20 text-center">
           <span className="text-3xl mb-3">📋</span>
-          <p className="text-sm font-semibold text-gray-600">No semester data imported yet.</p>
-          <p className="text-xs text-gray-400 mt-1 mb-5">Paste your portal results to get started.</p>
+          <p className="text-sm font-semibold text-gray-600">
+            No semester data imported yet.
+          </p>
+          <p className="text-xs text-gray-400 mt-1 mb-5">
+            Paste your portal results to get started.
+          </p>
           <button
             onClick={handleEdit}
             className="px-5 py-2 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition shadow-sm">

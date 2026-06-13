@@ -77,14 +77,12 @@ interface AllCoursesPanelProps {
   allCoursesQuery: string;
   remainingMandatoryCourses: Course[];
   yourCourses: Course[];
-  isFetchingYourCourses: boolean;
 }
 
 export default function RemainingCourses({
   allCoursesQuery,
   remainingMandatoryCourses,
   yourCourses,
-  isFetchingYourCourses,
 }: AllCoursesPanelProps) {
   return (
     <main className="flex-1 min-w-0 overflow-hidden flex flex-col gap-4">
@@ -117,46 +115,24 @@ export default function RemainingCourses({
         </div>
 
         <div className="overflow-y-auto p-3 max-h-dvh">
-          {isFetchingYourCourses ? (
-            <div className="flex items-center justify-center gap-2 py-6 text-sm text-gray-400">
-              <svg
-                className="w-4 h-4 animate-spin"
-                fill="none"
-                viewBox="0 0 24 24">
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8v8z"
-                />
-              </svg>
-              Loading your courses…
-            </div>
-          ) : (
-            <ul className="flex flex-col gap-1.5 h-auto">
-              {yourCourses.map((c) => (
-                <CourseRow
-                  key={c.code + Math.random}
-                  course={c}
-                  type="your"
-                  query={allCoursesQuery}
-                />
-              ))}
-            </ul>
-          )}
+          <ul className="flex flex-col gap-1.5 h-auto">
+            {yourCourses.map((c) => (
+              <CourseRow
+                key={c.code + Math.random}
+                course={c}
+                type="your"
+                query={allCoursesQuery}
+              />
+            ))}
+          </ul>
         </div>
 
         <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-50 shrink-0">
           <h2 className="font-semibold flex items-center gap-2 min-w-0">
             <span className="w-2.5 h-2.5 rounded-full bg-red-500 inline-block shrink-0" />
-            <span className="truncate">Your Remaining Institute Mandatory Courses</span>
+            <span className="truncate">
+              Your Remaining Institute Mandatory Courses
+            </span>
           </h2>
           {remainingMandatoryCourses !== null && (
             <div className="flex items-center gap-1.5 shrink-0 ml-2">
@@ -164,51 +140,28 @@ export default function RemainingCourses({
                 {remainingMandatoryCourses.length} courses
               </span>
               <span className="text-xs bg-gray-100 font-bold px-2 py-0.5 rounded-full text-black">
-                {remainingMandatoryCourses.reduce((sum, c) => sum + c.credits, 0)} cr
+                {remainingMandatoryCourses.reduce(
+                  (sum, c) => sum + c.credits,
+                  0,
+                )}{" "}
+                cr
               </span>
             </div>
           )}
         </div>
 
         <div className="overflow-y-auto p-3 max-h-dvh">
-          {isFetchingYourCourses ? (
-            <div className="flex items-center justify-center gap-2 py-6 text-sm text-gray-400">
-              <svg
-                className="w-4 h-4 animate-spin"
-                fill="none"
-                viewBox="0 0 24 24">
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8v8z"
-                />
-              </svg>
-              Loading your courses…
-            </div>
-          ) : (
-            <ul className="flex flex-col gap-1.5 h-auto">
-              {remainingMandatoryCourses.map((c) => (
-                <CourseRow
-                  key={c.code + Math.random}
-                  course={c}
-                  type="basket"
-                  query={allCoursesQuery}
-                />
-              ))}
-            </ul>
-          )}
+          <ul className="flex flex-col gap-1.5 h-auto">
+            {remainingMandatoryCourses.map((c) => (
+              <CourseRow
+                key={c.code + Math.random}
+                course={c}
+                type="basket"
+                query={allCoursesQuery}
+              />
+            ))}
+          </ul>
         </div>
-
-
-
       </section>
     </main>
   );
