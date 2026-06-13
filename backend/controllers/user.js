@@ -208,54 +208,63 @@ async function handleCources(req, res) {
 }
 
 async function handleUpdateCources(req, res) {
-    try {
-        const { codes } = req.body;
+  try {
+    const { codes } = req.body;
 
-        const validCodes = codes.filter(
-            (code) => courseMasterList[code]
-        );
-
-        const totalCredits = validCodes.reduce(
-            (sum, code) => sum + courseMasterList[code].credits,
-            0
-        );
-
-        const userCourses = await Cources.findOneAndUpdate(
-            {
-                user: req.user._id,
-            },
-            {
-                courses: validCodes,
-            },
-            {
-                upsert: true,
-                returnDocument: "after",
-            }
-        );
-
-        await Details.findOneAndUpdate(
-            {
-                user: req.user._id,
-            },
-            {
-                creditsCompleted: totalCredits,
-            },
-            {
-                upsert: true,
-                returnDocument: "after",
-            }
-        );
-
-        return res.json({
-            success: true,
-            courses: userCourses.courses,
-            totalCredits,
-        });
-    } catch (err) {
-        return res.status(500).json({
-            message: "Failed to save courses",
-        });
+    if (!Array.isArray(codes)) {
+      return res.status(400).json({
+        success: false,
+        message: "Codes must be an array",
+      });
     }
+
+    const userCourses = await Cources.findOneAndUpdate(
+      {
+        user: req.user._id,
+      },
+      {
+        $addToSet: {
+          courses: {
+            $each: codes,
+          },
+        },
+      },
+      {
+        upsert: true,
+        new: true,
+      }
+    );
+
+    const totalCredits = userCourses.courses.reduce((sum, code) => {
+      return sum + (courseMasterList[code]?.credits || 0);
+    }, 0);
+
+    await Details.findOneAndUpdate(
+      {
+        user: req.user._id,
+      },
+      {
+        creditsCompleted: totalCredits,
+      },
+      {
+        upsert: true,
+        new: true,
+      }
+    );
+
+    return res.status(200).json({
+      success: true,
+      courses: userCourses.courses,
+      totalCredits,
+    });
+  } catch (err) {
+    console.error("Error updating courses:", err);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to save courses",
+    });
+  }
 }
 
 

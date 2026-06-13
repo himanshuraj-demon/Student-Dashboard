@@ -3,7 +3,7 @@ import { useTitle } from "../hooks/useTitle";
 import Nav from "../services/Nav";
 import { useAuth } from "../hooks/useAuth";
 import axios from "axios";
-import { SiGithub ,SiCodeforces} from "react-icons/si";
+import { SiGithub, SiCodeforces } from "react-icons/si";
 import { TbBrandLeetcode } from "react-icons/tb";
 
 const Competitive = () => {
@@ -15,6 +15,19 @@ const Competitive = () => {
   const [cfData, setCfData] = useState(null);
   const [leetcodeData, setLeetcodeData] = useState(null);
   const [loading, setLoading] = useState(true);
+  // const [contests, setContests] = useState();
+
+  // useEffect(() => {
+  //   const fetchContests = async () => {
+  //     const res = await fetch("https://kontests.net/api/v1/all");
+
+  //     const data = await res.json();
+
+  //     setContests(data);
+  //   };
+
+  //   fetchContests();
+  // }, []);
 
   useEffect(() => {
     const fetchProfiles = async () => {
@@ -98,7 +111,9 @@ const Competitive = () => {
 
           {/* Codeforces */}
           <div className="competative rounded-2xl p-5">
-            <h2 className="font-bold text-xl mb-4 flex items-center gap-2"><SiCodeforces/> Codeforces</h2>
+            <h2 className="font-bold text-xl mb-4 flex items-center gap-2">
+              <SiCodeforces /> Codeforces
+            </h2>
 
             <div className="space-y-2">
               <p>🏆 Rating: {cfData?.rating}</p>
@@ -110,7 +125,9 @@ const Competitive = () => {
 
           {/* LeetCode */}
           <div className="competative rounded-2xl p-5">
-            <h2 className="text-xl font-bold mb-4 flex items-center gap-2"><TbBrandLeetcode/> LeetCode</h2>
+            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+              <TbBrandLeetcode /> LeetCode
+            </h2>
 
             <div className="space-y-2">
               <p>🏆 Ranking: {leetcodeData?.ranking}</p>

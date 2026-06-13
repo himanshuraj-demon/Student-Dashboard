@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
-import { branches } from "../../constants/courses";
+import { branches ,instituteRequirements} from "../../constants/courses";
 import { useAuth } from "../hooks/useAuth";
 import api from "../services/api";
 import { Semsterdetails } from "../../constants/semesterplan";
@@ -85,6 +85,21 @@ export default function SemesterWise() {
     );
   }, [yourCourses, selectedBranch]);
 
+  const remainingMandatoryCourses = useMemo(() => {
+  if (!yourCourses) return [];
+
+  const completedSet = new Set(yourCourses);
+
+  const mandatoryCourses = [
+    ...instituteRequirements.hssBasket.mandatoryCourses,
+    ...instituteRequirements.mathBasket.mandatoryCourses,
+  ];
+
+  return mandatoryCourses.filter(
+    (course) => !completedSet.has(course.code),
+  );
+}, [yourCourses]);
+
 
 
   // ── Which panel to show ────────────────────────────────────────────────────
@@ -152,8 +167,7 @@ export default function SemesterWise() {
       {isRemaining ? (
         <RemainingCourses
           allCoursesQuery={allCoursesQuery}
-          setAllCoursesQuery={setAllCoursesQuery}
-          yourCoursesFiltered={remainingCoreCourses}
+          remainingMandatoryCourses={remainingMandatoryCourses}
           yourCourses={remainingCoreCourses}
           isFetchingYourCourses={isFetchingYourCourses}
         />

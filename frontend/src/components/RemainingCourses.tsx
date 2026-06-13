@@ -73,19 +73,16 @@ function CourseRow({
   );
 }
 
-
 interface AllCoursesPanelProps {
   allCoursesQuery: string;
-  setAllCoursesQuery: React.Dispatch<React.SetStateAction<string>>;
-  yourCoursesFiltered: Course[];
-  yourCourses: string[] | null;
+  remainingMandatoryCourses: Course[];
+  yourCourses: Course[];
   isFetchingYourCourses: boolean;
 }
 
 export default function RemainingCourses({
   allCoursesQuery,
-  setAllCoursesQuery,
-  yourCoursesFiltered,
+  remainingMandatoryCourses,
   yourCourses,
   isFetchingYourCourses,
 }: AllCoursesPanelProps) {
@@ -95,40 +92,12 @@ export default function RemainingCourses({
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
             <h1 className="text-xl font-bold">Remaining Courses Courses</h1>
-            <p className="text-sm mt-0.5 truncate">Courses not yet recorded in any semester</p>
+            <p className="text-sm mt-0.5 truncate">
+              Courses not yet recorded in any semester
+            </p>
           </div>
         </div>
       </div>
-
-      <div className="sticky top-[72px] z-10 relative w-full">
-        <svg
-          className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"
-          />
-        </svg>
-        <input
-          className="w-full pl-9 pr-8 py-2.5 text-sm rounded-xl border font-semibold border-gray-200 branchpanelsearch bg-[#ffffff11] shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-300 placeholder:text-gray-400"
-          placeholder="Search courses by name or code…"
-          value={allCoursesQuery}
-          onChange={(e) => setAllCoursesQuery(e.target.value)}
-        />
-        {allCoursesQuery && (
-          <button
-            onClick={() => setAllCoursesQuery("")}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-            ✕
-          </button>
-        )}
-      </div>
-
-      {/* Your Courses — scrolls independently */}
       <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border h-dvh border-gray-100 shadow-sm overflow-x-hidden overflow-y-auto min-w-0 flex flex-col">
         <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-50 shrink-0">
           <h2 className="font-semibold flex items-center gap-2 min-w-0">
@@ -138,10 +107,10 @@ export default function RemainingCourses({
           {yourCourses !== null && (
             <div className="flex items-center gap-1.5 shrink-0 ml-2">
               <span className="text-xs bg-violet-100 text-violet-700 font-bold px-2 py-0.5 rounded-full">
-                {yourCoursesFiltered.length} courses
+                {yourCourses.length} courses
               </span>
               <span className="text-xs bg-gray-100 font-bold px-2 py-0.5 rounded-full text-black">
-                {yourCoursesFiltered.reduce((sum, c) => sum + c.credits, 0)} cr
+                {yourCourses.reduce((sum, c) => sum + c.credits, 0)} cr
               </span>
             </div>
           )}
@@ -170,27 +139,76 @@ export default function RemainingCourses({
               </svg>
               Loading your courses…
             </div>
-          ) : yourCoursesFiltered.length > 0 ? (
-            <ul className="flex flex-col gap-1.5 h-fit">
-              {yourCoursesFiltered.map((c) => (
+          ) : (
+            <ul className="flex flex-col gap-1.5 h-auto">
+              {yourCourses.map((c) => (
                 <CourseRow
-                  key={c.code}
+                  key={c.code + Math.random}
                   course={c}
                   type="your"
                   query={allCoursesQuery}
                 />
               ))}
             </ul>
-          ) : (
-            <div className="text-center py-8">
-              <p className="text-sm text-gray-400">
-                {allCoursesQuery
-                  ? "No completed courses match your search"
-                  : 'No courses added yet. Click "Add Courses" to get started.'}
-              </p>
+          )}
+        </div>
+
+        <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-50 shrink-0">
+          <h2 className="font-semibold flex items-center gap-2 min-w-0">
+            <span className="w-2.5 h-2.5 rounded-full bg-red-500 inline-block shrink-0" />
+            <span className="truncate">Your Remaining Institute Mandatory Courses</span>
+          </h2>
+          {remainingMandatoryCourses !== null && (
+            <div className="flex items-center gap-1.5 shrink-0 ml-2">
+              <span className="text-xs bg-violet-100 text-violet-700 font-bold px-2 py-0.5 rounded-full">
+                {remainingMandatoryCourses.length} courses
+              </span>
+              <span className="text-xs bg-gray-100 font-bold px-2 py-0.5 rounded-full text-black">
+                {remainingMandatoryCourses.reduce((sum, c) => sum + c.credits, 0)} cr
+              </span>
             </div>
           )}
         </div>
+
+        <div className="overflow-y-auto p-3 max-h-dvh">
+          {isFetchingYourCourses ? (
+            <div className="flex items-center justify-center gap-2 py-6 text-sm text-gray-400">
+              <svg
+                className="w-4 h-4 animate-spin"
+                fill="none"
+                viewBox="0 0 24 24">
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v8z"
+                />
+              </svg>
+              Loading your courses…
+            </div>
+          ) : (
+            <ul className="flex flex-col gap-1.5 h-auto">
+              {remainingMandatoryCourses.map((c) => (
+                <CourseRow
+                  key={c.code + Math.random}
+                  course={c}
+                  type="basket"
+                  query={allCoursesQuery}
+                />
+              ))}
+            </ul>
+          )}
+        </div>
+
+
+
       </section>
     </main>
   );

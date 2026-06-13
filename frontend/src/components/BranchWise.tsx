@@ -46,10 +46,7 @@ export default function BranchCourses() {
 
   // Add Courses mode state
   const [isAddingCourses, setIsAddingCourses] = useState(false);
-  const [pendingSelection, setPendingSelection] = useState<Set<string>>(
-    new Set(),
-  );
-  const [isSaving, setIsSaving] = useState(false);
+
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -122,39 +119,6 @@ export default function BranchCourses() {
     .map(([k, v]) => `${k.replace(/_/g, " ")}: ${v} cr`)
     .join(" · ");
 
-  const handleStartAdding = () => {
-    setPendingSelection(new Set(yourCourses ?? []));
-    setIsAddingCourses(true);
-  };
-
-  const handleCancelAdding = () => {
-    setIsAddingCourses(false);
-    setPendingSelection(new Set());
-  };
-
-  const handleToggleCourse = (code: string) => {
-    setPendingSelection((prev) => {
-      const next = new Set(prev);
-      if (next.has(code)) next.delete(code);
-      else next.add(code);
-      return next;
-    });
-  };
-
-  const handleSaveChanges = async () => {
-    setIsSaving(true);
-    try {
-      const updatedCourses = Array.from(pendingSelection);
-      await api.post("/user/your-courses", { codes: updatedCourses });
-      setYourCourses(updatedCourses);
-      setIsAddingCourses(false);
-      setPendingSelection(new Set());
-    } catch (err) {
-      console.error("Failed to save courses", err);
-    } finally {
-      setIsSaving(false);
-    }
-  };
 
   const yourCoursesDetails = useMemo(() => {
     if (!yourCourses) return [];
@@ -225,7 +189,7 @@ export default function BranchCourses() {
               {filteredBranches.map((name) => {
                 const b = branches[name as keyof typeof branches];
                 const isActive = selected === name;
-                const isUser = name === user.details.branch;
+                const isUser = name === user?.details?.branch;
                 return (
                   <li key={name}>
                     <button
@@ -274,25 +238,12 @@ export default function BranchCourses() {
               </div>
               <div className="text-xs text-gray-500">Your Completed</div>
             </div>
-            {!isAddingCourses && (
-              <button
-                onClick={handleStartAdding}
-                className="mt-1 w-full flex items-center justify-center gap-1.5 px-3 py-2 text-sm font-semibold rounded-xl bg-violet-600 text-white hover:bg-violet-700 transition-colors">
-                <svg
-                  className="w-3.5 h-3.5 shrink-0"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.5}>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 4v16m8-8H4"
-                  />
-                </svg>
-                Add Courses
-              </button>
-            )}
+            <div className="text-center">
+              <div className="text-2xl font-bold text-violet-600">
+                {yourCoursesFiltered.reduce((sum, c) => sum + c.credits, 0)} cr
+              </div>
+              <div className="text-xs text-gray-500">Credits Completed</div>
+            </div>
           </div>
         )}
       </aside>
@@ -311,13 +262,6 @@ export default function BranchCourses() {
         />
 
         : <AllCoursesPanel
-          isAddingCourses={isAddingCourses}
-          pendingSelection={pendingSelection}
-          isSaving={isSaving}
-          handleCancelAdding={handleCancelAdding}
-          handleSaveChanges={handleSaveChanges}
-          handleToggleCourse={handleToggleCourse}
-          handleStartAdding={handleStartAdding}
           allCoursesQuery={allCoursesQuery}
           setAllCoursesQuery={setAllCoursesQuery}
           allCoursesFiltered={allCoursesFiltered}
