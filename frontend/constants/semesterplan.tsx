@@ -2,7 +2,7 @@
 const curriculumPathway1 = [
   {
     semester: 1,
-    credits: 28,
+    credits: 24,
     courses: [
       {
         code: "FP:100",
@@ -14,12 +14,6 @@ const curriculumPathway1 = [
         code: "HS:191",
         title: "Introduction to Writing I",
         credits: 2,
-        category: "humanities",
-      },
-      {
-        code: "HS:201",
-        title: "World Civilizations and Cultures",
-        credits: 4,
         category: "humanities",
       },
       {
@@ -47,8 +41,8 @@ const curriculumPathway1 = [
         category: "engineering_science",
       },
       {
-        code: "ES:118",
-        title: "Materials for the Future",
+        code: "ES:192",
+        title: "Undergraduate Science Laboratory",
         credits: 3,
         category: "engineering_science",
       },
@@ -83,15 +77,9 @@ const curriculumPathway1 = [
         category: "math",
       },
       {
-        code: "BS:192",
-        title: "Undergraduate Science Laboratory",
-        credits: 3,
-        category: "basic_science",
-      },
-      {
-        code: "ES:113",
-        title: "Data Centric Computing",
-        credits: 3,
+        code: "ES:119",
+        title: "Principles of Artificial Intelligence",
+        credits: 4,
         category: "engineering_science",
       },
       {
@@ -259,31 +247,29 @@ const curriculumPathway1 = [
 const Chemical = [
   {
     semester: 1,
-    credits: 26,
+    credits: 20,
     courses: [
       { code: "FP 100", title: "Foundation Programme", l_t_p_c: "0-0-0-4", credits: 4 },
-      { code: "HS 101-109", title: "Language", l_t_p_c: "3-0-0-4", credits: 4 },
-      { code: "BE 101", title: "Introduction to Life Sciences: Fundamentals of Life", l_t_p_c: "3-1-0-4", credits: 4 },
-      { code: "ES 101", title: "Engineering Graphics", l_t_p_c: "2-0-3-3", credits: 3 },
+      { code: "HS 192", title: "Introduction to Writing I", l_t_p_c: "3-0-0-4", credits: 2 },
+      { code: "MA 101", title: "Calculus of Single Variable & Linear Algebra", l_t_p_c: "4-2-0-4", credits: 4 },
       { code: "ES 102/ES 112", title: "Introduction to Computing/ Computing", l_t_p_c: "2-0-2-3", credits: 3 },
-      { code: "ES 103", title: "Introduction to Electrical Systems", l_t_p_c: "3-1-0-4", credits: 4 },
+      { code: "ES 103", title: "Design, Innovation, and Prototyping", l_t_p_c: "3-1-0-4", credits: 5 },
+      { code: "BE 101", title: "Undergraduate Science Laboratory", l_t_p_c: "3-1-0-4", credits: 3 },
       { code: "PE 101", title: "Physical Education", l_t_p_c: "0-0-0-0", credits: 0 }
     ]
   },
   {
     semester: 2,
-    credits: 25,
+    credits: 21,
     courses: [
-      { code: "HS 151", title: "Economics", l_t_p_c: "3-1-0-4", credits: 4 },
-      { code: "MA 102", title: "Mathematics II", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "PH 101", title: "Physics", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "MA 101", title: "Mathematics I", l_t_p_c: "4-2-0-4", credits: 4 },
-      { code: "ES 104", title: "Introduction to Analog and Digital Electronics", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "CH 202", title: "Chemistry Lab", l_t_p_c: "0-0-4-2", credits: 2 },
-      { code: "ES 105", title: "Electrical and Electronics Lab", l_t_p_c: "0-0-4-2", credits: 2 },
-      { code: "ES 106", title: "Manufacturing and Workshop practice", l_t_p_c: "2-0-3-4", credits: 4 },
+      { code: "HS 192", title: "Introduction to Writing II", l_t_p_c: "3-1-0-4", credits: 2 },
+      { code: "MA 104", title: "Ordinary Differential Equations (first half)", l_t_p_c: "3-2-0-4", credits: 2 },
+      { code: "ES 116", title: "Principles and Applications of Electrical Engineering", l_t_p_c: "3-2-0-4", credits: 5 },
+      { code: "ES 114", title: "Probability, Statistics, and Data Visualization", l_t_p_c: "2-0-3-3", credits: 3 },
+      { code: "ES 119", title: "Principles of Artificial Intelligence", l_t_p_c: "2-0-3-4", credits: 4 },
+      { code: "ES 211", title: "Thermodynamics", l_t_p_c: "0-0-4-2", credits: 3 },
       { code: "PE 102", title: "Physical Education", l_t_p_c: "0-0-0-0", credits: 0 },
-      { code: "FP 101", title: "Intro to Engineering", l_t_p_c: "0-0-2-1", credits: 1 }
+      { code: "ES 117", title: "The World of Engineering", l_t_p_c: "0-0-2-1", credits: 2 }
     ]
   },
   {
@@ -360,31 +346,29 @@ const Chemical = [
 const Civil = [
   {
     semester: 1,
-    credits: 26,
+    credits: 20,
     courses: [
       { code: "FP 100", title: "Foundation Programme", l_t_p_c: "0-0-0-4", credits: 4 },
-      { code: "HS 101-109", title: "Language", l_t_p_c: "3-0-0-4", credits: 4 },
-      { code: "BE 101", title: "Introduction to Life Sciences: Fundamentals of Life", l_t_p_c: "3-1-0-4", credits: 4 },
-      { code: "MA 101", title: "Mathematics I", l_t_p_c: "4-2-0-4", credits: 4 },
-      { code: "ES 101", title: "Engineering Graphics", l_t_p_c: "2-0-3-3", credits: 3 },
+      { code: "HS 192", title: "Introduction to Writing I", l_t_p_c: "3-0-0-4", credits: 2 },
+      { code: "MA 101", title: "Calculus of Single Variable & Linear Algebra", l_t_p_c: "4-2-0-4", credits: 4 },
       { code: "ES 102/ES 112", title: "Introduction to Computing/ Computing", l_t_p_c: "2-0-2-3", credits: 3 },
-      { code: "ES 103", title: "Introduction to Electrical Systems", l_t_p_c: "3-1-0-4", credits: 4 },
+      { code: "ES 103", title: "Design, Innovation, and Prototyping", l_t_p_c: "3-1-0-4", credits: 5 },
+      { code: "BE 101", title: "Undergraduate Science Laboratory", l_t_p_c: "3-1-0-4", credits: 3 },
       { code: "PE 101", title: "Physical Education", l_t_p_c: "0-0-0-0", credits: 0 }
     ]
   },
   {
     semester: 2,
-    credits: 25,
+    credits: 21,
     courses: [
-      { code: "HS 151", title: "Economics", l_t_p_c: "3-1-0-4", credits: 4 },
-      { code: "MA 102", title: "Mathematics II", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "PH 101", title: "Physics", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "CH 202", title: "Chemistry Lab", l_t_p_c: "0-0-4-2", credits: 2 },
-      { code: "ES 104", title: "Introduction to Analog and Digital Electronics", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "ES 105", title: "Electrical and Electronics Lab", l_t_p_c: "0-0-4-2", credits: 2 },
-      { code: "ES 106", title: "Manufacturing and Workshop practice", l_t_p_c: "2-0-3-4", credits: 4 },
+      { code: "HS 192", title: "Introduction to Writing II", l_t_p_c: "3-1-0-4", credits: 2 },
+      { code: "MA 104", title: "Ordinary Differential Equations (first half)", l_t_p_c: "3-2-0-4", credits: 2 },
+      { code: "ES 116", title: "Principles and Applications of Electrical Engineering", l_t_p_c: "3-2-0-4", credits: 5 },
+      { code: "ES 114", title: "Probability, Statistics, and Data Visualization", l_t_p_c: "2-0-3-3", credits: 3 },
+      { code: "ES 119", title: "Principles of Artificial Intelligence", l_t_p_c: "2-0-3-4", credits: 4 },
+      { code: "CE 202", title: "Sustainability and Environment", l_t_p_c: "0-0-4-2", credits: 3 },
       { code: "PE 102", title: "Physical Education", l_t_p_c: "0-0-0-0", credits: 0 },
-      { code: "FP 101", title: "Intro to Engineering", l_t_p_c: "0-0-2-1", credits: 1 }
+      { code: "ES 117", title: "The World of Engineering", l_t_p_c: "0-0-2-1", credits: 2 }
     ]
   },
   {
@@ -463,31 +447,29 @@ const Civil = [
 const ComputerScience = [
   {
     semester: 1,
-    credits: 26,
+    credits: 20,
     courses: [
       { code: "FP 100", title: "Foundation Programme", l_t_p_c: "0-0-0-4", credits: 4 },
-      { code: "HS 101-109", title: "Language", l_t_p_c: "3-0-0-4", credits: 4 },
-      { code: "MA 101", title: "Mathematics I", l_t_p_c: "4-2-0-4", credits: 4 },
-      { code: "ES 101", title: "Engineering Graphics", l_t_p_c: "2-0-3-3", credits: 3 },
+      { code: "HS 192", title: "Introduction to Writing I", l_t_p_c: "3-0-0-4", credits: 2 },
+      { code: "MA 101", title: "Calculus of Single Variable & Linear Algebra", l_t_p_c: "4-2-0-4", credits: 4 },
       { code: "ES 102/ES 112", title: "Introduction to Computing/ Computing", l_t_p_c: "2-0-2-3", credits: 3 },
-      { code: "ES 103", title: "Introduction to Electrical Systems", l_t_p_c: "3-1-0-4", credits: 4 },
-      { code: "BE 101", title: "Introduction to Life Sciences: Fundamentals of Life", l_t_p_c: "3-1-0-4", credits: 4 },
+      { code: "ES 103", title: "Design, Innovation, and Prototyping", l_t_p_c: "3-1-0-4", credits: 5 },
+      { code: "BE 101", title: "Undergraduate Science Laboratory", l_t_p_c: "3-1-0-4", credits: 3 },
       { code: "PE 101", title: "Physical Education", l_t_p_c: "0-0-0-0", credits: 0 }
     ]
   },
   {
     semester: 2,
-    credits: 25,
+    credits: 22,
     courses: [
-      { code: "HS 151", title: "Economics", l_t_p_c: "3-1-0-4", credits: 4 },
-      { code: "MA 102", title: "Mathematics II", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "ES 104", title: "Introduction to Analog and Digital Electronics", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "ES 105", title: "Electrical and Electronics Lab", l_t_p_c: "0-0-4-2", credits: 2 },
-      { code: "ES 106", title: "Manufacturing and Workshop Practice", l_t_p_c: "2-0-3-4", credits: 4 },
-      { code: "PH 101", title: "Physics", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "CH 202", title: "Chemistry Lab", l_t_p_c: "0-0-4-2", credits: 2 },
+      { code: "HS 192", title: "Introduction to Writing II", l_t_p_c: "3-1-0-4", credits: 2 },
+      { code: "MA 104", title: "Ordinary Differential Equations (first half)", l_t_p_c: "3-2-0-4", credits: 2 },
+      { code: "ES 116", title: "Principles and Applications of Electrical Engineering", l_t_p_c: "3-2-0-4", credits: 5 },
+      { code: "ES 114", title: "Probability, Statistics, and Data Visualization", l_t_p_c: "2-0-3-3", credits: 3 },
+      { code: "ES 119", title: "Principles of Artificial Intelligence", l_t_p_c: "2-0-3-4", credits: 4 },
+      { code: "ES 214", title: "Discrete Mathematics", l_t_p_c: "0-0-4-2", credits: 4 },
       { code: "PE 102", title: "Physical Education", l_t_p_c: "0-0-0-0", credits: 0 },
-      { code: "FP 101", title: "Intro to Engineering", l_t_p_c: "0-0-2-1", credits: 1 }
+      { code: "ES 117", title: "The World of Engineering", l_t_p_c: "0-0-2-1", credits: 2 }
     ]
   },
   {
@@ -563,31 +545,29 @@ const ComputerScience = [
 const Electrical = [
   {
     semester: 1,
-    credits: 26,
+    credits: 20,
     courses: [
       { code: "FP 100", title: "Foundation Programme", l_t_p_c: "0-0-0-4", credits: 4 },
-      { code: "BE 101", title: "Introduction to Life Sciences: Fundamentals of Life", l_t_p_c: "3-1-0-4", credits: 4 },
-      { code: "MA 101", title: "Mathematics I", l_t_p_c: "4-2-0-4", credits: 4 },
-      { code: "ES 101", title: "Engineering Graphics", l_t_p_c: "2-0-3-3", credits: 3 },
+      { code: "HS 192", title: "Introduction to Writing I", l_t_p_c: "3-0-0-4", credits: 2 },
+      { code: "MA 101", title: "Calculus of Single Variable & Linear Algebra", l_t_p_c: "4-2-0-4", credits: 4 },
       { code: "ES 102/ES 112", title: "Introduction to Computing/ Computing", l_t_p_c: "2-0-2-3", credits: 3 },
-      { code: "ES 103", title: "Introduction to Electrical Systems", l_t_p_c: "3-1-0-4", credits: 4 },
+      { code: "ES 103", title: "Design, Innovation, and Prototyping", l_t_p_c: "3-1-0-4", credits: 5 },
+      { code: "BE 101", title: "Undergraduate Science Laboratory", l_t_p_c: "3-1-0-4", credits: 3 },
       { code: "PE 101", title: "Physical Education", l_t_p_c: "0-0-0-0", credits: 0 }
     ]
   },
   {
     semester: 2,
-    credits: 25,
+    credits: 21,
     courses: [
-      { code: "HS 151", title: "Economics", l_t_p_c: "3-1-0-4", credits: 4 },
-      { code: "HS 101-109", title: "Language", l_t_p_c: "3-0-0-4", credits: 4 },
-      { code: "MA 102", title: "Mathematics II", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "PH 101", title: "Physics", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "CH 202", title: "Chemistry Lab", l_t_p_c: "0-0-4-2", credits: 2 },
-      { code: "ES 104", title: "Introduction to Analog and Digital Electronics", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "ES 105", title: "Electrical and Electronics Lab", l_t_p_c: "0-0-4-2", credits: 2 },
-      { code: "ES 106", title: "Manufacturing and Workshop Practice", l_t_p_c: "2-0-3-4", credits: 4 },
+      { code: "HS 192", title: "Introduction to Writing II", l_t_p_c: "3-1-0-4", credits: 2 },
+      { code: "MA 104", title: "Ordinary Differential Equations (first half)", l_t_p_c: "3-2-0-4", credits: 2 },
+      { code: "ES 116", title: "Principles and Applications of Electrical Engineering", l_t_p_c: "3-2-0-4", credits: 5 },
+      { code: "ES 114", title: "Probability, Statistics, and Data Visualization", l_t_p_c: "2-0-3-3", credits: 3 },
+      { code: "ES 119", title: "Principles of Artificial Intelligence", l_t_p_c: "2-0-3-4", credits: 4 },
+      { code: "ES 225", title: "Semiconductor Devices", l_t_p_c: "0-0-4-2", credits: 4 },
       { code: "PE 102", title: "Physical Education", l_t_p_c: "0-0-0-0", credits: 0 },
-      { code: "FP 101", title: "Intro to Engineering", l_t_p_c: "0-0-2-1", credits: 1 }
+      { code: "ES 117", title: "The World of Engineering", l_t_p_c: "0-0-2-1", credits: 2 }
     ]
   },
   {
@@ -664,31 +644,29 @@ const Electrical = [
 const Materials = [
   {
     semester: 1,
-    credits: 26,
+    credits: 20,
     courses: [
       { code: "FP 100", title: "Foundation Programme", l_t_p_c: "0-0-0-4", credits: 4 },
-      { code: "HS 101-109", title: "Language", l_t_p_c: "3-0-0-4", credits: 4 },
-      { code: "BE 101", title: "Introduction to Life Sciences: Fundamentals of Life", l_t_p_c: "3-1-0-4", credits: 4 },
-      { code: "MA 101", title: "Mathematics I", l_t_p_c: "4-2-0-4", credits: 4 },
-      { code: "ES 101", title: "Engineering Graphics", l_t_p_c: "2-0-3-3", credits: 3 },
+      { code: "HS 192", title: "Introduction to Writing I", l_t_p_c: "3-0-0-4", credits: 2 },
+      { code: "MA 101", title: "Calculus of Single Variable & Linear Algebra", l_t_p_c: "4-2-0-4", credits: 4 },
       { code: "ES 102/ES 112", title: "Introduction to Computing/ Computing", l_t_p_c: "2-0-2-3", credits: 3 },
-      { code: "ES 103", title: "Introduction to Electrical Systems", l_t_p_c: "3-1-0-4", credits: 4 },
+      { code: "ES 103", title: "Design, Innovation, and Prototyping", l_t_p_c: "3-1-0-4", credits: 5 },
+      { code: "BE 101", title: "Undergraduate Science Laboratory", l_t_p_c: "3-1-0-4", credits: 3 },
       { code: "PE 101", title: "Physical Education", l_t_p_c: "0-0-0-0", credits: 0 }
     ]
   },
   {
     semester: 2,
-    credits: 25,
+    credits: 21,
     courses: [
-      { code: "HS 151", title: "Economics", l_t_p_c: "3-1-0-4", credits: 4 },
-      { code: "MA 102", title: "Mathematics II", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "PH 101", title: "Physics", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "CH 202", title: "Chemistry Lab", l_t_p_c: "0-0-4-2", credits: 2 },
-      { code: "ES 104", title: "Introduction to Analog and Digital Electronics", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "ES 105", title: "Electrical and Electronics Lab", l_t_p_c: "0-0-4-2", credits: 2 },
-      { code: "ES 106", title: "Manufacturing and Workshop practice", l_t_p_c: "2-0-3-4", credits: 4 },
+      { code: "HS 192", title: "Introduction to Writing II", l_t_p_c: "3-1-0-4", credits: 2 },
+      { code: "MA 104", title: "Ordinary Differential Equations (first half)", l_t_p_c: "3-2-0-4", credits: 2 },
+      { code: "ES 116", title: "Principles and Applications of Electrical Engineering", l_t_p_c: "3-2-0-4", credits: 5 },
+      { code: "ES 114", title: "Probability, Statistics, and Data Visualization", l_t_p_c: "2-0-3-3", credits: 3 },
+      { code: "ES 119", title: "Principles of Artificial Intelligence", l_t_p_c: "2-0-3-4", credits: 4 },
+      { code: "MSE 207", title: "Structure of Materials", l_t_p_c: "0-0-4-2", credits: 3 },
       { code: "PE 102", title: "Physical Education", l_t_p_c: "0-0-0-0", credits: 0 },
-      { code: "FP 101", title: "Intro to Engineering", l_t_p_c: "0-0-2-1", credits: 1 }
+      { code: "ES 117", title: "The World of Engineering", l_t_p_c: "0-0-2-1", credits: 2 }
     ]
   },
   {
@@ -765,31 +743,29 @@ const Materials = [
 const Mechanical = [
   {
     semester: 1,
-    credits: 26,
+    credits: 20,
     courses: [
       { code: "FP 100", title: "Foundation Programme", l_t_p_c: "0-0-0-4", credits: 4 },
-      { code: "HS 101-109", title: "Language", l_t_p_c: "3-0-0-4", credits: 4 },
-      { code: "MA 101", title: "Mathematics I", l_t_p_c: "4-2-0-4", credits: 4 },
+      { code: "HS 192", title: "Introduction to Writing I", l_t_p_c: "3-0-0-4", credits: 2 },
+      { code: "MA 101", title: "Calculus of Single Variable & Linear Algebra", l_t_p_c: "4-2-0-4", credits: 4 },
       { code: "ES 102/ES 112", title: "Introduction to Computing/ Computing", l_t_p_c: "2-0-2-3", credits: 3 },
-      { code: "ES 103", title: "Introduction to Electrical Systems", l_t_p_c: "3-1-0-4", credits: 4 },
-      { code: "BE 101", title: "Introduction to Life Sciences: Fundamentals of Life", l_t_p_c: "3-1-0-4", credits: 4 },
+      { code: "ES 103", title: "Design, Innovation, and Prototyping", l_t_p_c: "3-1-0-4", credits: 5 },
+      { code: "BE 101", title: "Undergraduate Science Laboratory", l_t_p_c: "3-1-0-4", credits: 3 },
       { code: "PE 101", title: "Physical Education", l_t_p_c: "0-0-0-0", credits: 0 }
     ]
   },
   {
     semester: 2,
-    credits: 25,
+    credits: 21,
     courses: [
-      { code: "HS 151", title: "Economics", l_t_p_c: "3-1-0-4", credits: 4 },
-      { code: "MA 102", title: "Mathematics II", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "ES 104", title: "Introduction to Analog and Digital Electronics", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "ES 101", title: "Engineering Graphics", l_t_p_c: "2-0-3-3", credits: 3 },
-      { code: "ES 106", title: "Manufacturing and Workshop Practice", l_t_p_c: "2-0-3-4", credits: 4 },
-      { code: "ES 105", title: "Electrical and Electronics Lab", l_t_p_c: "0-0-4-2", credits: 2 },
-      { code: "PH 101", title: "Physics", l_t_p_c: "3-2-0-4", credits: 4 },
-      { code: "CH 202", title: "Chemistry Lab", l_t_p_c: "0-0-4-2", credits: 2 },
+      { code: "HS 192", title: "Introduction to Writing II", l_t_p_c: "3-1-0-4", credits: 2 },
+      { code: "MA 104", title: "Ordinary Differential Equations (first half)", l_t_p_c: "3-2-0-4", credits: 2 },
+      { code: "ES 116", title: "Principles and Applications of Electrical Engineering", l_t_p_c: "3-2-0-4", credits: 5 },
+      { code: "ES 114", title: "Probability, Statistics, and Data Visualization", l_t_p_c: "2-0-3-3", credits: 3 },
+      { code: "ES 119", title: "Principles of Artificial Intelligence", l_t_p_c: "2-0-3-4", credits: 4 },
+      { code: "ES 211", title: "Thermodynamics", l_t_p_c: "0-0-4-2", credits: 3 },
       { code: "PE 102", title: "Physical Education", l_t_p_c: "0-0-0-0", credits: 0 },
-      { code: "FP 101", title: "Intro to Engineering", l_t_p_c: "0-0-2-1", credits: 1 }
+      { code: "ES 117", title: "The World of Engineering", l_t_p_c: "0-0-2-1", credits: 2 }
     ]
   },
   {

@@ -91,7 +91,7 @@ export default function AllCoursesPanel({
 }: AllCoursesPanelProps) {
   
   return (
-    <main className="flex-1 min-w-0 overflow-hidden flex flex-col gap-4">
+    <main className="flex-1 min-w-0 overflow-hidden flex flex-col gap-4 h-fit">
       {/* Header — sticky on both desktop and mobile */}
       <div className="sticky top-0 z-20 bg-[#ffffff11] branchpanelsearch rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-5 backdrop-blur-sm">
         <div className="flex items-center justify-between gap-3">
@@ -151,7 +151,7 @@ export default function AllCoursesPanel({
         </div>
 
         {/* This inner div scrolls independently — capped height on mobile + desktop */}
-        <div className="overflow-y-auto p-3 max-h-48 sm:max-h-64 md:max-h-72">
+        <div className="overflow-y-auto p-3 h-fit">
           {yourCoursesFiltered.length > 0 ? (
             <ul className="flex flex-col gap-1.5">
               {yourCoursesFiltered.map((c) => (
@@ -188,7 +188,7 @@ export default function AllCoursesPanel({
         </div>
 
         {/* This inner list scrolls independently — fills all remaining vertical space on desktop */}
-        <ul className="flex flex-col gap-1.5 p-3 overflow-y-auto max-h-64 sm:max-h-80 md:flex-1 md:min-h-0">
+        <ul className="flex flex-col gap-1.5 p-3 overflow-y-auto max-h-96 ">
           {allCoursesFiltered.length > 0 ? (
             allCoursesFiltered.map(([code, course]) => (
               <CourseRow

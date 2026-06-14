@@ -15,9 +15,15 @@ const Dashbord = () => {
   return (
     <div className={`main ${isAiOpen ? "ai-open" : ""}`}>
       <Nav />
-      <div>
-        <h1>{user?.name}</h1>
-        {auth ? <h1>Hi</h1> : <h1>no hi</h1>}
+      <div className="flex flex-col gap-1 h-dvh w-dvw md:w-auto">
+
+        <div className="h-16 bg-white m-2 flex items-center">
+          <h1 className="font-semibold text-3xl"> Welcome {user?.name}</h1>
+        </div>
+        
+
+
+
       </div>
 
       

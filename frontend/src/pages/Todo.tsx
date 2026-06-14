@@ -1,8 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { useTitle } from "../hooks/useTitle";
 import Nav from "../services/Nav";
-import AiSidebar from "../components/AiSidebar";
-import { LuBotMessageSquare } from "react-icons/lu";
 import Todoblock from "../components/TodoBlock";
 import { FiPlus, FiSearch } from "react-icons/fi";
 import TodoEdit from "../components/TodoEdit";
@@ -10,7 +8,6 @@ import { type Todo } from "../../constants/types";
 import { useAuth } from "../hooks/useAuth";
 
 const Todos = () => {
-  const [isAiOpen, setAiOpen] = useState(false);
   const { todos } = useAuth();
   const [isEdit, setEdit] = useState(false);
   const [todo, setTodo] = useState<Todo | null>(null);
@@ -18,9 +15,6 @@ const Todos = () => {
   const [search, setSearch] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
-  const AiSidebarWithProps = AiSidebar as React.ComponentType<{
-    setAiOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  }>;
 
   useTitle("Todo");
   const greeting = useMemo(() => {
@@ -47,7 +41,7 @@ const Todos = () => {
   const tagsList = ["coding", "game", "study", "music", "fitness", "personal"];
 
   return (
-    <div className={`main ${isAiOpen ? "ai-open" : ""}`}>
+    <div className="main">
       <Nav />
       <div className="flex flex-col gap-4 w-full universal mx-auto m-1 p-4 rounded-2xl overflow-x-hidden todosmenu">
         <div className="mb-2 ">
@@ -154,15 +148,6 @@ const Todos = () => {
         }}>
         <FiPlus size={28} />
       </button>
-
-      {isAiOpen && <AiSidebarWithProps setAiOpen={setAiOpen} />}
-      {!isAiOpen && (
-        <button
-          className="fixed md:bottom-6 md:right-24 bottom-25 right-25 bg-slate-800 hover:bg-slate-700 text-white p-3.5 rounded-full shadow-lg transition-all"
-          onClick={() => setAiOpen(true)}>
-          <LuBotMessageSquare size={24} />
-        </button>
-      )}
     </div>
   );
 };

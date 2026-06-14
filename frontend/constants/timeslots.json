@@ -1,0 +1,51 @@
+{
+   "8:30 - 9:50": {
+      "Monday": "A1",
+      "Tuesday": "B1",
+      "Wednesday": "A2",
+      "Thursday": "C2",
+      "Friday": "B2"
+   },
+   "10:00 - 11:20": {
+      "Monday": "C1",
+      "Tuesday": "D1",
+      "Wednesday": "E1",
+      "Thursday": "D2",
+      "Friday": "E2"
+   },
+   "11:30 - 12:50": {
+      "Monday": "F1",
+      "Tuesday": "G1",
+      "Wednesday": "H2",
+      "Thursday": "F2",
+      "Friday": "G2"
+   },
+   "13:00 - 14:00": {
+      "Monday": "T1",
+      "Tuesday": "T2",
+      "Wednesday": "T3",
+      "Thursday": "O1",
+      "Friday": "O2"
+   },
+   "14:00 - 15:20": {
+      "Monday": "I1",
+      "Tuesday": "J1",
+      "Wednesday": "I2",
+      "Thursday": "K2",
+      "Friday": "J2"
+   },
+   "15:30 - 16:50": {
+      "Monday": "K1",
+      "Tuesday": "L1",
+      "Wednesday": "M1",
+      "Thursday": "L2",
+      "Friday": "M2"
+   },
+   "17:00 - 18:20": {
+      "Monday": "H1",
+      "Tuesday": "N1",
+      "Wednesday": "P1",
+      "Thursday": "N2",
+      "Friday": "P2"
+   }
+}

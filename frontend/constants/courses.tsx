@@ -289,7 +289,7 @@ const courseMasterList: Record<string, { title: string; credits: number }> = {
   MSE211: { title: "Material Characterization Techniques", credits: 3 },
   MSE314: { title: "Materials Selection and Design", credits: 3 },
   ES112: {
-    title: "Calculus of Single Variable and Linear Algebra",
+    title: "Computing",
     credits: 3,
   },
   ES115: { title: "Design, Innovation, and Prototyping", credits: 5 },

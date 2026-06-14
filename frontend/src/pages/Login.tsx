@@ -44,6 +44,7 @@ export default function Login() {
         if (result.data.ok) {
           await checkAuth()
           toast.success("Login Succesfull");
+          toast.error("Please Update Profile first (new User Only)");
           navigate("/profile", { replace: true });
         }
       }
@@ -73,7 +74,7 @@ export default function Login() {
       await checkAuth();
       reset();
       toast.success(res.data.message);
-      toast.error("Please Update Profile first (new User)");
+      toast.error("Please Update Profile first (new User Only)");
       navigate("/profile", { replace: true });
     } catch (error) {
       if (axios.isAxiosError(error)) {

@@ -16,6 +16,12 @@ async function handleSignUp(req, res) {
             message: "Email already exists",
         });
     }
+    if(!name || !email || !password){
+      return res.status(400).json({
+            ok: false,
+            message: "Please fill required fields",
+        });
+    }
     try {
         const user = await User.create({
             name,
