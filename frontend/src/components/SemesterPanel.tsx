@@ -3,8 +3,6 @@ import { courseMasterList } from "../../constants/courses";
 import api from "../services/api";
 import { useAuth } from "../hooks/useAuth";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-
 export interface CourseRecord {
   code: string;
   grade: string;
@@ -24,7 +22,6 @@ export interface SemesterData {
   saved: boolean;
 }
 
-// ─── Portal paste parser ──────────────────────────────────────────────────────
 
 const VALID_GRADES = new Set([
   "A+",
@@ -157,7 +154,6 @@ function CourseTableRow({
   );
 }
 
-// ─── Loading skeleton ─────────────────────────────────────────────────────────
 
 function LoadingSkeleton(): JSX.Element {
   return (
@@ -168,7 +164,6 @@ function LoadingSkeleton(): JSX.Element {
   );
 }
 
-// ─── Main SemesterPanel ───────────────────────────────────────────────────────
 
 interface SemesterPanelProps {
   semesterName: string;
@@ -185,17 +180,14 @@ export default function SemesterPanel({
   onSaved,
   onCoursesAdded,
 }: SemesterPanelProps): JSX.Element {
-  // ── Fetch state ────────────────────────────────────────────────────────────
+
   const [isFetching, setIsFetching] = useState<boolean>(true);
   const [fetchError, setFetchError] = useState<boolean>(false);
   const { setYourCourses } = useAuth();
 
-  // ── Data state ─────────────────────────────────────────────────────────────
-  // null  = fetch in progress or no data on backend
-  // []    = backend returned empty / no record
+ 
   const [savedCourses, setSavedCourses] = useState<CourseRecord[] | null>(null);
 
-  // ── UI state ───────────────────────────────────────────────────────────────
   const [editing, setEditing] = useState<boolean>(false);
   const [pasteText, setPasteText] = useState<string>("");
   const [parsedCourses, setParsedCourses] = useState<CourseRecord[]>([]);
@@ -203,7 +195,7 @@ export default function SemesterPanel({
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [saveError, setSaveError] = useState<string>("");
 
-  // ── GET /user/semester-details/:semester on mount ─────────────────────────
+  
   useEffect(() => {
     let cancelled = false;
 
@@ -216,7 +208,6 @@ export default function SemesterPanel({
 
         if (cancelled) return;
 
-        // Backend shape: { ok: true, semester: { courses: [{code, grade}] } | null }
         const record = res.data?.semester;
 
         if (
@@ -224,8 +215,7 @@ export default function SemesterPanel({
           Array.isArray(record.courses) &&
           record.courses.length > 0
         ) {
-          // Map backend shape → CourseRecord[] (handles both {code,grade} directly
-          // and any variant where backend stores {courseCode, grade})
+          
           const courses: CourseRecord[] = record.courses.map(
             (c: { code?: string; courseCode?: string; grade: string }) => ({
               code: c.code ?? c.courseCode ?? "",
@@ -236,7 +226,7 @@ export default function SemesterPanel({
           setParsedCourses(courses);
           setEditing(false);
         } else {
-          // No record saved yet → show import UI
+        
           setSavedCourses([]);
           setParsedCourses([]);
           setEditing(true);
@@ -256,18 +246,17 @@ export default function SemesterPanel({
     return () => {
       cancelled = true;
     };
-  }, [semesterNum]); // re-runs only when user switches semester
+  }, [semesterNum]); 
 
-  // ── Derived ────────────────────────────────────────────────────────────────
+  
   const hasSavedData = savedCourses !== null && savedCourses.length > 0;
-  const displayCourses = parsedCourses; // what's shown in table (parsed or saved)
+  const displayCourses = parsedCourses; 
 
   const totalCredits = displayCourses.reduce(
     (sum, r) => sum + (courseMasterList[r.code]?.credits ?? 0),
     0,
   );
 
-  // ── Handlers ───────────────────────────────────────────────────────────────
 
   const handleParse = () => {
     setParseError("");
@@ -297,7 +286,6 @@ export default function SemesterPanel({
       courses: parsedCourses,
     };
 
-    // Only send codes not already on the backend
     const existingSet = new Set(existingCodes);
     const newOnlyCodes = parsedCourses
       .map((c) => c.code)
@@ -330,7 +318,6 @@ export default function SemesterPanel({
     setPasteText("");
     setParseError("");
     setSaveError("");
-    // Pre-fill parsed table with current saved data so user can edit grades inline
     setParsedCourses(savedCourses ?? []);
     setEditing(true);
   };
@@ -342,13 +329,11 @@ export default function SemesterPanel({
     setSaveError("");
   };
 
-  // ── Render ─────────────────────────────────────────────────────────────────
 
   if (isFetching) return <LoadingSkeleton />;
 
   return (
     <main className="flex-1 min-w-0 overflow-hidden flex flex-col gap-4">
-      {/* ── Header ── */}
       <div className="sticky top-0 z-20 bg-[#ffffff11] branchpanelsearch rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-5 backdrop-blur-sm">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
@@ -387,15 +372,11 @@ export default function SemesterPanel({
           </div>
         </div>
       </div>
-
-      {/* ── Fetch error banner ── */}
       {fetchError && (
         <div className="rounded-xl bg-red-50 border border-red-100 px-4 py-3 text-xs text-red-600 font-medium">
           Could not load saved data. You can still import grades below.
         </div>
       )}
-
-      {/* ── Import card — shown while editing ── */}
       {editing && (
         <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-5 flex flex-col gap-3">
           <div>
@@ -449,7 +430,6 @@ export default function SemesterPanel({
         </section>
       )}
 
-      {/* ── Empty state — fetch done, no data, not editing ── */}
       {!editing && !hasSavedData && (
         <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center justify-center py-20 text-center">
           <span className="text-3xl mb-3">📋</span>
@@ -467,7 +447,6 @@ export default function SemesterPanel({
         </section>
       )}
 
-      {/* ── Courses table ── */}
       {displayCourses.length > 0 && (
         <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border border-gray-100 shadow-sm overflow-hidden min-w-0 flex flex-col">
           <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-100 shrink-0">

@@ -1,4 +1,4 @@
-/* eslint-disable react-refresh/only-export-components */
+
 const curriculumPathway1 = [
   {
     semester: 1,

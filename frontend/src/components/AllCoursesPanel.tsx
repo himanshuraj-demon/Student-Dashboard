@@ -1,78 +1,5 @@
-import { type JSX } from "react";
-import type { Course, CourseType } from "../../constants/types";
-
-const CATEGORY_COLORS = {
-  core: {
-    bg: "bg-blue-50",
-    dot: "bg-blue-500",
-  },
-  elective: {
-    bg: "bg-amber-50",
-    dot: "bg-amber-500",
-  },
-  basket: {
-    bg: "bg-emerald-50",
-    dot: "bg-emerald-500",
-  },
-  your: {
-    bg: "bg-violet-50",
-    dot: "bg-violet-500",
-  },
-};
-
-function CourseRow({
-  course,
-  type,
-  query,
-}: {
-  course: Course;
-  type: CourseType;
-  query: string;
-}): JSX.Element {
-  const c = CATEGORY_COLORS[type] || CATEGORY_COLORS.core;
-
-  const highlight = (text: string): string | JSX.Element => {
-    if (!query) return text;
-
-    const idx = text.toLowerCase().indexOf(query.toLowerCase());
-
-    if (idx === -1) return text;
-
-    return (
-      <>
-        {text.slice(0, idx)}
-        <mark className="bg-yellow-200 text-yellow-900 rounded px-0.5">
-          {text.slice(idx, idx + query.length)}
-        </mark>
-        {text.slice(idx + query.length)}
-      </>
-    );
-  };
-
-  return (
-    <li
-      className={`flex items-center justify-between px-3 py-2.5 rounded-lg ${c.bg}`}>
-      <div className="flex items-center gap-2.5 min-w-0 flex-1">
-        <span
-          className={`inline-block w-2.5 h-2.5 rounded-full shrink-0 ${c.dot}`}
-        />
-
-        <span className="text-xs font-mono font-semibold text-gray-400 shrink-0">
-          {course.code}
-        </span>
-
-        <span className="text-sm font-medium text-gray-700 truncate min-w-0">
-          {highlight(course.title)}
-        </span>
-      </div>
-
-      <span className="text-xs font-bold text-gray-500 shrink-0 ml-2">
-        {course.credits} cr
-      </span>
-    </li>
-  );
-}
-
+import type { Course } from "../../constants/types";
+import { CourseRow } from "../../constants/functions";
 
 interface AllCoursesPanelProps {
   allCoursesQuery: string;
@@ -92,7 +19,6 @@ export default function AllCoursesPanel({
   
   return (
     <main className="flex-1 min-w-0 overflow-hidden flex flex-col gap-4 h-fit">
-      {/* Header — sticky on both desktop and mobile */}
       <div className="sticky top-0 z-20 bg-[#ffffff11] branchpanelsearch rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-5 backdrop-blur-sm">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
@@ -102,7 +28,6 @@ export default function AllCoursesPanel({
         </div>
       </div>
 
-      {/* Search — sticky just below the header */}
       <div className="sticky top-[72px] z-10 relative w-full">
         <svg
           className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
@@ -130,17 +55,15 @@ export default function AllCoursesPanel({
           </button>
         )}
       </div>
-
-      {/* Your Courses — scrolls independently */}
       <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border border-gray-100 shadow-sm overflow-hidden min-w-0 flex flex-col">
         <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-50 shrink-0">
           <h2 className="font-semibold flex items-center gap-2 min-w-0">
-            <span className="w-2.5 h-2.5 rounded-full bg-violet-500 inline-block shrink-0" />
+            <span className="w-2.5 h-2.5 rounded-full bg-green-500 inline-block shrink-0" />
             <span className="truncate">Your Courses</span>
           </h2>
           {yourCourses !== null && (
             <div className="flex items-center gap-1.5 shrink-0 ml-2">
-              <span className="text-xs bg-violet-100 text-violet-700 font-bold px-2 py-0.5 rounded-full">
+              <span className="text-xs bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full">
                 {yourCoursesFiltered.length} courses
               </span>
               <span className="text-xs bg-gray-100 font-bold px-2 py-0.5 rounded-full text-black">
@@ -149,8 +72,6 @@ export default function AllCoursesPanel({
             </div>
           )}
         </div>
-
-        {/* This inner div scrolls independently — capped height on mobile + desktop */}
         <div className="overflow-y-auto p-3 h-fit">
           {yourCoursesFiltered.length > 0 ? (
             <ul className="flex flex-col gap-1.5">
@@ -158,7 +79,7 @@ export default function AllCoursesPanel({
                 <CourseRow
                   key={c.code}
                   course={c}
-                  type="your"
+                  type="basket"
                   query={allCoursesQuery}
                 />
               ))}
@@ -174,8 +95,6 @@ export default function AllCoursesPanel({
           )}
         </div>
       </section>
-
-      {/* Course Catalogue — scrolls independently, takes remaining space on desktop */}
       <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border border-gray-100 shadow-sm overflow-hidden min-w-0 flex flex-col flex-1 min-h-0">
         <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-50 shrink-0">
           <h2 className="font-semibold flex items-center gap-2 min-w-0">
@@ -187,7 +106,6 @@ export default function AllCoursesPanel({
           </span>
         </div>
 
-        {/* This inner list scrolls independently — fills all remaining vertical space on desktop */}
         <ul className="flex flex-col gap-1.5 p-3 overflow-y-auto max-h-96 ">
           {allCoursesFiltered.length > 0 ? (
             allCoursesFiltered.map(([code, course]) => (

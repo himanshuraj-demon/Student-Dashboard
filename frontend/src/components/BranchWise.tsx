@@ -130,7 +130,7 @@ export default function BranchCourses() {
               setSidebarView("all-courses");
             }}
             className={`flex-1 py-2 text-xs font-semibold transition-colors
-              ${sidebarView === "all-courses" ? "bg-violet-600 text-white" : "text-gray-500 hover:bg-gray-50"}`}>
+              ${sidebarView === "all-courses" ? "bg-blue-600 text-white" : "text-gray-500 hover:bg-gray-50"}`}>
             All Courses
           </button>
         </div>
@@ -206,13 +206,13 @@ export default function BranchCourses() {
             </div>
             <div className="h-px bg-gray-100" />
             <div className="text-center">
-              <div className="text-2xl font-bold text-violet-600">
+              <div className="text-2xl font-bold text-blue-600">
                 {(yourCourses?.length ?? 0)}
               </div>
               <div className="text-xs text-gray-500">Your Completed</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-violet-600">
+              <div className="text-2xl font-bold text-green-600">
                 {yourCoursesFiltered.reduce((sum, c) => sum + c.credits, 0)} cr
               </div>
               <div className="text-xs text-gray-500">Credits Completed</div>

@@ -158,6 +158,8 @@ type TimeTableProp={
     setAdding:React.Dispatch<React.SetStateAction<boolean>>
 }
 
+const PRINT_ID = "timetable-print-target";
+
 const TimeTableGenerator: React.FC<TimeTableProp> = ({courses,setAdding}) => {
   const slotMap = useMemo(() => buildSlotMap(courses), [courses]);
 
@@ -172,39 +174,84 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({courses,setAdding}) => {
     setIsFullscreen(false);
   }, []);
 
+  // Mobile-safe PDF: inject @media print style targeting only the timetable div,
+  // then call window.print() directly — no popup window needed.
   const handleDownloadPDF = useCallback(() => {
-    const printContents = printRef.current?.innerHTML;
-    if (!printContents) return;
+    const styleId = "timetable-print-style";
+    let style = document.getElementById(styleId) as HTMLStyleElement | null;
+    if (!style) {
+      style = document.createElement("style");
+      style.id = styleId;
+      document.head.appendChild(style);
+    }
 
-    const printWindow = window.open("", "_blank");
-    if (!printWindow) return;
+    style.innerHTML = `
+      @media print {
+        @page {
+          size: landscape;
+          margin: 6mm;
+        }
 
-    printWindow.document.write(`
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>Timetable</title>
-          <style>
-            * { margin: 0; padding: 2; box-sizing: border-box; }
-            body { font-family: sans-serif; background: white; }
-            @media print {
-              body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            }
-          </style>
-          <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-        </head>
-        <body>
-          <div>${printContents}</div>
-          <script>
-            window.onload = function() {
-              window.print();
-              window.onafterprint = function() { window.close(); };
-            };
-          </script>
-        </body>
-      </html>
-    `);
-    printWindow.document.close();
+        /* Hide every top-level child of body */
+        body > * {
+          display: none !important;
+          visibility: hidden !important;
+        }
+
+        /* Reveal only our timetable container */
+        #${PRINT_ID} {
+          display: block !important;
+          visibility: visible !important;
+          position: fixed !important;
+          inset: 0 !important;
+          width: 100vw !important;
+          height: auto !important;
+          overflow: visible !important;
+          background: white !important;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+          color-adjust: exact !important;
+          padding: 4mm !important;
+          box-sizing: border-box !important;
+        }
+
+        /* Reveal all descendants */
+        #${PRINT_ID} * {
+          visibility: visible !important;
+          overflow: visible !important;
+          max-height: none !important;
+          height: auto !important;
+        }
+
+        /* Keep absolute-positioned event cards intact */
+        #${PRINT_ID} .absolute {
+          position: absolute !important;
+        }
+
+        /* Keep the fixed-height slot columns from collapsing */
+        #${PRINT_ID} [style*="height"] {
+          height: attr(style) !important;
+        }
+
+        /* Scale entire timetable to fit page width */
+        #${PRINT_ID} > div {
+          transform-origin: top left !important;
+          width: max-content !important;
+          min-width: 100% !important;
+          transform: scale(1) !important;
+        }
+      }
+    `;
+
+    window.print();
+
+    // Remove the injected style after the print dialog closes
+    const cleanup = () => {
+      const el = document.getElementById(styleId);
+      if (el) el.remove();
+      window.removeEventListener("afterprint", cleanup);
+    };
+    window.addEventListener("afterprint", cleanup);
   }, []);
 
   const firstStart = parseSlot(SLOT_ROWS[0].Slot).start;
@@ -240,6 +287,7 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({courses,setAdding}) => {
           </button>
         </div>
       )}
+
       {isFullscreen && (
         <div className="flex justify-end px-4 pt-3 pb-2 shrink-0">
           <button
@@ -252,7 +300,10 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({courses,setAdding}) => {
           </button>
         </div>
       )}
+
+      {/* id={PRINT_ID} is what the @media print style targets */}
       <div
+        id={PRINT_ID}
         ref={printRef}
         className={isFullscreen ? "flex-1 overflow-auto" : ""}
       >
@@ -324,6 +375,7 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({courses,setAdding}) => {
           </div>
         </div>
       </div>
+
       {isFullscreen && (
         <div className="flex justify-center px-4 py-3 shrink-0">
           <button

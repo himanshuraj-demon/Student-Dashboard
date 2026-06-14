@@ -4,6 +4,7 @@ import Nav from '../services/Nav';
 import TimeTableAdd from '../components/TimeTableAdd';
 import TimeTableGenerator from '../components/TimeTableGenerator';
 import { type CourseEntry } from '../../constants/timetabletypes';
+import { SlCalender } from "react-icons/sl";
 
 const COURSES: CourseEntry[] = [
   { "Course Code": "FP 100", "Course Name": "Foundation Programme" },
@@ -72,18 +73,13 @@ const Timetable = () => {
   return (
     <div className='main'>
       <Nav/>
-      <div className='flex w-dvw md:w-auto flex-col h-fit md:h-dvh overflow-y-scroll '>
-        <div className='flex justify-center items-center m-2 p-2 bg-[#ffffff22] rounded-2xl h-20'>
+      <div className='flex w-dvw md:w-auto flex-col h-fit md:h-dvh overflow-y-scroll overflow-x-hidden '>
+        <div className='flex justify-center gap-2 items-center m-2 mb-0 p-2 bg-[#ffffff22] rounded-2xl h-20'>
+          <SlCalender size={30}/>
             <h1 className='text-3xl font-semibold'>Generate TimeTable</h1>
-            <p>Icon</p>
         </div>
 
-        <div className='flex flex-col'>
-          <button onClick={()=>setAdding(true)}>Add Courses</button>
-          <button onClick={()=>setAdding(false)}>Add Courses</button>
-          {isAdding?"yes":"no"}
-        </div>
-        {isAdding?<TimeTableGenerator courses={cources}/>:<TimeTableAdd/>}
+        {!isAdding?<TimeTableGenerator courses={cources} setAdding={setAdding}/>:<TimeTableAdd/>}
       </div>
     </div>
   )

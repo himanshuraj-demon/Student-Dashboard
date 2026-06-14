@@ -47,3 +47,22 @@ export interface Todo {
   createdAt?: string;    
   updatedAt?: string;    
 }
+
+export const CATEGORY_COLORS = {
+  core: {
+    bg: "bg-blue-50",
+    dot: "bg-blue-500",
+  },
+  elective: {
+    bg: "bg-amber-50",
+    dot: "bg-amber-500",
+  },
+  basket: {
+    bg: "bg-emerald-50",
+    dot: "bg-emerald-500",
+  },
+  your: {
+    bg: "bg-violet-50",
+    dot: "bg-violet-500",
+  },
+};
