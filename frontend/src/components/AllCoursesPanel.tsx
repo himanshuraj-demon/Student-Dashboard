@@ -98,7 +98,7 @@ export default function AllCoursesPanel({
       <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border border-gray-100 shadow-sm overflow-hidden min-w-0 flex flex-col flex-1 min-h-0">
         <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-50 shrink-0">
           <h2 className="font-semibold flex items-center gap-2 min-w-0">
-            <span className="w-2.5 h-2.5 rounded-full bg-gray-400 inline-block shrink-0" />
+            <span className="w-2.5 h-2.5 rounded-full bg-violet-400 inline-block shrink-0" />
             <span className="truncate">Course Catalogue</span>
           </h2>
           <span className="text-xs bg-gray-100 text-black font-bold px-2 py-0.5 rounded-full shrink-0 ml-2">
@@ -112,7 +112,7 @@ export default function AllCoursesPanel({
               <CourseRow
                 key={code}
                 course={{ code, ...course }}
-                type="basket"
+                type="your"
                 query={allCoursesQuery}
               />
             ))

@@ -1,4 +1,4 @@
-import type { Course,CourseType } from "./types";
+import type { Course, CourseType } from "./types";
 import { CATEGORY_COLORS } from "./types";
 import { type JSX } from "react/jsx-runtime";
 export function CourseRow({
@@ -51,3 +51,4 @@ export function CourseRow({
     </li>
   );
 }
+

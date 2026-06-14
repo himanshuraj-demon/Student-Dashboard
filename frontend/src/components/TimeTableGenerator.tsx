@@ -1,5 +1,11 @@
 import React, { useMemo, useState, useRef, useCallback } from "react";
-import {type SlotRow,type CourseEntry,type EventColor,type ResolvedEvent,type EventCardProps} from "../../constants/timetabletypes"
+import {
+  type SlotRow,
+  type CourseEntry,
+  type EventColor,
+  type ResolvedEvent,
+  type EventCardProps,
+} from "../../constants/timetabletypes";
 
 const SLOT_ROWS: SlotRow[] = [
   { Slot: "8:30 - 9:50", M: "A1", T: "B1", W: "A2", Th: "C2", F: "B2" },
@@ -11,7 +17,7 @@ const SLOT_ROWS: SlotRow[] = [
   { Slot: "17:00 - 18:20", M: "H1", T: "N1", W: "P1", Th: "N2", F: "P2" },
 ];
 import { SlSizeFullscreen } from "react-icons/sl";
-import { FaPlus,FaDownload  } from "react-icons/fa";
+import { FaPlus, FaDownload } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 
 const DAY_KEYS: (keyof Omit<SlotRow, "Slot">)[] = ["M", "T", "W", "Th", "F"];
@@ -63,6 +69,11 @@ const COLOR_STYLES: Record<
     time: "text-amber-500",
     title: "text-amber-900",
   },
+  red: {
+    card: "bg-red-500 border border-dashed border-amber-200",
+    time: "text-black",
+    title: "text-black",
+  },
 };
 
 function parseTime(t: string): number {
@@ -81,47 +92,57 @@ function formatDecimalHour(h: number): string {
   const d = hh > 12 ? hh - 12 : hh === 0 ? 12 : hh;
   return mm === 0 ? `${d} ${ap}` : `${d}:${String(mm).padStart(2, "0")} ${ap}`;
 }
+
 function extractRoom(raw: string): string {
   const cleaned = raw.replace(/\n/g, " ").trim();
   const match = cleaned.match(/\(([^)]+)\)/);
   return match ? match[1].split(",")[0].trim() : "";
 }
-function buildSlotMap(courses: CourseEntry[]): Map<string, ResolvedEvent> {
-  const map = new Map<string, ResolvedEvent>();
+
+function buildSlotMap(courses: CourseEntry[]) {
+  const slotMap = new Map<string, ResolvedEvent[]>();
+
   let colorIdx = 0;
 
-  courses.forEach((c) => {
-    if (!c["Course Name"]) return;
+  courses.forEach((course) => {
+    if (!course["Course Name"]) return;
+
     const color = COLOR_CYCLE[colorIdx % COLOR_CYCLE.length];
     colorIdx++;
 
-    const process = (raw: string, type: "Lecture" | "Lab") => {
-      const codesPart = raw.split(/\n|\(/)[0];
-      const codes = codesPart
+    const process = (raw: string, type: "Lecture" | "Lab"|"Tutorial") => {
+      const room = extractRoom(raw);
+
+      const codes = raw
+        .split(/\n|\(/)[0]
         .split(",")
         .map((s) => s.trim())
         .filter(Boolean);
-      const room = extractRoom(raw);
 
       codes.forEach((code) => {
-        if (!map.has(code)) {
-          map.set(code, {
-            courseCode: c["Course Code"],
-            courseName: c["Course Name"]!,
-            slotCode: code,
-            type,
-            room,
-            color,
-          });
+        const event: ResolvedEvent = {
+          courseCode: course["Course Code"],
+          courseName: course["Course Name"]!,
+          slotCode: code,
+          type,
+          room,
+          color,
+        };
+
+        if (!slotMap.has(code)) {
+          slotMap.set(code, []);
         }
+
+        slotMap.get(code)!.push(event);
       });
     };
 
-    if (c.Lecture) process(c.Lecture, "Lecture");
-    if (c.Lab) process(c.Lab, "Lab");
+    if (course.Lecture) process(course.Lecture, "Lecture");
+    if (course.Lab) process(course.Lab, "Lab");
+    if (course.Tutorial) process(course.Tutorial, "Tutorial");
   });
 
-  return map;
+  return slotMap;
 }
 
 const EventCard: React.FC<EventCardProps> = ({
@@ -140,7 +161,8 @@ const EventCard: React.FC<EventCardProps> = ({
       <p className={`md:text-[9px] text-[8px] font-semibold mb-0.5 ${time}`}>
         {formatDecimalHour(start)} – {formatDecimalHour(end)}
       </p>
-      <p className={`md:text-sm text-[10px] font-semibold leading-snug ${title}`}>
+      <p
+        className={`md:text-sm text-[10px] font-semibold leading-snug ${title}`}>
         {event.courseName}
       </p>
       <p className={`md:text-[10px] text-[7px] mt-0.5 text-black`}>
@@ -153,14 +175,19 @@ const EventCard: React.FC<EventCardProps> = ({
   );
 };
 
-type TimeTableProp={
-    courses:CourseEntry[];
-    setAdding:React.Dispatch<React.SetStateAction<boolean>>
-}
+type TimeTableProp = {
+  courses: CourseEntry[];
+  setAdding: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-const TimeTableGenerator: React.FC<TimeTableProp> = ({courses,setAdding}) => {
+const TimeTableGenerator: React.FC<TimeTableProp> = ({
+  courses,
+  setAdding,
+}) => {
   const slotMap = useMemo(() => buildSlotMap(courses), [courses]);
-
+  const conflicts = [...slotMap.entries()].filter(
+    ([_, events]) => events.length > 1,
+  );
   const [isFullscreen, setIsFullscreen] = useState(false);
   const printRef = useRef<HTMLDivElement>(null);
 
@@ -223,19 +250,19 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({courses,setAdding}) => {
         isFullscreen
           ? "fixed inset-0 z-50 bg-black flex flex-col"
           : "universal p-2 md:p-2 w-dvw md:w-auto rounded-2xl bg-black"
-      }
-    >
+      }>
       {!isFullscreen && (
         <div className="flex justify-between px-2 pt-1 pb-0">
-          <button className="bg-blue-600 text-white rounded-2xl p-2 flex justify-center gap-2 mb-2 items-center" onClick={()=>setAdding(false)}>
-            <FaPlus/> Add Courses
+          <button
+            className="bg-blue-600 text-white rounded-2xl p-2 flex justify-center gap-2 mb-2 items-center"
+            onClick={() => setAdding(true)}>
+            <FaPlus /> Add Courses
           </button>
           <button
             onClick={handleFullscreen}
             title="Fullscreen"
-            className="flex items-center gap-3 bg-white/10 hover:bg-white/20 text-white text-xs font-medium px-3 py-1.5 rounded-lg transition-all border border-white/20"
-          >
-            <SlSizeFullscreen size={12}/>
+            className="flex items-center gap-3 bg-white/10 hover:bg-white/20 text-white text-xs font-medium px-3 py-1.5 rounded-lg transition-all border border-white/20">
+            <SlSizeFullscreen size={12} />
             Fullscreen
           </button>
         </div>
@@ -245,17 +272,74 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({courses,setAdding}) => {
           <button
             onClick={handleCloseFullscreen}
             title="Exit Fullscreen"
-            className="flex items-center gap-1 bg-white/10 hover:bg-white/20 text-white text-xs font-medium px-3 py-1.5 rounded-lg transition-all border border-white/20"
-          >
-            <IoClose size={20}/>
+            className="flex items-center gap-1 bg-white/10 hover:bg-white/20 text-white text-xs font-medium px-3 py-1.5 rounded-lg transition-all border border-white/20">
+            <IoClose size={20} />
             Close
           </button>
         </div>
       )}
+      {courses.length==0 && (
+        <div className="mx-2 mb-2 flex items-start gap-3 bg-red-100 border border-red-300 text-red-900 rounded-xl px-4 py-3">
+          <span className="text-red-500 mt-0.5">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+          </span>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold mb-0.5">
+              No Courses Selected Please Select !!
+            </p>
+          </div>
+        </div>
+      )}
+      {conflicts.length>0 && (
+        <div className="mx-2 mb-2 flex items-start gap-3 bg-red-100 border border-red-300 text-red-900 rounded-xl px-4 py-3">
+          <span className="text-red-500 mt-0.5">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+          </span>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold mb-0.5">
+              Slot Conflicts Detected (Color Red)
+            </p>
+            <p className="text-xs leading-relaxed">
+              {conflicts.map(([slot, events], i) => (
+                <span key={slot}>
+                  {i > 0 && <span className="mx-1 opacity-40">·</span>}
+                  <strong>{slot}</strong>
+                  {": "}
+                  {events.map((e) => `${e.courseCode} (${e.type})`).join(" ↔ ")}
+                </span>
+              ))}
+            </p>
+          </div>
+        </div>
+      )}
+
       <div
         ref={printRef}
-        className={isFullscreen ? "flex-1 overflow-auto" : ""}
-      >
+        className={isFullscreen ? "flex-1 overflow-auto w-auto" : ""}>
         <div className="timetable border border-gray-400 rounded-2xl overflow-hidden">
           <div className="flex overflow-x-auto">
             <div className="shrink-0 w-16 border-r border-gray-200 timetable">
@@ -293,7 +377,7 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({courses,setAdding}) => {
                   </div>
                   <div
                     className="relative timetable"
-                    style={{ height: totalHeight+10 }}>
+                    style={{ height: totalHeight + 10 }}>
                     {SLOT_ROWS.map((row) => (
                       <div
                         key={row.Slot}
@@ -301,12 +385,12 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({courses,setAdding}) => {
                         className="absolute left-0 right-0 border-b border-gray-100"
                       />
                     ))}
-
                     {SLOT_ROWS.map((row) => {
                       const slotCode = row[dayKey];
-                      const event = slotMap.get(slotCode);
-                      if (!event) return null;
-
+                      const events = slotMap.get(slotCode);
+                      if (!events?.length) return null;
+                      if(events.length>1) events[0].color="red";
+                      const event = events[0];
                       return (
                         <EventCard
                           key={row.Slot}
@@ -329,9 +413,8 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({courses,setAdding}) => {
           <button
             onClick={handleDownloadPDF}
             title="Download as PDF"
-            className="flex items-center gap-2 bg-white text-black text-sm font-semibold px-6 py-2.5 rounded-xl transition-all hover:bg-gray-100 shadow-lg"
-          >
-            <FaDownload size={20}/>
+            className="flex items-center gap-2 bg-white text-black text-sm font-semibold px-6 py-2.5 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
+            <FaDownload size={20} />
             Download as PDF
           </button>
         </div>
