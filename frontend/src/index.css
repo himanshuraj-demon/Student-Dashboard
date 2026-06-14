@@ -145,7 +145,9 @@
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
 }
-
+.export-mode {
+  width: 1400px;
+}
 body {
     font-family: 'Inter', sans-serif;
     background: linear-gradient(150deg,

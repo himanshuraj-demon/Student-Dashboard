@@ -1,4 +1,6 @@
 import React, { useMemo, useState, useRef, useCallback } from "react";
+import jsPDF from "jspdf";
+import { toPng } from "html-to-image";
 import {
   type SlotRow,
   type CourseEntry,
@@ -84,7 +86,6 @@ function parseSlot(slot: string): { start: number; end: number } {
   const [s, e] = slot.split("-");
   return { start: parseTime(s), end: parseTime(e) };
 }
-
 function formatDecimalHour(h: number): string {
   const hh = Math.floor(h);
   const mm = Math.round((h - hh) * 60);
@@ -110,7 +111,7 @@ function buildSlotMap(courses: CourseEntry[]) {
     const color = COLOR_CYCLE[colorIdx % COLOR_CYCLE.length];
     colorIdx++;
 
-    const process = (raw: string, type: "Lecture" | "Lab"|"Tutorial") => {
+    const process = (raw: string, type: "Lecture" | "Lab" | "Tutorial") => {
       const room = extractRoom(raw);
 
       const codes = raw
@@ -199,6 +200,72 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
     setIsFullscreen(false);
   }, []);
 
+  const downloadPNG = async () => {
+    const node = document.getElementById("timetable");
+    node.classList.add("export-mode");
+
+    if (!node) return;
+
+    try {
+      const dataUrl = await toPng(node, {
+        cacheBust: true,
+        pixelRatio: 4,
+        width: node.scrollWidth,
+        height: node.scrollHeight,
+      });
+
+      const link = document.createElement("a");
+      link.download = "timetable.png";
+      link.href = dataUrl;
+      link.click();
+      node.classList.remove("export-mode");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const downloadPDF = async () => {
+  const node = document.getElementById("timetable");
+  node.classList.add("export-mode");
+
+  if (!node) return;
+
+  try {
+    const dataUrl = await toPng(node, {
+        cacheBust: true,
+        pixelRatio: 2,
+        width: node.scrollWidth,
+        height: node.scrollHeight,
+      });
+
+    const pdf = new jsPDF({
+      orientation: "landscape",
+      unit: "mm",
+      format: "a4",
+    });
+
+    const img = new Image();
+
+    img.onload = () => {
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      const imgWidth = pageWidth;
+      const imgHeight = (img.height * imgWidth) / img.width;
+
+      const y = Math.max(0, (pageHeight - imgHeight) / 2);
+
+      pdf.addImage(dataUrl, "PNG", 0, y, imgWidth, imgHeight);
+      pdf.save("timetable.pdf");
+    };
+
+    img.src = dataUrl;
+    node.classList.remove("export-mode");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   const handleDownloadPDF = useCallback(() => {
     const printContents = printRef.current?.innerHTML;
     if (!printContents) return;
@@ -278,7 +345,7 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
           </button>
         </div>
       )}
-      {courses.length==0 && (
+      {courses.length == 0 && (
         <div className="mx-2 mb-2 flex items-start gap-3 bg-red-100 border border-red-300 text-red-900 rounded-xl px-4 py-3">
           <span className="text-red-500 mt-0.5">
             <svg
@@ -302,7 +369,7 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
           </div>
         </div>
       )}
-      {conflicts.length>0 && (
+      {conflicts.length > 0 && (
         <div className="mx-2 mb-2 flex items-start gap-3 bg-red-100 border border-red-300 text-red-900 rounded-xl px-4 py-3">
           <span className="text-red-500 mt-0.5">
             <svg
@@ -339,7 +406,8 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
 
       <div
         ref={printRef}
-        className={isFullscreen ? "flex-1 overflow-auto w-auto" : ""}>
+        className={isFullscreen ? "flex-1 overflow-auto w-auto" : ""}
+        id="timetable">
         <div className="timetable border border-gray-400 rounded-2xl overflow-hidden">
           <div className="flex overflow-x-auto">
             <div className="shrink-0 w-16 border-r border-gray-200 timetable">
@@ -389,7 +457,7 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
                       const slotCode = row[dayKey];
                       const events = slotMap.get(slotCode);
                       if (!events?.length) return null;
-                      if(events.length>1) events[0].color="red";
+                      if (events.length > 1) events[0].color = "red";
                       const event = events[0];
                       return (
                         <EventCard
@@ -409,9 +477,23 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
         </div>
       </div>
       {isFullscreen && (
-        <div className="flex justify-center px-4 py-3 shrink-0">
+        <div className="flex justify-around px-4 py-3 shrink-0">
           <button
             onClick={handleDownloadPDF}
+            title="Download as PDF"
+            className="flex items-center gap-2 bg-white text-black text-sm font-semibold px-6 py-2.5 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
+            <FaDownload size={20} />
+            Print PDF
+          </button>
+          <button
+            onClick={downloadPNG}
+            title="Download as PDF"
+            className="flex items-center gap-2 bg-white text-black text-sm font-semibold px-6 py-2.5 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
+            <FaDownload size={20} />
+            Download as PNG
+          </button>
+          <button
+            onClick={downloadPDF}
             title="Download as PDF"
             className="flex items-center gap-2 bg-white text-black text-sm font-semibold px-6 py-2.5 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
             <FaDownload size={20} />
