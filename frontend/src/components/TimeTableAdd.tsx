@@ -2,7 +2,8 @@ import React, { useState, useMemo } from "react";
 import { TimeTableRows } from "./TimeTableRows";
 import { type CourseEntry } from "../../constants/timetabletypes";
 import { FiSearch, FiX } from "react-icons/fi";
-import {COURSES} from "../../constants/timetabledata"
+import { COURSES } from "../../constants/timetabledata";
+import { IoClose } from "react-icons/io5";
 
 type TimeTableProp = {
   cources: CourseEntry[];
@@ -27,6 +28,12 @@ const TimeTableAdd: React.FC<TimeTableProp> = ({
     );
   }, [query]);
 
+  const handleToggle = (course: CourseEntry) => {
+    setCources((prev) => {
+        return prev.filter((c) => c["Course Code"] !== course["Course Code"]);
+    });
+  };
+
   return (
     <div className="flex mt-5 flex-col items-center">
       <div className="flex justify-center mx-5 mb-4">
@@ -37,8 +44,16 @@ const TimeTableAdd: React.FC<TimeTableProp> = ({
         </button>
       </div>
 
-      <div className="w-[90%] border border-white rounded-2xl p-3 bg-[#ffffff11]">
-        {/* Search bar */}
+      {cources.length > 0 &&
+       <div>
+        <ul className="flex flex-wrap gap-2 border border-white rounded-2xl p-3 m-2">
+          {cources.map((c)=>(
+            <li className="bg-green-100 text-black px-3 py-1 rounded-2xl flex items-center" onClick={()=>handleToggle(c)}>{c["Course Code"]}<IoClose size={20}/> </li>
+          ))}
+        </ul>
+        </div>}
+
+      <div className="md:w-[90%] w-dvw border border-white rounded-2xl p-3 bg-[#ffffff11]">
         <div className="relative mb-3">
           <FiSearch
             className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
@@ -60,7 +75,6 @@ const TimeTableAdd: React.FC<TimeTableProp> = ({
           )}
         </div>
 
-        {/* Course list */}
         <ul className="list-none p-0 m-0">
           {filtered.length > 0 ? (
             filtered.map((c) => (

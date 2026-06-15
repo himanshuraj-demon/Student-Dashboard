@@ -17,9 +17,9 @@ export default function RemainingCourses({
       <div className="sticky top-0 z-20 bg-[#ffffff11] branchpanelsearch rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-5 backdrop-blur-sm">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
-            <h1 className="text-xl font-bold">Remaining Courses Courses</h1>
-            <p className="text-sm mt-0.5 truncate">
-              Courses not yet recorded in any semester
+            <h1 className="text-xl font-bold">Remaining Degree Requirements</h1>
+            <p className="text-sm mt-0.5">
+              Track your remaining IIT Gandhinagar degree requirements, including unfinished core courses, elective requirements, credit deficits, and academic milestones needed to complete your program successfully.
             </p>
           </div>
         </div>

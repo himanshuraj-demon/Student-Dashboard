@@ -23,7 +23,7 @@ const semesterData = [
 export default function SemesterTrendChart() {
   return (
     <>
-    <h2 className="text-xl font-semibold m-4 flex gap-3 items-center "><TrendingUp size={32}/>  Semester Credit Trend  </h2>
+    <h2 className="text-sm md:text-xl font-semibold m-4 flex gap-3 items-center "><TrendingUp size={30}/>  Semester Credit Trend  </h2>
     <ResponsiveContainer width="100%" height={300} className="relative left-0">
       <LineChart data={semesterData}>
         <CartesianGrid strokeDasharray="3 3" />

@@ -158,7 +158,7 @@ const EventCard: React.FC<EventCardProps> = ({
   return (
     <div
       className={`absolute left-1 right-1 rounded-lg px-2 py-2 overflow-hidden overflow-y-clip cursor-pointer hover:brightness-95 transition-all ${card} m-1`}
-      style={{ top: topPx, height: heightPx }}>
+      style={{ top: topPx, height: heightPx+3 }}>
       <p className={`md:text-[9px] text-[8px] font-semibold mb-0.5 ${time}`}>
         {formatDecimalHour(start)} – {formatDecimalHour(end)}
       </p>
@@ -316,7 +316,7 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
       className={
         isFullscreen
           ? "fixed inset-0 z-50 bg-black flex flex-col"
-          : "universal p-2 md:p-2 w-dvw md:w-auto rounded-2xl bg-black"
+          : "universal p-2 md:p-2 w-dvw md:w-auto rounded-2xl bg-[#ffffff11]"
       }>
       {!isFullscreen && (
         <div className="flex justify-between px-2 pt-1 pb-0">
@@ -328,7 +328,7 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
           <button
             onClick={handleFullscreen}
             title="Fullscreen"
-            className="flex items-center gap-3 bg-white/10 hover:bg-white/20 text-white text-xs font-medium px-3 py-1.5 rounded-lg transition-all border border-white/20">
+            className="flex items-center gap-3 bg-white/10 hover:bg-white/20 timetable text-xs font-medium px-3 py-1.5 rounded-lg transition-all border border-white/20">
             <SlSizeFullscreen size={12} />
             Fullscreen
           </button>
@@ -477,25 +477,25 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
         </div>
       </div>
       {isFullscreen && (
-        <div className="flex justify-around px-4 py-3 shrink-0">
+        <div className="flex justify-around px-4 py-3 shrink-0 border-t border-white/10">
           <button
             onClick={handleDownloadPDF}
             title="Download as PDF"
-            className="flex items-center gap-2 bg-white text-black text-sm font-semibold px-6 py-2.5 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
+            className="md:flex hidden items-center gap-2 bg-white text-black text-sm font-semibold px-5 py-2 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
             <FaDownload size={20} />
             Print PDF
           </button>
           <button
             onClick={downloadPNG}
             title="Download as PDF"
-            className="flex items-center gap-2 bg-white text-black text-sm font-semibold px-6 py-2.5 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
+            className="flex items-center gap-2 bg-white text-black text-sm font-semibold px-5 py-2 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
             <FaDownload size={20} />
             Download as PNG
           </button>
           <button
             onClick={downloadPDF}
             title="Download as PDF"
-            className="flex items-center gap-2 bg-white text-black text-sm font-semibold px-6 py-2.5 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
+            className="flex items-center gap-2 bg-white text-black text-sm font-semibold px-5 py-2 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
             <FaDownload size={20} />
             Download as PDF
           </button>

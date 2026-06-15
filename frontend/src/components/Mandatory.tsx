@@ -49,7 +49,7 @@ export default function InstituteRequirements() {
 
   return (
     <div className="p-4 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-semibold mb-6">
+      <h1 className="text-xl md:text-2xl font-semibold mb-6 text-center">
         Institute Mandatory Courses
       </h1>
 

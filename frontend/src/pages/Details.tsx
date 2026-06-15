@@ -15,15 +15,13 @@ const Details = () => {
     <div className="main">
       {auth && <Nav />}
       <div className="detailsmainbox overflow-x-hidden relative md:w-full w-dvw  flex flex-col h-dvh ">
-        <div className="flex items-center justify-between mx-5 border-b-2 py-1">
-          <div>
-            <h1 className="text-2xl md:text-3xl font-bold">IIT Gandhinagar Academic Details & Degree Requirements</h1>
-            <p>
+        <div className="flex justify-center items-center m-4 mb-0 p-2 bg-[#ffffff22] rounded-2xl h-20 flex-col">
+            <h1 className="text-base md:text-3xl font-bold text-center">IIT Gandhinagar Academic Details & Degree Requirements</h1>
+            <p className="md:flex hidden">
               View degree requirements, credit distribution, semester-wise
               progress, and graduation requirements for IIT Gandhinagar
               students.
             </p>
-          </div>
         </div>
         <div className="relative md:top-10 mt-5 md:mt-0">
           <div>

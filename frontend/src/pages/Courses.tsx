@@ -1,16 +1,16 @@
-import React from 'react'
-import { useTitle } from '../hooks/useTitle'
-import Nav from '../services/Nav'
-import BranchWise from '../components/BranchWise'
+import React from "react";
+import { useTitle } from "../hooks/useTitle";
+import Nav from "../services/Nav";
+import BranchWise from "../components/BranchWise";
 
 const Cources = () => {
-  useTitle("Cources")
+  useTitle("Cources");
   return (
-    <div className='main'>
-      <Nav/>
-      <BranchWise/>
+    <div className="main">
+      <Nav />
+        <BranchWise />
     </div>
-  )
-}
+  );
+};
 
-export default Cources
+export default Cources;

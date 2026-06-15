@@ -1,8 +1,4 @@
-import type {
-  Branch,
-  Course,
-  CourseBasket,
-} from "../../constants/types";
+import type { Branch, Course, CourseBasket } from "../../constants/types";
 import { CourseRow } from "../../constants/functions";
 
 interface BranchPanelProps {
@@ -33,14 +29,12 @@ export default function BranchPanel({
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <h1 className="text-xl font-bold ">
-              {branch.branchName}
+              IIT Gandhinagar {branch.branchName} Courses & Curriculum
             </h1>
 
             <p className="text-sm  mt-0.5">
               Branch Code:
-              <span className="font-semibold ml-1">
-                {branch.branchCode}
-              </span>
+              <span className="font-semibold ml-1">{branch.branchCode}</span>
             </p>
           </div>
 
@@ -59,6 +53,10 @@ export default function BranchPanel({
               </div>
             ))}
           </div>
+          <p className="text-sm md:flex hidden font-semibold">
+            View mandatory core courses, elective options, credit requirements,
+            and degree completion guidelines for the IIT Gandhinagar {branch.branchName} program.
+          </p>
         </div>
 
         <div className="mt-4 flex flex-col gap-1.5 text-xs ">

@@ -39,8 +39,8 @@ export default function CreditBreakdownChart() {
 
   return (
     <div className="card">
-      <h2 className="text-xl  mx-4 flex gap-3 items-center">
-        <FcPieChart size={32} /> Credit Distribution {" "}
+      <h2 className="text-sm md:text-xl  mx-4 flex gap-3 items-center">
+        <FcPieChart size={30} /> Credit Distribution {" "}
       </h2>
 
       <div className="flex flex-col md:flex-row md:items-center gap-6 justify-center md:mx-15 mx-2 rounded-2xl my-1 shadow-sm cardsectioncredit">

@@ -22,8 +22,8 @@ export default function AllCoursesPanel({
       <div className="sticky top-0 z-20 bg-[#ffffff11] branchpanelsearch rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-5 backdrop-blur-sm">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
-            <h1 className="text-xl font-bold">All Courses</h1>
-            <p className="text-sm mt-0.5 truncate">Complete course catalogue</p>
+            <h1 className="text-xl font-bold">IIT Gandhinagar Course Progress Tracker</h1>
+            <p className="text-sm mt-0.5">Browse all IIT Gandhinagar courses and track your academic progress. View completed courses, earned credits, remaining degree requirements, and available course options to plan your academic journey effectively.</p>
           </div>
         </div>
       </div>
