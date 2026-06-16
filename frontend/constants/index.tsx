@@ -14,7 +14,7 @@ const links = [
   {
     name: "Dashboard",
     key:1,
-    path: "/",
+    path: "/dashboard",
     icon: <LuLayoutDashboard size={22} className="text-[var(--text-secondary)]"/>,
   },
   {

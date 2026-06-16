@@ -31,7 +31,7 @@ const Notes = () => {
     <div className={`main ${isAiOpen ? "ai-open" : ""}`}>
       <Nav />
       <div className="flex flex-col gap-2 notesmenu m-1 p-3 rounded-2xl overflow-x-hidden">
-        <div className="mb-4">
+        <div className="mb-4 text-center flex flex-col justify-center items-center">
           <h1 className="text-3xl font-bold tracking-tight flex items-center gap-3">
             📝 Notes Workspace
           </h1>

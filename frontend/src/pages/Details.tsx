@@ -15,8 +15,8 @@ const Details = () => {
     <div className="main">
       {auth && <Nav />}
       <div className="detailsmainbox overflow-x-hidden relative md:w-full w-dvw  flex flex-col h-dvh ">
-        <div className="flex justify-center items-center m-4 mb-0 p-2 bg-[#ffffff22] rounded-2xl h-20 flex-col">
-            <h1 className="text-base md:text-3xl font-bold text-center">IIT Gandhinagar Academic Details & Degree Requirements</h1>
+        <div className="flex justify-center items-center md:m-4 m-1 mb-0 p-2 bg-[#ffffff22]  h-20 flex-col border border-gray-100 rounded-2xl">
+            <h1 className="text-xl md:text-3xl font-bold text-center">IIT Gandhinagar Academic Details & Degree Requirements</h1>
             <p className="md:flex hidden">
               View degree requirements, credit distribution, semester-wise
               progress, and graduation requirements for IIT Gandhinagar
@@ -27,7 +27,7 @@ const Details = () => {
           <div>
             <CreditBreakdownChart />
           </div>
-          <div className="mr-5">
+          <div className="">
             <SemesterTrendChart />
           </div>
           <div>

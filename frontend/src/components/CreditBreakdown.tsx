@@ -38,12 +38,12 @@ export default function CreditBreakdownChart() {
   const onMouseLeave = () => setActiveIndex(null);
 
   return (
-    <div className="card">
+    <div className="card border border-gray-400 rounded-2xl m-1 md:m-4 p-1">
       <h2 className="text-sm md:text-xl  mx-4 flex gap-3 items-center">
         <FcPieChart size={30} /> Credit Distribution {" "}
       </h2>
 
-      <div className="flex flex-col md:flex-row md:items-center gap-6 justify-center md:mx-15 mx-2 rounded-2xl my-1 shadow-sm cardsectioncredit">
+      <div className="flex flex-col md:flex-row md:items-center gap-6 justify-center md:mx-15 mx-2 rounded-2xl my-1 shadow-sm cardsectioncredit ">
         {/* Chart */}
         <div className="w-full md:w-1/3 shrink-0">
           <ResponsiveContainer width="100%" height={300}>

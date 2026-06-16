@@ -33,7 +33,7 @@ export const TimeTableRows: React.FC<TimeTableProp> = ({
   return (
     <li
       onClick={() => handleToggle(course)}
-      className={`flex items-center justify-between px-3 py-2.5 rounded-lg m-2 transition-all hover:opacity-80 border border-black ${selected?"bg-green-100":"bg-violet-100"}  `}>
+      className={`flex items-center justify-between px-3 py-2.5 cursor-pointer rounded-lg m-2 transition-all hover:opacity-80 border border-black ${selected?"bg-green-100":"bg-violet-100"}  `}>
       <div className="flex items-center gap-2.5 min-w-0 flex-1">
         <button
           className={`w-6 h-6 border-2 border-black rounded-sm cursor-pointer flex justify-center items-center ${selected ? "bg-blue-500" : ""}`}>

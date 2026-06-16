@@ -316,19 +316,19 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
       className={
         isFullscreen
           ? "fixed inset-0 z-50 bg-black flex flex-col"
-          : "universal p-2 md:p-2 w-dvw md:w-auto rounded-2xl bg-[#ffffff11]"
+          : "universal p-2 w-dvw md:w-auto rounded-2xl bg-[#ffffff11]"
       }>
       {!isFullscreen && (
         <div className="flex justify-between px-2 pt-1 pb-0">
           <button
-            className="bg-blue-600 text-white rounded-2xl p-2 flex justify-center gap-2 mb-2 items-center"
+            className="bg-blue-600 text-white rounded-2xl p-2 flex justify-center gap-2 mb-2 items-center cursor-pointer"
             onClick={() => setAdding(true)}>
             <FaPlus /> Add Courses
           </button>
           <button
             onClick={handleFullscreen}
             title="Fullscreen"
-            className="flex items-center gap-3 bg-white/10 hover:bg-white/20 timetable text-xs font-medium px-3 py-1.5 rounded-lg transition-all border border-white/20">
+            className="flex items-center gap-3 bg-white/10 hover:bg-white/20 timetable text-xs font-medium px-3 py-1.5 rounded-lg transition-all border border-white/20 cursor-pointer">
             <SlSizeFullscreen size={12} />
             Fullscreen
           </button>
@@ -339,7 +339,7 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
           <button
             onClick={handleCloseFullscreen}
             title="Exit Fullscreen"
-            className="flex items-center gap-1 bg-white/10 hover:bg-white/20 text-white text-xs font-medium px-3 py-1.5 rounded-lg transition-all border border-white/20">
+            className="flex items-center cursor-pointer gap-1 bg-white/10 hover:bg-white/20 text-white text-xs font-medium px-3 py-1.5 rounded-lg transition-all border border-white/20">
             <IoClose size={20} />
             Close
           </button>
@@ -477,25 +477,25 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
         </div>
       </div>
       {isFullscreen && (
-        <div className="flex justify-around px-4 py-3 shrink-0 border-t border-white/10">
+        <div className="flex justify-around px-4 py-3 shrink-0 border-t border-white/10 ">
           <button
             onClick={handleDownloadPDF}
             title="Download as PDF"
-            className="md:flex hidden items-center gap-2 bg-white text-black text-sm font-semibold px-5 py-2 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
+            className="md:flex hidden items-center cursor-pointer gap-2 bg-white text-black text-sm font-semibold px-5 py-2 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
             <FaDownload size={20} />
             Print PDF
           </button>
           <button
             onClick={downloadPNG}
             title="Download as PDF"
-            className="flex items-center gap-2 bg-white text-black text-sm font-semibold px-5 py-2 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
+            className="flex items-center gap-2 cursor-pointer bg-white text-black text-sm font-semibold px-5 py-2 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
             <FaDownload size={20} />
             Download as PNG
           </button>
           <button
             onClick={downloadPDF}
             title="Download as PDF"
-            className="flex items-center gap-2 bg-white text-black text-sm font-semibold px-5 py-2 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
+            className="flex items-center gap-2 cursor-pointer bg-white text-black text-sm font-semibold px-5 py-2 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
             <FaDownload size={20} />
             Download as PDF
           </button>

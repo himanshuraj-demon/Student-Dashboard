@@ -15,7 +15,7 @@ const Timetable = () => {
     <div className="main">
       <Nav />
       <div className="overflow-x-hidden relative md:w-auto w-dvw flex-1 flex flex-col h-dvh">
-        <div className="flex justify-center items-center m-4 mb-0 p-2 bg-[#ffffff22] rounded-2xl h-20 flex-col">
+        <div className="flex justify-center items-center mt-3 m-2 mb-0 p-3 bg-[#ffffff22] rounded-2xl h-20 flex-col border border-gray-300">
           <h1 className="text-3xl font-semibold flex gap-2">
             <SlCalender size={30} /> Generate TimeTable
           </h1>

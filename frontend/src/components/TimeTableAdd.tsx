@@ -38,7 +38,7 @@ const TimeTableAdd: React.FC<TimeTableProp> = ({
     <div className="flex mt-5 flex-col items-center">
       <div className="flex justify-center mx-5 mb-4">
         <button
-          className="bg-blue-600 text-white rounded-2xl p-2 px-4"
+          className="bg-blue-600 text-white rounded-2xl p-2 px-4 cursor-pointer"
           onClick={() => setAdding(false)}>
           Generate TimeTable
         </button>
@@ -48,10 +48,11 @@ const TimeTableAdd: React.FC<TimeTableProp> = ({
        <div>
         <ul className="flex flex-wrap gap-2 border border-white rounded-2xl p-3 m-2">
           {cources.map((c)=>(
-            <li className="bg-green-100 text-black px-3 py-1 rounded-2xl flex items-center" onClick={()=>handleToggle(c)}>{c["Course Code"]}<IoClose size={20}/> </li>
+            <li className="bg-green-100 text-black px-3 py-1 rounded-2xl flex items-center cursor-pointer" onClick={()=>handleToggle(c)}>{c["Course Code"]}<IoClose size={20}/> </li>
           ))}
         </ul>
         </div>}
+        
 
       <div className="md:w-[90%] w-dvw border border-white rounded-2xl p-3 bg-[#ffffff11]">
         <div className="relative mb-3">

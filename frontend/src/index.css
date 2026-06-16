@@ -87,7 +87,7 @@
     --nav-from: #000000;
     --nav-via: #07011b;
     --border-colorP: rgb(129, 132, 137);
-    --cardc: #111827;
+    --cardc: #000000;
     --border: #1f2937;
     --nav-to: #0f0c31;
 
@@ -167,7 +167,8 @@ h6 {
 }
 
 ::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
+    height: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -205,7 +206,6 @@ h6 {
 
 .cardsectioncredit {
     background: rgba(59, 130, 246, 0.06);
-    border: 1px solid var(--border);
 }
 
 @media (width<768px) {
@@ -297,29 +297,79 @@ h6 {
             var(--nav-from),
             var(--nav-via),
             var(--nav-to));
-
     border-right: 1px solid var(--border-primary);
+    .nav-item {
+        @apply flex flex-col items-center justify-center gap-0.5 px-2 py-1 rounded-2xl transition-all duration-200;
+        min-width: 48px;
+        color: var(--text-secondary);
+    }
 
+    .nav-icon {
+        @apply flex items-center justify-center;
+        font-size: 30px;
+        line-height: 1;
+    }
+
+    .nav-label {
+        @apply text-[8px] font-medium tracking-wide leading-none;
+        color: inherit;
+    }
+    .Mactive-link {
+        @apply font-extrabold;
+        background-color: var(--accent);
+        border: 1px solid gold;
+        color: var(--text-primary);
+    }
+
+    .plus-btn {
+        @apply flex items-center justify-center rounded-full transition-all duration-300;
+        width: 50px;
+        height: 50px;
+        transform: translateY(-5px);
+        background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 60%, transparent));
+        border: 1.5px solid gold;
+        color: var(--text-primary);
+        box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 50%, transparent);
+    }
+
+    .plus-btn:active {
+        transform: scale(0.95);
+    }
+
+    .plus-btn--open svg {
+        transform: rotate(45deg);
+        transition: transform 0.25s ease;
+    }
+
+    .plus-btn svg {
+        transition: transform 0.25s ease;
+    }
+    .more-menu-backdrop {
+        @apply fixed inset-0 z-40;
+        background: transparent;
+    }
     .more-menu {
-        @apply fixed bottom-20 left-4 right-4 flex flex-col gap-2 p-4 rounded-3xl backdrop-blur-md shadow-xl z-50 transition-all duration-300 ease-in-out;
+        @apply fixed bottom-20 left-4 right-4 flex flex-col gap-2 p-4 rounded-3xl backdrop-blur-md shadow-xl z-50;
         background-color: var(--nav-via);
-        color: var(--text-primary)
+        color: var(--text-primary);
+        border: 0.5px solid var(--border-primary);
+        animation: slideUp 0.2s ease;
     }
 
     .more-menu a {
         @apply flex items-center gap-3 p-3 rounded-xl transition-all duration-200;
     }
+}
 
-    .more-menu a:hover {
-        background-color: var(--nav-to);
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
     }
-
-    .Mactive-link {
-        @apply p-3 rounded-full font-extrabold;
-        background-color: var(--accent);
-        border: 1px solid gold;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
-
 }
 
 
