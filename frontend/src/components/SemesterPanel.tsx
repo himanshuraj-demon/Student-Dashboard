@@ -104,7 +104,7 @@ function GradeBadge({ grade }: { grade: string }): JSX.Element {
   const good = ["A+", "A", "A-", "B+", "B"].includes(grade);
   const ok = ["B-", "C+", "C", "C-"].includes(grade);
   const cls = good
-    ? "bg-emerald-50 text-emerald-700"
+    ? "bg-emerald-100 text-emerald-700"
     : ok
       ? "bg-amber-50 text-amber-700"
       : "bg-red-50 text-red-600";
@@ -126,8 +126,8 @@ function CourseTableRow({
 }): JSX.Element {
   const master = courseMasterList[record.code];
   return (
-    <li className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-violet-50 hover:bg-violet-100/60 transition-colors">
-      <span className="inline-block w-2.5 h-2.5 rounded-full shrink-0 bg-violet-500" />
+    <li className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-green-50 hover:bg-violet-100/60 transition-colors">
+      <span className="inline-block w-2.5 h-2.5 rounded-full shrink-0 bg-green-500" />
       <span className="text-xs font-mono font-semibold text-gray-400 shrink-0 w-16">
         {record.code}
       </span>
@@ -451,7 +451,7 @@ export default function SemesterPanel({
         <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border border-gray-100 shadow-sm overflow-hidden min-w-0 flex flex-col">
           <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-100 shrink-0">
             <h2 className="font-semibold flex items-center gap-2 min-w-0 text-sm">
-              <span className="w-2.5 h-2.5 rounded-full bg-violet-500 inline-block shrink-0" />
+              <span className="w-2.5 h-2.5 rounded-full bg-green-500 inline-block shrink-0" />
               <span className="truncate">{semesterName} Courses</span>
             </h2>
             <div className="flex items-center gap-1.5 shrink-0 ml-2">

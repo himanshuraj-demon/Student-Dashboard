@@ -7,6 +7,7 @@ import Mandatory from "../components/Mandatory";
 import CurriculumTable from "../components/CurriculumTable";
 import { curriculumPathway1 } from "../../constants/semesterplan";
 import { useAuth } from "../hooks/useAuth";
+import AdditionalDetails from "../components/AdditionalDetails";
 
 const Details = () => {
   useTitle("Details");
@@ -15,7 +16,7 @@ const Details = () => {
     <div className="main">
       {auth && <Nav />}
       <div className="detailsmainbox overflow-x-hidden relative md:w-full w-dvw  flex flex-col h-dvh ">
-        <div className="flex justify-center items-center md:m-4 m-1 mb-0 p-2 bg-[#ffffff22]  h-20 flex-col border border-gray-100 rounded-2xl">
+        <div className="flex justify-center items-center md:m-3 m-1 mb-0 p-2 bg-[#ffffff22]  h-20 flex-col border border-gray-100 rounded-2xl">
             <h1 className="text-xl md:text-3xl font-bold text-center">IIT Gandhinagar Academic Details & Degree Requirements</h1>
             <p className="md:flex hidden">
               View degree requirements, credit distribution, semester-wise
@@ -23,12 +24,15 @@ const Details = () => {
               students.
             </p>
         </div>
-        <div className="relative md:top-10 mt-5 md:mt-0">
+        <div className="relative md:top-2 mt-5 md:mt-0">
           <div>
             <CreditBreakdownChart />
           </div>
           <div className="">
             <SemesterTrendChart />
+          </div>
+          <div>
+            <AdditionalDetails/>
           </div>
           <div>
             <Mandatory />

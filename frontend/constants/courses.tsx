@@ -1784,4 +1784,47 @@ const instituteRequirements = {
   graduationCredits: { range: "169-175" },
 };
 
-export { instituteRequirements, branches, courseMasterList };
+type Tab = "honours" | "minor";
+type Cohort = "2022" | "other";
+
+const data: Record<Cohort, Record<Tab, { points: string[]; note?: string }>> = {
+  "2022": {
+    honours: {
+      points: [
+        "Complete a minimum of 20 additional credits specified by your parent discipline.",
+        "Must include at least one project course in the parent discipline (beyond the open project).",
+        "Up to 2 open electives from the base programme may count toward the 20 credits.",
+      ],
+      note: "Pursuing multiple minors/honours or a dual degree? A maximum of 2 open electives may be shared across all additional programmes.",
+    },
+    minor: {
+      points: [
+        "Complete a minimum of 20 additional credits from another discipline or focus area.",
+        "Credits are specified by that discipline's group — check the Minor advisory for the course list.",
+        "Up to 2 open electives from the base programme may count toward the 20 credits.",
+      ],
+      note: "Pursuing multiple minors/honours or a dual degree? A maximum of 2 open electives may be shared across all additional programmes.",
+    },
+  },
+  other: {
+    honours: {
+      points: [
+        "Complete 20 credits of courses that deepen core competence in your discipline.",
+        "8 credits must come from BTech projects related to your discipline.",
+        "1 open elective from the base programme may count — reducing the open elective requirement to 16 credits.",
+        "Cross-discipline courses may be considered with DPC and DOAA approval.",
+      ],
+      note: "Pursuing multiple minors/honours or a dual degree? A maximum of 1 open elective may be shared across all additional programmes.",
+    },
+    minor: {
+      points: [
+        "Complete 20 credits of courses from another discipline.",
+        "Courses not typically offered by that discipline may qualify with DPC and DOAA approval.",
+        "1 open elective from the base programme may count — reducing the open elective requirement to 16 credits.",
+      ],
+      note: "Pursuing multiple minors/honours or a dual degree? A maximum of 1 open elective may be shared across all additional programmes.",
+    },
+  },
+};
+
+export { instituteRequirements, branches, courseMasterList,data };

@@ -44,7 +44,6 @@ export default function CreditBreakdownChart() {
       </h2>
 
       <div className="flex flex-col md:flex-row md:items-center gap-6 justify-center md:mx-15 mx-2 rounded-2xl my-1 shadow-sm cardsectioncredit ">
-        {/* Chart */}
         <div className="w-full md:w-1/3 shrink-0">
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>

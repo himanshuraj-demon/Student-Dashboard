@@ -7,8 +7,9 @@ const Navbar = () => {
     <>
       <nav className="navbar">
         <div className="logo">
-          <img src="./images/logo.svg" alt="nono"/>
+          <img src="./images/logo.svg" alt="nono" />
           <img src="./images/namelogo.png" alt="nono" className="spanlogo"/>
+        
         </div>
 
         <div className="navlinks">
@@ -27,8 +28,10 @@ const Navbar = () => {
         </div>
 
         <div className="profile">
-          <NavLink to={"/profile"} className={({ isActive }) => (isActive ? "active-link" : "")}>
-            <FaUser size={22} className="img text-[var(--text-secondary)]"/>
+          <NavLink
+            to={"/profile"}
+            className={({ isActive }) => (isActive ? "active-link" : "")}>
+            <FaUser size={22} className="img text-[var(--text-secondary)]" />
             <span>SmartTrack</span>
           </NavLink>
         </div>

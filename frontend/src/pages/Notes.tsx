@@ -66,7 +66,6 @@ const Notes = () => {
           ))}
         </div>
       </div>
-
       {isAiOpen && <AiSidebarWithProps setAiOpen={setAiOpen} />}
       {!isAiOpen && (
         <button
