@@ -421,7 +421,7 @@ const Profile = () => {
         </form>
 
         {user?.role === "ADMIN" ? 
-        <div className="text-center bg-blue-600 text-white rounded-2xl m-10 py-2 cursor-pointer">
+        <div className="text-center bg-blue-600 text-white rounded-2xl mx-10 mt-5 py-2 cursor-pointer">
              <Link to={"/admin"}>Admin Panel</Link> 
         </div> 
 

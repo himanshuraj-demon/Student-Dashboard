@@ -13,8 +13,8 @@ import Details from "../pages/Details";
 import Work from "../pages/Work";
 import AdminPage from "../pages/AdminPage";
 import AdminError from "../pages/AdminError";
-
+import AcademicCalendar from "../pages/Calender";
 
 export{
-    Details,AdminPage,Home,Login,Signup,Error,Timetable,Dashbord,Profile ,Planner,Courses,Analytics,Competitive,Work,AdminError
+    Details,AdminPage,Home,Login,Signup,Error,Timetable,Dashbord,Profile ,Planner,Courses,Analytics,Competitive,Work,AdminError,AcademicCalendar
 }

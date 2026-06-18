@@ -14,7 +14,8 @@ import {
   Details,
   Work,
   AdminPage,
-  AdminError
+  AdminError,
+  AcademicCalendar
 } from "./services";
 import ThemeProvider from "./context/ThemeContext";
 import { useAuth } from "./hooks/useAuth";
@@ -80,6 +81,11 @@ const App = () => {
             <Route
               path="/work"
               element={<Work />}
+              errorElement={<Error />}
+            />
+            <Route
+              path="/calender"
+              element={<AcademicCalendar />}
               errorElement={<Error />}
             />
           </Route>

@@ -10,7 +10,7 @@ export function ThemeToggle() {
         Theme: {isDark ? "Light" : "Dark"}
       </span>
 
-      <button
+      <div
         onClick={toggleTheme}
         aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
         style={{
@@ -22,7 +22,7 @@ export function ThemeToggle() {
         className="p-3 flex justify-center items-center"
       >
         {isDark ? <FiSun size={18} /> : <FiMoon size={18} />}
-      </button>
+      </div>
     </div>
   );
 }

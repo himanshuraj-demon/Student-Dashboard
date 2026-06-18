@@ -43,7 +43,7 @@ const AdminPage = ({ currentUser }: Props) => {
     <div className="main">
       <Nav />
 
-      <div className="mx-auto max-w-6xl p-6 sm:p-8">
+      <div className="mx-auto w-dvw md:w-auto p-6 sm:p-8 h-dvh">
         {/* Header Section */}
         <div className="mb-8 flex flex-col gap-1">
           <h1 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
@@ -107,7 +107,7 @@ const AdminPage = ({ currentUser }: Props) => {
                               }
                               className="w-full appearance-none rounded-lg border border-slate-200 bg-white py-1.5 pl-3 pr-8 text-sm font-medium text-slate-700 shadow-sm outline-none transition-all hover:border-slate-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10"
                             >
-                              <option value="STUDENT">STUDENT</option>
+                              <option value="NORMAL">NORMAL</option>
                               <option value="ADVISER">ADVISER</option>
                               <option value="ADMIN">ADMIN</option>
                             </select>

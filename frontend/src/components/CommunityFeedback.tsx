@@ -1,5 +1,4 @@
 "use client";
-
 import { useMemo, useState } from "react";
 import {
   Plus,
@@ -188,12 +187,9 @@ export default function CommunityFeedback({
   }
 
   return (
-    <div className="flex h-fit w-full flex-col border-l border-stone-200 timetable rounded-2xl m-1">
-      <div className="flex items-center justify-between border-b border-stone-200 bg-violet-700 px-6 py-4 rounded-2xl">
+    <div className="flex h-fit w-full md:w-auto flex-col border border-gray-400 bg-[#ffffff11] rounded-2xl m-2">
+      <div className="flex items-center justify-between border-b border-gray-400 bg-blue-700 px-6 py-4 rounded-t-2xl">
         <div>
-          <p className="font-mono text-xs uppercase tracking-widest text-violet-200">
-            Catalog
-          </p>
           <h2 className="font-serif text-xl font-semibold text-white">
             Community Feedback
           </h2>
@@ -201,14 +197,14 @@ export default function CommunityFeedback({
         {isAdviser && (
           <button
             onClick={() => setIsAddOpen(true)}
-            className="flex items-center gap-1.5 rounded-lg bg-amber-500 px-3 py-2 text-sm font-medium text-stone-900 shadow-sm transition hover:bg-amber-400">
+            className="flex items-center gap-1.5  bg-blue-500 px-3 py-2 rounded-2xl text-sm font-medium text-stone-900 shadow-sm transition hover:bg-amber-400">
             <Plus className="h-4 w-4" />
             Add Advice
           </button>
         )}
       </div>
 
-      <div className="flex gap-1 overflow-x-auto border-b border-stone-200  px-4 pt-3">
+      <div className="flex gap-1 overflow-x-auto overflow-hidden border-b border-stone-400  px-4 pt-3">
         {GROUPS.map((g) => {
           const Icon = g.icon;
           const isActive = group === g.value;
@@ -218,8 +214,8 @@ export default function CommunityFeedback({
               onClick={() => setGroup(g.value)}
               className={`-mb-px flex shrink-0 items-center gap-1.5 rounded-t-lg px-3 py-2 text-sm font-medium transition ${
                 isActive
-                  ? "z-10 bg-white text-violet-700 shadow-sm"
-                  : " hover:text-stone-700"
+                  ? "z-10 bg-white text-blue-700 shadow-sm"
+                  : " hover:text-stone-700 hover:bg-blue-300"
               }`}>
               <Icon className="h-3.5 w-3.5" />
               {g.label}
@@ -227,7 +223,7 @@ export default function CommunityFeedback({
           );
         })}
       </div>
-      <div className="space-y-3 border-b border-stone-200 px-4 py-3">
+      <div className="space-y-3 border-b border-stone-400 px-4 py-3">
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs font-medium uppercase tracking-wide ">
             Sort
@@ -239,8 +235,8 @@ export default function CommunityFeedback({
                 onClick={() => setSort(s.value)}
                 className={`rounded-full px-3 py-1 text-xs font-medium transition ${
                   sort === s.value
-                    ? "bg-violet-600 text-white"
-                    : "bg-stone-100 text-black hover:bg-stone-200"
+                    ? "bg-blue-600 text-white"
+                    : "bg-stone-100 text-black  hover:bg-blue-200"
                 }`}>
                 {s.label}
               </button>
@@ -260,8 +256,8 @@ export default function CommunityFeedback({
                 onClick={() => toggleTag(tag)}
                 className={`rounded-full border px-2.5 py-1 font-mono text-xs transition ${
                   isActive
-                    ? "border-violet-600 bg-violet-50 text-violet-700"
-                    : "border-stone-200  hover:border-stone-300"
+                    ? "border-blue-600 bg-blue-50 text-blue-700"
+                    : "border-stone-400  hover:border-blue-300"
                 }`}>
                 #{tag}
               </button>
@@ -292,7 +288,7 @@ export default function CommunityFeedback({
                       {item.title}
                     </h3>
                     <div className="mt-1 flex items-center gap-2 text-xs">
-                      <GraduationCap className="h-3.5 w-3.5 text-violet-500" />
+                      <GraduationCap className="h-3.5 w-3.5 text-blue-500" />
                       <span>{item.user.name}</span>
                       <span>·</span>
                       <span>{formatRelativeTime(item.createdAt)}</span>

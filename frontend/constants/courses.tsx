@@ -1755,6 +1755,7 @@ const instituteRequirements = {
     ],
   },
   mathBasket: {
+    totalCredits: 10,
     mandatoryCourses: [
       {
         code: "MA103",

@@ -1,15 +1,15 @@
 import express from "express"
 const router = express.Router()
 import { handleSignUp, handleLogIn, clearUser, handelMe, updateProfile, handleCources, handleUpdateCources, handleGoogleAuth, handleSaveSemester, handleGetSemester, getUsers,updateUserRole } from "../controllers/user.js"
-import { checkAuth } from "../middleware/auth.js"
+import { checkAuth,protect } from "../middleware/auth.js"
 import User from "../models/user.js";
 import Details from "../models/userdetails.js";
 import Cources from "../models/userCources.js";
 import adminOnly from "../middleware/adminOnly.js";
 
 
-router.get("/admin", checkAuth, adminOnly, getUsers);
-router.patch("/admin/:id/role",checkAuth,adminOnly,updateUserRole);
+router.get("/admin", protect, adminOnly, getUsers);
+router.patch("/admin/:id/role",protect,adminOnly,updateUserRole);
 router.post("/signup", handleSignUp);
 router.post("/login", handleLogIn);
 router.get("/me", checkAuth, handelMe);

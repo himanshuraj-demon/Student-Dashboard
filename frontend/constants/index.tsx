@@ -1,7 +1,7 @@
 import { FiBookOpen, FiCalendar, FiPieChart } from "react-icons/fi";
 import { FaCode } from "react-icons/fa";
 import { CgNotes } from "react-icons/cg";
-import { LuLayoutDashboard } from "react-icons/lu";
+import { LuLayoutDashboard,LuCalendar } from "react-icons/lu";
 import { TbListDetails } from "react-icons/tb";
 import { GrPlan } from "react-icons/gr";
 
@@ -56,6 +56,12 @@ const links = [
     key: 8,
     path: "/competitive",
     icon: <FaCode size={22} className="text-[var(--text-secondary)]" />,
+  },
+  {
+    name: "Calender",
+    key: 9,
+    path: "/calender",
+    icon: <LuCalendar size={22} className="text-[var(--text-secondary)]" />,
   },
 ];
 

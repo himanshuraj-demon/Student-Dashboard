@@ -56,7 +56,7 @@ const Planner = () => {
                 onClick={() => setSelectedBranch(branch)}
                 className={`px-4 py-2 rounded-full transition ${
                   selectedBranch === branch
-                    ? "bg-violet-500 text-white"
+                    ? "bg-blue-500 text-white"
                     : "bg-gray-200 text-black"
                 }`}>
                 {branch}
@@ -78,18 +78,18 @@ const Planner = () => {
             <a
               href="./pdfs/Adv13_Norms for BTech Programme_28 Jan 2026.pdf"
               target="_blank"
-              className="bg-violet-600 m-5 w-40 p-2 text-white rounded-2xl font-semibold">
+              className="bg-blue-600 m-5 w-40 p-2 text-white rounded-2xl font-semibold">
               Know More
             </a>
             <a
               href="./pdfs/Adv13_Norms for BTech Programme_28 Jan 2026.pdf"
               download={true}
-              className="bg-violet-600 m-5 w-40 p-2 text-white rounded-2xl font-semibold">
+              className="bg-blue-600 m-5 w-40 p-2 text-white rounded-2xl font-semibold">
               Download
             </a>
           </div>
         </div>
-        <div>
+        <div className="mb-5">
           <CommunityFeedback currentUser={user} />
         </div>
       </div>

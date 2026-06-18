@@ -1,14 +1,13 @@
 import express from "express";
 const router = express.Router();
-import { checkAuth } from "../middleware/auth.js";
+import { checkAuth,protect } from "../middleware/auth.js";
 import adviserOnly from "../middleware/advisor.js";
-import {getFeedbacks,createFeedback,voteFeedback,updateFeedback,deleteFeedback} from "../controllers/feedback.js"
-
+import { getFeedbacks, createFeedback, voteFeedback, updateFeedback, deleteFeedback } from "../controllers/feedback.js"
 
 router.get("/", getFeedbacks);
 router.post(
     "/",
-    checkAuth,
+    protect,
     adviserOnly,
     createFeedback
 );
@@ -18,7 +17,7 @@ router.post(
     checkAuth,
     voteFeedback
 );
-router.put("/:id", checkAuth, updateFeedback);
-router.delete("/:id", checkAuth, deleteFeedback);
+router.put("/:id", protect, updateFeedback);
+router.delete("/:id", protect, deleteFeedback);
 
 export default router;
