@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from "react";
 import { useTitle } from "../hooks/useTitle";
-import Nav from "../services/Nav";
 import Todoblock from "../components/TodoBlock";
 import { FiPlus, FiSearch } from "react-icons/fi";
 import TodoEdit from "../components/TodoEdit";
@@ -41,8 +40,7 @@ const Todos = () => {
   const tagsList = ["coding", "game", "study", "music", "fitness", "personal"];
 
   return (
-    <div className="main">
-      <Nav />
+    <div className="w-full md:w-auto h-dvh overflow-x-hidden overflow-y-scroll">
       <div className="flex flex-col gap-4 w-full universal mx-auto m-1 p-4 rounded-2xl overflow-x-hidden todosmenu">
         <div className="mb-2 ">
           <h1 className="text-3xl font-bold tracking-tight flex items-center gap-2">
@@ -140,7 +138,7 @@ const Todos = () => {
       {isEdit && <TodoEdit key={addKey} todo={todo} setEdit={setEdit} />}
 
       <button
-        className="fixed md:bottom-6 md:right-6 bottom-25 right-5 w-14 h-14 bg-blue-500 hover:bg-blue-600 active:scale-95 text-white rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all z-40"
+        className="fixed md:bottom-3 md:right-20 bottom-22 right-20 w-14 h-14 bg-blue-500 hover:bg-blue-600 active:scale-95 text-white rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all z-40"
         onClick={() => {
           setTodo(null);
           setAddKey((k) => k + 1);

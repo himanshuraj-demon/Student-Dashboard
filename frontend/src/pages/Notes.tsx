@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { useTitle } from "../hooks/useTitle";
-import Nav from "../services/Nav";
-import AiSidebar from "../components/AiSidebar";
-import { LuBotMessageSquare } from "react-icons/lu";
 import Notesblock from "../components/Notesblock";
 import { FiPlus } from "react-icons/fi";
 import NotesEdit from "../components/NotesEdit";
@@ -10,16 +7,11 @@ import { type Note } from "../../constants/types";
 import { useAuth } from "../hooks/useAuth";
 
 const Notes = () => {
-  const [isAiOpen, setAiOpen] = useState(false);
   const { notes } = useAuth();
   const [isEdit, setEdit] = useState(false);
   const [note, setNote] = useState<Note | null>(null);
   const [addKey, setAddKey] = useState(0);
   const [search, setSearch] = useState("");
-
-  const AiSidebarWithProps = AiSidebar as React.ComponentType<{
-    setAiOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  }>;
 
   useTitle("Notes");
 
@@ -28,8 +20,7 @@ const Notes = () => {
   );
 
   return (
-    <div className={`main ${isAiOpen ? "ai-open" : ""}`}>
-      <Nav />
+    <div className="w-full md:w-auto h-dvh overflow-x-hidden overflow-y-scroll">
       <div className="flex flex-col gap-2 notesmenu m-1 p-3 rounded-2xl overflow-x-hidden">
         <div className="mb-4 text-center flex flex-col justify-center items-center">
           <h1 className="text-3xl font-bold tracking-tight flex items-center gap-3">
@@ -66,14 +57,6 @@ const Notes = () => {
           ))}
         </div>
       </div>
-      {isAiOpen && <AiSidebarWithProps setAiOpen={setAiOpen} />}
-      {!isAiOpen && (
-        <button
-          className="fixed md:bottom-6 md:right-5 bottom-25 right-5"
-          onClick={() => setAiOpen(true)}>
-          <LuBotMessageSquare size={35} />
-        </button>
-      )}
     </div>
   );
 };

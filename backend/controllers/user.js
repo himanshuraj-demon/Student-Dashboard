@@ -136,7 +136,7 @@ async function handleGoogleAuth(req, res) {
         console.error(error)
         return res.status(500).json({
             message: "error occured",
-            error: error.message
+            error: "Internal Server Error"
         })
     }
 }

@@ -5,15 +5,14 @@ import Error from "../pages/Error";
 import Timetable from "../pages/Timetable";
 import Dashbord from "../pages/Dashbord";
 import Profile from "../pages/Profile";
-import Todo from "../pages/Todo";
 import Planner from "../pages/Planner";
-import Notes from "../pages/Notes";
 import Courses from "../pages/Courses";
 import Analytics from "../pages/Analytics";
 import Competitive from "../pages/Competitive";
 import Details from "../pages/Details";
+import Work from "../pages/Work";
 
 
 export{
-    Details,Home,Login,Signup,Error,Timetable,Dashbord,Profile,Todo ,Planner,Notes,Courses,Analytics,Competitive
+    Details,Home,Login,Signup,Error,Timetable,Dashbord,Profile ,Planner,Courses,Analytics,Competitive,Work
 }

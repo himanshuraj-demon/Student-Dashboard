@@ -2,7 +2,6 @@ import { FiBookOpen, FiCalendar, FiPieChart } from "react-icons/fi";
 import { FaCode } from "react-icons/fa";
 import { CgNotes } from "react-icons/cg";
 import { LuLayoutDashboard } from "react-icons/lu";
-import { FiCheckSquare } from "react-icons/fi";
 import { TbListDetails } from "react-icons/tb";
 import { GrPlan } from "react-icons/gr";
 
@@ -47,20 +46,14 @@ const links = [
     icon: <TbListDetails size={22} className="text-[var(--text-secondary)]" />,
   },
   {
-    name: "Notes",
+    name: "Work",
     key: 7,
-    path: "/notes",
+    path: "/work",
     icon: <CgNotes size={22} className="text-[var(--text-secondary)]" />,
   },
   {
-    name: "To-do",
-    key: 8,
-    path: "/todo",
-    icon: <FiCheckSquare size={22} className="text-[var(--text-secondary)]" />,
-  },
-  {
     name: "Competitive",
-    key: 9,
+    key: 8,
     path: "/competitive",
     icon: <FaCode size={22} className="text-[var(--text-secondary)]" />,
   },

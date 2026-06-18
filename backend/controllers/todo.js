@@ -5,7 +5,7 @@ async function handleTodoGet(req, res){
     const todos = await Todos.find({ userId: req.user._id }).sort({ pinned: -1, createdAt: -1 });
     res.status(200).json(todos);
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch tasks", error: error.message });
+    res.status(500).json({ message: "Failed to fetch tasks", error: "Internal Server Error" });
   }
 }
 
@@ -26,7 +26,7 @@ async function handleTodoPost(req, res) {
     const savedTodo = await newTodo.save();
     res.status(201).json(savedTodo);
   } catch (error) {
-    res.status(400).json({ message: "Failed to create task", error: error.message });
+    res.status(400).json({ message: "Failed to create task", error: "Internal Server Error" });
   }
 }
 
@@ -48,7 +48,7 @@ async function handleTodPut(req, res) {
     const updatedTodo = await todo.save();
     res.status(200).json(updatedTodo);
   } catch (error) {
-    res.status(400).json({ message: "Failed to update task", error: error.message });
+    res.status(400).json({ message: "Failed to update task", error: "Internal Server Error" });
   }
 }
 
@@ -62,7 +62,7 @@ async function handleTodoDelete (req, res) {
 
     res.status(200).json({ message: "Task successfully deleted" });
   } catch (error) {
-    res.status(500).json({ message: "Failed to delete task", error: error.message });
+    res.status(500).json({ message: "Failed to delete task", error: "Internal Server Error" });
   }
 }
 

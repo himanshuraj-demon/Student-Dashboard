@@ -6,14 +6,13 @@ import {
   Error,
   Timetable,
   Dashbord,
-  Todo,
   Planner,
-  Notes,
   Courses,
   Analytics,
   Profile,
   Competitive,
   Details,
+  Work
 } from "./services";
 import ThemeProvider from "./context/ThemeContext";
 import { useAuth } from "./hooks/useAuth";
@@ -46,13 +45,11 @@ const App = () => {
               element={<Dashbord />}
               errorElement={<Error />}
             />
-            <Route path="/todo" element={<Todo />} errorElement={<Error />} />
             <Route
               path="/planner"
               element={<Planner />}
               errorElement={<Error />}
             />
-            <Route path="/notes" element={<Notes />} errorElement={<Error />} />
             <Route
               path="/courses"
               element={<Courses />}
@@ -71,6 +68,11 @@ const App = () => {
             <Route
               path="/competitive"
               element={<Competitive />}
+              errorElement={<Error />}
+            />
+            <Route
+              path="/work"
+              element={<Work />}
               errorElement={<Error />}
             />
           </Route>
