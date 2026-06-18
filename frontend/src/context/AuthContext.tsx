@@ -1,5 +1,6 @@
 import { createContext } from "react";
 import {type Note,type Todo } from "../../constants/types";
+import {type Feedback } from "../../constants/feedbacktypes";
 
 export interface User {
   _id: string;
@@ -7,6 +8,7 @@ export interface User {
   email: string;
   profileImageUrl?: string;
   details?: UserDetails;
+  role:string
 }
 export interface UserDetails {
   cpi: number;
@@ -38,6 +40,8 @@ interface AuthContextType {
   checkAuth: () => Promise<void>;
   yourCourses: string[];
   setYourCourses: React.Dispatch<React.SetStateAction<string[]>>;
+  feedbacks: Feedback[];
+  setFeedbacks: React.Dispatch<React.SetStateAction<Feedback[]>>;
 }
 
 export const AuthContext =

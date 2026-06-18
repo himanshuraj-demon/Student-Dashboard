@@ -17,7 +17,7 @@ import userRoute from "./routes/user.js"
 import aiRoutes from "./routes/ai-chat.js";
 import notesRoute from "./routes/notes.js"
 import todosRoute from "./routes/todo.js"
-
+import feedbackRoute from "./routes/feedback.js"
 const app = express();
 
 app.use(morgan("dev"));
@@ -55,6 +55,7 @@ app.use("/api", aiRoutes);
 app.use("/notes", notesRoute);
 app.use("/todos", todosRoute);
 app.use("/user", userRoute);
+app.use("/feedback",feedbackRoute)
 app.get("/", (req, res) => {
   return res.json({ working: "good" });
 })

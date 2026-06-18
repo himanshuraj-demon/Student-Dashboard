@@ -11,6 +11,8 @@ import {
   Mechanical,
   Materials,
 } from "../../constants/semesterplan";
+import CommunityFeedback from "../components/CommunityFeedback";
+import { useAuth } from "../hooks/useAuth";
 
 const Branch: string[] = [
   "Artificial Intelligence",
@@ -37,6 +39,7 @@ const Planner = () => {
     "Computer Science & Engineering",
   );
   useTitle("Planer");
+  const { user } = useAuth();
   return (
     <div className="main">
       <Nav />
@@ -53,7 +56,7 @@ const Planner = () => {
                 onClick={() => setSelectedBranch(branch)}
                 className={`px-4 py-2 rounded-full transition ${
                   selectedBranch === branch
-                    ? "bg-blue-500 text-white"
+                    ? "bg-violet-500 text-white"
                     : "bg-gray-200 text-black"
                 }`}>
                 {branch}
@@ -75,16 +78,19 @@ const Planner = () => {
             <a
               href="./pdfs/Adv13_Norms for BTech Programme_28 Jan 2026.pdf"
               target="_blank"
-              className="bg-blue-600 m-5 w-40 p-2 text-white rounded-2xl font-semibold">
+              className="bg-violet-600 m-5 w-40 p-2 text-white rounded-2xl font-semibold">
               Know More
             </a>
             <a
               href="./pdfs/Adv13_Norms for BTech Programme_28 Jan 2026.pdf"
               download={true}
-              className="bg-blue-600 m-5 w-40 p-2 text-white rounded-2xl font-semibold">
+              className="bg-violet-600 m-5 w-40 p-2 text-white rounded-2xl font-semibold">
               Download
             </a>
           </div>
+        </div>
+        <div>
+          <CommunityFeedback currentUser={user} />
         </div>
       </div>
     </div>

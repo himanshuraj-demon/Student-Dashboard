@@ -2,12 +2,14 @@ import { useState, useEffect, useCallback } from "react";
 import { AuthContext, type User } from "./AuthContext";
 import api from "../services/api";
 import { type Note, type Todo } from "../../constants/types";
+import {type Feedback } from "../../constants/feedbacktypes";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [auth, setAuth] = useState<boolean | null>(null);
   const [notes, setNotes] = useState<Note[]>([]);
+  const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
   const [todos, setTodos] = useState<Todo[]>([]);
   const [yourCourses, setYourCourses] = useState<string[]>([]);
   const logout = async () => {
@@ -33,15 +35,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const checkAuth = useCallback(async () => {
     try {
-      const [userRes, notesRes, todoRes, coursesRes] = await Promise.all([
+      const [userRes, notesRes, todoRes, coursesRes,feedbackRes] = await Promise.all([
         api.get("/user/me"),
         api.get("/notes"),
         api.get("/todos"),
         api.get("/user/your-courses"),
+        api.get("/feedback")
       ]);
 
       setUser(userRes.data.user);
       setNotes(notesRes.data);
+      setFeedbacks(feedbackRes.data)
       setTodos(todoRes.data);
       setYourCourses(coursesRes.data.codes ?? []);
 
@@ -78,6 +82,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         checkAuth,
         yourCourses,
         setYourCourses,
+        feedbacks,
+        setFeedbacks,
       }}>
       {children}
     </AuthContext.Provider>
