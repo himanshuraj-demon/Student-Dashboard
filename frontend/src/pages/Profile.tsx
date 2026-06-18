@@ -16,6 +16,7 @@ import {
 import { GoInfo } from "react-icons/go";
 import { CgProfile } from "react-icons/cg";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 interface FormData {
   name: string;
@@ -93,7 +94,7 @@ const Profile = () => {
           codeforcesHandle: data.codeforces,
           codechefHandle: data.codechef,
         },
-        { withCredentials: true }
+        { withCredentials: true },
       );
       setUser(res.data.user);
       setEditing(false);
@@ -124,14 +125,11 @@ const Profile = () => {
     <div className="main">
       <Nav />
       <div className="mainprofilebox">
-
-        
         <div className="profile-cover">
           <div className="cover-grid" />
           <div className="cover-glow" />
         </div>
 
-        
         <div className="avatar-row">
           <div
             className="avatar-wrap"
@@ -139,8 +137,7 @@ const Profile = () => {
               user?.profileImageUrl
                 ? { backgroundImage: `url(${user.profileImageUrl})` }
                 : undefined
-            }
-          >
+            }>
             {!user?.profileImageUrl && (
               <span className="avatar-initials">{initials}</span>
             )}
@@ -150,11 +147,8 @@ const Profile = () => {
             <h1 className="avatar-name">{user?.name || "Your Name"}</h1>
             <p className="avatar-email">{user?.email}</p>
           </div>
-
-          
         </div>
 
-       
         <div className="stats-row">
           <div className="stat-card stat-accent">
             <span className="stat-label">CPI</span>
@@ -180,10 +174,7 @@ const Profile = () => {
           </div>
         </div>
 
-       
         <form id="profile-form" onSubmit={handleSubmit(onSubmit)}>
-
-          
           <div className="profile-section">
             <div className="section-title">
               <CgProfile size={18} />
@@ -219,10 +210,11 @@ const Profile = () => {
                 <select
                   {...register("branch")}
                   disabled={!isEditing}
-                  className="profile-input"
-                >
+                  className="profile-input">
                   {Branch.map((b) => (
-                    <option key={b} value={b}>{b}</option>
+                    <option key={b} value={b}>
+                      {b}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -234,10 +226,11 @@ const Profile = () => {
                 <select
                   {...register("currentSemester", { valueAsNumber: true })}
                   disabled={!isEditing}
-                  className="profile-input"
-                >
+                  className="profile-input">
                   {[...Array(12)].map((_, i) => (
-                    <option key={i + 1} value={i + 1}>{i + 1}</option>
+                    <option key={i + 1} value={i + 1}>
+                      {i + 1}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -256,7 +249,9 @@ const Profile = () => {
                   className="profile-input"
                 />
                 {errors.cpi && (
-                  <span className="profile-error">{String(errors.cpi.message)}</span>
+                  <span className="profile-error">
+                    {String(errors.cpi.message)}
+                  </span>
                 )}
               </div>
 
@@ -291,14 +286,12 @@ const Profile = () => {
             </div>
           </div>
 
-          
           <div className="profile-section">
             <div className="section-title">
               <SiGithub size={16} />
               Profiles &amp; handles
             </div>
 
-            
             {!isEditing && (
               <div className="handles-grid">
                 <div className="handle-tile">
@@ -340,7 +333,6 @@ const Profile = () => {
               </div>
             )}
 
-            
             {isEditing && (
               <div className="div1">
                 <div className="profile-field">
@@ -387,7 +379,6 @@ const Profile = () => {
             )}
           </div>
 
-          
           <div className="profile-footer">
             <ThemeToggle />
 
@@ -397,32 +388,25 @@ const Profile = () => {
                   <button
                     type="button"
                     onClick={() => setEditing(false)}
-                    className="btn btn-ghost"
-                  >
+                    className="btn btn-ghost">
                     Cancel
                   </button>
                   <button
                     type="submit"
                     className="btn btn-primary"
-                    disabled={isSubmitting}
-                  >
+                    disabled={isSubmitting}>
                     <MdOutlineSave size={16} />
                     {isSubmitting ? "Saving…" : "Save changes"}
                   </button>
                 </>
               ) : (
                 <>
-                  <div
-      
-                    onClick={logout}
-                    className="btn btn-danger"
-                  >
+                  <div onClick={logout} className="btn btn-danger">
                     Log out
                   </div>
                   <div
                     onClick={() => setEditing(true)}
-                    className="btn btn-primary"
-                  >
+                    className="btn btn-primary">
                     <MdDriveFileRenameOutline size={16} />
                     Edit profile
                   </div>
@@ -435,6 +419,13 @@ const Profile = () => {
             <p className="profile-errors">{errors.root.message}</p>
           )}
         </form>
+
+        {user?.role === "ADMIN" ? 
+        <div className="text-center bg-blue-600 text-white rounded-2xl m-10 py-2 cursor-pointer">
+             <Link to={"/admin"}>Admin Panel</Link> 
+        </div> 
+
+        : ""}
       </div>
     </div>
   );

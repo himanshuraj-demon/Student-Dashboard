@@ -12,7 +12,9 @@ import {
   Profile,
   Competitive,
   Details,
-  Work
+  Work,
+  AdminPage,
+  AdminError
 } from "./services";
 import ThemeProvider from "./context/ThemeContext";
 import { useAuth } from "./hooks/useAuth";
@@ -23,7 +25,7 @@ import { Toaster } from "react-hot-toast";
 axios.defaults.withCredentials = true;
 
 const App = () => {
-  const { auth } = useAuth();
+  const { auth,user } = useAuth();
   return (
     <BrowserRouter>
       <ThemeProvider>
@@ -38,6 +40,11 @@ const App = () => {
             <Route
               path="/timetable"
               element={<Timetable />}
+              errorElement={<Error />}
+            />
+            <Route
+              path="/admin"
+              element={user?.role==="ADMIN" ? <AdminPage currentUser={user}/> : <AdminError/>}
               errorElement={<Error />}
             />
             <Route

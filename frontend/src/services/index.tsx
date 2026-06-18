@@ -11,8 +11,10 @@ import Analytics from "../pages/Analytics";
 import Competitive from "../pages/Competitive";
 import Details from "../pages/Details";
 import Work from "../pages/Work";
+import AdminPage from "../pages/AdminPage";
+import AdminError from "../pages/AdminError";
 
 
 export{
-    Details,Home,Login,Signup,Error,Timetable,Dashbord,Profile ,Planner,Courses,Analytics,Competitive,Work
+    Details,AdminPage,Home,Login,Signup,Error,Timetable,Dashbord,Profile ,Planner,Courses,Analytics,Competitive,Work,AdminError
 }

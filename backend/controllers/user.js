@@ -7,6 +7,17 @@ import { createToken } from "../services/auth.js";
 import { oauth2client } from "../config/googleConfig.js"
 import axios from "axios";
 
+
+
+
+async function getUsers(req, res) {
+    const users = await User.find(
+        {},
+        "name email role"
+    );
+    res.json(users);
+}
+
 async function handleSignUp(req, res) {
     const { name, email, password } = req.body;
     const existingUser = await User.findOne({ email });
@@ -16,8 +27,8 @@ async function handleSignUp(req, res) {
             message: "Email already exists",
         });
     }
-    if(!name || !email || !password){
-      return res.status(400).json({
+    if (!name || !email || !password) {
+        return res.status(400).json({
             ok: false,
             message: "Please fill required fields",
         });
@@ -51,7 +62,6 @@ async function handleSignUp(req, res) {
         });
     }
 }
-
 async function handleLogIn(req, res) {
     const { email, password } = req.body;
     try {
@@ -80,8 +90,6 @@ async function handleLogIn(req, res) {
         });
     }
 }
-
-
 async function handelMe(req, res) {
 
     const user = await User.findById(req.user._id).select("-password -salt");
@@ -102,7 +110,6 @@ async function clearUser(req, res) {
         message: "Logged out",
     });
 }
-
 async function handleGoogleAuth(req, res) {
     const code = req.query.code;
     try {
@@ -140,7 +147,6 @@ async function handleGoogleAuth(req, res) {
         })
     }
 }
-
 const updateProfile = async (req, res) => {
     try {
         const {
@@ -197,7 +203,6 @@ const updateProfile = async (req, res) => {
         });
     }
 };
-
 async function handleCources(req, res) {
 
     try {
@@ -214,136 +219,166 @@ async function handleCources(req, res) {
         });
     }
 }
-
 async function handleUpdateCources(req, res) {
-  try {
-    const { codes } = req.body;
+    try {
+        const { codes } = req.body;
 
-    if (!Array.isArray(codes)) {
-      return res.status(400).json({
-        success: false,
-        message: "Codes must be an array",
-      });
-    }
-
-    const userCourses = await Cources.findOneAndUpdate(
-      {
-        user: req.user._id,
-      },
-      {
-        $addToSet: {
-          courses: {
-            $each: codes,
-          },
-        },
-      },
-      {
-        upsert: true,
-        new: true,
-      }
-    );
-
-    const totalCredits = userCourses.courses.reduce((sum, code) => {
-      return sum + (courseMasterList[code]?.credits || 0);
-    }, 0);
-
-    await Details.findOneAndUpdate(
-      {
-        user: req.user._id,
-      },
-      {
-        creditsCompleted: totalCredits,
-      },
-      {
-        upsert: true,
-        new: true,
-      }
-    );
-
-    return res.status(200).json({
-      success: true,
-      courses: userCourses.courses,
-      totalCredits,
-    });
-  } catch (err) {
-    console.error("Error updating courses:", err);
-
-    return res.status(500).json({
-      success: false,
-      message: "Failed to save courses",
-    });
-  }
-}
-
-
-async function handleSaveSemester(req, res) {
-  try {
-    const userId = req.user._id;
-
-    const { semester, courses } = req.body;
-
-    if (!semester || !Array.isArray(courses)) {
-      return res.status(400).json({
-        ok: false,
-        message: "Invalid payload",
-      });
-    }
-
-    const data =
-      await SemesterDetail.findOneAndUpdate(
-        {
-          userId,
-          semester,
-        },
-        {
-          userId,
-          semester,
-          courses,
-        },
-        {
-          upsert: true,
-          returnDocument: 'after',
+        if (!Array.isArray(codes)) {
+            return res.status(400).json({
+                success: false,
+                message: "Codes must be an array",
+            });
         }
-      );
 
-    return res.status(200).json({
-      ok: true,
-      semester: data,
-    });
-  } catch (err) {
-    console.error(err);
+        const userCourses = await Cources.findOneAndUpdate(
+            {
+                user: req.user._id,
+            },
+            {
+                $addToSet: {
+                    courses: {
+                        $each: codes,
+                    },
+                },
+            },
+            {
+                upsert: true,
+                new: true,
+            }
+        );
 
-    return res.status(500).json({
-      ok: false,
-      message: "Internal Server Error",
-    });
-  }
+        const totalCredits = userCourses.courses.reduce((sum, code) => {
+            return sum + (courseMasterList[code]?.credits || 0);
+        }, 0);
+
+        await Details.findOneAndUpdate(
+            {
+                user: req.user._id,
+            },
+            {
+                creditsCompleted: totalCredits,
+            },
+            {
+                upsert: true,
+                new: true,
+            }
+        );
+
+        return res.status(200).json({
+            success: true,
+            courses: userCourses.courses,
+            totalCredits,
+        });
+    } catch (err) {
+        console.error("Error updating courses:", err);
+
+        return res.status(500).json({
+            success: false,
+            message: "Failed to save courses",
+        });
+    }
 }
+async function handleSaveSemester(req, res) {
+    try {
+        const userId = req.user._id;
 
+        const { semester, courses } = req.body;
+
+        if (!semester || !Array.isArray(courses)) {
+            return res.status(400).json({
+                ok: false,
+                message: "Invalid payload",
+            });
+        }
+
+        const data =
+            await SemesterDetail.findOneAndUpdate(
+                {
+                    userId,
+                    semester,
+                },
+                {
+                    userId,
+                    semester,
+                    courses,
+                },
+                {
+                    upsert: true,
+                    returnDocument: 'after',
+                }
+            );
+
+        return res.status(200).json({
+            ok: true,
+            semester: data,
+        });
+    } catch (err) {
+        console.error(err);
+
+        return res.status(500).json({
+            ok: false,
+            message: "Internal Server Error",
+        });
+    }
+}
 async function handleGetSemester(req, res) {
-  try {
-    const userId = req.user._id;
-    const semester = Number(req.params.semester);
+    try {
+        const userId = req.user._id;
+        const semester = Number(req.params.semester);
 
-    const data = await SemesterDetail.findOne({
-      userId,
-      semester,
-    });
+        const data = await SemesterDetail.findOne({
+            userId,
+            semester,
+        });
 
-    return res.json({
-      ok: true,
-      semester: data,
-    });
-  } catch (err) {
-    console.error(err);
+        return res.json({
+            ok: true,
+            semester: data,
+        });
+    } catch (err) {
+        console.error(err);
 
-    return res.status(500).json({
-      ok: false,
-    });
-  }
+        return res.status(500).json({
+            ok: false,
+        });
+    }
 }
 
+async function updateUserRole(req, res) {
+  const { role } = req.body;
+
+  if (
+    !["STUDENT", "ADVISER", "ADMIN"].includes(role)
+  ) {
+    return res.status(400).json({
+      message: "Invalid role",
+    });
+  }
+
+  if (req.params.id === req.user._id.toString()) {
+    return res.status(400).json({
+      message: "You cannot change your own role",
+    });
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
+    req.params.id,
+    { role },
+    {
+      new: true,
+      runValidators: true,
+    }
+  ).select("name email role");
+
+  if (!updatedUser) {
+    return res.status(404).json({
+      message: "User not found",
+    });
+  }
+
+  res.json(updatedUser);
+};
 
 export {
-    handleLogIn, handleSignUp, clearUser, handelMe, updateProfile, handleCources, handleUpdateCources, handleGoogleAuth,handleSaveSemester,handleGetSemester
+    handleLogIn, handleSignUp, clearUser, handelMe, updateProfile, handleCources, handleUpdateCources, handleGoogleAuth, handleSaveSemester, handleGetSemester,getUsers,updateUserRole
 }
