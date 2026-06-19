@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTitle } from "../hooks/useTitle";
 import Nav from "../services/Nav";
 import { useAuth } from "../hooks/useAuth";
@@ -6,28 +6,38 @@ import axios from "axios";
 import { SiGithub, SiCodeforces } from "react-icons/si";
 import { TbBrandLeetcode } from "react-icons/tb";
 
+type githubProp={
+  avatar_url: string;
+  name: string;
+  login: string;
+  bio: string;
+  public_repos: number;
+  followers: number;
+  following: number;
+}
+type cfPrope={
+  rating:string;
+  maxRating:string;
+  rank:string;
+  maxRank:string;
+}
+type leetcodeProps={
+  ranking:string;
+  totalSolved:string;
+  easySolved:string;
+  mediumSolved:string;
+  hardSolved:string;
+}
+
 const Competitive = () => {
   const { user } = useAuth();
   const github = user?.details?.github;
   const codeforces = user?.details?.codeforcesHandle;
   const leetcode = user?.details?.codechefHandle;
-  const [githubData, setGithubData] = useState(null);
-  const [cfData, setCfData] = useState(null);
-  const [leetcodeData, setLeetcodeData] = useState(null);
+  const [githubData, setGithubData] = useState<githubProp|null>(null);
+  const [cfData, setCfData] = useState<cfPrope|null>(null);
+  const [leetcodeData, setLeetcodeData] = useState<leetcodeProps|null>(null);
   const [loading, setLoading] = useState(true);
-  // const [contests, setContests] = useState();
-
-  // useEffect(() => {
-  //   const fetchContests = async () => {
-  //     const res = await fetch("https://kontests.net/api/v1/all");
-
-  //     const data = await res.json();
-
-  //     setContests(data);
-  //   };
-
-  //   fetchContests();
-  // }, []);
 
   useEffect(() => {
     const fetchProfiles = async () => {
@@ -62,7 +72,7 @@ const Competitive = () => {
     };
 
     fetchProfiles();
-  }, [github, codeforces, leetcodeData]);
+  }, [github, codeforces, leetcode]);
 
   useTitle("Competitive");
   return (
@@ -77,6 +87,7 @@ const Competitive = () => {
             Track progress, solve problems, and stay consistent every day.
           </p>
         </div>
+        {loading && <h1>Loading...</h1>}
         <div className="competative rounded-2xl p-6 m-2">
           <div className="flex flex-col md:flex-row items-center gap-5">
             <img
@@ -150,7 +161,7 @@ const Competitive = () => {
           </div>
 
           <div className="competative p-4 rounded-xl text-center">
-            <p className="text-3xl font-bold">{leetcode?.totalSolved}</p>
+            <p className="text-3xl font-bold">{leetcodeData?.totalSolved}</p>
             <p>LeetCode Solved</p>
           </div>
 

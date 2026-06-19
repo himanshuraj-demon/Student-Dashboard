@@ -5,7 +5,7 @@ type Semester = {
     code: string;
     title: string;
     credits: number;
-    category: string;
+    category?: string;
   }[];
 };
 
@@ -83,7 +83,7 @@ function DesktopTable({ curriculum }: { curriculum: Semester[] }) {
                 {[...Array(cols)].map((_, i) => {
                   const course = sem.courses[i];
                   if (!course) return <td key={i} className="px-3 py-3" />;
-                  const style = getCategoryStyle(course.category);
+                  const style = getCategoryStyle(course.category!);
                   return (
                     <td key={i} className="px-3 py-3 align-top">
                       <div className={`rounded-xl p-2.5 h-full flex flex-col gap-1 ${style.bg}`}>
@@ -162,7 +162,7 @@ function MobileCards({ curriculum }: { curriculum: Semester[] }) {
             {/* Course grid */}
             <div className="p-3 grid grid-cols-1 gap-2">
               {sem.courses.map((course) => {
-                const style = getCategoryStyle(course.category);
+                const style = getCategoryStyle(course.category!);
                 return (
                   <div
                     key={course.code}

@@ -841,3 +841,15 @@ h6 {
   font-weight: 700;
   color: var(--text-primary);
 }
+
+
+.landingPage {
+  background-color: #120b31; 
+  background-image:
+    radial-gradient(at 0% 20%, rgba(255, 230, 180, 0.763) 0px, transparent 40%),
+    radial-gradient(at 35% 15%, rgba(138, 75, 255, 0.85) 0px, transparent 60%),
+    radial-gradient(at 80% 20%, rgba(87, 26, 201, 0.795) 0px, transparent 60%),
+    radial-gradient(at 15% 60%, rgba(107, 48, 225, 0.669) 0px, transparent 50%);
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}

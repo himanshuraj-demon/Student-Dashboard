@@ -28,7 +28,7 @@ export default function AllCoursesPanel({
         </div>
       </div>
 
-      <div className="sticky top-[72px] z-10 relative w-full">
+      <div className="sticky top-18 z-10  w-full">
         <svg
           className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
           fill="none"
@@ -111,7 +111,7 @@ export default function AllCoursesPanel({
             allCoursesFiltered.map(([code, course]) => (
               <CourseRow
                 key={code}
-                course={{ code, ...course }}
+                course={{ ...course }}
                 type="your"
                 query={allCoursesQuery}
               />

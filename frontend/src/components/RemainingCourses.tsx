@@ -2,13 +2,11 @@ import type { Course } from "../../constants/types";
 import { CourseRow } from "../../constants/functions";
 
 interface AllCoursesPanelProps {
-  allCoursesQuery: string;
   remainingMandatoryCourses: Course[];
   yourCourses: Course[];
 }
 
 export default function RemainingCourses({
-  allCoursesQuery,
   remainingMandatoryCourses,
   yourCourses,
 }: AllCoursesPanelProps) {
@@ -46,10 +44,9 @@ export default function RemainingCourses({
           <ul className="flex flex-col gap-1.5 h-auto">
             {yourCourses.map((c) => (
               <CourseRow
-                key={c.code + Math.random}
+                key={c.code! + Math.random}
                 course={c}
                 type="your"
-                query={allCoursesQuery}
               />
             ))}
           </ul>
@@ -82,10 +79,9 @@ export default function RemainingCourses({
           <ul className="flex flex-col gap-1.5 h-auto">
             {remainingMandatoryCourses.map((c) => (
               <CourseRow
-                key={c.code + Math.random}
+                key={c.code! + Math.random}
                 course={c}
                 type="your"
-                query={allCoursesQuery}
               />
             ))}
           </ul>

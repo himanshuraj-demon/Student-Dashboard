@@ -45,6 +45,7 @@ const VALID_GRADES = new Set([
   "I",
 ]);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function parsePortalPaste(raw: string): CourseRecord[] {
   const lines = raw
     .split("\n")

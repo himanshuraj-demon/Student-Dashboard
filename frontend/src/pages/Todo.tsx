@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useTitle } from "../hooks/useTitle";
 import Todoblock from "../components/TodoBlock";
 import { FiPlus, FiSearch } from "react-icons/fi";

@@ -21,7 +21,8 @@ const data = [
 ];
 
 
-const renderActiveShape = (props) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const renderActiveShape = (props:any) => {
   return (
     <Sector
       {...props}
@@ -32,9 +33,9 @@ const renderActiveShape = (props) => {
 };
 
 export default function CreditBreakdownChart() {
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState<number|null>(null);
 
-  const onMouseEnter = (_, index) => setActiveIndex(index);
+  const onMouseEnter = (_:unknown, index:number) => setActiveIndex(index);
   const onMouseLeave = () => setActiveIndex(null);
 
   return (
@@ -53,7 +54,6 @@ export default function CreditBreakdownChart() {
                 innerRadius={70}
                 outerRadius={100}
                 paddingAngle={4}
-                activeIndex={activeIndex}
                 activeShape={renderActiveShape}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}

@@ -8,7 +8,7 @@ export function CourseRow({
 }: {
   course: Course;
   type: CourseType;
-  query: string;
+  query?: string;
 }): JSX.Element {
   const c = CATEGORY_COLORS[type] || CATEGORY_COLORS.core;
 

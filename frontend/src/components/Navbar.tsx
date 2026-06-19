@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { links } from "../../constants";
 import { FaUser } from "react-icons/fa";
-const Navbar = () => {
+const Navbar:React.FC = () => {
   return (
     <>
       <nav className="navbar">

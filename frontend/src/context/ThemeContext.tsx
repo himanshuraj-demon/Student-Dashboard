@@ -35,6 +35,7 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
 }
 
 // Custom hook — import this wherever you need theme info or controls
+// eslint-disable-next-line react-refresh/only-export-components
 export function useTheme() {
   const ctx = useContext(ThemeContext);
   if (!ctx) throw new Error("useTheme must be used inside <ThemeProvider>");

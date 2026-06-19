@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { branches, courseMasterList } from "../../constants/courses";
 import { useAuth } from "../hooks/useAuth";
 
@@ -12,7 +12,7 @@ import AllCoursesPanel from "./AllCoursesPanel";
 
 // ─── SIDEBAR TABS ─────────────────────────────────────────────────────────────
 type SidebarView = "branches" | "all-courses";
-
+type BranchKey = keyof typeof branches;
 interface ExpandedBasketsState {
   [basketName: string]: boolean;
 }
@@ -28,9 +28,6 @@ export default function BranchCourses() {
     user?.details?.branch || branchNames[0],
   );
 
-  useEffect(() => {
-    if (user?.details?.branch) setSelected(user.details.branch);
-  }, [user]);
 
   const [search, setSearch] = useState<string>("");
   const [courseQuery, setCourseQuery] = useState<string>("");
@@ -42,10 +39,10 @@ export default function BranchCourses() {
   const filteredBranches = useMemo(
     (): string[] =>
       branchNames.filter((b) => b.toLowerCase().includes(search.toLowerCase())),
-    [search],
+    [search,branchNames],
   );
 
-  const branch = branches[selected] as Branch;
+  const branch = branches[selected as BranchKey] as Branch;
 
   const filteredCore = useMemo(
     (): Course[] =>
@@ -53,7 +50,7 @@ export default function BranchCourses() {
         (c) =>
           !courseQuery ||
           c.title.toLowerCase().includes(courseQuery.toLowerCase()) ||
-          c.code.toLowerCase().includes(courseQuery.toLowerCase()),
+          c.code!.toLowerCase().includes(courseQuery.toLowerCase()),
       ),
     [branch, courseQuery],
   );
@@ -68,7 +65,7 @@ export default function BranchCourses() {
               (c: Course): boolean =>
                 !courseQuery ||
                 c.title.toLowerCase().includes(courseQuery.toLowerCase()) ||
-                c.code.toLowerCase().includes(courseQuery.toLowerCase()),
+                c.code!.toLowerCase().includes(courseQuery.toLowerCase()),
             ),
           }),
         )

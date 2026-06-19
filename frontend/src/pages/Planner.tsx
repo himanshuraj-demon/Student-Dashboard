@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useTitle } from "../hooks/useTitle";
 import Nav from "../services/Nav";
 import CurriculumTable from "../components/CurriculumTable";
@@ -90,7 +90,7 @@ const Planner = () => {
           </div>
         </div>
         <div className="mb-5">
-          <CommunityFeedback currentUser={user} />
+          { user &&  <CommunityFeedback currentUser={user} />}
         </div>
       </div>
     </div>

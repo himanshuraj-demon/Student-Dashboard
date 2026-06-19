@@ -5,7 +5,7 @@ import { Semsterdetails } from "../../constants/semesterplan";
 
 import RemainingCourses from "./RemainingCourses";
 import SemesterPanel, { type SemesterData } from "./SemesterPanel";
-
+type BranchKey = keyof typeof branches;
 
 function semNameToNum(name: string): number {
   const m = name.match(/\d+/);
@@ -21,9 +21,7 @@ export default function SemesterWise() {
 
   const [selected, setSelected] = useState<string>(semesterItems[0]);
   const [search, setSearch] = useState<string>("");
-  const [allCoursesQuery, setAllCoursesQuery] = useState<string>("");
-
-  const [semesterRecords, setSemesterRecords] = useState<
+  const [, setSemesterRecords] = useState<
     Record<number, SemesterData>
   >({});
 
@@ -35,8 +33,6 @@ export default function SemesterWise() {
     [],
   );
 
-  /** Called by SemesterPanel after a successful POST /user/course-codes
-   *  so RemainingCourses stays in sync without a full re-fetch */
   const handleCoursesAdded = useCallback((newCodes: string[]) => {
     setYourCourses((prev) => {
       if (!prev) return newCodes;
@@ -58,7 +54,7 @@ export default function SemesterWise() {
   const remainingCoreCourses = useMemo(() => {
     if (!yourCourses || !selectedBranch) return [];
     const completedSet = new Set(yourCourses);
-    return branches[selectedBranch].disciplineCoreCourses.filter(
+    return branches[selectedBranch as BranchKey].disciplineCoreCourses.filter(
       (course) => !completedSet.has(course.code),
     );
   }, [yourCourses, selectedBranch]);
@@ -144,7 +140,6 @@ export default function SemesterWise() {
       {/* ── Main panel ── */}
       {isRemaining ? (
         <RemainingCourses
-          allCoursesQuery={allCoursesQuery}
           remainingMandatoryCourses={remainingMandatoryCourses}
           yourCourses={remainingCoreCourses}
         />

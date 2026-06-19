@@ -1,4 +1,3 @@
-import React from "react";
 import { useTitle } from "../hooks/useTitle";
 import Nav from "../services/Nav";
 import CreditBreakdownChart from "../components/CreditBreakdown";

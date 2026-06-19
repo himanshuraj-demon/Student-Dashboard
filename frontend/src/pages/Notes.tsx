@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useTitle } from "../hooks/useTitle";
 import Notesblock from "../components/Notesblock";
 import { FiPlus } from "react-icons/fi";

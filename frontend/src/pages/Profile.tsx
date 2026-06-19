@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useTitle } from "../hooks/useTitle";
 import Nav from "../services/Nav";
 import { useForm } from "react-hook-form";

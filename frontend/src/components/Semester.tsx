@@ -4,7 +4,6 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  type TooltipProps,
   Area,
   AreaChart,
 } from "recharts";
@@ -33,19 +32,19 @@ const stats = [
   { label: "Latest", value: latestCredits, sub: "S7 & S8" },
 ];
 
-const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>) => {
-  if (active && payload && payload.length) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const CustomTooltip = (props: any) => {
+  const { active, payload, label } = props;
+
+  if (active && payload?.length) {
     return (
-      <div className="rounded-xl border border-gray-100 bg-white px-4 py-3 shadow-lg dark:border-white/10 dark:bg-zinc-900">
-        <p className="mb-1 text-xs font-medium text-gray-400 dark:text-zinc-500">
-          {label}
-        </p>
-        <p className="text-sm font-semibold text-gray-900 dark:text-white">
-          {payload[0].value} credits
-        </p>
+      <div>
+        <p>{label}</p>
+        <p>{payload[0].value} credits</p>
       </div>
     );
   }
+
   return null;
 };
 

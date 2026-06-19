@@ -187,6 +187,7 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
 }) => {
   const slotMap = useMemo(() => buildSlotMap(courses), [courses]);
   const conflicts = [...slotMap.entries()].filter(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     ([_, events]) => events.length > 1,
   );
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -202,6 +203,7 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
 
   const downloadPNG = async () => {
     const node = document.getElementById("timetable");
+    if(node)
     node.classList.add("export-mode");
 
     if (!node) return;
@@ -226,6 +228,7 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
 
   const downloadPDF = async () => {
   const node = document.getElementById("timetable");
+  if(node)
   node.classList.add("export-mode");
 
   if (!node) return;

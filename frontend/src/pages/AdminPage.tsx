@@ -26,7 +26,9 @@ const AdminPage = ({ currentUser }: Props) => {
   };
 
   useEffect(() => {
-    fetchUsers();
+    setTimeout(() => {
+      fetchUsers();
+    }, 1);
   }, []);
 
   const handleRoleChange = async (userId: string, role: string) => {

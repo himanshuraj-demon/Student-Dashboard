@@ -1,4 +1,3 @@
-import React from "react";
 import "./nav.css";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -45,12 +44,19 @@ const Nav = () => {
       <div className="flex flex-col">
         <div className="mainnav self-center">
           <div className="logo">
-            <img src="" alt="SmartTrack" />
-            <h1>Smart Track</h1>
+            <img src="./images/logo.svg" alt="SmartTrack" width={30} />
+            <h1 className="text-2xl">Smart Track</h1>
+          </div>
+          <div>
+            <ul className="flex gap-10 text-base font-semibold">
+              <li><a href="#about">About</a></li>
+              <li><a href="#fetures">Fetures</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
           </div>
           <div className="options">
           <Link to={"/login"}><button>Log In</button></Link> 
-           <Link to={"/signup"}><button>Sign Up</button></Link> 
+          <Link to={"/signup"}><button>Sign Up</button></Link> 
           </div>
         </div>
       </div>
