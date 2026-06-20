@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { branches, courseMasterList } from "../../../constants/courses";
+import { branches, courseMasterList,scienceandmathbascket } from "../../../constants/courses";
 import { useAuth } from "../../hooks/useAuth";
 
 import type { Course, CourseBasket } from "../../../constants/types";
@@ -72,6 +72,15 @@ export default function BranchCourses() {
   const allCoursesFiltered = useMemo(() => {
     const q = allCoursesQuery.toLowerCase();
     return Object.entries(courseMasterList).filter(
+      ([code, course]) =>
+        !q ||
+        code.toLowerCase().includes(q) ||
+        course.title.toLowerCase().includes(q),
+    );
+  }, [allCoursesQuery]);
+  const allSceinceandMathBasket = useMemo(() => {
+    const q = allCoursesQuery.toLowerCase();
+    return Object.entries(scienceandmathbascket).filter(
       ([code, course]) =>
         !q ||
         code.toLowerCase().includes(q) ||
@@ -225,6 +234,7 @@ export default function BranchCourses() {
         <AllCoursesPanel
           allCoursesQuery={allCoursesQuery}
           setAllCoursesQuery={setAllCoursesQuery}
+          allSceinceBasket={allSceinceandMathBasket}
           allCoursesFiltered={allCoursesFiltered}
           yourCoursesFiltered={yourCoursesFiltered}
           yourCourses={yourCourses}

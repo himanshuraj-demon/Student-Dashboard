@@ -5,6 +5,7 @@ interface AllCoursesPanelProps {
   allCoursesQuery: string;
   setAllCoursesQuery: React.Dispatch<React.SetStateAction<string>>;
   allCoursesFiltered: [string, Course][];
+  allSceinceBasket:[string, Course][];
   yourCoursesFiltered: Course[];
   yourCourses: string[] | null;
 }
@@ -13,6 +14,7 @@ export default function AllCoursesPanel({
   allCoursesQuery,
   setAllCoursesQuery,
   allCoursesFiltered,
+  allSceinceBasket,
   yourCoursesFiltered,
   yourCourses,
 }: AllCoursesPanelProps) {
@@ -100,6 +102,34 @@ export default function AllCoursesPanel({
             </div>
           )}
         </div>
+      </section>
+      <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border border-gray-100 shadow-sm overflow-hidden min-w-0 flex flex-col flex-1 min-h-0">
+        <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-50 shrink-0">
+          <h2 className="font-semibold flex items-center gap-2 min-w-0">
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block shrink-0" />
+            <span className="truncate">Science And Math Basket</span>
+          </h2>
+          <span className="text-xs bg-gray-100 text-black font-bold px-2 py-0.5 rounded-full shrink-0 ml-2">
+            {allSceinceBasket.length} courses
+          </span>
+        </div>
+
+        <ul className="flex flex-col gap-1.5 p-3 overflow-y-auto max-h-96 ">
+          {allSceinceBasket.length > 0 ? (
+            allSceinceBasket.map(([code, course]) => (
+              <CourseRow
+                key={code}
+                course={{ ...course }}
+                type="elective"
+                query={allCoursesQuery}
+              />
+            ))
+          ) : (
+            <p className="text-sm text-gray-400 text-center py-3">
+              No courses match your search
+            </p>
+          )}
+        </ul>
       </section>
       <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border border-gray-100 shadow-sm overflow-hidden min-w-0 flex flex-col flex-1 min-h-0">
         <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-50 shrink-0">

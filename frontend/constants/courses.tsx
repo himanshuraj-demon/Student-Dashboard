@@ -1040,7 +1040,10 @@ const branches = {
           { code: "CS432", title: "Databases", credits: 4 },
           { code: "CS331", title: "Computer Networks", credits: 4 },
           { code: "ES214", title: "Discrete Mathematics", credits: 4 },
-          { code: "CS434", title: "Software Engineering", credits: 4 }, // Reffered from "Software Engineering and Testing"
+          { code: "CS434", title: "Software Engineering", credits: 4 },
+          { code: "CS436", title: "History of Computing and its Applications to Domains", credits: 4 },
+          { code: "EE214", title: "Digital Signal Processing", credits: 4 },
+          { code: "ES669", title: "Advanced Computer Architecture and Systems", credits: 4 },
         ],
       },
       {
@@ -1069,7 +1072,7 @@ const branches = {
     branchName: "Computer Science & Engineering",
     totalCredits: 170,
     coreCredits: 36,
-    electiveCredits: 26,
+    electiveCredits: 30,
     mandatoryScienceBasketRequirements:
       "Any approved course from Science Basket",
     mandatoryMathBasketRequirements:
@@ -1104,47 +1107,58 @@ const branches = {
       { code: "CS331", title: "Computer Networks", credits: 4 },
     ],
     disciplineElectiveBaskets: [
-      {
-        basketName: "Theory & Algorithms Basket",
-        minimumCredits: 8,
-        courses: [
-          {
-            code: "ES301",
-            title: "Data Structures & Algorithms II",
-            credits: 4,
-          },
-          { code: "CS614", title: "Advanced Algorithms", credits: 4 },
-          {
-            code: "CS617",
-            title: "Computational Complexity Theory",
-            credits: 4,
-          },
-          { code: "CS328", title: "Introduction to Data Science", credits: 4 },
-        ],
-      },
-      {
-        basketName: "Systems Basket",
-        minimumCredits: 8,
-        courses: [
-          { code: "CS327", title: "Compilers", credits: 5 },
-          { code: "CS432", title: "Databases", credits: 5 },
-          { code: "CS431", title: "Computer and Network Security", credits: 4 },
-          { code: "CS435", title: "Human-Computer Interaction", credits: 4 },
-          {
-            code: "CS616",
-            title: "Parallel and Distributed Systems",
-            credits: 4,
-          },
-        ],
-      },
+  {
+    basketName: "All CS Elective Basket",
+    minimumCredits: 14, 
+    courses: [
+      { code: "ES335", title: "Machine Learning", credits: 0 },
+      { code: "ES404", title: "Networks and Complex Systems", credits: 0 },
+      { code: "ES615", title: "Nature Inspired Computing", credits: 0 },
+      { code: "ES627", title: "Linear Algebra and Computation", credits: 0 },
+      { code: "ES637", title: "Mathematical Foundations for Computer Vision and Graphics", credits: 0 },
+      { code: "ES645", title: "Optimization Methods for Machine Learning", credits: 0 },
+      { code: "ES659", title: "Computer Graphics", credits: 0 },
+      { code: "ES661", title: "Probabilistic Machine Learning", credits: 0 },
+      { code: "ES666", title: "Computer Vision", credits: 0 },
+      { code: "ES667", title: "Deep Learning", credits: 0 },
+      { code: "ES669", title: "Advanced Computer Architecture and Systems", credits: 0 },
+      { code: "ES670", title: "Matrix Methods for Signal Processing, Data Science, and Machine Learning", credits: 0 },
+      { code: "ES676", title: "Classical Information Theory", credits: 0 },
     ],
+  },
+  {
+    basketName: "Theory & Algorithms Basket",
+    minimumCredits: 8,
+    courses: [
+      { code: "ES301", title: "Data Structures & Algorithms II", credits: 4 },
+      { code: "CS614", title: "Advanced Algorithms", credits: 4 },
+      { code: "CS617", title: "Computational Complexity Theory", credits: 4 },
+      { code: "CS328", title: "Introduction to Data Science", credits: 4 },
+    ],
+  },
+  {
+    basketName: "Systems Basket",
+    minimumCredits: 8,
+    courses: [
+      { code: "CS327", title: "Compilers", credits: 5 },
+      { code: "CS332", title: "Principles of Programming Languages", credits: 0 },
+      { code: "CS431", title: "Computer and Network Security", credits: 4 },
+      { code: "CS432", title: "Databases", credits: 5 },
+      { code: "CS434", title: "Software Engineering and Testing", credits: 0 },
+      { code: "CS435", title: "Human-Computer Interaction", credits: 4 },
+      { code: "CS615", title: "Advanced Networks", credits: 0 },
+      { code: "CS616", title: "Parallel and Distributed Systems", credits: 4 },
+      { code: "ES668", title: "5G and Beyond", credits: 0 },
+    ],
+  },
+]
   },
   "Electrical Engineering": {
     branchCode: "EE",
     branchName: "Electrical Engineering",
     totalCredits: 175,
     coreCredits: 43,
-    electiveCredits: 20,
+    electiveCredits: 24,
     mandatoryScienceBasketRequirements:
       "PH 201: Introduction to Electrodynamics is mandatory.",
     mandatoryMathBasketRequirements:
@@ -1172,40 +1186,155 @@ const branches = {
       { code: "EE341", title: "Communication Systems", credits: 4 },
     ],
     disciplineElectiveBaskets: [
+  {
+    basketName: "All EE Elective Courses",
+    minimumCredits: 24,
+    courses: [
       {
-        basketName: "All EE Elective Courses",
-        minimumCredits: 20,
-        courses: [
-          {
-            code: "ES333",
-            title: "Microprocessors and Embedded Systems",
-            credits: 4,
-          },
-          { code: "ES613", title: "Modern Control Theory", credits: 4 },
-          { code: "ES616", title: "Digital Control Systems", credits: 4 },
-          {
-            code: "ES663",
-            title: "Smart Renewable Energy Systems",
-            credits: 4,
-          },
-          { code: "ES667", title: "Deep Learning", credits: 4 },
-          { code: "ES668", title: "5G and Beyond", credits: 4 },
-          { code: "ES666", title: "Computer Vision", credits: 4 },
-          {
-            code: "PH643",
-            title: "Quantum Computing and Information",
-            credits: 4,
-          },
-        ],
+        code: "ES333",
+        title: "Microprocessors and Embedded Systems",
+        credits: 4,
+      },
+      { code: "ES613", title: "Modern Control Theory", credits: 4 },
+      { code: "ES616", title: "Digital Control Systems", credits: 4 },
+      {
+        code: "ES663",
+        title: "Smart Renewable Energy Systems",
+        credits: 4,
+      },
+      { code: "ES667", title: "Deep Learning", credits: 4 },
+      { code: "ES668", title: "5G and Beyond", credits: 4 },
+      { code: "ES666", title: "Computer Vision", credits: 4 },
+      {
+        code: "PH643",
+        title: "Quantum Computing and Information",
+        credits: 4,
+      },
+      {
+        code: "CS436",
+        title: "History of Computing and its Applications to Domains",
+        credits: 0,
+      },
+      {
+        code: "ES215",
+        title: "Computer Organization and Architecture",
+        credits: 0,
+      },
+      {
+        code: "ES412",
+        title: "Optical Fiber Communication",
+        credits: 0,
+      },
+      {
+        code: "ES414",
+        title: "Introduction to Photonics",
+        credits: 0,
+      },
+      {
+        code: "ES416",
+        title: "Space Science and Satellite Technology",
+        credits: 0,
+      },
+      {
+        code: "ES408",
+        title: "Mechatronics",
+        credits: 0,
+      },
+      {
+        code: "ES612",
+        title: "Artificial Intelligence",
+        credits: 0,
+      },
+      {
+        code: "ES615",
+        title: "Nature Inspired Computing",
+        credits: 0,
+      },
+      {
+        code: "ES625",
+        title: "Optical Communications",
+        credits: 0,
+      },
+      {
+        code: "ES626",
+        title: "Microfabrication and Semiconductor Processes",
+        credits: 0,
+      },
+      {
+        code: "ES637",
+        title: "Mathematical Foundations for Computer Vision and Graphics",
+        credits: 0,
+      },
+      {
+        code: "ES641",
+        title: "Electronic Instrumentation",
+        credits: 0,
+      },
+      {
+        code: "ES642",
+        title: "Control of Nonlinear Dynamical Systems",
+        credits: 0,
+      },
+      {
+        code: "ES655",
+        title: "Medical Imaging Systems",
+        credits: 0,
+      },
+      {
+        code: "ES656",
+        title: "Human-Robot Interaction",
+        credits: 0,
+      },
+      {
+        code: "ES657",
+        title: "Biomedical Ultrasound",
+        credits: 0,
+      },
+      {
+        code: "ES659",
+        title: "Computer Graphics",
+        credits: 0,
+      },
+      {
+        code: "ES662",
+        title: "Flexible Electronics: Materials, Methods and Devices",
+        credits: 0,
+      },
+      {
+        code: "ES665",
+        title: "Advanced Transportation Electrification Technology",
+        credits: 0,
+      },
+      {
+        code: "ES669",
+        title: "Advanced Computer Architecture and Systems",
+        credits: 0,
+      },
+      {
+        code: "ES670",
+        title: "Matrix Methods for Signal Processing, Data Science, and Machine Learning",
+        credits: 0,
+      },
+      {
+        code: "ES675",
+        title: "Photonics – Principles and Applications",
+        credits: 0,
+      },
+      {
+        code: "ES676",
+        title: "Classical Information Theory",
+        credits: 0,
       },
     ],
+  },
+]
   },
   "Mechanical Engineering": {
     branchCode: "ME",
     branchName: "Mechanical Engineering",
     totalCredits: 169,
     coreCredits: 44,
-    electiveCredits: 20,
+    electiveCredits: 24,
     mandatoryScienceBasketRequirements:
       "One course among PH 201, PH 202, PH 404, CH 203, CH 204 is mandatory.",
     mandatoryMathBasketRequirements:
@@ -1226,41 +1355,110 @@ const branches = {
         title: "Principles of Manufacturing Processes",
         credits: 3,
       },
+      { code: "ME208", title: "Vibrations", credits: 2 },
       { code: "ME334", title: "Heat and Mass Transfer", credits: 4 },
       { code: "ES245", title: "Control Systems", credits: 4 },
+      { code: "ES333", title: "Mechanics of Materials", credits: 3 },
+      { code: "NA", title: "Introduction to Manufacturing Systems & Metrology", credits: 3 },
       {
         code: "ME335",
         title: "Synthesis and Analysis of Mechanisms",
         credits: 3,
       },
       { code: "ME337", title: "Mechanical Systems Design", credits: 3 },
+      { code: "ES337", title: "Energy Systems", credits: 3 },
     ],
     disciplineElectiveBaskets: [
+  {
+    basketName: "All ME Elective Courses",
+    minimumCredits: 24,
+    courses: [
+      { code: "ES408", title: "Mechatronics", credits: 4 },
+      { code: "ES604", title: "Engineering Optimization", credits: 4 },
+      { code: "ES621", title: "Advanced Solid Mechanics", credits: 4 },
+      { code: "ES622", title: "Finite Element Methods", credits: 4 },
+      { code: "ES631", title: "Advanced Heat Transfer", credits: 4 },
+      { code: "ES656", title: "Human-Robot Interaction", credits: 4 },
       {
-        basketName: "All ME Elective Courses",
-        minimumCredits: 20,
-        courses: [
-          { code: "ES408", title: "Mechatronics", credits: 4 },
-          { code: "ES604", title: "Engineering Optimization", credits: 4 },
-          { code: "ES621", title: "Advanced Solid Mechanics", credits: 4 },
-          { code: "ES622", title: "Finite Element Methods", credits: 4 },
-          { code: "ES631", title: "Advanced Heat Transfer", credits: 4 },
-          { code: "ES656", title: "Human-Robot Interaction", credits: 4 },
-          {
-            code: "MSE313",
-            title: "Polymers, Ceramics & Composites",
-            credits: 4,
-          },
-        ],
+        code: "MSE313",
+        title: "Polymers, Ceramics & Composites",
+        credits: 4,
+      },
+      {
+        code: "CL324",
+        title: "Introduction to Polymer Science and Engineering",
+        credits: 0,
+      },
+      {
+        code: "CS435",
+        title: "Human-Computer Interaction",
+        credits: 0,
+      },
+      {
+        code: "ES214",
+        title: "Discrete Mathematics",
+        credits: 0,
+      },
+      {
+        code: "ES607",
+        title: "Foundations of Fluid Dynamics",
+        credits: 0,
+      },
+      {
+        code: "ES613",
+        title: "Modern Control Theory",
+        credits: 0,
+      },
+      {
+        code: "ES616",
+        title: "Digital Control Systems",
+        credits: 0,
+      },
+      {
+        code: "ES632",
+        title: "Energy Systems",
+        credits: 0,
+      },
+      {
+        code: "ES641",
+        title: "Electronic Instrumentation",
+        credits: 0,
+      },
+      {
+        code: "ES642",
+        title: "Control of Nonlinear Dynamical Systems",
+        credits: 0,
+      },
+      {
+        code: "ES646",
+        title: "Elastodynamics and Vibrations",
+        credits: 0,
+      },
+      {
+        code: "ES648",
+        title: "Nonlinear Dynamics and Vibrations",
+        credits: 0,
+      },
+      {
+        code: "ES653",
+        title: "Nonlinear Continuum Mechanics",
+        credits: 0,
+      },
+      {
+        code: "MSE632",
+        title: "Characterization of Materials",
+        credits: 0,
       },
     ],
+  },
+]
   },
   "Civil Engineering": {
     branchCode: "CE",
     branchName: "Civil Engineering",
     totalCredits: 172,
     coreCredits: 42,
-    electiveCredits: 20,
+    electiveCredits: 24,
     mandatoryScienceBasketRequirements:
       "Any approved course from Science Basket",
     mandatoryMathBasketRequirements:
@@ -1274,10 +1472,13 @@ const branches = {
     disciplineCoreCourses: [
       { code: "ES221", title: "Mechanics of Solids", credits: 4 },
       { code: "CE302", title: "Structural Analysis", credits: 4 },
+      { code: "NA", title: "Earth Materials & Processes ", credits: 2 },
       { code: "ES212", title: "Fluid Mechanics", credits: 4 },
       { code: "CE310", title: "Hydrology & Hydraulics", credits: 4 },
       { code: "CE312", title: "Design of Steel Structures", credits: 4 },
       { code: "CE301", title: "Soil Mechanics", credits: 5 },
+      { code: "NA", title: "Geospatial Engineering", credits: 4 },
+      { code: "NA", title: "Sustainability & Environment", credits: 3 },
       {
         code: "CE311",
         title: "Design of Reinforced Concrete Structures",
@@ -1326,7 +1527,7 @@ const branches = {
     branchName: "Chemical Engineering",
     totalCredits: 170,
     coreCredits: 42,
-    electiveCredits: 20,
+    electiveCredits: 24,
     mandatoryScienceBasketRequirements:
       "Any approved course from Science Basket",
     mandatoryMathBasketRequirements:
@@ -1339,6 +1540,7 @@ const branches = {
       "Open Project Course (4 credits) required after first year.",
     disciplineCoreCourses: [
       { code: "CL201", title: "Chemical Process Calculations", credits: 3 },
+      { code: "ES211", title: "Thermodynamics", credits: 3 },
       {
         code: "CL202",
         title: "Chemical Engineering Thermodynamics",
@@ -1346,9 +1548,15 @@ const branches = {
       },
       { code: "CL203", title: "Process Fluid Mechanics", credits: 3 },
       { code: "CL205", title: "Chemical Reaction Engineering I", credits: 3 },
+      { code: "CL206", title: "Chemical Reaction Engineering II", credits: 3 },
       { code: "CL204", title: "Heat Transfer", credits: 3 },
       { code: "CL314", title: "Separation Processes I", credits: 3 },
       { code: "CL315", title: "Process Dynamics & Control", credits: 3 },
+      { code: "TBD", title: "Separation Processes II", credits: 3 },
+      { code: "TBD", title: "Separation Processes I", credits: 3 },
+      { code: "TBD", title: "Integrated Chemical Engineering Lab-I", credits: 3 },
+      { code: "TBD", title: "Integrated Chemical Engineering Lab-II", credits: 2 },
+      { code: "TBD", title: "Transport Phenomena", credits: 3 },
       {
         code: "CL317",
         title: "Process Synthesis, Design & Simulation",
@@ -1356,35 +1564,95 @@ const branches = {
       },
     ],
     disciplineElectiveBaskets: [
+  {
+    basketName: "Chemical Engineering Elective Basket",
+    minimumCredits: 20,
+    courses: [
       {
-        basketName: "Chemical Engineering Elective Basket",
-        minimumCredits: 20,
-        courses: [
-          {
-            code: "CL324",
-            title: "Introduction to Polymer Science and Engineering",
-            credits: 4,
-          },
-          { code: "CL426", title: "Biochemical Engineering", credits: 4 },
-          { code: "ES604", title: "Engineering Optimization", credits: 4 },
-          { code: "CL601", title: "Advance Transport Phenomena", credits: 4 },
-          { code: "CL602", title: "Advanced Thermodynamics", credits: 4 },
-          { code: "CL604", title: "Advanced Reaction Engineering", credits: 4 },
-          {
-            code: "CE634",
-            title: "Air Pollution Control Engineering",
-            credits: 4,
-          },
-        ],
+        code: "CL324",
+        title: "Introduction to Polymer Science and Engineering",
+        credits: 4,
+      },
+      { code: "CL426", title: "Biochemical Engineering", credits: 4 },
+      { code: "ES604", title: "Engineering Optimization", credits: 4 },
+      { code: "CL601", title: "Advance Transport Phenomena", credits: 4 },
+      { code: "CL602", title: "Advanced Thermodynamics", credits: 4 },
+      { code: "CL604", title: "Advanced Reaction Engineering", credits: 4 },
+      {
+        code: "CE634",
+        title: "Air Pollution Control Engineering",
+        credits: 4,
+      },
+      {
+        code: "BS401",
+        title: "Nanoscale Science",
+        credits: 4,
+      },
+      {
+        code: "CL353",
+        title: "Introduction to Process Safety",
+        credits: 4,
+      },
+      {
+        code: "CL427",
+        title: "Formulation Science and Engineering",
+        credits: 4,
+      },
+      {
+        code: "ES617",
+        title: "Design of Experiments",
+        credits: 4,
+      },
+      {
+        code: "ES658",
+        title: "Molecular Simulations - Theory and Applications",
+        credits: 4,
+      },
+      {
+        code: "ES662",
+        title: "Flexible Electronics: Materials, Methods and Devices",
+        credits: 4,
+      },
+      {
+        code: "ES664",
+        title: "Scientific Computing using C++",
+        credits: 4,
+      },
+      {
+        code: "CL605",
+        title: "Colloidal Domain: Where Science Meets Engineering",
+        credits: 4,
+      },
+      {
+        code: "CL627",
+        title: "Particulate Solids: Processing & Surface Engineering",
+        credits: 4,
+      },
+      {
+        code: "CL628",
+        title: "Liquid State Theory",
+        credits: 4,
+      },
+      {
+        code: "CL629",
+        title: "Fundamentals of Aerosol Science",
+        credits:4,
+      },
+      {
+        code: "CL630",
+        title: "Catalyst Design for Heterogeneous Reactions",
+        credits: 4,
       },
     ],
+  },
+]
   },
   "Materials Engineering": {
     branchCode: "MSE",
     branchName: "Materials Engineering",
     totalCredits: 175,
     coreCredits: 42,
-    electiveCredits: 20,
+    electiveCredits: 24,
     mandatoryScienceBasketRequirements:
       "One course among PH 201, PH 202, CH 203 is mandatory.",
     mandatoryMathBasketRequirements:
@@ -1399,6 +1667,7 @@ const branches = {
       { code: "MSE207", title: "Structure of Materials", credits: 4 },
       { code: "MSE202", title: "Materials Thermodynamics", credits: 4 },
       { code: "MSE210", title: "Microstructural Engineering", credits: 4 },
+      { code: "MSE204", title: "Transport Phenomena in Materials Engineering", credits: 4 },
       { code: "MSE206", title: "Physics of Materials", credits: 4 },
       {
         code: "MSE205",
@@ -1407,10 +1676,16 @@ const branches = {
       },
       { code: "MSE313", title: "Polymers, Ceramics & Composites", credits: 4 }, // Evaluated variant from master list
       { code: "MSE307", title: "Materials Processing", credits: 4 },
+      { code: "NA", title: "Integrated Computational Materials Engineering", credits: 4 },
       {
         code: "MSE316",
         title: "Corrosion & Degradation of Materials",
         credits: 4,
+      },
+      {
+        code: "NA",
+        title: "Materials & Environment",
+        credits: 2,
       },
     ],
     disciplineElectiveBaskets: [
@@ -1432,7 +1707,7 @@ const branches = {
     branchName: "Integrated Circuit Design & Technology",
     totalCredits: 173,
     coreCredits: 44,
-    electiveCredits: 20,
+    electiveCredits: 24,
     mandatoryScienceBasketRequirements:
       "One course among PH 203, PH 510, Physics of Materials is mandatory.",
     mandatoryMathBasketRequirements:
@@ -1441,38 +1716,100 @@ const branches = {
     projectRequirements:
       "Open Project Course (4 credits) mandatory after first year.",
     disciplineCoreCourses: [
-      { code: "USW", title: "Unveiling the Semiconductor World", credits: 2 },
+      { code: "ES225", title: "Unveiling the Semiconductor World", credits: 2 },
       {
         code: "ES244",
         title: "Signals, Systems & Random Processes",
+        credits: 4,
+      },
+      {
+        code: "ES336",
+        title: "Computer Organization & Architecture",
         credits: 4,
       },
       { code: "ES204", title: "Digital Systems", credits: 4 },
       { code: "EE322", title: "Analog & Mixed Signal Circuits", credits: 4 },
       { code: "EE227", title: "CMOS Circuit Design", credits: 4 },
       { code: "EE226", title: "Semiconductor Devices", credits: 4 },
-      { code: "ES247", title: "IC Fabrication Processes", credits: 4 }, // Mapped from "IC Fabrication & Manufacturing" matching credits
-      { code: "ES672", title: "Semiconductor Packaging", credits: 4 }, // Mapped from "Semiconductor Package Assembly & Manufacturing"
-      { code: "EE618", title: "Microelectronics Lab", credits: 2 }, // Structured fallback for "IC Fabrication Lab" matching credits
+      { code: "EE226", title: "Semiconductor Material & Device Characterization ", credits: 4 },
+      { code: "ES247", title: "IC Fabrication & Manufacturing", credits: 4 }, // Mapped from "IC Fabrication & Manufacturing" matching credits
+      { code: "ES672", title: "Semiconductor Package Assembly & Manufacturing", credits: 4 }, // Mapped from "Semiconductor Package Assembly & Manufacturing"
+      { code: "NA", title: "IC Fabrication Lab", credits: 2 },
+      { code: "NA", title: "Thin Film Science & Vacuum Technology", credits: 4 },
     ],
     disciplineElectiveBaskets: [
+  {
+    basketName: "IC Design Electives",
+    minimumCredits: 24,
+    courses: [
+      { code: "EE651", title: "CMOS Analog IC Design", credits: 4 },
+      { code: "EE660", title: "Power Management IC Design", credits: 4 },
+      { code: "ES672", title: "Semiconductor Packaging", credits: 4 },
+      { code: "TBD-RF", title: "RF IC Design", credits: 4 },
       {
-        basketName: "IC Design Electives",
-        minimumCredits: 20,
-        courses: [
-          { code: "EE651", title: "CMOS Analog IC Design", credits: 4 },
-          { code: "EE660", title: "Power Management IC Design", credits: 4 },
-          { code: "ES672", title: "Semiconductor Packaging", credits: 4 },
-          { code: "TBD-RF", title: "RF IC Design", credits: 4 },
-          {
-            code: "TBD-VLSI",
-            title: "VLSI Physical Design: Netlist to GDSII",
-            credits: 4,
-          },
-          { code: "TBD-MEMS", title: "Fundamentals of MEMS/NEMS", credits: 4 },
-        ],
+        code: "TBD-VLSI",
+        title: "VLSI Physical Design: Netlist to GDSII",
+        credits: 4,
+      },
+      { code: "TBD-MEMS", title: "Fundamentals of MEMS/NEMS", credits: 4 },
+      {
+        code: "CS436",
+        title: "History of Computing and its Applications to Domains",
+        credits: 0,
+      },
+      {
+        code: "ES246",
+        title: "Vacuum Technology Laboratory",
+        credits: 0,
+      },
+      {
+        code: "TBD",
+        title: "Advanced Semiconductor Manufacturing",
+        credits: 0,
+      },
+      {
+        code: "TBD",
+        title: "Compound Semiconductor Devices & Circuits",
+        credits: 0,
+      },
+      {
+        code: "TBD",
+        title: "Design for Test",
+        credits: 0,
+      },
+      {
+        code: "TBD",
+        title: "Display Technology and Manufacturing",
+        credits: 0,
+      },
+      {
+        code: "TBD",
+        title: "Manufacturing Process Control",
+        credits: 0,
+      },
+      {
+        code: "TBD",
+        title: "Memory Devices, Circuits & Systems",
+        credits: 0,
+      },
+      {
+        code: "TBD",
+        title: "Nanoscale Devices",
+        credits: 0,
+      },
+      {
+        code: "TBD",
+        title: "Physics and Manufacturing of Solar Cells",
+        credits: 0,
+      },
+      {
+        code: "TBD",
+        title: "Power Semiconductor Devices",
+        credits: 0,
       },
     ],
+  },
+]
   },
   "Online Courses": {
     branchCode: "OL",
@@ -1785,6 +2122,39 @@ const instituteRequirements = {
   graduationCredits: { range: "169-175" },
 };
 
+const scienceandmathbascket:Record<string, { title: string; credits: number }>={
+  "PH201": { "title": "Introduction to Electrodynamics", "credits": 0 },
+  "PH202": { "title": "Introduction to Quantum Physics", "credits": 0 },
+  "PH203": { "title": "Solid State Physics", "credits": 0 },
+  "PH404": { "title": "Molecular and Crystal Physics", "credits": 0 },
+  "PH503": { "title": "Quantum Mechanics I", "credits": 0 },
+  "PH505": { "title": "Classical Electrodynamics", "credits": 0 },
+  "PH507": { "title": "Statistical Mechanics", "credits": 0 },
+  "PH508": { "title": "Classical Mechanics", "credits": 0 },
+  "PH509": { "title": "Computational Physics", "credits": 0 },
+  "PH510": { "title": "Condensed Matter Physics", "credits": 0 },
+  "CH203": { "title": "Fundamentals and Applications of Spectroscopy", "credits": 0 },
+  "CH204": { "title": "Organic Chemistry in Everyday Life", "credits": 0 },
+  "CH302": { "title": "Electrochemical Science and Engineering", "credits": 0 },
+  "CH401": { "title": "Food Chemistry", "credits": 0 },
+  "CH511": { "title": "Quantum Chemistry", "credits": 0 },
+  "CG503": { "title": "Fundamentals of Cognitive Psychology", "credits": 0 },
+  "CG505": { "title": "Fundamental Neuroscience", "credits": 0 },
+  "EH303": { "title": "Introduction to Earth Sciences", "credits": 0 },
+  "EH304": { "title": "Drone Data Acquisition Processing and Interpretation", "credits": 0 },
+  "EH601": { "title": "Earth Surface Processes", "credits": 0 },
+  "EH602": { "title": "River Morphology and Ecology", "credits": 0 },
+  "EH605": { "title": "Modeling of Earth System and Sustainability", "credits": 0 },
+  "EH608": { "title": "Biodiversity Conservation and Sustainable Development", "credits": 0 },
+  "EH611": { "title": "Near Surface Geophysics", "credits": 0 },
+  "EH612": { "title": "Ocean and Global Change", "credits": 0 },
+  "EH619": { "title": "Geobiology", "credits": 0 },
+  "EH621": { "title": "Climate of the Past", "credits": 0 },
+  "MA204": { "title": "Introduction to Partial Differential Equations", "credits": 0 },
+  "MA205": { "title": "Calculus of Several Variables", "credits": 0 },
+  "MA206": { "title": "Introduction to Complex Analysis", "credits": 0 }
+}
+
 type Tab = "honours" | "minor";
 type Cohort = "2022" | "other";
 
@@ -1828,4 +2198,4 @@ const data: Record<Cohort, Record<Tab, { points: string[]; note?: string }>> = {
   },
 };
 
-export { instituteRequirements, branches, courseMasterList,data };
+export { instituteRequirements, branches, courseMasterList,data,scienceandmathbascket };

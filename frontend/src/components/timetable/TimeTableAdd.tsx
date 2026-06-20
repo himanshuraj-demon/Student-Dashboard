@@ -70,7 +70,7 @@ const TimeTableAdd: React.FC<TimeTableProp> = ({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search by course name or code…"
-            className="w-full bg-[#ffffff18] text-white placeholder-gray-400 text-sm rounded-xl pl-9 pr-9 py-2 border border-white/20 focus:outline-none focus:border-blue-400 transition-colors"
+            className="w-full bg-[#ffffff18]  placeholder-gray-400 text-sm rounded-xl pl-9 pr-9 py-2 border border-white/20 focus:outline-none focus:border-blue-400 transition-colors"
           />
           {query && (
             <button
