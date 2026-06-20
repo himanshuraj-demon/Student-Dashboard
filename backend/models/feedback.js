@@ -4,7 +4,7 @@ const feedbackSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "user",
       required: true,
     },
 
@@ -31,14 +31,14 @@ const feedbackSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      maxlength: 100,
+      maxlength: 50,
     },
 
     content: {
       type: String,
       required: true,
       trim: true,
-      maxlength: 2000,
+      maxlength: 500,
     },
 
     tags: {

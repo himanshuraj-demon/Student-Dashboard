@@ -197,7 +197,7 @@ export default function CommunityFeedback({
         {isAdviser && (
           <button
             onClick={() => setIsAddOpen(true)}
-            className="flex items-center gap-1.5  bg-blue-500 px-3 py-2 rounded-2xl text-sm font-medium text-stone-900 shadow-sm transition hover:bg-amber-400">
+            className="flex items-center gap-1.5  bg-blue-500 px-3 py-2 rounded-2xl text-sm font-medium text-white shadow-sm transition hover:bg-amber-400">
             <Plus className="h-4 w-4" />
             Add Advice
           </button>
@@ -274,7 +274,7 @@ export default function CommunityFeedback({
         )}
         <div className="space-y-3">
           {visibleFeedbacks.map((item) => {
-            const isAuthor = String(item.user) === String(currentUser._id);
+            const isAuthor = String(item.user._id) === String(currentUser._id);
             const canEdit = isAuthor;
             const canDelete = isAuthor || isAdmin;
 
@@ -291,6 +291,7 @@ export default function CommunityFeedback({
                       <GraduationCap className="h-3.5 w-3.5 text-blue-500" />
                       <span>{item.user.name}</span>
                       <span>·</span>
+                      <span className="bg-amber-300 rounded-2xl px-2 border border-white text-black">{item.user.details?.branch}</span>
                       <span>{formatRelativeTime(item.createdAt)}</span>
                     </div>
                   </div>

@@ -1,20 +1,37 @@
+import { lazy } from "react";
+
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
-import Error from "../pages/Error";
-import Timetable from "../pages/Timetable";
-import Dashbord from "../pages/Dashbord";
-import Profile from "../pages/Profile";
-import Planner from "../pages/Planner";
-import Courses from "../pages/Courses";
-import Analytics from "../pages/Analytics";
-import Competitive from "../pages/Competitive";
-import Details from "../pages/Details";
-import Work from "../pages/Work";
-import AdminPage from "../pages/AdminPage";
+const Error = lazy(() => import("../pages/Error"));
+const Timetable = lazy(() => import("../pages/Timetable"));
+const Dashbord = lazy(() => import("../pages/Dashbord"));
+const Profile = lazy(() => import("../pages/Profile"));
+const Planner = lazy(() => import("../pages/Planner"));
+const Courses = lazy(() => import("../pages/Courses"));
+const Analytics = lazy(() => import("../pages/Analytics"));
+const Competitive = lazy(() => import("../pages/Competitive"));
+const Details = lazy(() => import("../pages/Details"));
+const Work = lazy(() => import("../pages/Work"));
+const AdminPage = lazy(() => import("../pages/AdminPage"));
 import AdminError from "../pages/AdminError";
-import AcademicCalendar from "../pages/Calender";
+const AcademicCalendar = lazy(() => import("../pages/Calender"));
 
-export{
-    Details,AdminPage,Home,Login,Signup,Error,Timetable,Dashbord,Profile ,Planner,Courses,Analytics,Competitive,Work,AdminError,AcademicCalendar
-}
+export {
+  Details,
+  AdminPage,
+  Home,
+  Login,
+  Signup,
+  Error,
+  Timetable,
+  Dashbord,
+  Profile,
+  Planner,
+  Courses,
+  Analytics,
+  Competitive,
+  Work,
+  AdminError,
+  AcademicCalendar,
+};

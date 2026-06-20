@@ -4,7 +4,7 @@ const NoteSchema = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "user",
       required: true,
     },
 
@@ -12,13 +12,13 @@ const NoteSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      maxlength:200,
+      maxlength:100,
     },
 
     description: {
       type: String,
       default: "",
-      maxlength: 100000,
+      maxlength: 10000,
     },
 
     theme: {

@@ -4,8 +4,14 @@
 export type FeedbackType = "semester" | "course" | "general";
 
 export type UserRole = "student" | "adviser";
-import {type User } from "../src/context/AuthContext";
 
+type User = {
+  _id: string;
+  name: string;
+  details?: {
+    branch: string;
+  };
+};
 
 export type VoteValue = "like" | "dislike" | null;
 

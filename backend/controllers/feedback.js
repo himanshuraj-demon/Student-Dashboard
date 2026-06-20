@@ -1,32 +1,32 @@
 import FeedbackVotes from "../models/feedbackVote.js";
 import Feedbacks from "../models/feedback.js";
-
+import User from "../models/user.js"
 
 const createFeedback = async (req, res) => {
-    const {
-        type,
-        semester,
-        courseCode,
-        title,
-        content,
-        tags,
-    } = req.body;
+  const {
+    type,
+    semester,
+    courseCode,
+    title,
+    content,
+    tags,
+  } = req.body;
 
-    const feedback = await Feedbacks.create({
-        user: req.user._id,
-        type,
-        semester,
-        courseCode,
-        title,
-        content,
-        tags,
-    });
+  const feedback = await Feedbacks.create({
+    user: req.user._id,
+    type,
+    semester,
+    courseCode,
+    title,
+    content,
+    tags,
+  });
 
-    const populated = await Feedbacks.findById(
-        feedback._id
-    )
+  const populated = await Feedbacks.findById(
+    feedback._id
+  )
 
-    res.status(201).json(populated);
+  res.status(201).json(populated);
 };
 
 const getFeedbacks = async (req, res) => {
@@ -53,6 +53,14 @@ const getFeedbacks = async (req, res) => {
       : { createdAt: -1 };
 
   const feedbacks = await Feedbacks.find(query)
+    .populate({
+      path: "user",
+      select: "name",
+      populate: {
+        path: "details",
+        select: "branch",
+      },
+    })
     .sort(sortObj)
     .lean();
 

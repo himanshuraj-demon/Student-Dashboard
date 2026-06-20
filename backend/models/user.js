@@ -5,7 +5,8 @@ import { createToken } from "../services/auth.js";
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        maxlength:50,
     },
     email: {
         type: String,
@@ -18,7 +19,8 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        select: false
+        select: false,
+        maxlength:30,
     },
     profileImageUrl: {
         type: String,
@@ -59,6 +61,16 @@ userSchema.statics.matchPasswordAndTokenGenerator = async function (email, passw
     return token;
 };
 
+
+userSchema.virtual("details", {
+  ref: "details",
+  localField: "_id",
+  foreignField: "user",
+  justOne: true,
+});
+
+userSchema.set("toJSON", { virtuals: true });
+userSchema.set("toObject", { virtuals: true });
 
 const User = new mongoose.model("user", userSchema);
 
