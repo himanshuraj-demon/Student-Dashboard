@@ -1,8 +1,8 @@
 import  { useState } from "react";
 import { useTitle } from "../hooks/useTitle";
 import Nav from "../services/Nav";
-import TimeTableAdd from "../components/TimeTableAdd";
-import TimeTableGenerator from "../components/TimeTableGenerator";
+import TimeTableAdd from "../components/timetable/TimeTableAdd";
+import TimeTableGenerator from "../components/timetable/TimeTableGenerator";
 import { type CourseEntry } from "../../constants/timetabletypes";
 import { SlCalender } from "react-icons/sl";
 

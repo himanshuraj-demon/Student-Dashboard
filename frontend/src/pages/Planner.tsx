@@ -1,7 +1,7 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { useTitle } from "../hooks/useTitle";
 import Nav from "../services/Nav";
-import CurriculumTable from "../components/CurriculumTable";
+import CurriculumTable from "../components/planner/CurriculumTable";
 import {
   curriculumPathway1,
   Chemical,
@@ -11,7 +11,7 @@ import {
   Mechanical,
   Materials,
 } from "../../constants/semesterplan";
-import CommunityFeedback from "../components/CommunityFeedback";
+import CommunityFeedback from "../components/planner/CommunityFeedback";
 import { useAuth } from "../hooks/useAuth";
 
 const Branch: string[] = [
@@ -90,7 +90,7 @@ const Planner = () => {
           </div>
         </div>
         <div className="mb-5">
-          { user &&  <CommunityFeedback currentUser={user} />}
+          {user && <CommunityFeedback currentUser={user} />}
         </div>
       </div>
     </div>

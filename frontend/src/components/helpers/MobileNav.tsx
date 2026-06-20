@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { links } from "../../constants";
+import { links } from "../../../constants";
 import { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { TiPlus } from "react-icons/ti";
@@ -13,8 +13,7 @@ export default function MobileNav() {
       to={link.path}
       className={({ isActive }) =>
         isActive ? "Mactive-link nav-item" : "nav-item"
-      }
-    >
+      }>
       <span className="nav-icon">{link.icon}</span>
       <span className="nav-label">{link.name}</span>
     </NavLink>
@@ -29,8 +28,7 @@ export default function MobileNav() {
       <button
         onClick={() => setOpen((prev) => !prev)}
         className={`plus-btn ${open ? "plus-btn--open" : ""}`}
-        aria-label="More options"
-      >
+        aria-label="More options">
         <TiPlus size={25} />
       </button>
 
@@ -46,11 +44,8 @@ export default function MobileNav() {
               <NavLink
                 key={link.path}
                 to={link.path}
-                className={({ isActive }) =>
-                  isActive ? "Mactive-link" : ""
-                }
-                onClick={() => setOpen(false)}
-              >
+                className={({ isActive }) => (isActive ? "Mactive-link" : "")}
+                onClick={() => setOpen(false)}>
                 {link.icon}
                 <span>{link.name}</span>
               </NavLink>
@@ -58,8 +53,7 @@ export default function MobileNav() {
             <NavLink
               to={"/profile"}
               className={({ isActive }) => (isActive ? "Mactive-link" : "")}
-              onClick={() => setOpen(false)}
-            >
+              onClick={() => setOpen(false)}>
               <FaUser size={22} className="img text-[var(--text-secondary)]" />
               <span>Profile</span>
             </NavLink>

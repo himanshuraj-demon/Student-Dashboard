@@ -1,8 +1,8 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { useTitle } from "../hooks/useTitle";
-import Notesblock from "../components/Notesblock";
+import Notesblock from "../components/notes/Notesblock";
 import { FiPlus } from "react-icons/fi";
-import NotesEdit from "../components/NotesEdit";
+import NotesEdit from "../components/notes/NotesEdit";
 import { type Note } from "../../constants/types";
 import { useAuth } from "../hooks/useAuth";
 
@@ -16,7 +16,7 @@ const Notes = () => {
   useTitle("Notes");
 
   const filteredNotes = notes.filter((n: Note) =>
-    n.title.toLowerCase().includes(search.toLowerCase())
+    n.title.toLowerCase().includes(search.toLowerCase()),
   );
 
   return (

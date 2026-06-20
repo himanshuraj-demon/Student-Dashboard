@@ -1,5 +1,5 @@
-import type { Course } from "../../constants/types";
-import { CourseRow } from "../../constants/functions";
+import type { Course } from "../../../constants/types";
+import { CourseRow } from "../../../constants/functions";
 
 interface AllCoursesPanelProps {
   remainingMandatoryCourses: Course[];
@@ -17,7 +17,10 @@ export default function RemainingCourses({
           <div className="min-w-0">
             <h1 className="text-xl font-bold">Remaining Degree Requirements</h1>
             <p className="text-sm mt-0.5">
-              Track your remaining IIT Gandhinagar degree requirements, including unfinished core courses, elective requirements, credit deficits, and academic milestones needed to complete your program successfully.
+              Track your remaining IIT Gandhinagar degree requirements,
+              including unfinished core courses, elective requirements, credit
+              deficits, and academic milestones needed to complete your program
+              successfully.
             </p>
           </div>
         </div>
@@ -43,11 +46,7 @@ export default function RemainingCourses({
         <div className="overflow-y-auto p-3 max-h-dvh">
           <ul className="flex flex-col gap-1.5 h-auto">
             {yourCourses.map((c) => (
-              <CourseRow
-                key={c.code! + Math.random}
-                course={c}
-                type="your"
-              />
+              <CourseRow key={c.code! + Math.random} course={c} type="your" />
             ))}
           </ul>
         </div>
@@ -78,11 +77,7 @@ export default function RemainingCourses({
         <div className="overflow-y-auto p-3 max-h-dvh">
           <ul className="flex flex-col gap-1.5 h-auto">
             {remainingMandatoryCourses.map((c) => (
-              <CourseRow
-                key={c.code! + Math.random}
-                course={c}
-                type="your"
-              />
+              <CourseRow key={c.code! + Math.random} course={c} type="your" />
             ))}
           </ul>
         </div>

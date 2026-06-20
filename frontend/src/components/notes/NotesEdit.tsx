@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoMdClose } from "react-icons/io";
-import { type Note } from "../../constants/types";
-import api from "../services/api";
-import { useAuth } from "../hooks/useAuth";
+import { type Note } from "../../../constants/types";
+import api from "../../services/api";
+import { useAuth } from "../../hooks/useAuth";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -23,7 +23,13 @@ type Props = {
 };
 
 const NotesEdit = ({ note, setEdit }: Props) => {
-  const { register, handleSubmit, reset, setError, formState: { errors,isSubmitting } } = useForm<Note>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    formState: { errors, isSubmitting },
+  } = useForm<Note>();
   const { setNotes } = useAuth();
   const [isEditing, setEditing] = useState(note === null);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -96,7 +102,8 @@ const NotesEdit = ({ note, setEdit }: Props) => {
           <div className="bg-white text-black rounded-2xl shadow-2xl p-6 w-[90%] max-w-sm flex flex-col gap-4">
             <h2 className="text-xl font-bold text-center">Delete Note?</h2>
             <p className="text-center text-gray-600 text-sm">
-              This action cannot be undone. Are you sure you want to delete this note?
+              This action cannot be undone. Are you sure you want to delete this
+              note?
             </p>
             <div className="flex justify-between gap-3 mt-2">
               <button
@@ -204,7 +211,6 @@ const NotesEdit = ({ note, setEdit }: Props) => {
                 <div className="flex justify-between">
                   {note?._id && (
                     <div
-                  
                       className="px-4 py-1 rounded-2xl bg-red-600 text-white cursor-pointer"
                       onClick={() => setConfirmDelete(true)}>
                       Delete

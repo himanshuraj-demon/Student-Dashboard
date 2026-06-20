@@ -1,15 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { links } from "../../constants";
+import { links } from "../../../constants";
 import { FaUser } from "react-icons/fa";
-const Navbar:React.FC = () => {
+const Navbar: React.FC = () => {
   return (
     <>
       <nav className="navbar">
         <div className="logo">
           <img src="./images/logo.svg" alt="nono" />
-          <img src="./images/namelogo.png" alt="nono" className="spanlogo"/>
-        
+          <img src="./images/namelogo.png" alt="nono" className="spanlogo" />
         </div>
 
         <div className="navlinks">

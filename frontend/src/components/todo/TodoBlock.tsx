@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import { type Todo } from "../../constants/types";
-import api from "../services/api";
-import { useAuth } from "../hooks/useAuth";
+import { type Todo } from "../../../constants/types";
+import api from "../../services/api";
+import { useAuth } from "../../hooks/useAuth";
 import { HiDotsVertical } from "react-icons/hi";
 import { FiMapPin, FiClock } from "react-icons/fi";
 import {
@@ -115,7 +115,7 @@ const Todoblock = ({ todo, onEditClick }: Props) => {
     cursor-pointer
     overflow-visible
     group hover:shadow-[0_0_25px_rgba(59,130,246,0.35)]
-    ${todo.completed ? "opacity-50 scale-[0.99]" : "hover:scale-[1.01]"} ${todo.pinned? "scale-105":""}
+    ${todo.completed ? "opacity-50 scale-[0.99]" : "hover:scale-[1.01]"} ${todo.pinned ? "scale-105" : ""}
   `}
       style={{
         backgroundColor: todo.pinned ? "#3b82f6" : "#2563eb",

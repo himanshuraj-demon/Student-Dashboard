@@ -1,6 +1,6 @@
-import {memo} from "react";
-import Navbar from "../components/Navbar";
-import MobileNav from "../components/MobileNav";
+import { memo } from "react";
+import Navbar from "../components/helpers/Navbar";
+import MobileNav from "../components/helpers/MobileNav";
 
 const Nav = () => {
   return (

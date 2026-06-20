@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 import { useTitle } from "../hooks/useTitle";
-import Todoblock from "../components/TodoBlock";
+import Todoblock from "../components/todo/TodoBlock";
 import { FiPlus, FiSearch } from "react-icons/fi";
-import TodoEdit from "../components/TodoEdit";
+import TodoEdit from "../components/todo/TodoEdit";
 import { type Todo } from "../../constants/types";
 import { useAuth } from "../hooks/useAuth";
 
@@ -13,7 +13,6 @@ const Todos = () => {
   const [addKey, setAddKey] = useState(0);
   const [search, setSearch] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
-
 
   useTitle("Todo");
   const greeting = useMemo(() => {

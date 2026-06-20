@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AiSidebar from "../components/AiSidebar";
+import AiSidebar from "../components/helpers/AiSidebar";
 import { LuBotMessageSquare } from "react-icons/lu";
 import Nav from "../services/Nav";
 import Notes from "./Notes";

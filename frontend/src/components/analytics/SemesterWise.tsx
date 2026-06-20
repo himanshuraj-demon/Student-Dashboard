@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback } from "react";
-import { branches ,instituteRequirements} from "../../constants/courses";
-import { useAuth } from "../hooks/useAuth";
-import { Semsterdetails } from "../../constants/semesterplan";
+import { branches, instituteRequirements } from "../../../constants/courses";
+import { useAuth } from "../../hooks/useAuth";
+import { Semsterdetails } from "../../../constants/semesterplan";
 
 import RemainingCourses from "./RemainingCourses";
 import SemesterPanel, { type SemesterData } from "./SemesterPanel";
@@ -15,15 +15,13 @@ function semNameToNum(name: string): number {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function SemesterWise() {
-  const { user,yourCourses,setYourCourses } = useAuth();
+  const { user, yourCourses, setYourCourses } = useAuth();
   const semesterItems: string[] = Semsterdetails;
-  const selectedBranch = user?.details?.branch ||"Artificial Intelligence";
+  const selectedBranch = user?.details?.branch || "Artificial Intelligence";
 
   const [selected, setSelected] = useState<string>(semesterItems[0]);
   const [search, setSearch] = useState<string>("");
-  const [, setSemesterRecords] = useState<
-    Record<number, SemesterData>
-  >({});
+  const [, setSemesterRecords] = useState<Record<number, SemesterData>>({});
 
   /** Called by SemesterPanel after a successful save */
   const handleSemesterSaved = useCallback(
@@ -33,13 +31,16 @@ export default function SemesterWise() {
     [],
   );
 
-  const handleCoursesAdded = useCallback((newCodes: string[]) => {
-    setYourCourses((prev) => {
-      if (!prev) return newCodes;
-      const merged = Array.from(new Set([...prev, ...newCodes]));
-      return merged;
-    });
-  }, [setYourCourses]);
+  const handleCoursesAdded = useCallback(
+    (newCodes: string[]) => {
+      setYourCourses((prev) => {
+        if (!prev) return newCodes;
+        const merged = Array.from(new Set([...prev, ...newCodes]));
+        return merged;
+      });
+    },
+    [setYourCourses],
+  );
 
   // ── Derived lists ──────────────────────────────────────────────────────────
 
@@ -60,26 +61,21 @@ export default function SemesterWise() {
   }, [yourCourses, selectedBranch]);
 
   const remainingMandatoryCourses = useMemo(() => {
-  if (!yourCourses) return [];
+    if (!yourCourses) return [];
 
-  const completedSet = new Set(yourCourses);
+    const completedSet = new Set(yourCourses);
 
-  const mandatoryCourses = [
-    ...instituteRequirements.hssBasket.mandatoryCourses,
-    ...instituteRequirements.mathBasket.mandatoryCourses,
-  ];
+    const mandatoryCourses = [
+      ...instituteRequirements.hssBasket.mandatoryCourses,
+      ...instituteRequirements.mathBasket.mandatoryCourses,
+    ];
 
-  return mandatoryCourses.filter(
-    (course) => !completedSet.has(course.code),
-  );
-}, [yourCourses]);
-
-
+    return mandatoryCourses.filter((course) => !completedSet.has(course.code));
+  }, [yourCourses]);
 
   // ── Which panel to show ────────────────────────────────────────────────────
   const isRemaining =
-    selected === "Remaining Courses" ||
-    selected === semesterItems[0];
+    selected === "Remaining Courses" || selected === semesterItems[0];
 
   const activeSemNum = isRemaining ? null : semNameToNum(selected);
 
@@ -146,7 +142,7 @@ export default function SemesterWise() {
       ) : (
         activeSemNum !== null && (
           <SemesterPanel
-            key={activeSemNum}            
+            key={activeSemNum}
             semesterName={selected}
             semesterNum={activeSemNum}
             existingCodes={yourCourses ?? []}

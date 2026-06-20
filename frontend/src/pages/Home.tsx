@@ -1,4 +1,4 @@
-import Nav from '../components/homecomponnts/Nav';
+import Nav from '../components/homecomponents/Nav';
 const Home = () => {
   return (
     <div className='landingPage'>

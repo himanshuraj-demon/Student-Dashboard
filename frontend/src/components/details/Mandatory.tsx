@@ -1,5 +1,5 @@
 import React from "react";
-import {instituteRequirements} from "../../constants/courses";
+import { instituteRequirements } from "../../../constants/courses";
 
 const COLORS = [
   "#6366f1",
@@ -33,7 +33,13 @@ function Row({ label, value, colorDot }: RowProps) {
   );
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="mb-6">
       <h2 className="text-base font-semibold text-gray-500 uppercase tracking-wide mb-2 px-1">
@@ -71,7 +77,10 @@ export default function InstituteRequirements() {
           label="General Education Credits"
           value={`${r.hssBasket.generalEducationCredits} credits`}
         />
-        <Row label="Total Credits" value={`${r.hssBasket.totalCredits} credits`} />
+        <Row
+          label="Total Credits"
+          value={`${r.hssBasket.totalCredits} credits`}
+        />
       </Section>
 
       {/* Science Basket */}

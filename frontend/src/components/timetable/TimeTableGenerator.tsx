@@ -7,7 +7,7 @@ import {
   type EventColor,
   type ResolvedEvent,
   type EventCardProps,
-} from "../../constants/timetabletypes";
+} from "../../../constants/timetabletypes";
 
 const SLOT_ROWS: SlotRow[] = [
   { Slot: "8:30 - 9:50", M: "A1", T: "B1", W: "A2", Th: "C2", F: "B2" },
@@ -158,7 +158,7 @@ const EventCard: React.FC<EventCardProps> = ({
   return (
     <div
       className={`absolute left-1 right-1 rounded-lg px-2 py-2 overflow-hidden overflow-y-clip cursor-pointer hover:brightness-95 transition-all ${card} m-1`}
-      style={{ top: topPx, height: heightPx+3 }}>
+      style={{ top: topPx, height: heightPx + 3 }}>
       <p className={`md:text-[9px] text-[8px] font-semibold mb-0.5 ${time}`}>
         {formatDecimalHour(start)} – {formatDecimalHour(end)}
       </p>
@@ -203,8 +203,7 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
 
   const downloadPNG = async () => {
     const node = document.getElementById("timetable");
-    if(node)
-    node.classList.add("export-mode");
+    if (node) node.classList.add("export-mode");
 
     if (!node) return;
 
@@ -227,47 +226,46 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
   };
 
   const downloadPDF = async () => {
-  const node = document.getElementById("timetable");
-  if(node)
-  node.classList.add("export-mode");
+    const node = document.getElementById("timetable");
+    if (node) node.classList.add("export-mode");
 
-  if (!node) return;
+    if (!node) return;
 
-  try {
-    const dataUrl = await toPng(node, {
+    try {
+      const dataUrl = await toPng(node, {
         cacheBust: true,
         pixelRatio: 2,
         width: node.scrollWidth,
         height: node.scrollHeight,
       });
 
-    const pdf = new jsPDF({
-      orientation: "landscape",
-      unit: "mm",
-      format: "a4",
-    });
+      const pdf = new jsPDF({
+        orientation: "landscape",
+        unit: "mm",
+        format: "a4",
+      });
 
-    const img = new Image();
+      const img = new Image();
 
-    img.onload = () => {
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
+      img.onload = () => {
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
 
-      const imgWidth = pageWidth;
-      const imgHeight = (img.height * imgWidth) / img.width;
+        const imgWidth = pageWidth;
+        const imgHeight = (img.height * imgWidth) / img.width;
 
-      const y = Math.max(0, (pageHeight - imgHeight) / 2);
+        const y = Math.max(0, (pageHeight - imgHeight) / 2);
 
-      pdf.addImage(dataUrl, "PNG", 0, y, imgWidth, imgHeight);
-      pdf.save("timetable.pdf");
-    };
+        pdf.addImage(dataUrl, "PNG", 0, y, imgWidth, imgHeight);
+        pdf.save("timetable.pdf");
+      };
 
-    img.src = dataUrl;
-    node.classList.remove("export-mode");
-  } catch (error) {
-    console.error(error);
-  }
-};
+      img.src = dataUrl;
+      node.classList.remove("export-mode");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleDownloadPDF = useCallback(() => {
     const printContents = printRef.current?.innerHTML;

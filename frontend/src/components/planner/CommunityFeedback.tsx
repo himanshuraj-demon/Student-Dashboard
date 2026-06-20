@@ -12,22 +12,19 @@ import {
   Pencil,
   Trash2,
 } from "lucide-react";
-import { type User } from "../context/AuthContext";
+import { type User } from "../../context/AuthContext";
 import {
   type Feedback,
   type GroupFilter,
   type SortOption,
   FEEDBACK_TAGS,
   type VoteValue,
-} from "../../constants/feedbacktypes";
-import {
-  voteFeedback,
-  deleteFeedback,
-} from "../services/feedbackapi";
+} from "../../../constants/feedbacktypes";
+import { voteFeedback, deleteFeedback } from "../../services/feedbackapi";
 import AddFeedbackModal from "./Addfeedback";
 import ConfirmDialog from "./ConfirmDialog";
-import { useAuth } from "../hooks/useAuth";
-import api from "../services/api";
+import { useAuth } from "../../hooks/useAuth";
+import api from "../../services/api";
 
 interface CommunityFeedbackProps {
   currentUser: User;
@@ -69,7 +66,7 @@ function catalogStamp(item: Feedback): string {
 export default function CommunityFeedback({
   currentUser,
 }: CommunityFeedbackProps) {
-  const {feedbacks,setFeedbacks}=useAuth();
+  const { feedbacks, setFeedbacks } = useAuth();
   const [group, setGroup] = useState<GroupFilter>("all");
   const [sort, setSort] = useState<SortOption>("newest");
   const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
@@ -149,7 +146,7 @@ export default function CommunityFeedback({
   }
 
   async function handleSaved() {
-    const feedbackRes=await api.get("/feedback");
+    const feedbackRes = await api.get("/feedback");
     setFeedbacks(feedbackRes.data);
     setIsAddOpen(false);
     setEditingFeedback(null);
@@ -248,21 +245,22 @@ export default function CommunityFeedback({
             Tags
           </span>
           <div className="flex gap-1 overflow-x-auto">
-          {FEEDBACK_TAGS.map((tag) => {
-            const isActive = activeTags.has(tag);
-            return (
-              <button
-                key={tag}
-                onClick={() => toggleTag(tag)}
-                className={`rounded-full border px-2.5 py-1 font-mono text-xs transition ${
-                  isActive
-                    ? "border-blue-600 bg-blue-50 text-blue-700"
-                    : "border-stone-400  hover:border-blue-300"
-                }`}>
-                #{tag}
-              </button>
-            );
-          })}</div>
+            {FEEDBACK_TAGS.map((tag) => {
+              const isActive = activeTags.has(tag);
+              return (
+                <button
+                  key={tag}
+                  onClick={() => toggleTag(tag)}
+                  className={`rounded-full border px-2.5 py-1 font-mono text-xs transition ${
+                    isActive
+                      ? "border-blue-600 bg-blue-50 text-blue-700"
+                      : "border-stone-400  hover:border-blue-300"
+                  }`}>
+                  #{tag}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -291,7 +289,9 @@ export default function CommunityFeedback({
                       <GraduationCap className="h-3.5 w-3.5 text-blue-500" />
                       <span>{item.user.name}</span>
                       <span>·</span>
-                      <span className="bg-amber-300 rounded-2xl px-2 border border-white text-black">{item.user.details?.branch}</span>
+                      <span className="bg-amber-300 rounded-2xl px-2 border border-white text-black">
+                        {item.user.details?.branch}
+                      </span>
                       <span>{formatRelativeTime(item.createdAt)}</span>
                     </div>
                   </div>

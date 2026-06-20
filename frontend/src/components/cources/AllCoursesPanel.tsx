@@ -1,5 +1,5 @@
-import type { Course } from "../../constants/types";
-import { CourseRow } from "../../constants/functions";
+import type { Course } from "../../../constants/types";
+import { CourseRow } from "../../../constants/functions";
 
 interface AllCoursesPanelProps {
   allCoursesQuery: string;
@@ -16,14 +16,20 @@ export default function AllCoursesPanel({
   yourCoursesFiltered,
   yourCourses,
 }: AllCoursesPanelProps) {
-  
   return (
     <main className="flex-1 min-w-0 overflow-hidden flex flex-col gap-4 h-fit">
       <div className="sticky top-0 z-20 bg-[#ffffff11] branchpanelsearch rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-5 backdrop-blur-sm">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
-            <h1 className="text-xl font-bold">IIT Gandhinagar Course Progress Tracker</h1>
-            <p className="text-sm mt-0.5">Browse all IIT Gandhinagar courses and track your academic progress. View completed courses, earned credits, remaining degree requirements, and available course options to plan your academic journey effectively.</p>
+            <h1 className="text-xl font-bold">
+              IIT Gandhinagar Course Progress Tracker
+            </h1>
+            <p className="text-sm mt-0.5">
+              Browse all IIT Gandhinagar courses and track your academic
+              progress. View completed courses, earned credits, remaining degree
+              requirements, and available course options to plan your academic
+              journey effectively.
+            </p>
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ import {
   LuSparkles,
   LuZap,
 } from "react-icons/lu";
-import "../pages/css/aisidebar.css";
+import "../../pages/css/aisidebar.css";
 
 interface ChatMessage {
   id: string;

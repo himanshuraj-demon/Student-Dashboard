@@ -1,5 +1,5 @@
-import type { Branch, Course, CourseBasket } from "../../constants/types";
-import { CourseRow } from "../../constants/functions";
+import type { Branch, Course, CourseBasket } from "../../../constants/types";
+import { CourseRow } from "../../../constants/functions";
 
 interface BranchPanelProps {
   branch: Branch;
@@ -55,7 +55,8 @@ export default function BranchPanel({
           </div>
           <p className="text-sm md:flex hidden font-semibold">
             View mandatory core courses, elective options, credit requirements,
-            and degree completion guidelines for the IIT Gandhinagar {branch.branchName} program.
+            and degree completion guidelines for the IIT Gandhinagar{" "}
+            {branch.branchName} program.
           </p>
         </div>
 

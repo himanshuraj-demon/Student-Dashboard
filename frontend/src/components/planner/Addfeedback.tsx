@@ -7,9 +7,9 @@ import {
   type Feedback,
   type FeedbackType,
   FEEDBACK_TAGS,
-} from "../../constants/feedbacktypes";
-import { createFeedback, updateFeedback } from "../services/feedbackapi";
-import { type User } from "../context/AuthContext";
+} from "../../../constants/feedbacktypes";
+import { createFeedback, updateFeedback } from "../../services/feedbackapi";
+import { type User } from "../../context/AuthContext";
 
 interface AddFeedbackModalProps {
   isOpen: boolean;
@@ -258,10 +258,13 @@ export default function AddFeedbackModal({
             <input
               type="text"
               placeholder="Start the project early"
-              {...register("title",{
-                    required: { value: true, message: "Give your advice a short title." },
-                    maxLength: { value: 50, message: "Max length is 50" },
-                  })}
+              {...register("title", {
+                required: {
+                  value: true,
+                  message: "Give your advice a short title.",
+                },
+                maxLength: { value: 50, message: "Max length is 50" },
+              })}
               className="w-full rounded-lg border border-stone-200 px-3 py-2 text-sm text-stone-700 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
             {errors.title && (
@@ -279,10 +282,13 @@ export default function AddFeedbackModal({
             <textarea
               rows={4}
               placeholder="Write the advice you wish someone had told you…"
-              {...register("content",{
-                    required: { value: true, message: "Write out the advice itself." },
-                    maxLength: { value: 200, message: "Max length is 200" },
-                  })}
+              {...register("content", {
+                required: {
+                  value: true,
+                  message: "Write out the advice itself.",
+                },
+                maxLength: { value: 200, message: "Max length is 200" },
+              })}
               className="w-full resize-none rounded-lg border border-stone-200 px-3 py-2 text-sm text-stone-700 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
             {errors.content && (

@@ -1,14 +1,11 @@
 import { useState, useMemo } from "react";
-import { branches, courseMasterList } from "../../constants/courses";
-import { useAuth } from "../hooks/useAuth";
+import { branches, courseMasterList } from "../../../constants/courses";
+import { useAuth } from "../../hooks/useAuth";
 
-
-import type { Course, CourseBasket } from "../../constants/types";
-import type { Branch } from "../../constants/types";
+import type { Course, CourseBasket } from "../../../constants/types";
+import type { Branch } from "../../../constants/types";
 import BranchPanel from "./BranchPanel";
 import AllCoursesPanel from "./AllCoursesPanel";
-
-
 
 // ─── SIDEBAR TABS ─────────────────────────────────────────────────────────────
 type SidebarView = "branches" | "all-courses";
@@ -19,7 +16,7 @@ interface ExpandedBasketsState {
 
 // ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
 export default function BranchCourses() {
-  const { user,yourCourses } = useAuth();
+  const { user, yourCourses } = useAuth();
   const branchNames = Object.keys(branches) as string[];
 
   // Sidebar state
@@ -27,7 +24,6 @@ export default function BranchCourses() {
   const [selected, setSelected] = useState<string>(
     user?.details?.branch || branchNames[0],
   );
-
 
   const [search, setSearch] = useState<string>("");
   const [courseQuery, setCourseQuery] = useState<string>("");
@@ -39,7 +35,7 @@ export default function BranchCourses() {
   const filteredBranches = useMemo(
     (): string[] =>
       branchNames.filter((b) => b.toLowerCase().includes(search.toLowerCase())),
-    [search,branchNames],
+    [search, branchNames],
   );
 
   const branch = branches[selected as BranchKey] as Branch;
@@ -90,7 +86,6 @@ export default function BranchCourses() {
     .map(([k, v]) => `${k.replace(/_/g, " ")}: ${v} cr`)
     .join(" · ");
 
-
   const yourCoursesDetails = useMemo(() => {
     if (!yourCourses) return [];
     return yourCourses
@@ -107,8 +102,6 @@ export default function BranchCourses() {
         c.title.toLowerCase().includes(q),
     );
   }, [yourCoursesDetails, allCoursesQuery]);
-
-
 
   return (
     <div className="flex flex-col md:flex-row gap-4 p-4 min-h-screen bg-[rgba(59,130,246,0.06)] font-sans overflow-x-hidden overflow-y-scroll h-fit md:h-dvh">
@@ -202,7 +195,7 @@ export default function BranchCourses() {
             <div className="h-px bg-gray-100" />
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-600">
-                {(yourCourses?.length ?? 0)}
+                {yourCourses?.length ?? 0}
               </div>
               <div className="text-xs text-gray-500">Your Completed</div>
             </div>
@@ -217,8 +210,8 @@ export default function BranchCourses() {
       </aside>
 
       {/* ── Main Panel ── */}
-      {sidebarView === "branches"
-        ? <BranchPanel
+      {sidebarView === "branches" ? (
+        <BranchPanel
           branch={branch}
           courseQuery={courseQuery}
           setCourseQuery={setCourseQuery}
@@ -228,14 +221,15 @@ export default function BranchCourses() {
           toggleBasket={toggleBasket}
           openElectives={openElectives}
         />
-
-        : <AllCoursesPanel
+      ) : (
+        <AllCoursesPanel
           allCoursesQuery={allCoursesQuery}
           setAllCoursesQuery={setAllCoursesQuery}
           allCoursesFiltered={allCoursesFiltered}
           yourCoursesFiltered={yourCoursesFiltered}
           yourCourses={yourCourses}
-        />}
+        />
+      )}
     </div>
   );
 }

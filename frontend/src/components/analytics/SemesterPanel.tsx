@@ -1,7 +1,7 @@
 import { useState, useEffect, type JSX } from "react";
-import { courseMasterList } from "../../constants/courses";
-import api from "../services/api";
-import { useAuth } from "../hooks/useAuth";
+import { courseMasterList } from "../../../constants/courses";
+import api from "../../services/api";
+import { useAuth } from "../../hooks/useAuth";
 
 export interface CourseRecord {
   code: string;
@@ -21,7 +21,6 @@ export interface SemesterData {
   courses: CourseRecord[];
   saved: boolean;
 }
-
 
 const VALID_GRADES = new Set([
   "A+",
@@ -155,7 +154,6 @@ function CourseTableRow({
   );
 }
 
-
 function LoadingSkeleton(): JSX.Element {
   return (
     <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center justify-center py-20 gap-3">
@@ -164,7 +162,6 @@ function LoadingSkeleton(): JSX.Element {
     </section>
   );
 }
-
 
 interface SemesterPanelProps {
   semesterName: string;
@@ -181,12 +178,10 @@ export default function SemesterPanel({
   onSaved,
   onCoursesAdded,
 }: SemesterPanelProps): JSX.Element {
-
   const [isFetching, setIsFetching] = useState<boolean>(true);
   const [fetchError, setFetchError] = useState<boolean>(false);
   const { setYourCourses } = useAuth();
 
- 
   const [savedCourses, setSavedCourses] = useState<CourseRecord[] | null>(null);
 
   const [editing, setEditing] = useState<boolean>(false);
@@ -196,7 +191,6 @@ export default function SemesterPanel({
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [saveError, setSaveError] = useState<string>("");
 
-  
   useEffect(() => {
     let cancelled = false;
 
@@ -216,7 +210,6 @@ export default function SemesterPanel({
           Array.isArray(record.courses) &&
           record.courses.length > 0
         ) {
-          
           const courses: CourseRecord[] = record.courses.map(
             (c: { code?: string; courseCode?: string; grade: string }) => ({
               code: c.code ?? c.courseCode ?? "",
@@ -227,7 +220,6 @@ export default function SemesterPanel({
           setParsedCourses(courses);
           setEditing(false);
         } else {
-        
           setSavedCourses([]);
           setParsedCourses([]);
           setEditing(true);
@@ -247,17 +239,15 @@ export default function SemesterPanel({
     return () => {
       cancelled = true;
     };
-  }, [semesterNum]); 
+  }, [semesterNum]);
 
-  
   const hasSavedData = savedCourses !== null && savedCourses.length > 0;
-  const displayCourses = parsedCourses; 
+  const displayCourses = parsedCourses;
 
   const totalCredits = displayCourses.reduce(
     (sum, r) => sum + (courseMasterList[r.code]?.credits ?? 0),
     0,
   );
-
 
   const handleParse = () => {
     setParseError("");
@@ -329,7 +319,6 @@ export default function SemesterPanel({
     setParseError("");
     setSaveError("");
   };
-
 
   if (isFetching) return <LoadingSkeleton />;
 

@@ -1,5 +1,5 @@
 import { FaCheck } from "react-icons/fa6";
-import { type CourseEntry } from "../../constants/timetabletypes";
+import { type CourseEntry } from "../../../constants/timetabletypes";
 
 type TimeTableProp = {
   course: CourseEntry;

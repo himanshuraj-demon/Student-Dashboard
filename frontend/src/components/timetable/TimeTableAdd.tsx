@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from "react";
 import { TimeTableRows } from "./TimeTableRows";
-import { type CourseEntry } from "../../constants/timetabletypes";
+import { type CourseEntry } from "../../../constants/timetabletypes";
 import { FiSearch, FiX } from "react-icons/fi";
-import { COURSES } from "../../constants/timetabledata";
+import { COURSES } from "../../../constants/timetabledata";
 import { IoClose } from "react-icons/io5";
 
 type TimeTableProp = {
@@ -30,7 +30,7 @@ const TimeTableAdd: React.FC<TimeTableProp> = ({
 
   const handleToggle = (course: CourseEntry) => {
     setCources((prev) => {
-        return prev.filter((c) => c["Course Code"] !== course["Course Code"]);
+      return prev.filter((c) => c["Course Code"] !== course["Course Code"]);
     });
   };
 
@@ -44,15 +44,20 @@ const TimeTableAdd: React.FC<TimeTableProp> = ({
         </button>
       </div>
 
-      {cources.length > 0 &&
-       <div>
-        <ul className="flex flex-wrap gap-2 border border-white rounded-2xl p-3 m-2">
-          {cources.map((c)=>(
-            <li className="bg-green-100 text-black px-3 py-1 rounded-2xl flex items-center cursor-pointer" onClick={()=>handleToggle(c)}>{c["Course Code"]}<IoClose size={20}/> </li>
-          ))}
-        </ul>
-        </div>}
-        
+      {cources.length > 0 && (
+        <div>
+          <ul className="flex flex-wrap gap-2 border border-white rounded-2xl p-3 m-2">
+            {cources.map((c) => (
+              <li
+                className="bg-green-100 text-black px-3 py-1 rounded-2xl flex items-center cursor-pointer"
+                onClick={() => handleToggle(c)}>
+                {c["Course Code"]}
+                <IoClose size={20} />{" "}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <div className="md:w-[90%] w-dvw border border-white rounded-2xl p-3 bg-[#ffffff11]">
         <div className="relative mb-3">

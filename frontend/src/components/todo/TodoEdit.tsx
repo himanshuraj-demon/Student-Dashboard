@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoMdClose } from "react-icons/io";
-import { type Todo } from "../../constants/types";
-import api from "../services/api";
-import { useAuth } from "../hooks/useAuth";
+import { type Todo } from "../../../constants/types";
+import api from "../../services/api";
+import { useAuth } from "../../hooks/useAuth";
 import axios from "axios";
 import { tagIcons } from "./TodoBlock";
 import toast from "react-hot-toast";
