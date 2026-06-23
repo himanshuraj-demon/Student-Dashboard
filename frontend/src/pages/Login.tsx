@@ -39,8 +39,6 @@ export default function Login() {
           { withCredentials: true },
         );
 
-        console.log(result.data);
-
         if (result.data.ok) {
           await checkAuth()
           toast.success("Login Succesfull");

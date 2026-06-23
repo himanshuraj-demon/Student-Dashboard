@@ -1,3 +1,64 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@theme {
+  --color-void: #0B0815;
+  --color-panel: #161024;
+  --color-panel2: #1C1230;
+
+  --color-violet: #8B5CF6;
+  --color-violet-soft: #A78BFA;
+  --color-violet-deep: #5B33C4;
+
+  --color-lilac: #C4B5FD;
+  --color-peach: #F3D9B1;
+  --color-ink: #F5F3FA;
+  --color-muted: #9C92B8;
+
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --shadow-glow: 0 0 40px -5px rgba(139, 92, 246, 0.45);
+  --shadow-glow-sm: 0 0 18px -2px rgba(139, 92, 246, 0.5);
+}
+
+/* Tailwind v4 can't generate a multi-stop radial gradient utility from @theme alone,
+   so this one stays as a plain utility class — same effect as the old bg-corner-glow. */
+.bg-corner-glow {
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(243, 217, 177, 0.16), transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.25), transparent 45%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-void);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: var(--color-violet);
+  color: var(--color-void);
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-void); }
+::-webkit-scrollbar-thumb { background: #2A1B4D; border-radius: 8px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
