@@ -19,10 +19,10 @@ const proof = [
 
 const About = () => {
   const sectionRef = useRef(null);
-  const statsRef = useRef(null);
+  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const items = statsRef.current.children;
+    const items = statsRef.current!.children;
     gsap.fromTo(
       items,
       { opacity: 0, y: 30 },

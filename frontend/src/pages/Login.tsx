@@ -129,6 +129,7 @@ export default function Login() {
                 placeholder="you@iitgn.ac.in"
                 {...register("email", {
                   required: { value: true, message: "Email Required" },
+                  maxLength: { value: 40, message: "Max length is 40" },
                   pattern: {
                     value: /^[a-zA-Z0-9._%+-]+@iitgn\.ac\.in$/,
                     message: "Only @iitgn.ac.in email allowed",
@@ -151,6 +152,7 @@ export default function Login() {
                   {...register("password", {
                     required: { value: true, message: "Password Required" },
                     minLength: { value: 8, message: "Min length is 8" },
+                    maxLength: { value: 50, message: "Max length is 50" },
                   })}
                   placeholder="Min. 8 characters"
                   type={showPassword ? "text" : "password"}

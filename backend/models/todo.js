@@ -6,11 +6,13 @@ const TodoSchema = new mongoose.Schema(
       type: String,
       required: [true, "A task title is required"],
       trim: true,
+      maxlength:50,
     },
     description: {
       type: String,
       trim: true,
       default: "",
+      maxlength:1000,
     },
     time: {
       type: Date,

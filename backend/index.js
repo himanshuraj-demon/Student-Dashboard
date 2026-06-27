@@ -54,7 +54,7 @@ connectDB(process.env.MONGO_URL);
 app.use("/api", aiRoutes);
 app.use("/notes", notesRoute);
 app.use("/todos", todosRoute);
-app.use("/user", userRoute);
+app.use("/user",authLimiter, userRoute);
 app.use("/feedback",feedbackRoute)
 app.get("/", (req, res) => {
   return res.json({ working: "good" });

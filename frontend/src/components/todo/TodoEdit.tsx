@@ -150,6 +150,7 @@ const TodoEdit = ({ todo, setEdit }: Props) => {
               <input
                 {...register("title", {
                   required: "A descriptive title assignment is required",
+                  maxLength: { value: 50, message: "Max length is 50" },
                 })}
                 placeholder="What needs to be done?"
                 className="w-full p-3 bg-[#1e2540] border border-slate-800 rounded-xl text-white outline-none focus:border-purple-500 text-sm transition-all"
@@ -177,7 +178,7 @@ const TodoEdit = ({ todo, setEdit }: Props) => {
                 Description (Optional)
               </label>
               <textarea
-                {...register("description")}
+                {...register("description",{maxLength: { value: 100, message: "Max length is 100" },})}
                 placeholder="Add some details or notes..."
                 rows={3}
                 className="w-full p-3 bg-[#1e2540] border border-slate-800 rounded-xl text-white outline-none focus:border-purple-500 text-sm transition-all resize-none"

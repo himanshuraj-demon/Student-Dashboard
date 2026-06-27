@@ -1,15 +1,16 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
 
-  const handleChange = (e) =>
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+  const handleChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+  ) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     // wire this up to your backend endpoint
     setSent(true);
@@ -21,10 +22,9 @@ const Contact = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="relative overflow-hidden rounded-3xl border border-violet/20 bg-panel p-10 md:p-14"
-        >
+          className="relative overflow-hidden rounded-3xl border border-violet/20 bg-panel p-10 md:p-14">
           <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-violet/20 blur-3xl" />
 
           <div className="relative grid grid-cols-1 gap-10 md:grid-cols-2">
@@ -36,13 +36,12 @@ const Contact = () => {
                 Got feedback, or found a bug?
               </h2>
               <p className="mt-4 max-w-sm text-muted">
-                We read every message. Tell us what's slowing your semester down,
-                and we'll tell you when it's fixed.
+                We read every message. Tell us what's slowing your semester
+                down, and we'll tell you when it's fixed.
               </p>
               <a
                 href="mailto:hello@studytracker.app"
-                className="mt-6 inline-flex items-center gap-1.5 font-mono text-sm text-lilac hover:text-violet-soft"
-              >
+                className="mt-6 inline-flex items-center gap-1.5 font-mono text-sm text-lilac hover:text-violet-soft">
                 hello@studytracker.app
                 <ArrowUpRight size={16} />
               </a>
@@ -83,8 +82,7 @@ const Contact = () => {
                   />
                   <button
                     type="submit"
-                    className="w-full rounded-xl bg-ink py-3 font-medium text-void transition hover:bg-violet-soft"
-                  >
+                    className="w-full rounded-xl bg-ink py-3 font-medium text-void transition hover:bg-violet-soft">
                     Send message
                   </button>
                 </>

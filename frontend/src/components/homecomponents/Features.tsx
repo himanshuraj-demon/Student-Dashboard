@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion,type Variants } from 'framer-motion';
 import {
   LayoutDashboard,
   BookOpenCheck,
@@ -67,9 +67,9 @@ const features = [
   },
 ];
 
-const cardVariant = {
+const cardVariant:Variants = {
   hidden: { opacity: 0, y: 24 },
-  show: (i) => ({
+  show: (i:number) => ({
     opacity: 1,
     y: 0,
     transition: { duration: 0.5, delay: i * 0.06, ease: 'easeOut' },

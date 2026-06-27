@@ -1,5 +1,4 @@
 import React, { useMemo, useState, useRef, useCallback } from "react";
-import jsPDF from "jspdf";
 import { toPng } from "html-to-image";
 import {
   type SlotRow,
@@ -227,6 +226,7 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
 
   const downloadPDF = async () => {
     const node = document.getElementById("timetable");
+    const {default :jsPDF}=await import("jspdf")
     if (node) node.classList.add("export-mode");
 
     if (!node) return;
@@ -267,40 +267,6 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
     }
   };
 
-  const handleDownloadPDF = useCallback(() => {
-    const printContents = printRef.current?.innerHTML;
-    if (!printContents) return;
-
-    const printWindow = window.open("", "_blank");
-    if (!printWindow) return;
-
-    printWindow.document.write(`
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>Timetable</title>
-          <style>
-            * { margin: 0; padding: 2; box-sizing: border-box; }
-            body { font-family: sans-serif; background: white; }
-            @media print {
-              body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            }
-          </style>
-          <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-        </head>
-        <body>
-          <div>${printContents}</div>
-          <script>
-            window.onload = function() {
-              window.print();
-              window.onafterprint = function() { window.close(); };
-            };
-          </script>
-        </body>
-      </html>
-    `);
-    printWindow.document.close();
-  }, []);
 
   const firstStart = parseSlot(SLOT_ROWS[0].Slot).start;
   const lastEnd = parseSlot(SLOT_ROWS[SLOT_ROWS.length - 1].Slot).end;
@@ -479,13 +445,6 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
       </div>
       {isFullscreen && (
         <div className="flex justify-around px-4 py-3 shrink-0 border-t border-white/10 ">
-          <button
-            onClick={handleDownloadPDF}
-            title="Download as PDF"
-            className="md:flex hidden items-center cursor-pointer gap-2 bg-white text-black text-sm font-semibold px-5 py-2 rounded-xl transition-all hover:bg-gray-100 shadow-lg">
-            <FaDownload size={20} />
-            Print PDF
-          </button>
           <button
             onClick={downloadPNG}
             title="Download as PDF"

@@ -6,12 +6,13 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        maxlength:50,
+        maxlength:30,
     },
     email: {
         type: String,
         required: true,
         unique: true,
+        maxlength:40,
     },
     salt: {
         type: String,
@@ -20,7 +21,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         select: false,
-        maxlength:30,
+        maxlength:50,
     },
     profileImageUrl: {
         type: String,
