@@ -14,6 +14,7 @@ interface FormData {
   password: string;
 }
 interface LoginResponse {
+  isNewUser: boolean;
   ok: boolean;
   message: string;
   user: string;
@@ -21,7 +22,7 @@ interface LoginResponse {
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { checkAuth} = useAuth();
+  const { checkAuth } = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -40,7 +41,7 @@ export default function Login() {
         );
 
         if (result.data.ok) {
-          await checkAuth()
+          await checkAuth();
           toast.success("Login Succesfull");
           toast.error("Please Update Profile first (new User Only)");
           navigate("/profile", { replace: true });
@@ -69,21 +70,31 @@ export default function Login() {
           withCredentials: true,
         },
       );
+
       await checkAuth();
       reset();
-      toast.success(res.data.message);
-      toast.error("Please Update Profile first (new User Only)");
-      navigate("/profile", { replace: true });
+      if (res.data.isNewUser) {
+        toast.success("Please update your profile");
+        navigate("/profile",{ replace: true });
+      } else {
+        toast.error("Invalid email or password");
+      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
+        const message =
+          error.response?.data?.message ?? "Invalid email or password";
+
         setError("root", {
-          message: error.response?.data?.message || error.message,
+          message,
         });
-        console.log("error");
+
+        toast.error(message);
       } else {
         setError("root", {
           message: "Something went wrong",
         });
+
+        toast.error("Something went wrong");
       }
     }
   };

@@ -65,6 +65,7 @@ async function handleSignUp(req, res) {
 async function handleLogIn(req, res) {
     const { email, password } = req.body;
     try {
+        if(!email || !password) return res.json({ok:false,message:"Invalid email or password"})
         const token = await User.matchPasswordAndTokenGenerator(email, password);
         if (!token) {
             return res.status(401).json({
@@ -82,11 +83,13 @@ async function handleLogIn(req, res) {
             .json({
                 ok: true,
                 message: "Login successful",
+                "isNewUser": true
             });
 
     } catch (error) {
         return res.json({
-            ok: false
+            ok: false,
+            message: error.message || "Invalid email or password"
         });
     }
 }

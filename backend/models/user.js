@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
 userSchema.pre("save", function () {
     const user = this;
 
-  if (!user.isModified("password")) return;
+  if (!user.isModified("password")|| !this.password ) return;
 
   const salt = randomBytes(16).toString();
   const hashedPassword = createHmac("sha256", salt)
@@ -53,6 +53,7 @@ userSchema.pre("save", function () {
 userSchema.statics.matchPasswordAndTokenGenerator = async function (email, password) {
   const user = await this.findOne({ email }).select("+password +salt");
   if (!user) return false;
+  if(!user.password) return false
 
   const providedHash = createHmac("sha256", user.salt)
     .update(password)

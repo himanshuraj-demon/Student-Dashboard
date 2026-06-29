@@ -184,8 +184,8 @@ export default function CommunityFeedback({
   }
 
   return (
-    <div className="flex h-fit w-full md:w-auto flex-col border border-gray-400 bg-[#ffffff11] rounded-2xl m-2">
-      <div className="flex items-center justify-between border-b border-gray-400 bg-blue-700 px-6 py-4 rounded-t-2xl">
+    <div className="flex h-fit w-dvw md:w-auto flex-col border border-gray-400 bg-[#ffffff11] rounded-2xl m-1">
+      <div className="flex items-center justify-between border-b border-gray-400 bg-blue-700 px-4 py-4 rounded-t-2xl">
         <div>
           <h2 className="font-serif text-xl font-semibold text-white">
             Community Feedback
