@@ -114,11 +114,11 @@ const Competitive = () => {
     <div className="main">
       <Nav />
       <div className="h-dvh flex text-black flex-col overflow-y-scroll">
-        <div className="md:h-24 m-2 h-auto rounded-2xl flex flex-col justify-center px-6 bg-[#ffffff99]">
-          <h1 className="text-3xl font-bold tracking-tight">
+        <div className="md:h-30 m-2 h-auto rounded-2xl flex flex-col justify-center px-6 py-2 bg-[#ffffff99]">
+          <h1 className="md:text-3xl text-2xl font-bold tracking-tight text-center">
             👋Welcome Back, Coder!
           </h1>
-          <p className="text-sm opacity-80 mt-1">
+          <p className="text-sm opacity-80 mt-1 hidden md:flex">
             Track progress, solve problems, and stay consistent every day.
           </p>
         </div>
@@ -132,7 +132,7 @@ const Competitive = () => {
             />
 
             <div className="flex-1">
-              <h1 className="text-3xl font-bold">{githubData?.name}</h1>
+              <h1 className="text-2xl font-bold">{githubData?.name}</h1>
 
               <p className="opacity-80">@{githubData?.login}</p>
 

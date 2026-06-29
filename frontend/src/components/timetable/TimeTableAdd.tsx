@@ -38,7 +38,7 @@ const TimeTableAdd: React.FC<TimeTableProp> = ({
     <div className="flex mt-5 flex-col items-center">
       <div className="flex justify-center mx-5 mb-4">
         <button
-          className="bg-blue-600 text-white rounded-2xl p-2 px-4 cursor-pointer"
+          className="bg-blue-600 text-white rounded-2xl p-1 px-3 cursor-pointer"
           onClick={() => setAdding(false)}>
           Generate TimeTable
         </button>

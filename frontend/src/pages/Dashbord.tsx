@@ -104,12 +104,12 @@ export default function Dashboard() {
   return (
     <div className="main">
       <Nav />
-      <div className="dashboard-wrapper h-dvh overflow-y-scroll">
+      <div className="dashboard-wrapper h-dvh overflow-y-scroll w-dvw md:w-auto">
         <div className="w-auto mx-auto md:p-6 p-3">
           <div className="dash-header mb-6">
             <div className="flex justify-between items-start relative z-10">
               <div>
-                <h1 className="text-2xl font-bold mb-1">
+                <h1 className="md:text-2xl text-xl font-bold mb-1">
                   Welcome back, {user?.name}
                 </h1>
                 <p>
@@ -142,7 +142,7 @@ export default function Dashboard() {
               <div className="stat-value">
                 {completedCredits} / {totalCredits} Credits
               </div>
-              <div className="text-sm  mt-1">
+              <div className="md:text-sm text-xs mt-1">
                 {graduationPercentage}% Degree Completed
               </div>
 

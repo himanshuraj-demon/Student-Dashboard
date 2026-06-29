@@ -323,7 +323,7 @@ h6 {
 }
 
 .mobile-nav {
-  @apply fixed bottom-0 left-0 right-0 h-16 flex items-center justify-around backdrop-blur-md border-t md:hidden z-50;
+  @apply fixed bottom-0 left-0 right-0 h-12 flex items-center justify-around backdrop-blur-md border-t md:hidden z-50;
   background: linear-gradient(to bottom,
       var(--nav-from),
       var(--nav-via),
@@ -338,7 +338,7 @@ h6 {
 
   .nav-icon {
     @apply flex items-center justify-center;
-    font-size: 30px;
+    font-size: 22px;
     line-height: 1;
   }
 
@@ -356,9 +356,8 @@ h6 {
 
   .plus-btn {
     @apply flex items-center justify-center rounded-full transition-all duration-300;
-    width: 50px;
-    height: 50px;
-    transform: translateY(-5px);
+    width: 45px;
+    height: 45px;
     background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 60%, transparent));
     border: 1.5px solid gold;
     color: var(--text-primary);
@@ -858,7 +857,7 @@ h6 {
 }
 
 .stat-value {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.5px;
