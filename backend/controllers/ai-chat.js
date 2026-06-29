@@ -68,7 +68,7 @@ async function handleAi(req,res) {
             },
         });
     } catch (error) {
-        console.error("AI Chat Error:", error);
+        console.error("AI Chat Error");
 
         return res.status(500).json({
             success: false,

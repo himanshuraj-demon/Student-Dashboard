@@ -5,7 +5,7 @@ import { useAuth } from "../hooks/useAuth";
 import axios from "axios";
 import { SiGithub, SiCodeforces } from "react-icons/si";
 import { TbBrandLeetcode } from "react-icons/tb";
-
+import UpcomingContests from "../components/competitive/UpcomingContests";
 type githubProp={
   avatar_url: string;
   name: string;
@@ -29,41 +29,76 @@ type leetcodeProps={
   hardSolved:string;
 }
 
+
+interface CacheSchema {
+  timestamp: number;
+  githubData: githubProp | null;
+  cfData: cfPrope | null;
+  leetcodeData: leetcodeProps | null;
+}
+
+const CACHE_KEY = "competitive_dashboard_data";
+const CACHE_DURATION = 2 * 60 * 60 * 1000; // 2 hours
+
 const Competitive = () => {
   const { user } = useAuth();
   const github = user?.details?.github;
   const codeforces = user?.details?.codeforcesHandle;
-  const leetcode = user?.details?.codechefHandle;
+  const leetcode = user?.details?.codechefHandle || user?.details?.codechefHandle; 
   const [githubData, setGithubData] = useState<githubProp|null>(null);
   const [cfData, setCfData] = useState<cfPrope|null>(null);
   const [leetcodeData, setLeetcodeData] = useState<leetcodeProps|null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!github && !codeforces && !leetcode) return;
+
     const fetchProfiles = async () => {
       try {
+       
+        const localCache = localStorage.getItem(CACHE_KEY);
+        if (localCache) {
+          const parsed: CacheSchema = JSON.parse(localCache);
+          const cacheAge = Date.now() - parsed.timestamp;
+
+          
+          setGithubData(parsed.githubData);
+          setCfData(parsed.cfData);
+          setLeetcodeData(parsed.leetcodeData);
+
+          
+          if (cacheAge < CACHE_DURATION) {
+            setLoading(false);
+            return;
+          }
+        }
+
+       
         setLoading(true);
 
         const [githubRes, cfRes, lcRes] = await Promise.all([
-          axios.get(`https://api.github.com/users/${github}`, {
-            withCredentials: false,
-          }),
-
-          axios.get(
-            `https://codeforces.com/api/user.info?handles=${codeforces}`,
-            {
-              withCredentials: false,
-            },
-          ),
-
-          axios.get(`https://alfa-leetcode-api.onrender.com/${leetcode}`, {
-            withCredentials: false,
-          }),
+          github ? axios.get(`https://api.github.com/users/${github}`, { withCredentials: false }) : null,
+          codeforces ? axios.get(`https://codeforces.com/api/user.info?handles=${codeforces}`, { withCredentials: false }) : null,
+          leetcode ? axios.get(`https://alfa-leetcode-api.onrender.com/${leetcode}`, { withCredentials: false }) : null,
         ]);
 
-        setGithubData(githubRes.data);
-        setCfData(cfRes.data.result[0]);
-        setLeetcodeData(lcRes.data);
+        const freshGithub = githubRes ? githubRes.data : null;
+        const freshCf = cfRes ? cfRes.data.result[0] : null;
+        const freshLc = lcRes ? lcRes.data : null;
+
+        if (freshGithub) setGithubData(freshGithub);
+        if (freshCf) setCfData(freshCf);
+        if (freshLc) setLeetcodeData(freshLc);
+
+        localStorage.setItem(
+          CACHE_KEY,
+          JSON.stringify({
+            timestamp: Date.now(),
+            githubData: freshGithub || githubData,
+            cfData: freshCf || cfData,
+            leetcodeData: freshLc || leetcodeData,
+          })
+        );
       } catch (error) {
         console.log(error);
       } finally {
@@ -149,6 +184,7 @@ const Competitive = () => {
             </div>
           </div>
         </div>
+        <UpcomingContests />
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 m-2">
           <div className="competative p-4 rounded-xl text-center">
             <p className="text-3xl font-bold">{githubData?.public_repos}</p>

@@ -73,7 +73,6 @@ export default function Signup() {
           { withCredentials: true },
         );
 
-        console.log(result.data);
 
         if (result.data.ok) {
           await checkAuth();

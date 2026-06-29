@@ -11,6 +11,7 @@ import {
   LuZap,
 } from "react-icons/lu";
 import "../../pages/css/aisidebar.css";
+import api from "../../services/api";
 
 interface ChatMessage {
   id: string;
@@ -94,14 +95,12 @@ const AiSidebar = ({ setAiOpen }: AiSidebarProps) => {
     try {
       const updatedHistory = [...messages, userMessage];
       setMessages(updatedHistory);
-      const res = await fetch("http://localhost:3000/api/ai-chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input, history: updatedHistory }),
+      const res = await api.post("/api/ai-chat", {
+        message: input,
+        history: updatedHistory,
       });
 
-      const json: AIResponse = await res.json();
-      console.log(json)
+      const json: AIResponse = await res.data;
 
       if (json.success && json.message) {
         setMessages((prev) => [...prev, json.message]);

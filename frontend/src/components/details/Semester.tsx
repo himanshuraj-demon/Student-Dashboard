@@ -16,8 +16,8 @@ const semesterData = [
   { sem: "S4", credits: 22 },
   { sem: "S5", credits: 20 },
   { sem: "S6", credits: 20 },
-  { sem: "S7", credits: 16 },
-  { sem: "S8", credits: 16 },
+  { sem: "S7", credits: 18 },
+  { sem: "S8", credits: 18 },
 ];
 
 const totalCredits = semesterData.reduce((sum, d) => sum + d.credits, 0);

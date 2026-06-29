@@ -23,19 +23,19 @@ const app = express();
 app.use(morgan("dev"));
 const globalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: 2000,
   standardHeaders: true,
   legacyHeaders: false,
   message: { message: 'Too many requests, please try again later.' },
 });
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 20,
+  max: 1000,
   standardHeaders: true,
   legacyHeaders: false,
   message: { message: 'Too many authentication attempts, please try again later.' },
 });
-// app.use(globalLimiter)
+app.use(globalLimiter)
 app.use(cookieParser());
 app.use(helmet());
 app.use(
