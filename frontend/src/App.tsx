@@ -39,8 +39,9 @@ const App = () => {
               path="/"
               element={auth ? <Navigate to="/dashboard" /> : <Home />}
             />
+            <Route path="/timetable" element={<Timetable />} />
             <Route element={<ProtectedRoute />}>
-              <Route path="/timetable" element={<Timetable />} />
+              
               <Route
                 path="/admin"
                 element={
