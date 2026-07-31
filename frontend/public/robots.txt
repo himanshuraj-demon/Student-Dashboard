@@ -1,0 +1,24 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+Allow: /timetable
+Allow: /details
+Allow: /login
+Allow: /signup
+
+# Disallow crawling of internal/authenticated routes
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /planner
+Disallow: /courses
+Disallow: /analytics
+Disallow: /profile
+Disallow: /competitive
+Disallow: /work
+Disallow: /calender
+
+# Host
+Host: https://student-dashboard-pied-iota.vercel.app
+
+# Sitemap
+Sitemap: https://student-dashboard-pied-iota.vercel.app/sitemap.xml
