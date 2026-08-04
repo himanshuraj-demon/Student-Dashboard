@@ -4,11 +4,15 @@ import { CourseRow } from "../../../constants/functions";
 interface AllCoursesPanelProps {
   remainingMandatoryCourses: Course[];
   yourCourses: Course[];
+  remainingMinorCourses?: Course[];
+  minorName?: string | null;
 }
 
 export default function RemainingCourses({
   remainingMandatoryCourses,
   yourCourses,
+  remainingMinorCourses,
+  minorName,
 }: AllCoursesPanelProps) {
   return (
     <main className="flex-1 min-w-0 overflow-hidden flex flex-col gap-4">
@@ -77,10 +81,45 @@ export default function RemainingCourses({
         <div className="overflow-y-auto p-3 max-h-dvh">
           <ul className="flex flex-col gap-1.5 h-auto">
             {remainingMandatoryCourses.map((c) => (
-              <CourseRow key={c.code! + Math.random} course={c} type="your" />
+              <CourseRow key={c.code! + Math.random()} course={c} type="your" />
             ))}
           </ul>
         </div>
+
+        {minorName && remainingMinorCourses && (
+          <>
+            <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-t border-gray-50/10 shrink-0">
+              <h2 className="font-semibold flex items-center gap-2 min-w-0">
+                <span className="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block shrink-0" />
+                <span className="truncate">Your Remaining Minor Courses ({minorName})</span>
+              </h2>
+              <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                <span className="text-xs bg-blue-100 text-blue-700 font-bold px-2 py-0.5 rounded-full">
+                  {remainingMinorCourses.length} courses
+                </span>
+                <span className="text-xs bg-gray-100 font-bold px-2 py-0.5 rounded-full text-black">
+                  {remainingMinorCourses.reduce((sum, c) => sum + c.credits, 0)} cr
+                </span>
+              </div>
+            </div>
+
+            <div className="overflow-y-auto p-3 max-h-dvh">
+              {remainingMinorCourses.length > 0 ? (
+                <ul className="flex flex-col gap-1.5 h-auto">
+                  {remainingMinorCourses.map((c) => (
+                    <CourseRow key={c.code! + Math.random()} course={c} type="your" />
+                  ))}
+                </ul>
+              ) : (
+                <div className="text-center py-6">
+                  <p className="text-sm text-green-500 font-semibold">
+                    Congratulations! You have completed all courses for this minor discipline.
+                  </p>
+                </div>
+              )}
+            </div>
+          </>
+        )}
       </section>
     </main>
   );

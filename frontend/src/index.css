@@ -785,7 +785,9 @@ h6 {
 }
 
 
-
+.minor-bg{
+  background-color: var(--bg-secondary);
+}
 
 .branchpanel {
   .branchpanelsearch {

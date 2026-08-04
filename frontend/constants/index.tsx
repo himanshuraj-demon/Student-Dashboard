@@ -1,4 +1,4 @@
-import { FiBookOpen, FiCalendar, FiPieChart } from "react-icons/fi";
+import { FiBookOpen, FiCalendar, FiPieChart, FiAward } from "react-icons/fi";
 import { FaCode } from "react-icons/fa";
 import { CgNotes } from "react-icons/cg";
 import { LuLayoutDashboard,LuCalendar } from "react-icons/lu";
@@ -62,6 +62,12 @@ const links = [
     key: 9,
     path: "/calender",
     icon: <LuCalendar size={22} className="text-[var(--text-secondary)]" />,
+  },
+  {
+    name: "Minors",
+    key: 10,
+    path: "/minors",
+    icon: <FiAward size={22} className="text-[var(--text-secondary)]" />,
   },
 ];
 

@@ -14,9 +14,10 @@ import {
   Competitive,
   Details,
   Work,
-  AdminPage,
   AdminError,
   AcademicCalendar,
+  Minors,
+  AdminPage,
 } from "./services";
 import ThemeProvider from "./context/ThemeContext";
 import { useAuth } from "./hooks/useAuth";
@@ -55,6 +56,7 @@ const App = () => {
               <Route path="/dashboard" element={<Dashbord />} />
               <Route path="/planner" element={<Planner />} />
               <Route path="/courses" element={<Courses />} />
+              <Route path="/minors" element={<Minors />} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/competitive" element={<Competitive />} />

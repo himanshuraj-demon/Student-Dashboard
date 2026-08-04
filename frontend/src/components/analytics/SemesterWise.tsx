@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback } from "react";
 import { branches, instituteRequirements } from "../../../constants/courses";
 import { useAuth } from "../../hooks/useAuth";
 import { Semsterdetails } from "../../../constants/semesterplan";
+import { MINORS, MINOR_COURSES, type Minor, type MinorCourse } from "../../../constants/minors";
 
 import RemainingCourses from "./RemainingCourses";
 import SemesterPanel, { type SemesterData } from "./SemesterPanel";
@@ -73,6 +74,26 @@ export default function SemesterWise() {
     return mandatoryCourses.filter((course) => !completedSet.has(course.code));
   }, [yourCourses]);
 
+  const selectedMinor = localStorage.getItem("selectedMinor");
+  
+  const activeMinorName = useMemo(() => {
+    if (!selectedMinor) return null;
+    return MINORS.find((m: Minor) => m.code === selectedMinor)?.name || selectedMinor;
+  }, [selectedMinor]);
+
+  const remainingMinorCourses = useMemo(() => {
+    if (!selectedMinor || !yourCourses) return [];
+    const completedSet = new Set(yourCourses);
+    return MINOR_COURSES
+      .filter((c: MinorCourse) => c.minorCode === selectedMinor && !completedSet.has(c.courseCode))
+      .map((c: MinorCourse) => ({
+        code: c.courseCode,
+        title: c.courseName,
+        credits: c.credits,
+        note: c.note || undefined
+      }));
+  }, [selectedMinor, yourCourses]);
+
   // ── Which panel to show ────────────────────────────────────────────────────
   const isRemaining =
     selected === "Remaining Courses" || selected === semesterItems[0];
@@ -138,6 +159,8 @@ export default function SemesterWise() {
         <RemainingCourses
           remainingMandatoryCourses={remainingMandatoryCourses}
           yourCourses={remainingCoreCourses}
+          remainingMinorCourses={remainingMinorCourses}
+          minorName={activeMinorName}
         />
       ) : (
         activeSemNum !== null && (

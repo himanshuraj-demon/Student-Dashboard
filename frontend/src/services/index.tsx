@@ -15,6 +15,7 @@ const Details = lazy(() => import("../pages/Details"));
 const Work = lazy(() => import("../pages/Work"));
 const AdminPage = lazy(() => import("../pages/AdminPage"));
 import AdminError from "../pages/AdminError";
+const Minors = lazy(() => import("../pages/Minors"));
 const AcademicCalendar = lazy(() => import("../pages/Calender"));
 
 export {
@@ -34,4 +35,5 @@ export {
   Work,
   AdminError,
   AcademicCalendar,
+  Minors,
 };
