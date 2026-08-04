@@ -161,12 +161,12 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "MSE 314",
     "Course Name": "Materials Selection and Design",
-    "Lecture": "C2\n (Jasubhai Auditorium),I2\n (Jagdish Patel Learning Theatre)"
+    "Lecture": "C2\n(Jasubhai Auditorium),I2\n(Jagdish Patel Learning Theatre)"
   },
   {
     "Course Code": "MSE 318",
     "Course Name": "Introduction to Quantum Materials and Devices",
-    "Lecture": "C1 \n(Jasubhai Auditorium),I2 \n(Jayshree S Sheth Learning Theatre)"
+    "Lecture": "C1\n(Jasubhai Auditorium),I2\n(Jayshree S Sheth Learning Theatre)"
   },
   {
     "Course Code": "MSE 319",
