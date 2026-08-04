@@ -111,29 +111,85 @@ function buildSlotMap(courses: CourseEntry[]) {
     colorIdx++;
 
     const process = (raw: string, type: "Lecture" | "Lab" | "Tutorial") => {
-      const room = extractRoom(raw);
+      const blocks: string[] = [];
+      let currentBlock = "";
+      let parenDepth = 0;
+      let hasClosedParenInBlock = false;
 
-      const codes = raw
-        .split(/\n|\(/)[0]
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean);
-
-      codes.forEach((code) => {
-        const event: ResolvedEvent = {
-          courseCode: course["Course Code"],
-          courseName: course["Course Name"]!,
-          slotCode: code,
-          type,
-          room,
-          color,
-        };
-
-        if (!slotMap.has(code)) {
-          slotMap.set(code, []);
+      for (let i = 0; i < raw.length; i++) {
+        const char = raw[i];
+        if (char === "(") {
+          parenDepth++;
+          currentBlock += char;
+        } else if (char === ")") {
+          parenDepth = Math.max(0, parenDepth - 1);
+          if (parenDepth === 0) {
+            hasClosedParenInBlock = true;
+          }
+          currentBlock += char;
+        } else if (parenDepth === 0) {
+          if (char === ",") {
+            if (hasClosedParenInBlock) {
+              if (currentBlock.trim()) {
+                blocks.push(currentBlock.trim());
+              }
+              currentBlock = "";
+              hasClosedParenInBlock = false;
+            } else {
+              currentBlock += char;
+            }
+          } else if (char === "\n") {
+            let nextNonWhitespace = "";
+            for (let j = i + 1; j < raw.length; j++) {
+              if (raw[j] && !/\s/.test(raw[j])) {
+                nextNonWhitespace = raw[j];
+                break;
+              }
+            }
+            if (nextNonWhitespace === "(") {
+              currentBlock += char;
+            } else {
+              if (currentBlock.trim()) {
+                blocks.push(currentBlock.trim());
+              }
+              currentBlock = "";
+              hasClosedParenInBlock = false;
+            }
+          } else {
+            currentBlock += char;
+          }
+        } else {
+          currentBlock += char;
         }
+      }
+      if (currentBlock.trim()) {
+        blocks.push(currentBlock.trim());
+      }
 
-        slotMap.get(code)!.push(event);
+      blocks.forEach((block) => {
+        const room = extractRoom(block);
+        const codes = block
+          .split(/\n|\(/)[0]
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean);
+
+        codes.forEach((code) => {
+          const event: ResolvedEvent = {
+            courseCode: course["Course Code"],
+            courseName: course["Course Name"]!,
+            slotCode: code,
+            type,
+            room,
+            color,
+          };
+
+          if (!slotMap.has(code)) {
+            slotMap.set(code, []);
+          }
+
+          slotMap.get(code)!.push(event);
+        });
       });
     };
 
