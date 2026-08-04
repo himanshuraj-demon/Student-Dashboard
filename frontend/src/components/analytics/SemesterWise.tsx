@@ -81,7 +81,7 @@ export default function SemesterWise() {
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
-    <div className="flex flex-col md:flex-row gap-4 p-4 min-h-screen bg-[rgba(59,130,246,0.06)] font-sans overflow-x-hidden overflow-y-scroll h-fit md:h-dvh">
+    <div className="flex flex-col md:flex-row gap-4 p-1 md:p-4 min-h-screen bg-[rgba(59,130,246,0.06)] font-sans overflow-x-hidden overflow-y-scroll h-fit md:h-dvh">
       {/* ── Sidebar ── */}
       <aside className="w-full md:w-64 shrink-0 flex flex-col gap-3">
         {/* Search */}

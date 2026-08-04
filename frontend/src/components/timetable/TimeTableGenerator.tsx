@@ -20,6 +20,7 @@ const SLOT_ROWS: SlotRow[] = [
 import { SlSizeFullscreen } from "react-icons/sl";
 import { FaPlus, FaDownload } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import { COURSE_CREDITS } from "../../../constants/coursecredits";
 
 const DAY_KEYS: (keyof Omit<SlotRow, "Slot">)[] = ["M", "T", "W", "Th", "F"];
 const DAY_LABELS: Record<string, string> = {
@@ -245,6 +246,9 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     ([_, events]) => events.length > 1,
   );
+  const totalCredits = useMemo(() => {
+    return courses.reduce((sum, c) => sum + (COURSE_CREDITS[c["Course Code"]] ?? 3), 0);
+  }, [courses]);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const printRef = useRef<HTMLDivElement>(null);
 
@@ -339,26 +343,34 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
       className={
         isFullscreen
           ? "fixed inset-0 z-50 bg-black flex flex-col"
-          : "universal p-2 w-dvw md:w-auto rounded-2xl bg-[#ffffff11]"
+          : "universal p-2 w-full md:w-auto rounded-2xl bg-[#ffffff11]"
       }>
       {!isFullscreen && (
-        <div className="flex justify-between px-2 pt-1 pb-0">
+        <div className="flex justify-between items-center px-2 pt-1 pb-0 flex-wrap gap-2">
           <button
-            className="bg-blue-600 text-white rounded-2xl p-2 flex justify-center gap-2 mb-2 items-center cursor-pointer"
+            className="bg-blue-600 text-white rounded-2xl p-2 flex justify-center gap-2 mb-2 items-center cursor-pointer hover:bg-blue-700 transition-all font-semibold"
             onClick={() => setAdding(true)}>
             <FaPlus /> Add Courses
           </button>
-          <button
-            onClick={handleFullscreen}
-            title="Fullscreen"
-            className="flex items-center gap-3 bg-white/10 hover:bg-white/20 timetable text-xs font-medium px-3 py-1.5 rounded-lg transition-all border border-white/20 cursor-pointer">
-            <SlSizeFullscreen size={12} />
-            Fullscreen
-          </button>
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-xs font-semibold px-2.5 py-1.5 bg-white/10 rounded-lg border border-white/20">
+              Total Credits: <span className="text-blue-400 font-extrabold">{totalCredits}</span>
+            </span>
+            <button
+              onClick={handleFullscreen}
+              title="Fullscreen"
+              className="flex items-center gap-3 bg-white/10 hover:bg-white/20 timetable text-xs font-medium px-3 py-1.5 rounded-lg transition-all border border-white/20 cursor-pointer">
+              <SlSizeFullscreen size={12} />
+              Fullscreen
+            </button>
+          </div>
         </div>
       )}
       {isFullscreen && (
-        <div className="flex justify-end px-4 pt-3 pb-2 shrink-0">
+        <div className="flex justify-between items-center px-4 pt-3 pb-2 shrink-0">
+          <span className="text-xs font-semibold px-2.5 py-1.5 bg-white/10 text-white rounded-lg border border-white/20">
+            Total Credits: <span className="text-blue-400 font-extrabold">{totalCredits}</span>
+          </span>
           <button
             onClick={handleCloseFullscreen}
             title="Exit Fullscreen"
@@ -433,8 +445,8 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
         id="timetable">
         <div className="timetable border border-gray-400 rounded-2xl overflow-hidden">
           <div className="flex overflow-x-auto">
-            <div className="shrink-0 w-16 border-r border-gray-200 timetable">
-              <div className="h-11 border-b border-gray-200 " />
+            <div className="shrink-0 w-16 border-r border-gray-200 timetable sticky left-0 bg-[var(--bg-secondary)] z-20">
+              <div className="h-11 border-b border-gray-200 bg-[var(--bg-secondary)]" />
               <div className="relative " style={{ height: totalHeight }}>
                 {SLOT_ROWS.map((row) => (
                   <div
@@ -456,7 +468,7 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
               </div>
             </div>
 
-            <div className="flex flex-1 min-w-120">
+            <div className="flex flex-1 min-w-[750px]">
               {DAY_KEYS.map((dayKey) => (
                 <div
                   key={dayKey}

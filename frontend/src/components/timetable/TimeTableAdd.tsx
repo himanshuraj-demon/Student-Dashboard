@@ -4,6 +4,7 @@ import { type CourseEntry } from "../../../constants/timetabletypes";
 import { FiSearch, FiX } from "react-icons/fi";
 import { COURSES } from "../../../constants/timetabledata";
 import { IoClose } from "react-icons/io5";
+import { COURSE_CREDITS } from "../../../constants/coursecredits";
 
 type TimeTableProp = {
   cources: CourseEntry[];
@@ -34,14 +35,21 @@ const TimeTableAdd: React.FC<TimeTableProp> = ({
     });
   };
 
+  const totalCredits = useMemo(() => {
+    return cources.reduce((sum, c) => sum + (COURSE_CREDITS[c["Course Code"]] ?? 3), 0);
+  }, [cources]);
+
   return (
     <div className="flex mt-5 flex-col items-center">
-      <div className="flex justify-center mx-5 mb-4">
+      <div className="flex justify-center items-center gap-4 mx-5 mb-4 flex-wrap">
         <button
-          className="bg-blue-600 text-white rounded-2xl p-1 px-3 cursor-pointer"
+          className="bg-blue-600 text-white rounded-2xl p-1 px-3 cursor-pointer hover:bg-blue-700 transition-all font-semibold"
           onClick={() => setAdding(false)}>
           Generate TimeTable
         </button>
+        <span className="text-sm font-semibold px-3 py-1 bg-white/10 rounded-xl border border-white/20">
+          Total Selected Credits: <span className="text-blue-400 font-extrabold">{totalCredits}</span>
+        </span>
       </div>
 
       {cources.length > 0 && (
