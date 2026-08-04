@@ -68,22 +68,39 @@ export const COURSES: CourseEntry[] = [
     "Course Name": "Comprehensive Viva Voce"
   },
   {
+    "Course Code": "PH 001",
+    "Course Name": "Preparatory Courses",
+    "Lecture": "E1,E2\n(5/202)"
+  },
+  {
+    "Course Code": "CH 001",
+    "Course Name": "Preparatory Courses",
+    "Lecture": "B1,C2\n(5/202)"
+  },
+  {
+    "Course Code": "MA 001",
+    "Course Name": "Preparatory Courses",
+    "Lecture": "K1,K2\n(7/101)"
+  },
+  {
+    "Course Code": "HS 001",
+    "Course Name": "Preparatory Courses",
+    "Lecture": "G1,G2\n(11/205)"
+  },
+  {
     "Course Code": "CL 202",
     "Course Name": "Chemical Engineering Thermodynamics",
-    "Lecture": "A1,A2\n(7/109)",
-    "Tutorial": "L1\n(7/109)"
+    "Lecture": "A1,A2\n(7/109)"
   },
   {
     "Course Code": "CL 203",
     "Course Name": "Process Fluid Mechanics",
-    "Lecture": "E1,E2\n(7/208)",
-    "Tutorial": "L2\n(7/208)"
+    "Lecture": "E1,E2\n(7/208)"
   },
   {
     "Course Code": "CL 204",
     "Course Name": "Heat Transfer",
-    "Lecture": "D1,D2\n(11/102)",
-    "Tutorial": "B2\n(11/102)"
+    "Lecture": "D1,D2\n(11/102)"
   },
   {
     "Course Code": "CS 202",
@@ -130,7 +147,7 @@ export const COURSES: CourseEntry[] = [
     "Course Name": "Digital Systems",
     "Lecture": "E1,E2\n(10/103)",
     "Tutorial": "L1\n(10/103)",
-    "Lab": "K1\n(10/104,10/105,10/203,10/204)"
+    "Lab": "K1\n(10/103)"
   },
   {
     "Course Code": "ES 243",
@@ -164,7 +181,7 @@ export const COURSES: CourseEntry[] = [
     "Course Code": "ME 207",
     "Course Name": "Fluid Dynamics",
     "Lecture": "E1,E2\n(7/109)",
-    "Tutorial": "M2\n(7/101,7/204)",
+    "Tutorial": "J2\n(11/101,11/102)",
     "Lab": "K1\n(ME Lab)"
   },
   {
@@ -225,7 +242,7 @@ export const COURSES: CourseEntry[] = [
     "Course Code": "CE 203",
     "Course Name": "Geospatial Engineering",
     "Lecture": "E2\n(7/101)",
-    "Lab": "J1,L1\n(CE Lab)"
+    "Lab": "J1,L1\n(10/102)"
   },
   {
     "Course Code": "EE 223",
@@ -243,12 +260,12 @@ export const COURSES: CourseEntry[] = [
     "Course Code": "ME 206",
     "Course Name": "Statics and Dynamics",
     "Lecture": "G1,G2\n(Jagdish Patel Learning Theatre)",
-    "Lab": "I1\n(ME Lab)"
+    "Lab": "K2\n(ME Lab)"
   },
   {
     "Course Code": "EE 322",
     "Course Name": "Analog & Mixed Signal Circuits",
-    "Lecture": "C2,B2\n(Surendra C Sheth Learning Theatre)",
+    "Lecture": "C2,H1\n(Surendra C Sheth Learning Theatre,7/208)",
     "Lab": "L2,K2\n(EE Lab)"
   },
   {
@@ -286,8 +303,14 @@ export const COURSES: CourseEntry[] = [
     "Lecture": "P1,P2\n(10/103)"
   },
   {
+    "Course Code": "ES 335",
+    "Course Name": "Machine Learning",
+    "Lecture": "J1,K2\n(10/103)",
+    "Tutorial": "B2\n(Jagdish Patel Learning Theatre,Harsha Patel Learning Theatre)"
+  },
+  {
     "Course Code": "ES 678",
-    "Course Name": "Machine Learning (ES 335)",
+    "Course Name": "Machine Learning",
     "Lecture": "J1,K2\n(10/103)",
     "Tutorial": "B2\n(Jagdish Patel Learning Theatre,Harsha Patel Learning Theatre)"
   },
@@ -410,9 +433,9 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "ME 334",
     "Course Name": "Heat and Mass Transfer",
-    "Lecture": "C1,C2\n(Jagdish Patel Learning Theatre)",
-    "Tutorial": "L1\n(Jagdish Patel Learning Theatre)",
-    "Lab": "J1\n(ME Lab)"
+    "Lecture": "B1,C2\n(Jagdish Patel Learning Theatre)",
+    "Tutorial": "C1\n(10/105)",
+    "Lab": "F1\n(10/105)"
   },
   {
     "Course Code": "ME 362",
@@ -429,7 +452,7 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "MSE 304",
     "Course Name": "Principles of Metal Extraction and Refining",
-    "Lecture": "J1,J2\n(11/204)"
+    "Lecture": "J1,J2\n(7/105)"
   },
   {
     "Course Code": "FP 501",
@@ -450,7 +473,12 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "BE 303",
     "Course Name": "Bionanotechnology – Principles and Applications",
-    "Lecture": "F1,F2\n(11/204)"
+    "Lecture": "F1,F2\n(7/101)"
+  },
+  {
+    "Course Code": "BE 305",
+    "Course Name": "Origins of Species",
+    "Lecture": "A1,A2\n(7/202)"
   },
   {
     "Course Code": "BE 404",
@@ -460,8 +488,8 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "BE 614",
     "Course Name": "Biostatistics",
-    "Lecture": "G1\n(7/201)",
-    "Lab": "I1,K1\n(BE Lab)"
+    "Lecture": "H2\n(7/201)",
+    "Lab": "B1,D1\n(10/105)"
   },
   {
     "Course Code": "BE 616",
@@ -488,12 +516,12 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "BE 623",
     "Course Name": "Biocomputing",
-    "Lab": "K2,L2\n(BE Lab)"
+    "Lab": "K2,L2\n(10/104)"
   },
   {
     "Course Code": "BE 625",
     "Course Name": "AI Applications in Life Sciences",
-    "Lecture": "D1,D2\n(7/103)"
+    "Lecture": "G1 (7/101)\nD2 (7/110)"
   },
   {
     "Course Code": "CE 315",
@@ -514,11 +542,6 @@ export const COURSES: CourseEntry[] = [
     "Course Code": "CE 642",
     "Course Name": "Integrated Waste Management and Circular Economy",
     "Lecture": "I1,I2\n(Harsha Patel Learning Theatre)"
-  },
-  {
-    "Course Code": "CL 353",
-    "Course Name": "Introduction to Process Safety",
-    "Lecture": "B1\n(Harsha Patel Learning Theatre)"
   },
   {
     "Course Code": "CE 601",
@@ -604,6 +627,11 @@ export const COURSES: CourseEntry[] = [
     "Course Code": "CL 328",
     "Course Name": "Chemical Engineering Practice in Industry",
     "Lecture": "P2\n(11/102)"
+  },
+  {
+    "Course Code": "CL 353",
+    "Course Name": "Introduction to Process Safety",
+    "Lecture": "B1\n(Harsha Patel Learning Theatre)"
   },
   {
     "Course Code": "CL 426",
@@ -762,8 +790,14 @@ export const COURSES: CourseEntry[] = [
     "Lecture": "L1,L2\n(7/106)"
   },
   {
+    "Course Code": "ES 421",
+    "Course Name": "RFIC Design",
+    "Lecture": "N2,P2\n(7/202)",
+    "Lab": "B1,D1\n(EE Lab)"
+  },
+  {
     "Course Code": "ES 679",
-    "Course Name": "RFIC Design (ES 421)",
+    "Course Name": "RFIC Design",
     "Lecture": "N2,P2\n(7/202)",
     "Lab": "B1,D1\n(EE Lab)"
   },
@@ -784,8 +818,14 @@ export const COURSES: CourseEntry[] = [
     "Lab": "I2\n(EE Lab)"
   },
   {
+    "Course Code": "EE 434",
+    "Course Name": "Wireless System Design and Implementation",
+    "Lecture": "J1\n(7/110)",
+    "Lab": "A2,B2\n(EE Lab)"
+  },
+  {
     "Course Code": "EE 671",
-    "Course Name": "Wireless System Design and Implementation (EE 434)",
+    "Course Name": "Wireless System Design and Implementation",
     "Lecture": "J1\n(7/110)",
     "Lab": "A2,B2\n(EE Lab)"
   },
@@ -876,7 +916,12 @@ export const COURSES: CourseEntry[] = [
     "Course Code": "ME 639",
     "Course Name": "Introduction to Robotics",
     "Lecture": "M1,M2\n(7/203)",
-    "Lab": "P1\n(ME Lab)"
+    "Lab": "P1\n(7/203)"
+  },
+  {
+    "Course Code": "ME 640",
+    "Course Name": "Fracture Mechanics",
+    "Lecture": "E1,E2\n(7/110)"
   },
   {
     "Course Code": "ES 646",
@@ -888,6 +933,18 @@ export const COURSES: CourseEntry[] = [
     "Course Name": "Mathematical Tools for Mechanical Engineers",
     "Lecture": "C1,C2\n(7/210)",
     "Tutorial": "H2\n(7/210)"
+  },
+  {
+    "Course Code": "ME 691-XXII",
+    "Course Name": "Special Topics in Mechanical Engineering: Fluid Dynamics at Small Scales",
+    "Lecture": "J1,J2\n(11/204)",
+    "Tutorial": "A2\n(11/204)"
+  },
+  {
+    "Course Code": "ME 691-XXIII",
+    "Course Name": "Special Topics in Mechanical Engineering: Foundations of Heat and Mass Transfer",
+    "Lecture": "L1,L2\n(11/204)",
+    "Tutorial": "P2\n(11/204)"
   },
   {
     "Course Code": "ME 692-X",
@@ -971,7 +1028,7 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "CH 622",
     "Course Name": "Interpretative Organic Spectroscopy",
-    "Lecture": "A1,A2\n(7/208)"
+    "Lecture": "B1,B2\n(7/108)"
   },
   {
     "Course Code": "CH 624",
@@ -981,7 +1038,7 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "CH 626",
     "Course Name": "Asymmetric Synthesis and Catalysis",
-    "Lecture": "D1,D2\n(11/205)"
+    "Lecture": "E1,E2\n(11/205)"
   },
   {
     "Course Code": "CH 627",
@@ -1002,7 +1059,7 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "CH 637",
     "Course Name": "Organic Electronics",
-    "Lecture": "J1,J2\n(7/105)"
+    "Lecture": "J1,J2\n(7/108)"
   },
   {
     "Course Code": "CH 640",
@@ -1098,7 +1155,7 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "MA 643",
     "Course Name": "Numerical Analysis for Partial Differential Equations",
-    "Lecture": "P1,P2\n(13/124)"
+    "Lecture": "K1,K2\n(7/110)"
   },
   {
     "Course Code": "MA 691-II",
@@ -1254,6 +1311,12 @@ export const COURSES: CourseEntry[] = [
     "Lecture": "N1,N2\n(13/125)"
   },
   {
+    "Course Code": "EH 634",
+    "Course Name": "Dynamic Earth Surface and Nature Hazards",
+    "Lecture": "F1\n(7/102)",
+    "Lab": "B1,D1\n(10/104)"
+  },
+  {
     "Course Code": "EH 638",
     "Course Name": "Rock Mechanics and Rock Engineering",
     "Lecture": "J1,J2\n(7/206)"
@@ -1311,6 +1374,17 @@ export const COURSES: CourseEntry[] = [
     "Lecture": "D1,D2\n(7/201)"
   },
   {
+    "Course Code": "CG 615",
+    "Course Name": "AI & Human Cognition",
+    "Lecture": "N1,N2\n(7/109)",
+    "Tutorial": "P2\n(7/209)"
+  },
+  {
+    "Course Code": "ES 606",
+    "Course Name": "Computational Neuroscience",
+    "Lecture": "G1,G2\n(7/201)"
+  },
+  {
     "Course Code": "ES 673",
     "Course Name": "NeuroAI: Neuroscience & Artificial Intelligence",
     "Lecture": "E1,E2\n(7/206)"
@@ -1330,7 +1404,7 @@ export const COURSES: CourseEntry[] = [
     "Course Code": "FP 602",
     "Course Name": "Writing (For Engineering PhD students and MTech Students)",
     "Lecture": "H1\n(Jasubhai Auditorium)",
-    "Lab": "P1,P2\n(7/101,7/102,7/103,7/104,7/105,7/204,7/205,7/206)"
+    "Lab": "P1,P2\n(7/101,7/102,7/103,7/104,7/105,7/204,7/205,7/206,7/207)"
   },
   {
     "Course Code": "FP 602 (MA)",
@@ -1342,7 +1416,7 @@ export const COURSES: CourseEntry[] = [
     "Course Code": "FP 602 (CG)",
     "Course Name": "Writing (PG Cognitive and Brain Science)",
     "Lecture": "H2\n(Jayshree S Sheth Learning Theatre)",
-    "Lab": "I1,K1\n(7/201,7/207,7/210,7/108)"
+    "Lab": "I1,K1\n(7/108)"
   },
   {
     "Course Code": "FP 602 (CH)",
@@ -1391,18 +1465,38 @@ export const COURSES: CourseEntry[] = [
     "Lecture": "L1,L2\n(11/205)"
   },
   {
+    "Course Code": "HS 392",
+    "Course Name": "Special Topics in HSS: Competitiveness and Ethical Leadership (first half)",
+    "Lecture": "N2,P2\n(5/202)"
+  },
+  {
     "Course Code": "MS 408",
     "Course Name": "Financial Considerations in Engineering Decisions",
     "Lecture": "M1,M2\n(7/209)"
   },
   {
+    "Course Code": "MS 491",
+    "Course Name": "Special Topics in Management: Marketing Analytics",
+    "Lecture": "M1,M2\n(Online)"
+  },
+  {
+    "Course Code": "MS 491-XIII",
+    "Course Name": "Special Topics in Management: An Introduction to Business, Organization & Finance",
+    "Lecture": "P1,P2 (Jayshree S Sheth Learning Theatre)\nSaturday (10:30 AM–12:30 PM) (11/102)"
+  },
+  {
+    "Course Code": "MS 491-XVI",
+    "Course Name": "Special Topics in Management: Lean Six Sigma",
+    "Lecture": "P1,P2\n(7/208)"
+  },
+  {
     "Course Code": "MS 492-VIII",
-    "Course Name": "Special Topics in Management: Leadership Development & Executive Presence",
+    "Course Name": "Special Topics in Management: Leadership Development & Executive Presence (first half)",
     "Lecture": "L1,L2\n(7/105)"
   },
   {
     "Course Code": "MS 492-IX",
-    "Course Name": "Special Topics in Management: Managing People and Workplace Behaviour",
+    "Course Name": "Special Topics in Management: Managing People and Workplace Behaviour (first half)",
     "Lecture": "P1,P2\n(7/106)"
   },
   {
@@ -1458,7 +1552,7 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "HS 523",
     "Course Name": "Quantitative Research Methods in Social Sciences",
-    "Lecture": "G1,G2\n(7/202)",
+    "Lecture": "B1,B2\n(7/203)",
     "Tutorial": "H1\n(7/109)"
   },
   {
@@ -1489,7 +1583,7 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "HS 647",
     "Course Name": "Literature, Theory and Social Context",
-    "Lecture": "E1,E2\n(7/202)"
+    "Lecture": "I2,J2\n(7/208)"
   },
   {
     "Course Code": "HS 651",
