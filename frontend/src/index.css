@@ -323,49 +323,68 @@ h6 {
 }
 
 .mobile-nav {
-  @apply fixed bottom-0 left-0 right-0 h-12 flex items-center justify-around backdrop-blur-md border-t md:hidden z-50;
-  background: linear-gradient(to bottom,
-      var(--nav-from),
-      var(--nav-via),
-      var(--nav-to));
-  border-right: 1px solid var(--border-primary);
+  @apply fixed bottom-0 left-0 right-0 h-14 flex items-center justify-around md:hidden z-50;
+  background:var(--bg-primary);
+  border: 1px solid color(var(--bg-secondary));
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out;
+
+  &.mobile-nav--hidden {
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+  }
 
   .nav-item {
-    @apply flex flex-col items-center justify-center gap-0.5 px-2 py-1 rounded-2xl transition-all duration-200;
-    min-width: 48px;
+    @apply flex flex-col items-center justify-center flex-1 py-1 px-1 transition-all duration-200 cursor-pointer;
+  }
+
+  .nav-icon-container {
+    @apply flex items-center justify-center rounded-full transition-all duration-300;
+    width: 45px;
+    height: 28px;
     color: var(--text-secondary);
   }
 
-  .nav-icon {
-    @apply flex items-center justify-center;
-    font-size: 22px;
-    line-height: 1;
+  .nav-icon-container svg {
+    font-size: 18px;
+    transition: transform 0.2s ease;
+  }
+
+  .nav-icon-container--active {
+    background-color: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--text-primary);
+  }
+
+  .nav-icon-container--active svg {
+    color: var(--text-primary) !important;
+    transform: scale(1.05);
   }
 
   .nav-label {
-    @apply text-[8px] font-medium tracking-wide leading-none;
-    color: inherit;
+    @apply text-[9px] font-medium tracking-wide mt-1 transition-all duration-200 text-center;
+    color: var(--text-secondary);
   }
 
-  .Mactive-link {
-    @apply font-extrabold;
-    background-color: var(--accent);
-    border: 1px solid gold;
+  .nav-label--active {
+    @apply font-bold;
     color: var(--text-primary);
   }
 
   .plus-btn {
-    @apply flex items-center justify-center rounded-full transition-all duration-300;
-    width: 45px;
-    height: 45px;
-    background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 60%, transparent));
-    border: 1.5px solid gold;
+    @apply flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer shrink-0;
+    width: 42px;
+    height: 42px;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
     color: var(--text-primary);
-    box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 50%, transparent);
+  }
+
+  .plus-btn:hover {
+    background: color-mix(in srgb, var(--accent) 20%, transparent);
   }
 
   .plus-btn:active {
-    transform: scale(0.95);
+    transform: scale(0.92);
   }
 
   .plus-btn--open svg {
@@ -383,24 +402,46 @@ h6 {
   }
 
   .more-menu {
-    @apply fixed bottom-20 left-4 right-4 flex flex-col gap-2 p-4 rounded-3xl backdrop-blur-md shadow-xl z-50;
-    background-color: var(--nav-via);
-    color: var(--text-primary);
-    border: 0.5px solid var(--border-primary);
-    animation: slideUp 0.2s ease;
+    @apply fixed bottom-20 left-4 right-4 p-3 rounded-2xl backdrop-blur-lg shadow-2xl z-50;
+    background-color: color-mix(in srgb, var(--bg-secondary) 92%, transparent);
+    border: 1px solid color-mix(in srgb, var(--border) 45%, transparent);
+    animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .more-menu a {
-    @apply flex items-center gap-3 p-3 rounded-xl transition-all duration-200;
+  .more-menu-grid {
+    @apply grid grid-cols-2 gap-1.5;
+  }
+
+  .more-menu-item {
+    @apply flex items-center gap-3 p-3 rounded-xl transition-all duration-200 cursor-pointer text-sm;
+    color: var(--text-secondary);
+  }
+
+  .more-menu-item:hover,
+  .more-menu-item--active {
+    background-color: color-mix(in srgb, var(--accent) 8%, transparent);
+    color: var(--text-primary);
+  }
+
+  .more-menu-icon {
+    @apply flex items-center justify-center;
+    font-size: 20px;
+  }
+
+  .more-menu-item--active .more-menu-icon svg {
+    color: var(--text-primary) !important;
+  }
+
+  .more-menu-label {
+    @apply font-medium;
   }
 }
 
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(16px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
