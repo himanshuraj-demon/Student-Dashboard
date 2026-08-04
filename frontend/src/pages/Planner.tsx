@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useTitle } from "../hooks/useTitle";
-import Nav from "../services/Nav";
 import CurriculumTable from "../components/planner/CurriculumTable";
 import {
   curriculumPathway1,
@@ -41,9 +40,7 @@ const Planner = () => {
   useTitle("Planer");
   const { user } = useAuth();
   return (
-    <div className="main">
-      <Nav />
-      <div className="flex flex-col w-full md:w-auto md:h-dvh  overflow-x-hidden relative">
+    <div className="flex flex-col w-full md:w-auto md:h-dvh  overflow-x-hidden relative">
         <div>
           <h1 className="text-center text-red-500 font-semibold">
             This is data given by institute and not updated for current year so
@@ -93,7 +90,6 @@ const Planner = () => {
           {user && <CommunityFeedback currentUser={user} />}
         </div>
       </div>
-    </div>
   );
 };
 

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Nav from "../services/Nav";
 import { getUsers, updateRole } from "../services/adminapi";
 import { type User } from "../context/AuthContext";
 
@@ -42,10 +41,7 @@ const AdminPage = ({ currentUser }: Props) => {
   };
 
   return (
-    <div className="main">
-      <Nav />
-
-      <div className="mx-auto w-dvw md:w-auto p-6 sm:p-8 h-dvh">
+    <div className="mx-auto w-dvw md:w-auto p-6 sm:p-8 h-dvh">
         {/* Header Section */}
         <div className="mb-8 flex flex-col gap-1">
           <h1 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
@@ -140,7 +136,6 @@ const AdminPage = ({ currentUser }: Props) => {
           )}
         </div>
       </div>
-    </div>
   );
 };
 

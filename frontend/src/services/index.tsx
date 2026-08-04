@@ -18,6 +18,8 @@ import AdminError from "../pages/AdminError";
 const Minors = lazy(() => import("../pages/Minors"));
 const AcademicCalendar = lazy(() => import("../pages/Calender"));
 
+import DashboardLayout from "./DashboardLayout";
+
 export {
   Details,
   AdminPage,
@@ -36,4 +38,5 @@ export {
   AdminError,
   AcademicCalendar,
   Minors,
+  DashboardLayout,
 };

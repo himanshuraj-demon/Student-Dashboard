@@ -1,6 +1,5 @@
 import { useState, useMemo } from "react";
 import { useTitle } from "../hooks/useTitle";
-import Nav from "../services/Nav";
 import MinorPanel from "../components/cources/MinorPanel";
 import { MINORS, MINOR_COURSES, type Minor } from "../../constants/minors";
 import { useAuth } from "../hooks/useAuth";
@@ -35,10 +34,7 @@ export default function Minors() {
   }, [search]);
 
   return (
-    <div className="main">
-      <Nav />
-      
-      <div className="flex flex-col md:flex-row gap-4 p-1 md:p-4 min-h-screen bg-[rgba(59,130,246,0.06)] font-sans overflow-x-hidden overflow-y-scroll h-fit md:h-dvh w-full">
+    <div className="flex flex-col md:flex-row gap-4 p-1 md:p-4 min-h-screen bg-[rgba(59,130,246,0.06)] font-sans overflow-x-hidden overflow-y-scroll h-fit md:h-dvh w-full">
         {/* ── Sidebar ── */}
         <aside className="w-full md:w-64 shrink-0 flex flex-col gap-3">
           <div className="relative">
@@ -131,6 +127,5 @@ export default function Minors() {
           onRemoveMinor={handleRemoveMinor}
         />
       </div>
-    </div>
   );
 }

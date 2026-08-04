@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useTitle } from "../hooks/useTitle";
-import Nav from "../services/Nav";
 import { useAuth } from "../hooks/useAuth";
 import axios from "axios";
 import { SiGithub, SiCodeforces } from "react-icons/si";
@@ -111,9 +110,7 @@ const Competitive = () => {
 
   useTitle("Competitive");
   return (
-    <div className="main">
-      <Nav />
-      <div className="h-dvh flex text-black flex-col overflow-y-scroll">
+    <div className="h-dvh flex text-black flex-col overflow-y-scroll">
         <div className="md:h-30 m-2 h-auto rounded-2xl flex flex-col justify-center px-6 py-2 bg-[#ffffff99]">
           <h1 className="md:text-3xl text-2xl font-bold tracking-tight text-center">
             👋Welcome Back, Coder!
@@ -207,7 +204,6 @@ const Competitive = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

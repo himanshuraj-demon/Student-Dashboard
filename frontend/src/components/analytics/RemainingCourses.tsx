@@ -29,7 +29,7 @@ export default function RemainingCourses({
           </div>
         </div>
       </div>
-      <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border h-dvh border-gray-100 shadow-sm overflow-x-hidden overflow-y-auto min-w-0 flex flex-col">
+      <section className="branchpanelsearch bg-[#ffffff11] rounded-2xl border h-fit border-gray-100 shadow-sm overflow-x-hidden min-w-0 flex flex-col">
         <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-gray-50 shrink-0">
           <h2 className="font-semibold flex items-center gap-2 min-w-0">
             <span className="w-2.5 h-2.5 rounded-full bg-red-500 inline-block shrink-0" />
@@ -47,7 +47,7 @@ export default function RemainingCourses({
           )}
         </div>
 
-        <div className="overflow-y-auto p-3 max-h-dvh">
+        <div className="p-3">
           <ul className="flex flex-col gap-1.5 h-auto">
             {yourCourses.map((c) => (
               <CourseRow key={c.code! + Math.random} course={c} type="your" />
@@ -78,7 +78,7 @@ export default function RemainingCourses({
           )}
         </div>
 
-        <div className="overflow-y-auto p-3 max-h-dvh">
+        <div className="p-3">
           <ul className="flex flex-col gap-1.5 h-auto">
             {remainingMandatoryCourses.map((c) => (
               <CourseRow key={c.code! + Math.random()} course={c} type="your" />
@@ -103,7 +103,7 @@ export default function RemainingCourses({
               </div>
             </div>
 
-            <div className="overflow-y-auto p-3 max-h-dvh">
+            <div className="p-3">
               {remainingMinorCourses.length > 0 ? (
                 <ul className="flex flex-col gap-1.5 h-auto">
                   {remainingMinorCourses.map((c) => (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import AiSidebar from "../components/helpers/AiSidebar";
 import { LuBotMessageSquare } from "react-icons/lu";
-import Nav from "../services/Nav";
 import Notes from "./Notes";
 import Todos from "./Todo";
 import { FaRegNoteSticky } from "react-icons/fa6";
@@ -9,15 +9,17 @@ import { MdNote } from "react-icons/md";
 
 type TopbarView = "notes" | "todos";
 const Work = () => {
-  const [isAiOpen, setAiOpen] = useState(false);
+  const { isAiOpen, setAiOpen } = useOutletContext<{
+    isAiOpen: boolean;
+    setAiOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  }>();
   const [topbarView, setTopbarView] = useState<TopbarView>("notes");
 
   const AiSidebarWithProps = AiSidebar as React.ComponentType<{
     setAiOpen: React.Dispatch<React.SetStateAction<boolean>>;
   }>;
   return (
-    <div className={`main ${isAiOpen ? "ai-open" : ""} overflow-hidden`}>
-      <Nav />
+    <>
       <section className="flex flex-col h-dvh">
         <div className="flex sticky rounded-xl overflow-hidden border border-gray-300 bg-[rgba(59,130,246,0.06)] shadow-sm">
           <button
@@ -45,7 +47,7 @@ const Work = () => {
           <LuBotMessageSquare size={35} />
         </button>
       )}
-    </div>
+    </>
   );
 };
 

@@ -18,6 +18,7 @@ import {
   AcademicCalendar,
   Minors,
   AdminPage,
+  DashboardLayout,
 } from "./services";
 import ThemeProvider from "./context/ThemeContext";
 import { useAuth } from "./hooks/useAuth";
@@ -40,28 +41,29 @@ const App = () => {
               path="/"
               element={auth ? <Navigate to="/dashboard" /> : <Home />}
             />
-            <Route path="/timetable" element={<Timetable />} />
-            <Route element={<ProtectedRoute />}>
-              
-              <Route
-                path="/admin"
-                element={
-                  user?.role === "ADMIN" ? (
-                    <AdminPage currentUser={user} />
-                  ) : (
-                    <AdminError />
-                  )
-                }
-              />
-              <Route path="/dashboard" element={<Dashbord />} />
-              <Route path="/planner" element={<Planner />} />
-              <Route path="/courses" element={<Courses />} />
-              <Route path="/minors" element={<Minors />} />
-              <Route path="/analytics" element={<Analytics />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/competitive" element={<Competitive />} />
-              <Route path="/work" element={<Work />} />
-              <Route path="/calender" element={<AcademicCalendar />} />
+            <Route element={<DashboardLayout />}>
+              <Route path="/timetable" element={<Timetable />} />
+              <Route element={<ProtectedRoute />}>
+                <Route
+                  path="/admin"
+                  element={
+                    user?.role === "ADMIN" ? (
+                      <AdminPage currentUser={user} />
+                    ) : (
+                      <AdminError />
+                    )
+                  }
+                />
+                <Route path="/dashboard" element={<Dashbord />} />
+                <Route path="/planner" element={<Planner />} />
+                <Route path="/courses" element={<Courses />} />
+                <Route path="/minors" element={<Minors />} />
+                <Route path="/analytics" element={<Analytics />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/competitive" element={<Competitive />} />
+                <Route path="/work" element={<Work />} />
+                <Route path="/calender" element={<AcademicCalendar />} />
+              </Route>
             </Route>
             <Route path="/details" element={<Details />} />
             <Route path="/login" element={<Login />} />

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Nav from "../services/Nav";
 import {CALENDAR_DATA,MONTHS_MAP} from "../../constants/calender"
 
 const CATEGORIES = {
@@ -51,8 +50,6 @@ export default function AcademicCalendar() {
   });
 
   return (
-    <div className="main">
-        <Nav/>
     <div className="h-dvh overflow-y-scroll bg-[#ffffff11] p-4 md:p-8  antialiased selection:bg-indigo-100">
       <div className="mx-auto max-w-7xl space-y-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-slate-200 pb-5">
@@ -246,7 +243,6 @@ export default function AcademicCalendar() {
 
         </div>
       </div>
-    </div>
     </div>
   );
 }

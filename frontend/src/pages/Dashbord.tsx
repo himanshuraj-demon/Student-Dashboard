@@ -1,5 +1,4 @@
 import React from "react";
-import Nav from "../services/Nav";
 import { useAuth } from "../hooks/useAuth";
 import { branches, instituteRequirements } from "../../constants/courses";
 import { Link } from "react-router-dom";
@@ -102,9 +101,7 @@ export default function Dashboard() {
   const totalCoreElectiveCredits = branchData.electiveCredits;
 
   return (
-    <div className="main">
-      <Nav />
-      <div className="dashboard-wrapper h-dvh overflow-y-scroll w-dvw md:w-auto">
+    <div className="dashboard-wrapper h-dvh overflow-y-scroll w-dvw md:w-auto">
         <div className="w-auto mx-auto md:p-6 p-3">
           <div className="dash-header mb-6">
             <div className="flex justify-between items-start relative z-10">
@@ -288,6 +285,5 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-    </div>
   );
 }

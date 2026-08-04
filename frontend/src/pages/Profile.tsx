@@ -1,6 +1,5 @@
 import  { useEffect, useState } from "react";
 import { useTitle } from "../hooks/useTitle";
-import Nav from "../services/Nav";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../hooks/useAuth";
 import axios from "axios";
@@ -122,9 +121,7 @@ const Profile = () => {
   useTitle("Profile");
 
   return (
-    <div className="main">
-      <Nav />
-      <div className="mainprofilebox">
+    <div className="mainprofilebox">
         <div className="profile-cover">
           <div className="cover-grid" />
           <div className="cover-glow" />
@@ -427,7 +424,6 @@ const Profile = () => {
 
         : ""}
       </div>
-    </div>
   );
 };
 
