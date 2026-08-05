@@ -46,13 +46,13 @@ const About = () => {
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
           <div>
             <span className="font-mono text-xs uppercase tracking-widest text-violet-soft">
-              Why StudyTracker
+              Why SmartOS
             </span>
             <h2 className="mt-4 font-display text-4xl font-semibold text-ink md:text-5xl">
               Built like the apps you actually trust your data with.
             </h2>
             <p className="mt-5 text-muted">
-              StudyTracker isn't a student project bolted onto a spreadsheet — it's a
+              SmartOS isn't a student project bolted onto a spreadsheet — it's a
               full authenticated platform with role-based access, sanitized inputs and
               cookie-secured sessions, so your transcript stays yours.
             </p>

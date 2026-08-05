@@ -21,7 +21,7 @@ const Nav = () => {
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet text-void">
             <GraduationCap size={18} />
           </div>
-          <span className="font-display text-lg font-semibold text-ink">StudyTracker</span>
+          <span className="font-display text-lg font-semibold text-ink">SmartOS</span>
         </div>
 
         <nav className="hidden items-center gap-8 md:flex">

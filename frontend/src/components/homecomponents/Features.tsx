@@ -95,7 +95,7 @@ const Features = () => {
           </h2>
           <p className="mt-4 text-muted">
             From the courses you've finished to the contest you haven't registered for yet —
-            StudyTracker keeps the whole degree in view.
+            SmartOS keeps the whole degree in view.
           </p>
         </motion.div>
 

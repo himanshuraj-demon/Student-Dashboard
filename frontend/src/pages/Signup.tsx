@@ -99,7 +99,7 @@ export default function Signup() {
       <div className="signup-left">
         <div className="signup-brand">
           <span className="signup-brand-dot" />
-          StudyTracker
+          SmartOS
         </div>
 
         <div className="signup-form-wrap">

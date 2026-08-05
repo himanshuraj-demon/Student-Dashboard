@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
             to={"/profile"}
             className={({ isActive }) => (isActive ? "active-link" : "")}>
             <FaUser size={22} className="img text-[var(--text-secondary)]" />
-            <span>SmartTrack</span>
+            <span>SmartOS</span>
           </NavLink>
         </div>
       </nav>

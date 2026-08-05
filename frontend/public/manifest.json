@@ -1,0 +1,20 @@
+{
+  "short_name": "SmartOS",
+  "name": "SmartOS Student Dashboard (SmartTrack)",
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0d0b14",
+  "theme_color": "#8b5cf6",
+  "display": "standalone"
+}

@@ -40,9 +40,9 @@ const Contact = () => {
                 down, and we'll tell you when it's fixed.
               </p>
               <a
-                href="mailto:hello@studytracker.app"
+                href="mailto:hello@smartos.app"
                 className="mt-6 inline-flex items-center gap-1.5 font-mono text-sm text-lilac hover:text-violet-soft">
-                hello@studytracker.app
+                hello@smartos.app
                 <ArrowUpRight size={16} />
               </a>
             </div>

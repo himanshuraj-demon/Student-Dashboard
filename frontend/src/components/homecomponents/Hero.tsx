@@ -83,7 +83,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-6 max-w-md text-lg text-muted">
-            StudyTracker turns your CPI, credits, timetable and deadlines into
+            SmartOS (incorporating SmartTrack) turns your CPI, credits, timetable and deadlines into
             one live dashboard — so you plan the semester instead of guessing
             your way through it.
           </motion.p>

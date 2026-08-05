@@ -26,7 +26,7 @@ const Footer = () => {
                 <FaGraduationCap size={18} />
               </div>
               <span className="font-display text-lg font-semibold text-ink">
-                StudyTracker
+                SmartOS
               </span>
             </div>
             <p className="mt-4 max-w-xs text-sm text-muted">
@@ -83,7 +83,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-muted md:flex-row">
-          <span>© {new Date().getFullYear()} StudyTracker. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} SmartOS. All rights reserved.</span>
           <span className="font-mono">Made for students, by students.</span>
         </div>
       </div>

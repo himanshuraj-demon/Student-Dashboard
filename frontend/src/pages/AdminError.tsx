@@ -166,7 +166,7 @@ export default function AdminError() {
           className="w-2 h-2 rounded-full bg-violet-600"
           style={{ boxShadow: "0 0 8px rgba(124,58,237,0.9)" }}
         />
-        StudyTracker
+        SmartOS
       </div>
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-105 h-105 pointer-events-none">
@@ -276,7 +276,7 @@ export default function AdminError() {
         <span className="w-1 h-1 rounded-full bg-zinc-700 inline-block" />
         Error Admin
         <span className="w-1 h-1 rounded-full bg-zinc-700 inline-block" />
-        StudyTracker
+        SmartOS
         <span className="w-1 h-1 rounded-full bg-zinc-700 inline-block" />
       </div>
     </div>
