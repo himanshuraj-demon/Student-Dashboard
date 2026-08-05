@@ -30,10 +30,19 @@ for idx, row in df.iterrows():
 
     if code_str in courses_dict:
         continue
-        
+
+    credits = row.get('C')
+    try:
+        credits_val = float(credits)
+        if pd.notna(credits) and credits_val.is_integer():
+            credits_val = int(credits_val)
+    except (ValueError, TypeError):
+        credits_val = 3
+
     course_entry = {
         "Course Code": code_str,
-        "Course Name": name_str
+        "Course Name": name_str,
+        "Credits": credits_val
     }
     
     for field in ['Lecture', 'Tutorial', 'Lab']:

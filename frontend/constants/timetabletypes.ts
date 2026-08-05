@@ -10,6 +10,7 @@ type SlotRow = {
 type CourseEntry = {
   "Course Code": string;
   "Course Name"?: string;
+  Credits?: number;
   Lecture?: string;
   Lab?: string;
   Tutorial?:string

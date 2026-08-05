@@ -45,6 +45,14 @@ export const TimeTableRows: React.FC<TimeTableProp> = ({
         <span className="text-sm font-medium text-black truncate min-w-0">
           {course["Course Name"]}
         </span>
+        
+      </div>
+      <div>
+        {course.Credits !== undefined && (
+          <span className="text-[10px] font-bold text-slate-700 bg-black/5 px-2 py-0.5 rounded-md shrink-0 border border-black/10">
+            {course.Credits} Cr
+          </span>
+        )}
       </div>
     </li>
   );

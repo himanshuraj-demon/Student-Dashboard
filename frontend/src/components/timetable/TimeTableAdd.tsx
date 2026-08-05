@@ -4,7 +4,6 @@ import { type CourseEntry } from "../../../constants/timetabletypes";
 import { FiSearch, FiX } from "react-icons/fi";
 import { COURSES } from "../../../constants/timetabledata";
 import { IoClose } from "react-icons/io5";
-import { COURSE_CREDITS } from "../../../constants/coursecredits";
 
 type TimeTableProp = {
   cources: CourseEntry[];
@@ -36,7 +35,7 @@ const TimeTableAdd: React.FC<TimeTableProp> = ({
   };
 
   const totalCredits = useMemo(() => {
-    return cources.reduce((sum, c) => sum + (COURSE_CREDITS[c["Course Code"]] ?? 3), 0);
+    return cources.reduce((sum, c) => sum + (c.Credits ?? 3), 0);
   }, [cources]);
 
   return (
@@ -57,10 +56,16 @@ const TimeTableAdd: React.FC<TimeTableProp> = ({
           <ul className="flex flex-wrap gap-2 border border-white rounded-2xl p-3 m-2">
             {cources.map((c) => (
               <li
-                className="bg-green-100 text-black px-3 py-1 rounded-2xl flex items-center cursor-pointer"
+                key={c["Course Code"]}
+                className="bg-green-100 text-black px-3 py-1 rounded-2xl flex items-center gap-1.5 cursor-pointer font-medium"
                 onClick={() => handleToggle(c)}>
-                {c["Course Code"]}
-                <IoClose size={20} />{" "}
+                <span>{c["Course Code"]}</span>
+                {c.Credits !== undefined && (
+                  <span className="text-[10px] font-bold text-gray-600 bg-black/5 px-1 py-0.5 rounded">
+                    {c.Credits} cr
+                  </span>
+                )}
+                <IoClose size={18} className="text-gray-700 hover:text-black" />
               </li>
             ))}
           </ul>

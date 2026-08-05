@@ -20,7 +20,6 @@ const SLOT_ROWS: SlotRow[] = [
 import { SlSizeFullscreen } from "react-icons/sl";
 import { FaPlus, FaDownload } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-import { COURSE_CREDITS } from "../../../constants/coursecredits";
 
 const DAY_KEYS: (keyof Omit<SlotRow, "Slot">)[] = ["M", "T", "W", "Th", "F"];
 const DAY_LABELS: Record<string, string> = {
@@ -247,7 +246,7 @@ const TimeTableGenerator: React.FC<TimeTableProp> = ({
     ([_, events]) => events.length > 1,
   );
   const totalCredits = useMemo(() => {
-    return courses.reduce((sum, c) => sum + (COURSE_CREDITS[c["Course Code"]] ?? 3), 0);
+    return courses.reduce((sum, c) => sum + (c.Credits ?? 3), 0);
   }, [courses]);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const printRef = useRef<HTMLDivElement>(null);
