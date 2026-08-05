@@ -90,17 +90,20 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "CL 202",
     "Course Name": "Chemical Engineering Thermodynamics",
-    "Lecture": "A1,A2\n(7/109)"
+    "Lecture": "A1,A2\n(7/109)",
+    "Tutorial": "A1,A2\n(7/109)"
   },
   {
     "Course Code": "CL 203",
     "Course Name": "Process Fluid Mechanics",
-    "Lecture": "E1,E2\n(7/208)"
+    "Lecture": "E1,E2\n(7/208)",
+    "Tutorial": "E1,E2\n(7/208)"
   },
   {
     "Course Code": "CL 204",
     "Course Name": "Heat Transfer",
-    "Lecture": "D1,D2\n(11/102)"
+    "Lecture": "D1,D2\n(11/102)",
+    "Tutorial": "D1,D2\n(11/102)"
   },
   {
     "Course Code": "CS 202",
@@ -117,7 +120,7 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "GE 201",
     "Course Name": "General Education II",
-    "Lecture": "P1,P2\n(Jasubhai Auditorium)"
+    "Lecture": "P1,P2\n(Jasubhai Auditorium,Surendra C Sheth Learning Theatre)"
   },
   {
     "Course Code": "HS 221",
@@ -161,12 +164,12 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "MSE 314",
     "Course Name": "Materials Selection and Design",
-    "Lecture": "C2\n(Jasubhai Auditorium),I2\n(Jagdish Patel Learning Theatre)"
+    "Lecture": "C2\n(Jasubhai Auditorium),\nI2(Jagdish Patel Learning Theatre)"
   },
   {
     "Course Code": "MSE 318",
     "Course Name": "Introduction to Quantum Materials and Devices",
-    "Lecture": "C1\n(Jasubhai Auditorium),I2\n(Jayshree S Sheth Learning Theatre)"
+    "Lecture": "C1\n(Jasubhai Auditorium),\nI2(Jayshree S Sheth Learning Theatre)"
   },
   {
     "Course Code": "MSE 319",
@@ -259,7 +262,7 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "ME 206",
     "Course Name": "Statics and Dynamics",
-    "Lecture": "G1,G2\n(Jagdish Patel Learning Theatre)",
+    "Lecture": "M1,M2\n(7/203)",
     "Lab": "K2\n(ME Lab)"
   },
   {
@@ -434,8 +437,8 @@ export const COURSES: CourseEntry[] = [
     "Course Code": "ME 334",
     "Course Name": "Heat and Mass Transfer",
     "Lecture": "B1,C2\n(Jagdish Patel Learning Theatre)",
-    "Tutorial": "C1\n(10/105)",
-    "Lab": "F1\n(10/105)"
+    "Tutorial": "C1\n(10/104)",
+    "Lab": "F1\n(10/104)"
   },
   {
     "Course Code": "ME 362",
@@ -456,19 +459,19 @@ export const COURSES: CourseEntry[] = [
   },
   {
     "Course Code": "FP 501",
-    "Course Name": "Aarohan (For 2025 MSc and MA students)"
+    "Course Name": "Aarohan (For 2026 MSc and MA students)"
   },
   {
     "Course Code": "FP 601",
-    "Course Name": "Aarohan (For 2025 MTech, PGDIIT and PhD students)"
+    "Course Name": "Aarohan (For 2026 MTech, PGDIIT and PhD students)"
   },
   {
     "Course Code": "PE 500",
-    "Course Name": "Physical Education (For 2022 MSc and MA students)"
+    "Course Name": "Physical Education (MSc and MA students)"
   },
   {
     "Course Code": "PE 600",
-    "Course Name": "Physical Education (For 2022 M Tech and PhD students)"
+    "Course Name": "Physical Education (MTech and PhD students)"
   },
   {
     "Course Code": "BE 303",
@@ -567,7 +570,7 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "CE 622",
     "Course Name": "Structural Dynamics",
-    "Lecture": "D1,D2\n(11/204)"
+    "Lecture": "A1,A2\n(7/210)"
   },
   {
     "Course Code": "CE 625",
@@ -582,7 +585,7 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "CE 634",
     "Course Name": "Air Pollution Control Engineering",
-    "Lecture": "P1,P2\n(7/210)"
+    "Lecture": "J1,J2\n(7/209)"
   },
   {
     "Course Code": "CE 635",
@@ -761,7 +764,7 @@ export const COURSES: CourseEntry[] = [
     "Course Code": "EH 304",
     "Course Name": "Drone Data Acquisition, Processing and Interpretation",
     "Lecture": "G1\n(7/104)",
-    "Lab": "C1,F1\n(10/104)"
+    "Lab": "C1,F1\n(10/105)"
   },
   {
     "Course Code": "MTE 602",
@@ -771,7 +774,7 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "MTE 603",
     "Course Name": "Dynamics of Maritime Structures",
-    "Lecture": "A1,A2\n(7/110)"
+    "Lecture": "D1,D2\n(7/103)"
   },
   {
     "Course Code": "MTE 692-I",
@@ -899,7 +902,7 @@ export const COURSES: CourseEntry[] = [
     "Course Code": "ES 607",
     "Course Name": "Foundations of Fluid Dynamics",
     "Lecture": "G1,G2\n(7/105)",
-    "Tutorial": "M1\n(Jayshree S Sheth Learning Theatre)"
+    "Tutorial": "C1\n(7/210)"
   },
   {
     "Course Code": "ME 605",
@@ -915,8 +918,8 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "ME 639",
     "Course Name": "Introduction to Robotics",
-    "Lecture": "M1,M2\n(7/203)",
-    "Lab": "P1\n(7/203)"
+    "Lecture": "N1,N2\n(7/205)",
+    "Lab": "L1\n(7/205)"
   },
   {
     "Course Code": "ME 640",
@@ -926,12 +929,12 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "ES 646",
     "Course Name": "Elastodynamics and Vibrations",
-    "Lecture": "G1,G2\n(13/125)"
+    "Lecture": "E1,E2\n(13/125)"
   },
   {
     "Course Code": "ME 648",
     "Course Name": "Mathematical Tools for Mechanical Engineers",
-    "Lecture": "C1,C2\n(7/210)",
+    "Lecture": "F1,F2\n(7/206)",
     "Tutorial": "H2\n(7/210)"
   },
   {
@@ -1104,8 +1107,8 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "MA 605",
     "Course Name": "Commutative Algebra",
-    "Lecture": "J1,J2\n(7/106)",
-    "Tutorial": "I2\n(7/106)"
+    "Lecture": "E1,E2\n(7/103)",
+    "Tutorial": "C1\n(7/105)"
   },
   {
     "Course Code": "MA 623",
@@ -1134,13 +1137,13 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "MA 630 (A)",
     "Course Name": "Measure Theory & Probability",
-    "Lecture": "B1,A1\n(11/102)",
+    "Lecture": "G1,G2\n(7/202)",
     "Tutorial": "H2\n(11/102)"
   },
   {
     "Course Code": "MA 640",
     "Course Name": "Integral Geometry in Imaging Sciences",
-    "Lecture": "B1,B2\n(13/125)"
+    "Lecture": "I2,B2\n(7/106)"
   },
   {
     "Course Code": "MA 642",
@@ -1410,7 +1413,7 @@ export const COURSES: CourseEntry[] = [
     "Course Code": "FP 602 (MA)",
     "Course Name": "Writing (PG Mathematics)",
     "Lecture": "H1\n(Jayshree S Sheth Learning Theatre)",
-    "Lab": "P1,P2\n(7/108,7/109,7/110)"
+    "Lab": "P1 (11/101)\nP2 (Jagdish Patel Learning Theatre,Harsha Patel Learning Theatre)"
   },
   {
     "Course Code": "FP 602 (CG)",
@@ -1457,12 +1460,12 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "HS 154",
     "Course Name": "Mandarin for Beginners",
-    "Lecture": "M1,M2\n(10/102)"
+    "Lecture": "N1,N2\n(7/102)"
   },
   {
     "Course Code": "HS 155",
     "Course Name": "Mandarin for Beginners - II",
-    "Lecture": "L1,L2\n(11/205)"
+    "Lecture": "L1,L2\n(7/103)"
   },
   {
     "Course Code": "HS 392",
@@ -1507,7 +1510,7 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "IN 491",
     "Course Name": "Special Topics: Foundations of User Experience",
-    "Lecture": "M1,M2\n(Surendra C Sheth Learning Theatre)"
+    "Lecture": "M1,M2\n(Online)"
   },
   {
     "Course Code": "HS 491-XI",
@@ -1522,7 +1525,7 @@ export const COURSES: CourseEntry[] = [
   {
     "Course Code": "HS 491-XIV",
     "Course Name": "Special Topics in HSS: Appreciation of Classical Indian Music",
-    "Lecture": "M1,M2\n(Harsha Patel Learning Theatre)"
+    "Lecture": "L1,L2\n(5/203)"
   },
   {
     "Course Code": "HS 492-XI",
