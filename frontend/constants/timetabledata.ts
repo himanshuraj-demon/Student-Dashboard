@@ -120,7 +120,7 @@ export const COURSES: CourseEntry[] = [
     "Course Code": "CL 204",
     "Course Name": "Heat Transfer",
     "Credits": 3,
-    "Lecture": "D1,D2\n(11/102),
+    "Lecture": "D1,D2\n(11/102)",
   },
   {
     "Course Code": "CS 202",
