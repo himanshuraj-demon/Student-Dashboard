@@ -109,21 +109,18 @@ export const COURSES: CourseEntry[] = [
     "Course Name": "Chemical Engineering Thermodynamics",
     "Credits": 3,
     "Lecture": "A1,A2\n(7/109)",
-    "Tutorial": "A1,A2\n(7/109)"
   },
   {
     "Course Code": "CL 203",
     "Course Name": "Process Fluid Mechanics",
     "Credits": 3,
     "Lecture": "E1,E2\n(7/208)",
-    "Tutorial": "E1,E2\n(7/208)"
   },
   {
     "Course Code": "CL 204",
     "Course Name": "Heat Transfer",
     "Credits": 3,
-    "Lecture": "D1,D2\n(11/102)",
-    "Tutorial": "D1,D2\n(11/102)"
+    "Lecture": "D1,D2\n(11/102),
   },
   {
     "Course Code": "CS 202",
